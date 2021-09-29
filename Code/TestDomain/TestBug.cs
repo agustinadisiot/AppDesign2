@@ -49,18 +49,24 @@ namespace TestDomain
         }
 
         [TestMethod]
+        public void IdGetSet()
+        {
+            bug.ID = 1;
+            int expected = 1;
+            Assert.AreEqual(expected, bug.ID);
+        }
+
+        [TestMethod]
         public void IsActive()
         {
-            Bug bug1 = new Bug();
             Assert.IsTrue(bug.IsActive);
         }
 
         [TestMethod]
         public void NullDeveloper()
         {
-            Bug bug1 = new Bug();
-            Developer expectedDev = null;
-            Assert.AreEqual(bug.CompletedBy, expectedDev);
+            Assert.IsNull(bug.CompletedBy);
         }
+
     }
 }
