@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obligatorio", "Obligatorio.csproj", "{BA486937-F315-4F59-B407-AC51D4815553}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Obligatorio", "Obligatorio.csproj", "{BA486937-F315-4F59-B407-AC51D4815553}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{AA6564C1-ECAD-404F-9BF6-60A47ED1DBC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "..\Domain\Domain.csproj", "{AA6564C1-ECAD-404F-9BF6-60A47ED1DBC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDomain", "..\TestDomain\TestDomain.csproj", "{7AE7705D-6922-4CD6-9CC7-635C4D32F249}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDomain", "..\TestDomain\TestDomain.csproj", "{7AE7705D-6922-4CD6-9CC7-635C4D32F249}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugBusinessLogic", "..\BusinessLogic\BugBusinessLogic.csproj", "{5FD942F9-89C3-415A-8B8F-D71A35B37AE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugBusinessLogicTest", "..\BugBusinessLogicTest\BugBusinessLogicTest.csproj", "{546707BE-842F-41EB-BE91-A790AA8C7B1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{7AE7705D-6922-4CD6-9CC7-635C4D32F249}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AE7705D-6922-4CD6-9CC7-635C4D32F249}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AE7705D-6922-4CD6-9CC7-635C4D32F249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FD942F9-89C3-415A-8B8F-D71A35B37AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FD942F9-89C3-415A-8B8F-D71A35B37AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FD942F9-89C3-415A-8B8F-D71A35B37AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FD942F9-89C3-415A-8B8F-D71A35B37AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{546707BE-842F-41EB-BE91-A790AA8C7B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{546707BE-842F-41EB-BE91-A790AA8C7B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{546707BE-842F-41EB-BE91-A790AA8C7B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{546707BE-842F-41EB-BE91-A790AA8C7B1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
