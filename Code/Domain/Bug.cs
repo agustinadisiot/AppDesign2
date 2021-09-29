@@ -7,6 +7,8 @@
         public string Version { get; set; }
         public bool IsActive { get; set; }
         public object CompletedBy { get; set; }
+        public int ID { get; set; }
+
         public Bug()
         {
             IsActive = true;
