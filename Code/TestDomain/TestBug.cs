@@ -60,7 +60,7 @@ namespace TestDomain
         {
             Bug bug1 = new Bug();
             Developer expectedDev = null;
-            Assert.AreEqual(bug.Developer, expectedDev);
+            Assert.AreEqual(bug.CompletedBy, expectedDev);
         }
     }
 }
