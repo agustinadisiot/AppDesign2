@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain
+namespace Obligatorio
 {
     public class Class1
     {
