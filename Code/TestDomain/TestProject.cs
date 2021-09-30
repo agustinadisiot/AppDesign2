@@ -1,17 +1,14 @@
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TestDomain
 {
     [TestClass]
     public class TestProject
     {
-        // private Project project;
-        //private List<Tester> testers;
-        //private List<Developer> developers;
-        private List<Bug> bugs;
-
+        private Project project;
         [TestCleanup]
         public void TearDown()
         {
@@ -52,7 +49,7 @@ namespace TestDomain
         public void GetDevelopersEmpty()
         {
             List<Developer> expectedDeveloper = new List<Developer>();
-            Assert.IsTrue(expectedDeveloper.SequenceEqual(project.Developer));
+            Assert.IsTrue(expectedDeveloper.SequenceEqual(project.Developers));
         }
 
         public void GetSetDevelopers()
@@ -60,20 +57,20 @@ namespace TestDomain
             Developer dev = new Developer();
             List<Developer> expectedDeveloper = new List<Developer>();
             expectedDeveloper.Add(dev);
-            project.Developer = expectedDeveloper;
-            Assert.IsTrue(expectedDeveloper.SequenceEqual(project.Developer));
+            project.Developers = expectedDeveloper;
+            Assert.IsTrue(expectedDeveloper.SequenceEqual(project.Developers));
         }
 
         public void GetBugsEmpty()
         {
-            Bug expectedBugs = new List<Bug>();
+            List<Bug> expectedBugs = new List<Bug>();
             Assert.IsTrue(expectedBugs.SequenceEqual(project.Bugs));
         }
 
         public void GetSetBugs()
         {
             Bug bug = new Bug();
-            Bug expectedBugs = new List<Bug>();
+            List<Bug> expectedBugs = new List<Bug>();
             expectedBugs.Add(bug);
             project.Bugs = expectedBugs;
             Assert.IsTrue(expectedBugs.SequenceEqual(project.Bugs));
