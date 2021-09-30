@@ -14,5 +14,11 @@
             IsActive = true;
             CompletedBy = null;
         }
+
+        public override bool Equals(object obj)
+        {
+            Bug bug = (Bug)obj;
+            return bug.ID == this.ID;
+        }
     }
 }

@@ -31,12 +31,14 @@ namespace TestDomain
             Assert.AreEqual(expected, project.Name);
         }
 
+        [TestMethod]
         public void GetTestersEmpty()
         {
             List<Tester> expectedTesters = new List<Tester>();
             Assert.IsTrue(expectedTesters.SequenceEqual(project.Testers));
         }
 
+        [TestMethod]
         public void GetSetTesters()
         {
             Tester tester = new Tester();
@@ -46,12 +48,14 @@ namespace TestDomain
             Assert.IsTrue(expectedTesters.SequenceEqual(project.Testers));
         }
 
+        [TestMethod]
         public void GetDevelopersEmpty()
         {
             List<Developer> expectedDeveloper = new List<Developer>();
             Assert.IsTrue(expectedDeveloper.SequenceEqual(project.Developers));
         }
 
+        [TestMethod]
         public void GetSetDevelopers()
         {
             Developer dev = new Developer();
@@ -61,12 +65,14 @@ namespace TestDomain
             Assert.IsTrue(expectedDeveloper.SequenceEqual(project.Developers));
         }
 
+        [TestMethod]
         public void GetBugsEmpty()
         {
             List<Bug> expectedBugs = new List<Bug>();
             Assert.IsTrue(expectedBugs.SequenceEqual(project.Bugs));
         }
 
+        [TestMethod]
         public void GetSetBugs()
         {
             Bug bug = new Bug();

@@ -71,13 +71,16 @@ namespace TestBugBusinessLogic
             Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.Bugs));
         }
 
+        [TestMethod]
         public void GetById()
         {
+            bugBusinessLogic.AddBug(bug);
             int idBug = 0;
 
             Assert.AreEqual(bug, bugBusinessLogic.GetById(idBug));
         }
 
+        [TestMethod]
         public void GetAll()
         {
             bugBusinessLogic.Bugs = bugs;
@@ -85,6 +88,7 @@ namespace TestBugBusinessLogic
             Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.GetAll()));
         }
 
+        [TestMethod]
         public void UpdateBugNotFound()
         {
             int idbugToUpdate = 2;
@@ -92,6 +96,7 @@ namespace TestBugBusinessLogic
             Assert.ThrowsException<NonexistentBugException>(() =>  bugBusinessLogic.UpdateBug(idbugToUpdate, bug1));
         }
 
+        [TestMethod]
         public void UpdateBug()
         {
             bugBusinessLogic.Bugs = bugs;
@@ -99,6 +104,7 @@ namespace TestBugBusinessLogic
 
             Bug bugModified = new Bug()
             {
+                ID = 0,
                 Name = "bugMod",
                 Description = "No funciona el boton aceptar",
                 Version = "12.2.2."
