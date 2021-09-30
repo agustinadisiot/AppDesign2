@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace BusinessLogic
 {
     [Serializable]
-    internal class NonexistentProjectException : Exception
+    public class NonexistentProjectException : Exception
     {
         private string message;
 

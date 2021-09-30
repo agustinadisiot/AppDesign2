@@ -17,5 +17,10 @@ namespace Domain
             Bugs = new List<Bug>();
         }
 
+        public override bool Equals(object obj)
+        {
+            Project project = (Project)obj;
+            return (project.ID == this.ID) && (project.Name == this.Name);
+        }
     }
 }

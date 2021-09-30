@@ -51,7 +51,6 @@ namespace TestProjectBusinessLogic
         public void CreateProject()
         {
             projectBusinessLogic.Add(project);
-            projects.Add(project);
 
             Assert.IsTrue(projects.SequenceEqual(projectBusinessLogic.Projects));
         }
@@ -142,7 +141,7 @@ namespace TestProjectBusinessLogic
 
             Project projectModified = new Project()
             {
-                Name = "Web API Mod",
+                Name = "Modiefied Name",
                 Testers = testers,
                 Developers = developers,
                 Bugs = bugs
@@ -150,7 +149,7 @@ namespace TestProjectBusinessLogic
 
             projectBusinessLogic.UpdateByName(nameProjectToUpdate, projectModified);
 
-            Assert.AreNotEqual(project, projectModified);
+            Assert.AreEqual(project, projectModified);
         }
 
         [TestMethod]

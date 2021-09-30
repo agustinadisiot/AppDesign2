@@ -9,6 +9,11 @@ namespace BusinessLogic
     {
         public List<Project> Projects { get; set; }
 
+        public ProjectBusinessLogic()
+        {
+            Projects = new List<Project>();
+        }
+
         public Project Add(Project project)
         {
             Projects.Add(project);
@@ -49,7 +54,7 @@ namespace BusinessLogic
 
             if (project is null)
             {
-                throw new NonexistentBugException();
+                throw new NonexistentProjectException();
             }
 
             project.Name = projectModified.Name;
@@ -87,7 +92,7 @@ namespace BusinessLogic
 
             if (project is null)
             {
-                throw new NonexistentBugException();
+                throw new NonexistentProjectException();
             }
 
             project.Name = projectModified.Name;
