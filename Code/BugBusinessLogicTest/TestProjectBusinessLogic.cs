@@ -2,6 +2,7 @@
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TestProjectBusinessLogic
 {
@@ -130,7 +131,7 @@ namespace TestProjectBusinessLogic
         {
             string nameProjectToUpdate = "Nonexistent Project";
 
-            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.Update(nameProjectToUpdate, project));
+            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.UpdateByName(nameProjectToUpdate, project));
         }
 
         [TestMethod]

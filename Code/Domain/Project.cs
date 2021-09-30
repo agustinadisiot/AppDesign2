@@ -8,6 +8,7 @@ namespace Domain
         public List<Tester> Testers { get; set; }
         public List<Developer> Developers { get; set; }
         public List<Bug> Bugs { get; set; }
+        public int ID { get; set; }
 
         public Project()
         {
