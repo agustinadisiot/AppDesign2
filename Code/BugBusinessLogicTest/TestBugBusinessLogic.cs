@@ -48,7 +48,7 @@ namespace TestBugBusinessLogic
         [TestMethod]
         public void CreateBug()
         {
-            bugBusinessLogic.AddBug(bug);
+            bugBusinessLogic.Add(bug);
 
             Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.Bugs));
         }
@@ -58,7 +58,7 @@ namespace TestBugBusinessLogic
         {
             int idbugToDelete = 1;
             
-            Assert.ThrowsException<NonexistentBugException>(() => bugBusinessLogic.DeleteBug(idbugToDelete));
+            Assert.ThrowsException<NonexistentBugException>(() => bugBusinessLogic.Delete(idbugToDelete));
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace TestBugBusinessLogic
         {
             bugBusinessLogic.Bugs = bugs;
             int idbugToDelete = 0;
-            bugBusinessLogic.DeleteBug(idbugToDelete);
+            bugBusinessLogic.Delete(idbugToDelete);
 
             Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.Bugs));
         }
@@ -74,7 +74,7 @@ namespace TestBugBusinessLogic
         [TestMethod]
         public void GetById()
         {
-            bugBusinessLogic.AddBug(bug);
+            bugBusinessLogic.Add(bug);
             int idBug = 0;
 
             Assert.AreEqual(bug, bugBusinessLogic.GetById(idBug));
@@ -93,7 +93,7 @@ namespace TestBugBusinessLogic
         {
             int idbugToUpdate = 2;
 
-            Assert.ThrowsException<NonexistentBugException>(() =>  bugBusinessLogic.UpdateBug(idbugToUpdate, bug1));
+            Assert.ThrowsException<NonexistentBugException>(() =>  bugBusinessLogic.Update(idbugToUpdate, bug1));
         }
 
         [TestMethod]
@@ -110,7 +110,7 @@ namespace TestBugBusinessLogic
                 Version = "12.2.2."
             };
 
-            bugBusinessLogic.UpdateBug(idbugToUpdate, bugModified);
+            bugBusinessLogic.Update(idbugToUpdate, bugModified);
 
             Assert.AreEqual(bug, bugModified);
         }
