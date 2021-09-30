@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessLogic;
 
 namespace TestBugBusinessLogic
 {
@@ -13,9 +14,6 @@ namespace TestBugBusinessLogic
         private Bug bug1;
         private Bug bug2;
         private List<Bug> bugs;
-        private List<Bug> bugs1;
-        private List<Bug> bugs2;
-        private List<Bug> emptyBugs;
 
 
         [TestCleanup]
@@ -43,67 +41,60 @@ namespace TestBugBusinessLogic
             bugs = new List<Bug>() {
                 bug
             };
-            bugs1 = new List<Bug>() {
-                bug1
-            };
-            bugs2 = new List<Bug>() {
-                bug2
-            };
-            emptyBugs = new List<Bug>();
+
         }
 
         
         [TestMethod]
         public void CreateBug()
         {
-            BugBusinessLogic.AddBug(bug);
+            bugBusinessLogic.AddBug(bug);
 
-            Assert.IsTrue(bugs.SequenceEqual(BugBusinessLogic.Bugs));
+            Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.Bugs));
         }
 
         [TestMethod]
         public void DeleteBugNotFound()
         {
-            BugBusinessLogic.Bugs = emptyBugs;
             int idbugToDelete = 1;
             
-            Assert.ThrowsException<ExceptionNonexistentBug>(() => BugBusinessLogic.DeleteBug(idbugToDelete));
+            Assert.ThrowsException<NonexistentBugException>(() => bugBusinessLogic.DeleteBug(idbugToDelete));
         }
 
         [TestMethod]
         public void DeleteBug()
         {
-            BugBusinessLogic.Bugs = bugs;
+            bugBusinessLogic.Bugs = bugs;
             int idbugToDelete = 0;
-            BugBusinessLogic.DeleteBug(idbugToDelete);
+            bugBusinessLogic.DeleteBug(idbugToDelete);
 
-            Assert.IsTrue(bugs.SequenceEqual(BugBusinessLogic.Bugs));
+            Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.Bugs));
         }
 
         public void GetById()
         {
             int idBug = 0;
 
-            Assert.AreEqual(bug, BugBusinessLogic.GetById(idBug));
+            Assert.AreEqual(bug, bugBusinessLogic.GetById(idBug));
         }
 
         public void GetAll()
         {
-            BugBusinessLogic.Bugs = bugs;
+            bugBusinessLogic.Bugs = bugs;
 
-            Assert.IsTrue(bugs.SequenceEqual(BugBusinessLogic.GetAll()));
+            Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.GetAll()));
         }
 
         public void UpdateBugNotFound()
         {
             int idbugToUpdate = 2;
 
-            Assert.ThrowsException<ExceptionNonexistentBug>(() => BugBusinessLogic.UpdateBug(idbugToUpdate, bug1));
+            Assert.ThrowsException<NonexistentBugException>(() =>  bugBusinessLogic.UpdateBug(idbugToUpdate, bug1));
         }
 
         public void UpdateBug()
         {
-            BugBusinessLogic.Bugs = bugs;
+            bugBusinessLogic.Bugs = bugs;
             int idbugToUpdate = 0;
 
             Bug bugModified = new Bug()
@@ -113,7 +104,7 @@ namespace TestBugBusinessLogic
                 Version = "12.2.2."
             };
 
-            BugBusinessLogic.UpdateBug(idbugToUpdate, bugModified);
+            bugBusinessLogic.UpdateBug(idbugToUpdate, bugModified);
 
             Assert.AreEqual(bug, bugModified);
         }

@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "..\Domain\Domain.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDomain", "..\TestDomain\TestDomain.csproj", "{7AE7705D-6922-4CD6-9CC7-635C4D32F249}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugBusinessLogic", "..\BusinessLogic\BugBusinessLogic.csproj", "{5FD942F9-89C3-415A-8B8F-D71A35B37AE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "..\BusinessLogic\BusinessLogic.csproj", "{5FD942F9-89C3-415A-8B8F-D71A35B37AE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugBusinessLogicTest", "..\BugBusinessLogicTest\BugBusinessLogicTest.csproj", "{546707BE-842F-41EB-BE91-A790AA8C7B1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBugBusinessLogic", "..\BugBusinessLogicTest\TestBugBusinessLogic.csproj", "{546707BE-842F-41EB-BE91-A790AA8C7B1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
