@@ -12,6 +12,10 @@ namespace TestBugBusinessLogic
         private Bug bug1;
         private Bug bug2;
         private List<Bug> bugs;
+        private List<Bug> bugs1;
+        private List<Bug> bugs2;
+        private List<Bug> emptyBugs;
+
 
         [TestCleanup]
         public void TearDown()
@@ -34,9 +38,15 @@ namespace TestBugBusinessLogic
             bug2 = new Bug() { ID = 2 };
 
             bugs = new List<Bug>() {
-                bug1,
+                bug
+            };
+            bugs1 = new List<Bug>() {
+                bug1
+            };
+            bugs2 = new List<Bug>() {
                 bug2
             };
+            emptyBugs = new List<Bug>();
         }
 
         
@@ -45,34 +55,64 @@ namespace TestBugBusinessLogic
         {
             bug.AddBug(bug);
 
-            List<Bug> bugs = new List<Bug>()
-            { 
-                bug
-             };
             Assert.IsTrue(bugs.SequenceEqual(bug.Bugs));
+        }
+
+        [TestMethod]
+        public void DeleteBugNotFound()
+        {
+            bug.Bugs = emptyBugs;
+            int idbugToDelete = 1;
+            
+            Assert.ThrowsException<ExceptionNonexistentBug>(() => bug.DeleteBug(idbugToDelete));
         }
 
         [TestMethod]
         public void DeleteBug()
         {
-            List<Bug> expectedBugs = new List<Bug>();
-            expectedBugs.Add(bug2);
-
             bug.Bugs = bugs;
-            int idbugToDelete = 1;
+            int idbugToDelete = 0;
             bug.DeleteBug(idbugToDelete);
 
-            Assert.IsTrue(expectedBugs.SequenceEqual(bug.Bugs));
+            Assert.IsTrue(bugs.SequenceEqual(bug.Bugs));
         }
 
         public void GetById()
         {
-            bug.Bugs = bugs;
             int idBug = 0;
 
             Assert.AreEqual(bug, bug.GetById(idBug));
         }
 
+        public void GetAll()
+        {
+            bug.Bugs = bugs;
 
+            Assert.IsTrue(bugs.SequenceEqual(bug.GetAll()));
+        }
+
+        public void UpdateBugNotFound()
+        {
+            int idbugToUpdate = 2;
+
+            Assert.ThrowsException<ExceptionNonexistentBug>(() => bug.UpdateBug(idbugToUpdate, bug1));
+        }
+
+        public void UpdateBug()
+        {
+            bug.Bugs = bugs;
+            int idbugToUpdate = 0;
+
+            Bug bugModified = new Bug()
+            {
+                Name = "bugMod",
+                Description = "No funciona el boton aceptar",
+                Version = "12.2.2."
+            };
+
+            bug.UpdateBug(idbugToUpdate, bugModified);
+
+            Assert.AreEqual(bug, bugModified);
+        }
     }
 }
