@@ -1,11 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using BusinessLogic;
+using Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
-namespace TestBugBusinessLogic
+namespace TestProjectBusinessLogic
 {
     [TestClass]
     public class TestProjectBusinessLogic
     {
-        private ProjectBusinessLogic bugBusinessLogic;
+        private ProjectBusinessLogic projectBusinessLogic;
         private List<Project> projects;
         private Project project;
 
@@ -27,6 +30,7 @@ namespace TestBugBusinessLogic
 
             project = new Project()
             {
+                ID = 0,
                 Name = "Web API"
             };
 
@@ -52,19 +56,37 @@ namespace TestBugBusinessLogic
         }
 
         [TestMethod]
-        public void DeleteProjectNotFound()
+        public void DeleteProjectByNameNotFound()
         {
             string nameProjectToDelete = "Empty project";
 
-            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.Delete(nameProjectToDelete));
+            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.DeleteByName(nameProjectToDelete));
         }
 
         [TestMethod]
-        public void DeleteProject()
+        public void DeleteProjectByName()
         {
             projectBusinessLogic.Projects = projects;
             string nameProjectToDelete = "Web API";
-            projectBusinessLogic.Delete(nameProjectToDelete);
+            projectBusinessLogic.DeleteByName(nameProjectToDelete);
+
+            Assert.IsTrue(projects.SequenceEqual(projectBusinessLogic.Projects));
+        }
+
+        [TestMethod]
+        public void DeleteProjectByIdNotFound()
+        {
+            int idProjectToDelete = 1;
+
+            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.Delete(idProjectToDelete));
+        }
+
+        [TestMethod]
+        public void DeleteProjectById()
+        {
+            projectBusinessLogic.Projects = projects;
+            int idProjectToDelete = 0;
+            projectBusinessLogic.Delete(idProjectToDelete);
 
             Assert.IsTrue(projects.SequenceEqual(projectBusinessLogic.Projects));
         }
@@ -87,6 +109,15 @@ namespace TestBugBusinessLogic
         }
 
         [TestMethod]
+        public void GetById()
+        {
+            projectBusinessLogic.Add(project);
+            int idProject = 0;
+
+            Assert.AreEqual(project, projectBusinessLogic.GetById(idProject));
+        }
+
+        [TestMethod]
         public void GetAllProjects()
         {
             projectBusinessLogic.Projects = projects;
@@ -95,7 +126,7 @@ namespace TestBugBusinessLogic
         }
 
         [TestMethod]
-        public void UpdateProjectNotFound()
+        public void UpdateProjectByNameNotFound()
         {
             string nameProjectToUpdate = "Nonexistent Project";
 
@@ -103,7 +134,7 @@ namespace TestBugBusinessLogic
         }
 
         [TestMethod]
-        public void UpdateProject()
+        public void UpdateProjectByName()
         {
             projectBusinessLogic.Projects = projects;
             string nameProjectToUpdate = "Web API";
@@ -113,12 +144,39 @@ namespace TestBugBusinessLogic
                 Name = "Web API Mod",
                 Testers = testers,
                 Developers = developers,
-                bugs = bugs
+                Bugs = bugs
             };
 
-            projectBusinessLogic.Update(nameProjectToUpdate, projectModified);
+            projectBusinessLogic.UpdateByName(nameProjectToUpdate, projectModified);
 
             Assert.AreNotEqual(project, projectModified);
+        }
+
+        [TestMethod]
+        public void UpdateProjectByIdNotFound()
+        {
+            int idProjectToUpdate = 1;
+
+            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.Update(idProjectToUpdate, project));
+        }
+
+        [TestMethod]
+        public void UpdateProjectById()
+        {
+            projectBusinessLogic.Projects = projects;
+            int idProjectToUpdate = 0;
+
+            Project projectModified = new Project()
+            {
+                Name = "Web API Mod",
+                Testers = testers,
+                Developers = developers,
+                Bugs = bugs
+            };
+
+            projectBusinessLogic.Update(idProjectToUpdate, projectModified);
+
+            Assert.AreEqual(project, projectModified);
         }
     }
 }
