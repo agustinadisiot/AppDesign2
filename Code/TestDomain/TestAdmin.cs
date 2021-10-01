@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDomain
 {
@@ -30,41 +31,41 @@ namespace TestDomain
         [TestMethod]
         public void IdGetSet()
         {
-            developer.ID = 1;
+            admin.ID = 1;
             int expected = 1;
-            Assert.AreEqual(expected, developer.ID);
+            Assert.AreEqual(expected, admin.ID);
         }
 
         [TestMethod]
         public void NameGetSet()
         {
-            developer.Name = "Ivan";
+            admin.Name = "Ivan";
             string expected = "Ivan";
-            Assert.AreEqual(expected, developer.Name);
+            Assert.AreEqual(expected, admin.Name);
         }
 
         [TestMethod]
         public void LastnameGetSet()
         {
-            developer.Lastname = "Monjardin";
+            admin.Lastname = "Monjardin";
             string expected = "Monjardin";
-            Assert.AreEqual(expected, developer.Lastname);
+            Assert.AreEqual(expected, admin.Lastname);
         }
 
         [TestMethod]
         public void UsernameGetSet()
         {
-            developer.Username = "ivom";
+            admin.Username = "ivom";
             string expected = "ivom";
-            Assert.AreEqual(expected, developer.Username);
+            Assert.AreEqual(expected, admin.Username);
         }
 
         [TestMethod]
         public void PasswordGetSet()
         {
-            developer.Password = "myPasscode";
+            admin.Password = "myPasscode";
             string expected = "myPasscode";
-            Assert.AreEqual(expected, developer.Password);
+            Assert.AreEqual(expected, admin.Password);
         }
     }
 }
