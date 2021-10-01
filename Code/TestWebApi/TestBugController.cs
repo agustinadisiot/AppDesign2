@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using BusinessLogic;
-using Dnp.Data.Objects;
 using Domain;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
+using WebApi.Controllers;
+
+
 
 namespace TestWebApi
 {
@@ -33,9 +36,11 @@ namespace TestWebApi
                 }
             };
 
-            var mock = new Mock<IBusinessLogic>(MockBehavior.Strict);
+            // TODO refactor a bug interfaces
+            var mock = new Mock<IBusinessLogic<Bug>>(MockBehavior.Strict);
             mock.Setup(b => b.GetAll()).Returns(bugsToReturn);
-            var controller = new BugController(mock.Object);
+            var controller = new BugController((IBusinessLogic<BugBusinessLogic>)mock.Object);
+
 
         }
     }
