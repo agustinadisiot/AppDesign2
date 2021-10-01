@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System.Collections.Generic;
 using BusinessLogic;
 using BusinessLogicInterfaces;
@@ -9,6 +10,14 @@ using TestWebApi.Utils;
 using WebApi.Controllers;
 
 
+=======
+using BusinessLogic;
+using Dnp.Data.Objects;
+using Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System.Collections.Generic;
+>>>>>>> 5d59545... Adds web api first tests. Stage red
 
 namespace TestWebApi
 {
@@ -18,7 +27,11 @@ namespace TestWebApi
         [TestMethod]
         public void GetAll()
         {
+<<<<<<< HEAD
             List<Bug> bugExpected = new List<Bug>()
+=======
+            List<Bug> bugsToReturn = new List<Bug>()
+>>>>>>> 5d59545... Adds web api first tests. Stage red
             {
                 new Bug(){
                 Name = "Not working button",
@@ -38,6 +51,7 @@ namespace TestWebApi
                 }
             };
 
+<<<<<<< HEAD
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
             mock.Setup(b => b.GetAll()).Returns(bugExpected);
             var controller = new BugController(mock.Object);
@@ -48,6 +62,12 @@ namespace TestWebApi
 
             mock.VerifyAll();
             CollectionAssert.AreEqual(bugExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
+=======
+            var mock = new Mock<IBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetAll()).Returns(bugsToReturn);
+            var controller = new BugController(mock.Object);
+
+>>>>>>> 5d59545... Adds web api first tests. Stage red
         }
     }
 }

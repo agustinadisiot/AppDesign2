@@ -12,7 +12,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+<<<<<<< HEAD
 namespace WebApi
+=======
+namespace WebAPI
+>>>>>>> 5d59545... Adds web api first tests. Stage red
 {
     public class Startup
     {
@@ -30,7 +34,11 @@ namespace WebApi
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
+<<<<<<< HEAD
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
+=======
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
+>>>>>>> 5d59545... Adds web api first tests. Stage red
             });
         }
 
@@ -41,7 +49,11 @@ namespace WebApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
+<<<<<<< HEAD
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
+=======
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
+>>>>>>> 5d59545... Adds web api first tests. Stage red
             }
 
             app.UseHttpsRedirection();
