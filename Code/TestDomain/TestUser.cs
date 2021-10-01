@@ -68,11 +68,5 @@ namespace TestDomain
             Assert.AreEqual(expected, user.Password);
         }
 
-        [TestMethod]
-        public void NullRole()
-        {
-            Assert.IsNull(user.Role);
-        }
-
     }
 }
