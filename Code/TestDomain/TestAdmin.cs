@@ -4,9 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TestDomain
 {
     [TestClass]
-    public class TestUser
+    public class TestAdmin
     {
-        private User user;
+        private User admin;
 
         [TestCleanup]
         public void TearDown()
@@ -17,7 +17,7 @@ namespace TestDomain
         [TestInitialize]
         public void Setup()
         {
-            user = new User()
+            admin = new Admin()
             {
                 ID = 0,
                 Username = "agustinadisiot",
@@ -31,42 +31,41 @@ namespace TestDomain
         [TestMethod]
         public void IdGetSet()
         {
-            user.ID = 1;
+            admin.ID = 1;
             int expected = 1;
-            Assert.AreEqual(expected, user.ID);
+            Assert.AreEqual(expected, admin.ID);
         }
 
         [TestMethod]
         public void NameGetSet()
         {
-            user.Name = "Ivan";
+            admin.Name = "Ivan";
             string expected = "Ivan";
-            Assert.AreEqual(expected, user.Name);
+            Assert.AreEqual(expected, admin.Name);
         }
 
         [TestMethod]
         public void LastnameGetSet()
         {
-            user.Lastname = "Monjardin";
+            admin.Lastname = "Monjardin";
             string expected = "Monjardin";
-            Assert.AreEqual(expected, user.Lastname);
+            Assert.AreEqual(expected, admin.Lastname);
         }
 
         [TestMethod]
         public void UsernameGetSet()
         {
-            user.Username = "ivom";
+            admin.Username = "ivom";
             string expected = "ivom";
-            Assert.AreEqual(expected, user.Username);
+            Assert.AreEqual(expected, admin.Username);
         }
 
         [TestMethod]
         public void PasswordGetSet()
         {
-            user.Password = "myPasscode";
+            admin.Password = "myPasscode";
             string expected = "myPasscode";
-            Assert.AreEqual(expected, user.Password);
+            Assert.AreEqual(expected, admin.Password);
         }
-
     }
 }

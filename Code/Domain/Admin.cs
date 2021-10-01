@@ -1,8 +1,8 @@
 ﻿namespace Domain
 {
-    public class Tester : User
+    public class Admin : User
     {
-        public Tester()
+        public Admin()
         {
         }
     }

@@ -1,6 +1,9 @@
 ﻿namespace Domain
 {
-    public class Developer
+    public class Developer : User
     {
+        public Developer()
+        {
+        }
     }
 }

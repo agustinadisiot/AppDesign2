@@ -4,9 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TestDomain
 {
     [TestClass]
-    public class TestUser
+    public class TestTester
     {
-        private User user;
+        private User tester;
 
         [TestCleanup]
         public void TearDown()
@@ -17,7 +17,7 @@ namespace TestDomain
         [TestInitialize]
         public void Setup()
         {
-            user = new User()
+            tester = new Tester()
             {
                 ID = 0,
                 Username = "agustinadisiot",
@@ -31,42 +31,43 @@ namespace TestDomain
         [TestMethod]
         public void IdGetSet()
         {
-            user.ID = 1;
+            tester.ID = 1;
             int expected = 1;
-            Assert.AreEqual(expected, user.ID);
+            Assert.AreEqual(expected, tester.ID);
         }
 
         [TestMethod]
         public void NameGetSet()
         {
-            user.Name = "Ivan";
+            tester.Name = "Ivan";
             string expected = "Ivan";
-            Assert.AreEqual(expected, user.Name);
+            Assert.AreEqual(expected, tester.Name);
         }
 
         [TestMethod]
         public void LastnameGetSet()
         {
-            user.Lastname = "Monjardin";
+            tester.Lastname = "Monjardin";
             string expected = "Monjardin";
-            Assert.AreEqual(expected, user.Lastname);
+            Assert.AreEqual(expected, tester.Lastname);
         }
 
         [TestMethod]
         public void UsernameGetSet()
         {
-            user.Username = "ivom";
+            tester.Username = "ivom";
             string expected = "ivom";
-            Assert.AreEqual(expected, user.Username);
+            Assert.AreEqual(expected, tester.Username);
         }
 
         [TestMethod]
         public void PasswordGetSet()
         {
-            user.Password = "myPasscode";
+            tester.Password = "myPasscode";
             string expected = "myPasscode";
-            Assert.AreEqual(expected, user.Password);
+            Assert.AreEqual(expected, tester.Password);
         }
 
     }
 }
+
