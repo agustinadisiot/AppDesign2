@@ -1,4 +1,6 @@
-﻿namespace Domain
+﻿using System.Collections;
+
+namespace Domain
 {
     public class Bug
     {
