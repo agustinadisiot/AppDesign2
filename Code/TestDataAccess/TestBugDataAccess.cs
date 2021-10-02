@@ -72,18 +72,14 @@ namespace TestDataAccess
         [TestMethod]
         public void Update()
         {
-            using (var context = new BugManagerContext(contextOptions))
+            bugDataAccess.Create(new Bug
             {
-                context.Add(new Bug
-                {
-                    Id = 1,
-                    Name = "b",
-                    Description = "a",
-                    Version = "1.0",
-                    IsActive = true
-                });
-                context.SaveChanges();
-            }
+                Id = 1,
+                Name = "b",
+                Description = "a",
+                Version = "1.0",
+                IsActive = true
+            });
 
             var bugUpdated = new Bug
             {
@@ -96,14 +92,11 @@ namespace TestDataAccess
 
             bugDataAccess.Update(bugUpdated);
 
-            using (var context = new BugManagerContext(contextOptions))
-            {
-                var bugSaved = context.Set<Bug>().First(bug => bug.Id == 1);
+            var bugSaved = bugDataAccess.GetById(1);
 
-                Assert.AreEqual(0, new BugComparer().Compare(bugUpdated, bugSaved));
-            }
+            Assert.AreEqual(0, new BugComparer().Compare(bugUpdated, bugSaved));
+
         }
-
 
         [TestMethod]
         public void Create()
@@ -116,24 +109,19 @@ namespace TestDataAccess
                 Version = "2.0",
                 IsActive = true
             };
-            using (var context = new BugManagerContext(contextOptions))
-            {
-                context.Add(new Bug
-                {
-                    Id = 1,
-                    Name = "Error",
-                    Description = "Erorr critico",
-                    Version = "2.0",
-                    IsActive = true
-                });
-                context.SaveChanges();
-            }
 
-            using (var context = new BugManagerContext(contextOptions))
+            bugDataAccess.Create(new Bug()
             {
-                var bugSaved = bugDataAccess.GetById(1);
-                Assert.AreEqual(0, new BugComparer().Compare(expectedBug, bugSaved));
-            }
+                Id = 1,
+                Name = "Error",
+                Description = "Erorr critico",
+                Version = "2.0",
+                IsActive = true
+            });
+
+            var bugSaved = bugDataAccess.GetById(1);
+            Assert.AreEqual(0, new BugComparer().Compare(expectedBug, bugSaved));
+
         }
     }
 }

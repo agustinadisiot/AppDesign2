@@ -14,9 +14,9 @@ namespace Repository.Design
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer(connectionString);
 
-            var vidlyContext = new BugManagerContext(optionsBuilder.Options);
+            var bugManagerContext = new BugManagerContext(optionsBuilder.Options);
 
-            return vidlyContext;
+            return bugManagerContext;
         }
     }
 }
