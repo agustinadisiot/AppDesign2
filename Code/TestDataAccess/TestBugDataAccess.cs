@@ -124,7 +124,7 @@ namespace TestDataAccess
 
         }
 
-
+        [TestMethod]
         public void Delete()
         {
             Bug notExpectedBug = new Bug()
@@ -137,9 +137,9 @@ namespace TestDataAccess
             };
             bugDataAccess.Create(notExpectedBug);
             bugDataAccess.Delete(notExpectedBug);
+            var bugsSaved = bugDataAccess.GetAll().ToList();
 
-            var bugsSaved = bugDataAccess.GetAll();
-            CollectionAssert.DoesNotContain(bugsSaved, notExpectedBug)
+            CollectionAssert.DoesNotContain(bugsSaved, notExpectedBug);
 
         }
     }

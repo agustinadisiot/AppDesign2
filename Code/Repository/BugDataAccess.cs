@@ -60,5 +60,12 @@ namespace Repository
             bugToUpdate.Description = bugUpdated.Description;
             context.SaveChanges();
         }
+
+        public void Delete(Bug bugToDelete)
+        {
+            Bug bugDelete = GetById(bugToDelete.Id);
+            bugs.Remove(bugDelete);
+            context.SaveChanges();
+        }
     }
 }
