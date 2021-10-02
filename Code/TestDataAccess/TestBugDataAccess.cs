@@ -136,7 +136,7 @@ namespace TestDataAccess
                 IsActive = true
             };
             bugDataAccess.Create(notExpectedBug);
-            bugDataAccess.Delete(1);
+            bugDataAccess.Delete(notExpectedBug);
 
             var bugsSaved = bugDataAccess.GetAll();
             CollectionAssert.DoesNotContain(bugsSaved, notExpectedBug)
