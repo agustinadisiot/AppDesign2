@@ -69,7 +69,12 @@ namespace TestDomain
             CollectionAssert.AreEqual(expectedProjects, actualProjects);
         }
 
-
+        [TestMethod]
+        public void ProjectsGetEmtpy()
+        {
+            var actualProjects = bug.Projects;
+            Assert.IsTrue(actualProjects.Count == 0);
+        }
 
         [DataTestMethod]
         [DataRow(0)]
