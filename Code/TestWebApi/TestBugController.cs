@@ -38,7 +38,6 @@ namespace TestWebApi
                 }
             };
 
-            // TODO refactor a bug interfaces
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
             mock.Setup(b => b.GetAll()).Returns(bugExpected);
             var controller = new BugController(mock.Object);
