@@ -10,7 +10,7 @@ namespace Domain
         public string Version { get; set; }
         public bool IsActive { get; set; }
         public object CompletedBy { get; set; }
-        public int ID { get; set; }
+        public int Id { get; set; }
         public List<Project> Projects { get; set; }
 
         public Bug()
@@ -23,7 +23,7 @@ namespace Domain
         public override bool Equals(object obj)
         {
             Bug bug = (Bug)obj;
-            return bug.ID == this.ID;
+            return bug.Id == this.Id;
         }
     }
 }

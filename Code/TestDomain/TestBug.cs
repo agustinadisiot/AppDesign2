@@ -82,9 +82,9 @@ namespace TestDomain
         [DataRow(2)]
         public void IdGetSet(int id)
         {
-            bug.ID = id;
+            bug.Id = id;
             int expected = id;
-            Assert.AreEqual(expected, bug.ID);
+            Assert.AreEqual(expected, bug.Id);
         }
 
         [TestMethod]

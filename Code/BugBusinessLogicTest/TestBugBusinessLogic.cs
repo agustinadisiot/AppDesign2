@@ -29,14 +29,14 @@ namespace TestBugBusinessLogic
 
             bug = new Bug()
             {
-                ID = 0,
+                Id = 0,
                 Name = "Bug1",
                 Description = "Cuando el servidor se cierra y estoy en login se rompe",
                 Version = "12.4.5"
             };
 
-            bug1 = new Bug() { ID = 1 };
-            bug2 = new Bug() { ID = 2 };
+            bug1 = new Bug() { Id = 1 };
+            bug2 = new Bug() { Id = 2 };
 
             bugs = new List<Bug>() {
                 bug
@@ -104,7 +104,7 @@ namespace TestBugBusinessLogic
 
             Bug bugModified = new Bug()
             {
-                ID = 0,
+                Id = 0,
                 Name = "bugMod",
                 Description = "No funciona el boton aceptar",
                 Version = "12.2.2."

@@ -19,7 +19,7 @@ namespace TestDomain
         {
             developer = new Developer()
             {
-                ID = 0,
+                Id = 0,
                 Username = "agustinadisiot",
                 Name = "Agustina",
                 Lastname = "Disiot",
@@ -31,9 +31,9 @@ namespace TestDomain
         [TestMethod]
         public void IdGetSet()
         {
-            developer.ID = 1;
+            developer.Id = 1;
             int expected = 1;
-            Assert.AreEqual(expected, developer.ID);
+            Assert.AreEqual(expected, developer.Id);
         }
 
         [TestMethod]
