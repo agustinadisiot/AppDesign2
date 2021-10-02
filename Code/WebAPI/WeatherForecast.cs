@@ -1,10 +1,6 @@
 using System;
 
-<<<<<<< HEAD
 namespace WebApi
-=======
-namespace WebAPI
->>>>>>> 5d59545... Adds web api first tests. Stage red
 {
     public class WeatherForecast
     {
