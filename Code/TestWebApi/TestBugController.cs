@@ -4,6 +4,7 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using TestWebApi.Utils;
 using WebApi.Controllers;
 
 
@@ -38,14 +39,14 @@ namespace TestWebApi
 
             // TODO refactor a bug interfaces
             var mock = new Mock<IBusinessLogic<Bug>>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(bugsToReturn);
+            mock.Setup(b => b.GetAll()).Returns(bugExpected);
             var controller = new BugController((IBusinessLogic<BugBusinessLogic>)mock.Object);
 
             var result = controller.Get();
             var okResult = result as OkObjectResult;
             var bugsResult = okResult.Value as IEnumerable<Bug>;
 
-            CollectionAssert.AreEqual()
+            CollectionAssert.AreEqual(bugExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
         }
     }
 }
