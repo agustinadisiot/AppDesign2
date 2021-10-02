@@ -12,6 +12,7 @@ namespace Domain
         public object CompletedBy { get; set; }
         public int Id { get; set; }
         public List<Project> Projects { get; set; }
+        public int ProjectId { get; set; }
 
         public Bug()
         {
