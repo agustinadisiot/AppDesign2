@@ -62,10 +62,14 @@ namespace TestDomain
             {
                 Name = "Project2",
             }
+        };
+            bug.Projects = expectedProjects;
+            var actualProjects = bug.Projects;
+            // TODO hacer comparable de project
+            CollectionAssert.AreEqual(expectedProjects, actualProjects);
         }
-        bug.Projects = expectedProjects;
-            CollectionAssert.AreEqual(expectedProjects, bug.Version);
-        }
+
+
 
         [DataTestMethod]
         [DataRow(0)]

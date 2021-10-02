@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -10,6 +11,7 @@ namespace Domain
         public bool IsActive { get; set; }
         public object CompletedBy { get; set; }
         public int ID { get; set; }
+        public List<Project> Projects { get; set; }
 
         public Bug()
         {
