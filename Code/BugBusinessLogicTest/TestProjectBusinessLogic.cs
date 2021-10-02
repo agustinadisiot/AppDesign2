@@ -31,7 +31,7 @@ namespace TestProjectBusinessLogic
 
             project = new Project()
             {
-                ID = 0,
+                Id = 0,
                 Name = "Web API"
             };
 

@@ -8,7 +8,7 @@ namespace Domain
         public List<Tester> Testers { get; set; }
         public List<Developer> Developers { get; set; }
         public List<Bug> Bugs { get; set; }
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public Project()
         {
@@ -20,7 +20,7 @@ namespace Domain
         public override bool Equals(object obj)
         {
             Project project = (Project)obj;
-            return (project.ID == this.ID) && (project.Name == this.Name);
+            return (project.Id == this.Id) && (project.Name == this.Name);
         }
     }
 }

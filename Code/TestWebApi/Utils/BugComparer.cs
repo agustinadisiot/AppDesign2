@@ -16,7 +16,7 @@ namespace TestWebApi.Utils
             Bug bugExpected = x as Bug;
             Bug bugReturned = x as Bug;
 
-            bool equals = bugExpected.ID == bugReturned.ID &&
+            bool equals = bugExpected.Id == bugReturned.Id &&
                         bugExpected.Description == bugReturned.Description &&
                         bugExpected.Name == bugReturned.Name &&
                         bugExpected.CompletedBy.Equals(bugReturned.CompletedBy) &&

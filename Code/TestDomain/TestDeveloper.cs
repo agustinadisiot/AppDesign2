@@ -1,12 +1,13 @@
 ﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace TestDomain
 {
     [TestClass]
     public class TestDeveloper
     {
-        private User developer;
+        private Developer developer;
 
         [TestCleanup]
         public void TearDown()
@@ -19,7 +20,7 @@ namespace TestDomain
         {
             developer = new Developer()
             {
-                ID = 0,
+                Id = 0,
                 Username = "agustinadisiot",
                 Name = "Agustina",
                 Lastname = "Disiot",
@@ -31,9 +32,9 @@ namespace TestDomain
         [TestMethod]
         public void IdGetSet()
         {
-            developer.ID = 1;
+            developer.Id = 1;
             int expected = 1;
-            Assert.AreEqual(expected, developer.ID);
+            Assert.AreEqual(expected, developer.Id);
         }
 
         [TestMethod]
@@ -68,5 +69,31 @@ namespace TestDomain
             Assert.AreEqual(expected, developer.Password);
         }
 
+
+        [TestMethod]
+        public void ProjectsGet()
+        {
+            List<Project> expectedProjects = new List<Project> {
+                new Project()
+            {
+                Name = "Project1",
+            },
+                new Project()
+            {
+                Name = "Project2",
+            }
+        };
+            developer.Projects = expectedProjects;
+            var actualProjects = developer.Projects;
+            // TODO hacer comparable de project
+            CollectionAssert.AreEqual(expectedProjects, actualProjects);
+        }
+
+        [TestMethod]
+        public void ProjectsGetEmtpy()
+        {
+            var actualProjects = developer.Projects;
+            Assert.IsTrue(actualProjects.Count == 0);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain;
+using System.Collections.Generic;
 
 namespace TestDomain
 {
@@ -48,12 +49,42 @@ namespace TestDomain
             Assert.AreEqual(expected, bug.Version);
         }
 
+
         [TestMethod]
-        public void IdGetSet()
+        public void ProjectsGet()
         {
-            bug.ID = 1;
-            int expected = 1;
-            Assert.AreEqual(expected, bug.ID);
+            List<Project> expectedProjects = new List<Project> {
+                new Project()
+            {
+                Name = "Project1",
+            },
+                new Project()
+            {
+                Name = "Project2",
+            }
+        };
+            bug.Projects = expectedProjects;
+            var actualProjects = bug.Projects;
+            // TODO hacer comparable de project
+            CollectionAssert.AreEqual(expectedProjects, actualProjects);
+        }
+
+        [TestMethod]
+        public void ProjectsGetEmtpy()
+        {
+            var actualProjects = bug.Projects;
+            Assert.IsTrue(actualProjects.Count == 0);
+        }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(2)]
+        public void IdGetSet(int id)
+        {
+            bug.Id = id;
+            int expected = id;
+            Assert.AreEqual(expected, bug.Id);
         }
 
         [TestMethod]

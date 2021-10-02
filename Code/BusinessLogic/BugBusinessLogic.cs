@@ -16,7 +16,7 @@ namespace BusinessLogic
 
         public Bug GetById(int idBug)
         {
-            Bug bug = Bugs.FirstOrDefault((i) => i.ID == idBug);
+            Bug bug = Bugs.FirstOrDefault((i) => i.Id == idBug);
 
             return bug;
         }
@@ -34,7 +34,7 @@ namespace BusinessLogic
 
         public void Update(int idbugToUpdate, Bug bugModified)
         {
-            Bug bug = Bugs.FirstOrDefault(i => i.ID == idbugToUpdate);
+            Bug bug = Bugs.FirstOrDefault(i => i.Id == idbugToUpdate);
 
             if (bug is null)
             {
@@ -50,7 +50,7 @@ namespace BusinessLogic
 
         public void Delete(int idbugToDelete)
         {
-            Bug bug = Bugs.FirstOrDefault(i => i.ID == idbugToDelete);
+            Bug bug = Bugs.FirstOrDefault(i => i.Id == idbugToDelete);
 
             if (bug is null)
             {

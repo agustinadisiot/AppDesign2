@@ -25,7 +25,7 @@ namespace TestWebApi
                 Version = "1",
                 IsActive = true,
                 CompletedBy = null,
-                ID = 0
+                Id = 0
                 },
                 new Bug(){
                 Name = "Not working button",
@@ -33,7 +33,7 @@ namespace TestWebApi
                 Version = "1",
                 IsActive = true,
                 CompletedBy = null,
-                ID = 1
+                Id = 1
                 }
             };
 

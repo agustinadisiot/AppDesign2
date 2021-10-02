@@ -22,7 +22,7 @@ namespace BusinessLogic
 
         public void Delete(int Id)
         {
-            Project project = Projects.FirstOrDefault(i => i.ID == Id);
+            Project project = Projects.FirstOrDefault(i => i.Id == Id);
 
             if (project is null)
             {
@@ -39,7 +39,7 @@ namespace BusinessLogic
 
         public Project GetById(int Id)
         {
-            Project project = Projects.FirstOrDefault((i) => i.ID == Id);
+            Project project = Projects.FirstOrDefault((i) => i.Id == Id);
             if (project is null)
             {
                 throw new NonexistentProjectException();
@@ -50,7 +50,7 @@ namespace BusinessLogic
 
         public void Update(int Id, Project projectModified)
         {
-            Project project = Projects.FirstOrDefault(i => i.ID == Id);
+            Project project = Projects.FirstOrDefault(i => i.Id == Id);
 
             if (project is null)
             {
