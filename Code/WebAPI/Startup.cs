@@ -1,3 +1,4 @@
+using Factory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +34,9 @@ namespace WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
             });
+
+            var businessContainer = new BusinessLogicFactory(services);
+            businessContainer.AddBusinessLogicService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

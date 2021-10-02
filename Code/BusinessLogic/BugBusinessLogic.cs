@@ -1,12 +1,21 @@
 ﻿using Domain;
 using System;
+using BusinessLogicInterfaces;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BusinessLogic
 {
-    public class BugBusinessLogic : IBusinessLogic<Bug>
+    public class BugBusinessLogic : IBugBusinessLogic
     {
+        /* public IBugDataAccess bugDataAccess { get; set; }
+
+         public BugBusinessLogic(IBugDataAccess newbugDataAccess)
+         {
+             bugDataAccess = newbugDataAccess;
+         }*/
+
+
         public List<Bug> Bugs { get; set; }
 
         public BugBusinessLogic()
@@ -23,7 +32,27 @@ namespace BusinessLogic
 
         public IEnumerable<Bug> GetAll()
         {
-            return Bugs;
+            List<Bug> bugExpected = new List<Bug>()
+            {
+                new Bug(){
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 0
+                },
+                new Bug(){
+                Name = "Not working button yellow ",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 1
+                }
+            };
+
+            return bugExpected; // TODO cambiar a Bugs y elminar el coso de arriba
         }
 
         public Bug Add(Bug bug)
@@ -60,4 +89,6 @@ namespace BusinessLogic
             Bugs.Remove(bug);
         }
     }
+
+
 }

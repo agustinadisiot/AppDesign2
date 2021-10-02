@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("bugs")]
     public class BugController : ControllerBase
     {
         private readonly IBugBusinessLogic businessLogic;
@@ -23,6 +23,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+
             return Ok(businessLogic.GetAll());
         }
     }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public interface IBusinessLogic<T>
+    public interface BusinessLogic<T>
     {
         IEnumerable<T> GetAll();
         T GetById(int Id);
