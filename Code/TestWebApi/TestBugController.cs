@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using BusinessLogic;
 using BusinessLogicInterfaces;
 using Domain;
+using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using TestWebApi.Utils;
 using WebApi.Controllers;
 
 

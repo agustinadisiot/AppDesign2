@@ -9,7 +9,7 @@ namespace Domain
         public string Description { get; set; }
         public string Version { get; set; }
         public bool IsActive { get; set; }
-        public object CompletedBy { get; set; }
+        public Developer CompletedBy { get; set; }
         public int Id { get; set; }
         public List<Project> Projects { get; set; }
         public int ProjectId { get; set; }

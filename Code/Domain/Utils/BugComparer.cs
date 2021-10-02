@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestWebApi.Utils
+namespace Domain.Utils
 {
-    class BugComparer : IComparer
+    public class BugComparer : IComparer
     {
         // TODO create model and put this function inside BugModel
         public int Compare(object x, object y)
@@ -19,9 +19,11 @@ namespace TestWebApi.Utils
             bool equals = bugExpected.Id == bugReturned.Id &&
                         bugExpected.Description == bugReturned.Description &&
                         bugExpected.Name == bugReturned.Name &&
-                        bugExpected.CompletedBy.Equals(bugReturned.CompletedBy) &&
                         bugExpected.IsActive == bugReturned.IsActive &&
-                        bugExpected.Version == bugReturned.Version;
+                        bugExpected.Version == bugReturned.Version &&
+                        ((bugExpected.CompletedBy == null && bugReturned.CompletedBy == null) ||
+                        (bugExpected.Equals(bugReturned)));
+            ;
 
             return equals ? 0 : -1;
         }
