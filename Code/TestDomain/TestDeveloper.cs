@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace TestDomain
 {
@@ -68,5 +69,31 @@ namespace TestDomain
             Assert.AreEqual(expected, developer.Password);
         }
 
+
+        [TestMethod]
+        public void ProjectsGet()
+        {
+            List<Project> expectedProjects = new List<Project> {
+                new Project()
+            {
+                Name = "Project1",
+            },
+                new Project()
+            {
+                Name = "Project2",
+            }
+        };
+            developer.Projects = expectedProjects;
+            var actualProjects = developer.Projects;
+            // TODO hacer comparable de project
+            CollectionAssert.AreEqual(expectedProjects, actualProjects);
+        }
+
+        [TestMethod]
+        public void ProjectsGetEmtpy()
+        {
+            var actualProjects = developer.Projects;
+            Assert.IsTrue(actualProjects.Count == 0);
+        }
     }
 }
