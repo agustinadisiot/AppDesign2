@@ -1,4 +1,5 @@
-﻿using BusinessLogic;
+﻿using BusinessLogicInterfaces;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,17 +13,17 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class BugController : ControllerBase
     {
-        private readonly IBusinessLogic<BugBusinessLogic> businessLogic;
+        private readonly IBugBusinessLogic businessLogic;
 
-        public BugController(IBusinessLogic<BugBusinessLogic> newBusinessLogic)
+        public BugController(IBugBusinessLogic newBusinessLogic)
         {
             businessLogic = newBusinessLogic;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IActionResult Get()
         {
-            return null;
+            return Ok(businessLogic.GetAll());
         }
     }
 }

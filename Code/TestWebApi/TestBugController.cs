@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BusinessLogic;
+using BusinessLogicInterfaces;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -38,9 +39,9 @@ namespace TestWebApi
             };
 
             // TODO refactor a bug interfaces
-            var mock = new Mock<IBusinessLogic<Bug>>(MockBehavior.Strict);
+            var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
             mock.Setup(b => b.GetAll()).Returns(bugExpected);
-            var controller = new BugController((IBusinessLogic<BugBusinessLogic>)mock.Object);
+            var controller = new BugController(mock.Object);
 
             var result = controller.Get();
             var okResult = result as OkObjectResult;
