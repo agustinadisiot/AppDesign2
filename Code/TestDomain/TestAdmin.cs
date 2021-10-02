@@ -6,7 +6,7 @@ namespace TestDomain
     [TestClass]
     public class TestAdmin
     {
-        private User admin;
+        private Admin admin;
 
         [TestCleanup]
         public void TearDown()
