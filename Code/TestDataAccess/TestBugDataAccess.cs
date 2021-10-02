@@ -123,5 +123,24 @@ namespace TestDataAccess
             Assert.AreEqual(0, new BugComparer().Compare(expectedBug, bugSaved));
 
         }
+
+
+        public void Delete()
+        {
+            Bug notExpectedBug = new Bug()
+            {
+                Id = 1,
+                Name = "Error",
+                Description = "Erorr critico",
+                Version = "2.0",
+                IsActive = true
+            };
+            bugDataAccess.Create(notExpectedBug);
+            bugDataAccess.Delete(1);
+
+            var bugsSaved = bugDataAccess.GetAll();
+            CollectionAssert.DoesNotContain(bugsSaved, notExpectedBug)
+
+        }
     }
 }
