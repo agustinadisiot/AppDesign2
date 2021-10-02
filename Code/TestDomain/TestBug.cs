@@ -87,6 +87,18 @@ namespace TestDomain
             Assert.AreEqual(expected, bug.Id);
         }
 
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(2)]
+        public void ProyectIdGetSet(int id)
+        {
+            bug.ProjectId = id;
+            int expected = id;
+            Assert.AreEqual(expected, bug.ProjectId);
+        }
+
         [TestMethod]
         public void IsActive()
         {
