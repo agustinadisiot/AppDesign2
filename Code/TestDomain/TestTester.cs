@@ -1,12 +1,13 @@
 ﻿using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace TestDomain
 {
     [TestClass]
     public class TestTester
     {
-        private User tester;
+        private Tester tester;
 
         [TestCleanup]
         public void TearDown()
@@ -81,8 +82,8 @@ namespace TestDomain
                 Name = "Project2",
             }
         };
-            bug.Projects = expectedProjects;
-            var actualProjects = bug.Projects;
+            tester.Projects = expectedProjects;
+            var actualProjects = tester.Projects;
             // TODO hacer comparable de project
             CollectionAssert.AreEqual(expectedProjects, actualProjects);
         }
@@ -90,7 +91,7 @@ namespace TestDomain
         [TestMethod]
         public void ProjectsGetEmtpy()
         {
-            var actualProjects = bug.Projects;
+            var actualProjects = tester.Projects;
             Assert.IsTrue(actualProjects.Count == 0);
         }
     }
