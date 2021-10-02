@@ -5,11 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-<<<<<<< HEAD
+
 namespace WebApi.Controllers
-=======
-namespace WebAPI.Controllers
->>>>>>> 5d59545... Adds web api first tests. Stage red
 {
     [ApiController]
     [Route("[controller]")]
