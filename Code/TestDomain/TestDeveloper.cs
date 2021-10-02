@@ -7,7 +7,7 @@ namespace TestDomain
     [TestClass]
     public class TestDeveloper
     {
-        private User developer;
+        private Developer developer;
 
         [TestCleanup]
         public void TearDown()
