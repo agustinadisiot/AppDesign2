@@ -16,7 +16,7 @@ namespace TestWebApi
         [TestMethod]
         public void GetAll()
         {
-            List<Bug> bugsToReturn = new List<Bug>()
+            List<Bug> bugExpected = new List<Bug>()
             {
                 new Bug(){
                 Name = "Not working button",
@@ -41,7 +41,11 @@ namespace TestWebApi
             mock.Setup(b => b.GetAll()).Returns(bugsToReturn);
             var controller = new BugController((IBusinessLogic<BugBusinessLogic>)mock.Object);
 
+            var result = controller.Get();
+            var okResult = result as OkObjectResult;
+            var bugsResult = okResult.Value as IEnumerable<Bug>;
 
+            CollectionAssert.AreEqual()
         }
     }
 }
