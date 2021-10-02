@@ -17,6 +17,7 @@ namespace Domain
         {
             IsActive = true;
             CompletedBy = null;
+            Projects = new List<Project>();
         }
 
         public override bool Equals(object obj)
