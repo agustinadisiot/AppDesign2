@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Repository
 {
@@ -29,14 +30,18 @@ namespace Repository
             return bug;
         }
 
+        public Bug GetById(int id)
+        {
+            Bug bug = bugs.First(bug => bug.Id == id);
+            return bug;
+        }
 
         public IEnumerable<Bug> GetAll()
         {
-
             return context.Bugs;
         }
 
-        public void UpdateAll(Bug bugUpdated)
+        public void Update(Bug bugUpdated)
         {
             if (bugs is null)
                 throw new ArgumentNullException("Bugs can't be null"); // TODO cambiar excepcion
