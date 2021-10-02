@@ -68,6 +68,31 @@ namespace TestDomain
             Assert.AreEqual(expected, tester.Password);
         }
 
+        [TestMethod]
+        public void ProjectsGet()
+        {
+            List<Project> expectedProjects = new List<Project> {
+                new Project()
+            {
+                Name = "Project1",
+            },
+                new Project()
+            {
+                Name = "Project2",
+            }
+        };
+            bug.Projects = expectedProjects;
+            var actualProjects = bug.Projects;
+            // TODO hacer comparable de project
+            CollectionAssert.AreEqual(expectedProjects, actualProjects);
+        }
+
+        [TestMethod]
+        public void ProjectsGetEmtpy()
+        {
+            var actualProjects = bug.Projects;
+            Assert.IsTrue(actualProjects.Count == 0);
+        }
     }
 }
 
