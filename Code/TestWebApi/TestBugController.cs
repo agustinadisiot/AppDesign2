@@ -46,6 +46,7 @@ namespace TestWebApi
             var okResult = result as OkObjectResult;
             var bugsResult = okResult.Value as IEnumerable<Bug>;
 
+            mock.VerifyAll();
             CollectionAssert.AreEqual(bugExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
         }
     }
