@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using BusinessLogicInterfaces;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace BusinessLogic
             return project;
         }
 
-        public void Delete(int Id)
+        public ResponseMessage Delete(int Id)
         {
             Project project = Projects.FirstOrDefault(i => i.Id == Id);
 
@@ -30,6 +31,7 @@ namespace BusinessLogic
             }
 
             Projects.Remove(project);
+            return new ResponseMessage(""); //todo mensaje
         }
 
         public IEnumerable<Project> GetAll()
@@ -48,7 +50,7 @@ namespace BusinessLogic
             return project;
         }
 
-        public void Update(int Id, Project projectModified)
+        public Project Update(int Id, Project projectModified)
         {
             Project project = Projects.FirstOrDefault(i => i.Id == Id);
 
@@ -61,6 +63,7 @@ namespace BusinessLogic
             project.Testers = projectModified.Testers;
             project.Developers = projectModified.Developers;
             project.Bugs = projectModified.Bugs;
+            return project;
         }
 
         public void DeleteByName(string nameProject)

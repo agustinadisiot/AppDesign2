@@ -113,19 +113,38 @@ namespace TestWebApi
                 Id = 0
             };
 
+            List<Bug> bugs = new List<Bug>()
+            {
+                bugExpected,
+                new Bug()
+                {
+                    Name = "button",
+                    Description = "Upload not working",
+                    Version = "1.4.5",
+                    IsActive = false,
+                    CompletedBy = null,
+                    Id = 1
+                },
+                 new Bug()
+                {
+                    Name = "Not working button",
+                    Description = "Upload button not working",
+                    Version = "6.2",
+                    IsActive = true,
+                    CompletedBy = null,
+                    Id = 2
+                },
+            };
+
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.Delete(bugExpected.Id));
+            mock.Setup(b => b.Delete(bugExpected.Id)).Returns(new ResponseMessage(""));
             var controller = new BugController(mock.Object);
 
-            var result = controller.Delete(bugExpected);
-
+            var result = controller.Delete(bugExpected.Id);
+            var okResult = result as OkObjectResult;
             mock.VerifyAll();
 
-            var bugs = controller.Get();
-            var okResultBugs = bugs as OkObjectResult;
-            var allBugs = okResultBugs.Value as IEnumerable<Bug>;
-
-            Assert.IsFalse(allBugs.Contains(bugExpected));
+            Assert.IsTrue(okResult.Value is ResponseMessage);
         }
 
         [TestMethod]
@@ -141,11 +160,21 @@ namespace TestWebApi
                 Id = 0
             };
 
+            Bug bugModified = new Bug()
+            {
+                Name = "Bug number 4",
+                Description = "Email verification not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 0
+            };
+
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetById(bugExpected.Id)).Returns(bugExpected);
+            mock.Setup(b => b.Update(bugExpected.Id, bugModified)).Returns(bugExpected);
             var controller = new BugController(mock.Object);
 
-            var result = controller.Update(bugExpected.Id);
+            var result = controller.Update(bugExpected.Id, bugModified);
             var okResult = result as OkObjectResult;
             var bugResult = okResult.Value as Bug;
 

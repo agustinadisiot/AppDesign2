@@ -14,7 +14,7 @@ namespace BusinessLogicInterfaces
         IEnumerable<T> GetAll();
         T GetById(int Id);
         T Add(T t);
-        void Update(int Id, T t);
-        void Delete(int Id);
+        T Update(int Id, T t);
+        ResponseMessage Delete(int Id);
     }
 }

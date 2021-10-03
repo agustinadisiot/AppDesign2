@@ -32,27 +32,7 @@ namespace BusinessLogic
 
         public IEnumerable<Bug> GetAll()
         {
-            List<Bug> bugExpected = new List<Bug>()
-            {
-                new Bug(){
-                Name = "Not working button",
-                Description = "Upload button not working",
-                Version = "1",
-                IsActive = true,
-                CompletedBy = null,
-                Id = 0
-                },
-                new Bug(){
-                Name = "Not working button yellow ",
-                Description = "Upload button not working",
-                Version = "1",
-                IsActive = true,
-                CompletedBy = null,
-                Id = 1
-                }
-            };
-
-            return bugExpected; // TODO cambiar a Bugs y elminar el coso de arriba
+            return Bugs; 
         }
 
         public Bug Add(Bug bug)
@@ -61,7 +41,7 @@ namespace BusinessLogic
             return bug;
         }
 
-        public void Update(int idbugToUpdate, Bug bugModified)
+        public Bug Update(int idbugToUpdate, Bug bugModified)
         {
             Bug bug = Bugs.FirstOrDefault(i => i.Id == idbugToUpdate);
 
@@ -75,9 +55,11 @@ namespace BusinessLogic
             bug.Version = bugModified.Version;
             bug.CompletedBy = bugModified.CompletedBy;
             bug.IsActive = bugModified.IsActive;
+
+            return bug;
         }
 
-        public void Delete(int idbugToDelete)
+        public ResponseMessage Delete(int idbugToDelete)
         {
             Bug bug = Bugs.FirstOrDefault(i => i.Id == idbugToDelete);
 
@@ -87,6 +69,7 @@ namespace BusinessLogic
             }
 
             Bugs.Remove(bug);
+            return new ResponseMessage(""); //todo agregar mensaje
         }
     }
 

@@ -27,9 +27,28 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetAll());
         }
 
-        public object Post(Bug bugExpected)
+        [HttpPost]
+        public object Post([FromBody] Bug bugExpected)
         {
             return Ok(businessLogic.Add(bugExpected));
+        }
+
+        [HttpGet("{id}")]
+        public object Get([FromRoute] int id)
+        {
+            return Ok(businessLogic.GetById(id));
+        }
+
+        [HttpPut("{id}")]
+        public object Update([FromRoute]int id, [FromBody]Bug bugModified)
+        {
+            return Ok(businessLogic.Update(id, bugModified));
+        }
+
+        [HttpDelete("{id}")]
+        public object Delete([FromRoute] int id)
+        {
+            return Ok(businessLogic.Delete(id));
         }
     }
 }
