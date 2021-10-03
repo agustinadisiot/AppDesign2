@@ -26,5 +26,10 @@ namespace WebApi.Controllers
 
             return Ok(businessLogic.GetAll());
         }
+
+        public object Post(Bug bugExpected)
+        {
+            return Ok(businessLogic.Add(bugExpected));
+        }
     }
 }

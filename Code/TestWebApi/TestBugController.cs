@@ -17,7 +17,7 @@ namespace TestWebApi
         [TestMethod]
         public void GetAll()
         {
-            List<Bug> bugExpected = new List<Bug>()
+            List<Bug> bugsExpected = new List<Bug>()
             {
                 new Bug(){
                 Name = "Not working button",
@@ -38,7 +38,7 @@ namespace TestWebApi
             };
 
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(bugExpected);
+            mock.Setup(b => b.GetAll()).Returns(bugsExpected);
             var controller = new BugController(mock.Object);
 
             var result = controller.Get();
@@ -46,7 +46,32 @@ namespace TestWebApi
             var bugsResult = okResult.Value as IEnumerable<Bug>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(bugExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
+            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
+        }
+
+        [TestMethod]
+        public void Create()
+        {
+            Bug bugExpected = new Bug()
+            {
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 0
+            };
+
+            var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.Add(bugExpected)).Returns(bugExpected);
+            var controller = new BugController(mock.Object);
+
+            var result = controller.Post(bugExpected);
+            var okResult = result as OkObjectResult;
+            var bugResult = okResult.Value as Bug;
+
+            mock.VerifyAll();
+            Assert.AreEqual(bugExpected, bugResult);
         }
     }
 }
