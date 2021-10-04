@@ -11,14 +11,13 @@ namespace Domain
         public bool IsActive { get; set; }
         public Developer CompletedBy { get; set; }
         public int Id { get; set; }
-        public List<Project> Projects { get; set; }
-        public int ProjectId { get; set; }
+        public Project Project { get; set; }
+        public string ProjectName { get; set; }
 
         public Bug()
         {
             IsActive = true;
             CompletedBy = null;
-            Projects = new List<Project>();
         }
 
         public override bool Equals(object obj)
@@ -26,5 +25,7 @@ namespace Domain
             Bug bug = (Bug)obj;
             return bug.Id == this.Id;
         }
+
+        // TODO validate
     }
 }

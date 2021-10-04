@@ -51,29 +51,16 @@ namespace TestDomain
 
 
         [TestMethod]
-        public void ProjectsGet()
+        public void ProjectGet()
         {
-            List<Project> expectedProjects = new List<Project> {
-                new Project()
+            Project expectedProject = new Project
             {
-                Name = "Project1",
-            },
-                new Project()
-            {
-                Name = "Project2",
-            }
-        };
-            bug.Projects = expectedProjects;
-            var actualProjects = bug.Projects;
+                Name = "New Project"
+            };
+            bug.Project = expectedProject;
+            var actualProject = bug.Project;
             // TODO hacer comparable de project
-            CollectionAssert.AreEqual(expectedProjects, actualProjects);
-        }
-
-        [TestMethod]
-        public void ProjectsGetEmtpy()
-        {
-            var actualProjects = bug.Projects;
-            Assert.IsTrue(actualProjects.Count == 0);
+            Assert.AreEqual(expectedProject, actualProject);
         }
 
         [DataTestMethod]
@@ -89,14 +76,14 @@ namespace TestDomain
 
 
         [DataTestMethod]
-        [DataRow(0)]
-        [DataRow(1)]
-        [DataRow(2)]
-        public void ProyectIdGetSet(int id)
+        [DataRow("New project")]
+        [DataRow("Second project")]
+        [DataRow("The new new project")]
+        public void ProyectNameSet(string name)
         {
-            bug.ProjectId = id;
-            int expected = id;
-            Assert.AreEqual(expected, bug.ProjectId);
+            bug.ProjectName = name;
+            string expected = name;
+            Assert.AreEqual(name, bug.ProjectName);
         }
 
         [TestMethod]
