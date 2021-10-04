@@ -9,18 +9,17 @@ using System;
 
 namespace Factory
 {
-    public class BusinessLogicFactory
+    public class ServiceFactory
     {
         private readonly IServiceCollection serviceCollection;
 
-        public BusinessLogicFactory(IServiceCollection newServiceCollection)
+        public ServiceFactory(IServiceCollection newServiceCollection)
         {
             serviceCollection = newServiceCollection;
         }
 
-        public void AddBusinessLogicService()
-        { // TODO cambiar nombre de funcion y clase 
-            // TODO cambiar a scoped, el singleton es solo para las pruebas sin data access
+        public void AddCustomServices()
+        {
             serviceCollection.AddScoped<IBugDataAccess, BugDataAccess>();
             serviceCollection.AddScoped<IBugBusinessLogic, BugBusinessLogic>();
         }
