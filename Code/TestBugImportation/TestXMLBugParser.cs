@@ -1,14 +1,17 @@
+using BugParser;
 using Domain;
+using Domain.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace TestBugImportation
+namespace TestBugParser
 {
+    [DeploymentItem(@"TestFiles/XMLTestFiles/OneBug.xml", "TestFiles/XMLTestFiles")]
     [TestClass]
     public class TestXMLBugParser
     {
-        const string baseDirectory = "./TestFiles/XMLTestFiles/";
+        const string baseDirectory = "../../../TestFiles/XMLTestFiles/";
         [TestMethod]
         public void ImportOneBug()
         {
@@ -24,11 +27,11 @@ namespace TestBugImportation
                 IsActive = true,
                 CompletedBy = null,
                 Id = 1,
-                Project = "Nombre del Proyecto"
+                ProjectName = "Nombre del Proyecto"
                 }
             };
 
-            CollectionAssert.AreEquivalent(expectedBugs, actualBugs);
+            CollectionAssert.AreEqual(expectedBugs, actualBugs, new BugComparer());
         }
 
 
@@ -47,7 +50,7 @@ namespace TestBugImportation
                 IsActive = true,
                 CompletedBy = null,
                 Id = 1,
-                Project = "Nombre del Proyecto"
+                ProjectName = "Nombre del Proyecto"
                 },
                 new Bug()
                 {
@@ -56,12 +59,12 @@ namespace TestBugImportation
                 Version = "1",
                 IsActive = true,
                 CompletedBy = null,
-                Project = "Nombre del Proyecto",
+                ProjectName = "Nombre del Proyecto",
                 Id = 2
                 }
             };
 
-            CollectionAssert.AreEquivalent(expectedBugs, actualBugs);
+            CollectionAssert.AreEqual(expectedBugs, actualBugs, new BugComparer());
         }
 
         [TestMethod]
@@ -79,7 +82,7 @@ namespace TestBugImportation
                 IsActive = true,
                 CompletedBy = null,
                 Id = 1,
-                Project = "Nombre del Proyecto"
+                ProjectName = "Nombre del Proyecto"
                 },
                 new Bug()
                 {
@@ -88,10 +91,9 @@ namespace TestBugImportation
                 Version = "1",
                 IsActive = true,
                 CompletedBy = null,
-                Project = "Nombre del Proyecto",
+                ProjectName = "Nombre del Proyecto",
                 Id = 2
                 },
-                ,
                 new Bug()
                 {
                  Name = "Error en el envío de correo 3",
@@ -99,12 +101,12 @@ namespace TestBugImportation
                 Version = "2",
                 IsActive = true,
                 CompletedBy = null,
-                Project = "Nombre del Proyecto",
+                ProjectName = "Nombre del Proyecto",
                 Id = 2
                 }
             };
 
-            CollectionAssert.AreEquivalent(expectedBugs, actualBugs);
+            CollectionAssert.AreEqual(expectedBugs, actualBugs, new BugComparer());
         }
 
         [TestMethod]
@@ -116,14 +118,13 @@ namespace TestBugImportation
 
             Assert.IsTrue(actualBugs.Count == 0);
 
-            Assert.ThrowsException<NonexistentBugException>(() => bugBusinessLogic.Delete(idbugToDelete));
         }
 
         [TestMethod]
         public void InvalidXML()
         {
             string fullPath = baseDirectory + "InvalidXML.xml";
-            Assert.ThrowsException<XmlException>(() => BugParserXML.GetBugs(fullPath);
+            Assert.ThrowsException<XmlException>(() => BugParserXML.GetBugs(fullPath));
 
         }
 
@@ -131,7 +132,8 @@ namespace TestBugImportation
         public void InvalidBugs()
         {// TODO testear cada propiedad? 
             string fullPath = baseDirectory + "InvalidBugs.xml";
-            Assert.ThrowsException<XmlException>(() => BugParserXML.GetBugs(fullPath);
+            Assert.ThrowsException<XmlException>(() => BugParserXML.GetBugs(fullPath));
+            // TODO cambiar por otra excepcion
 
         }
 

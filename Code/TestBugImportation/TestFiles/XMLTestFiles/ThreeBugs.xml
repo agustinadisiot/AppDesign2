@@ -38,5 +38,22 @@
 				Activo
 			</Estado>
 		</Bug>
+		<Bug>
+			<Id>
+				3
+			</Id>
+			<Nombre>
+				Error en el envío de correo 3
+			</Nombre>
+			<Descripcion>
+				El error se produce cuando el usuario no tiene un correo asignado 3
+			</Descripcion>
+			<Version>
+				1.0
+			</Version>
+			<Estado>
+				Activo
+			</Estado>
+		</Bug>
 	</Bugs>
 </Empresa>
