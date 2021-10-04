@@ -1,7 +1,7 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 using Repository.Design;
-using RepositoryDataAccess;
+using RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +13,9 @@ namespace Repository
         private readonly DbSet<Bug> bugs;
         private readonly BugManagerContext context;
 
-        public BugDataAccess(BugManagerContext newContext)
+        public BugDataAccess(DbContext newContext)
         {
-            context = newContext;
+            context = (BugManagerContext)newContext;
             bugs = context.Set<Bug>();
         }
 

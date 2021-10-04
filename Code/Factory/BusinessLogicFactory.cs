@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using Repository.Design;
-using RepositoryDataAccess;
+using RepositoryInterfaces;
 using System;
 
 namespace Factory
@@ -20,11 +20,9 @@ namespace Factory
 
         public void AddBusinessLogicService()
         { // TODO cambiar nombre de funcion y clase 
-            // TODO cambiar a scoped, el singleton es solo para las pruebas sin data acces
-            serviceCollection.AddSingleton<IBugBusinessLogic, BugBusinessLogic>();
-
-            DotNetEnv.Env.Load("./Environment/.env");
+            // TODO cambiar a scoped, el singleton es solo para las pruebas sin data access
             serviceCollection.AddScoped<IBugDataAccess, BugDataAccess>();
+            serviceCollection.AddScoped<IBugBusinessLogic, BugBusinessLogic>();
         }
 
         public void AddDbContextService(string connectionString)
