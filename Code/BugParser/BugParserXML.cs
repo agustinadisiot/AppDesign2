@@ -11,7 +11,9 @@ namespace BugParser
     {
         public static List<Bug> GetBugs(string fullPath)
         {
+            // TODO hacer refactor distinas funciones
             XmlSerializer serializer = new XmlSerializer(typeof(BugModel));
+            // TODO hacer test cuando falla el FileStream
             FileStream fs = new FileStream(fullPath, FileMode.Open);
             BugModel completeImportedData;
             try
