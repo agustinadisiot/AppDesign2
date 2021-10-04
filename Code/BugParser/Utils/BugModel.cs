@@ -52,7 +52,7 @@ namespace BugParser
     public class BugXML
     {
         [XmlElement("Id")]
-        public string Id { get; set; } // TODO cambiar a int
+        public string Id { get; set; }
         [XmlElement("Nombre")]
         public string Nombre { get; set; }
         [XmlElement("Descripcion")]
