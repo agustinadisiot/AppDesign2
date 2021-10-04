@@ -22,14 +22,14 @@ namespace Factory
         { // TODO cambiar nombre de funcion y clase 
             // TODO cambiar a scoped, el singleton es solo para las pruebas sin data acces
             serviceCollection.AddSingleton<IBugBusinessLogic, BugBusinessLogic>();
+
+            DotNetEnv.Env.Load("./Environment/.env");
             serviceCollection.AddScoped<IBugDataAccess, BugDataAccess>();
         }
 
         public void AddDbContextService(string connectionString)
         {
-            // TODO ver porque no hacer designContext estatica o hacerla estatica y justificar
-            BugManagerContext bugManagerContext = new DesignContext().CreateDbContext(null);
-            serviceCollection.AddDbContext<DbContext, BugManagerContext>();
+            serviceCollection.AddDbContext<DbContext, BugManagerContext>(options => options.UseSqlServer(connectionString));
         }
     }
 }
