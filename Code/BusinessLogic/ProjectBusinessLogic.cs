@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BusinessLogic
 {
-    public class ProjectBusinessLogic : BusinessLogic<Project>
+    public class ProjectBusinessLogic : IProjectBusinessLogic
     {
         public List<Project> Projects { get; set; }
 
