@@ -21,6 +21,7 @@ namespace Domain.Utils
                         bugExpected.Name == bugReturned.Name &&
                         bugExpected.IsActive == bugReturned.IsActive &&
                         bugExpected.Version == bugReturned.Version &&
+                        bugExpected.ProjectName == bugReturned.ProjectName &&
                         ((bugExpected.CompletedBy == null && bugReturned.CompletedBy == null) ||
                         (bugExpected.Equals(bugReturned)));
             ;

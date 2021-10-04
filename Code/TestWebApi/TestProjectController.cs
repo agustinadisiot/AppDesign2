@@ -1,11 +1,11 @@
 ﻿using BusinessLogicInterfaces;
+using Domain;
+using Domain.Utils;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WebApi.Controllers;
 
 namespace TestWebApi
 {
@@ -36,7 +36,7 @@ namespace TestWebApi
             var projectsResult = okResult.Value as IEnumerable<Project>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new projectComparer());
+            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer());
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@ namespace TestWebApi
             mock.Setup(b => b.GetByName(projectExpected.Name)).Returns(projectExpected);
             var controller = new ProjectController(mock.Object);
 
-            var result = controller.Get(projectExpected.Name);
+            var result = controller.GetByName(projectExpected.Name);
             var okResult = result as OkObjectResult;
             var projectResult = okResult.Value as Project;
 
@@ -130,7 +130,7 @@ namespace TestWebApi
             mock.Setup(b => b.Delete(projectExpected.Id)).Returns(new ResponseMessage(""));
             var controller = new ProjectController(mock.Object);
 
-            var result = controller.Delete(projecyExpected.Id);
+            var result = controller.Delete(projectExpected.Id);
             var okResult = result as OkObjectResult;
             mock.VerifyAll();
 
