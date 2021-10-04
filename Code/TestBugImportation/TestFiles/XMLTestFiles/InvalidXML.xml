@@ -1,42 +1,45 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Empresa>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 	<Proyecto>
 		Nombre del Proyecto
-	</Proyecto>
+			</Id>
+<Empresa>
 	<Bugs>
-		<Bug>
 			<Id>
 				1
+				1
+				1
 			</Id>
-			<Nombre>
 				Error en el envío de correo
-			</Nombre>
 			<Descripcion>
-				El error se produce cuando el usuario no tiene un correo asignado
 			</Descripcion>
+			</Nombre>
+			</Nombre>
+			</Nombre>
+			</Nombre>
 			<Version>
 				1.0
 			</Version>
 			<Estado>
+			<Nombre>
 				Activo
 			</Estado>
 		</Bug>
 		<Bug>
 			<Id>
 				2
-			</Id>
 			<Nombre>
+			<Version>
 				Error en el envío de correo 2
 			</Nombre>
+</Empresa1>
 			<Descripcion>
 				El error se produce cuando el usuario no tiene un correo asignado 2
 			</Descripcion>
-			<Version>
+		</Bug>
 				1.0
 			</Version>
+		<Bug>
 			<Estado>
 				Activo
 			</Estado>
-		</Bug>
 	</Bugs>
-</Empresa>

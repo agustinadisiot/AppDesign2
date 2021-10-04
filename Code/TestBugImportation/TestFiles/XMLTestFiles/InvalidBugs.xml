@@ -8,17 +8,14 @@
 			<Id>
 				1
 			</Id>
-			<Nombre>
+			<Apellido>
 				Error en el envío de correo
-			</Nombre>
+			</Apellido>
 			<Descripcion>
 				El error se produce cuando el usuario no tiene un correo asignado
 			</Descripcion>
-			<Version>
-				1.0
-			</Version>
 			<Estado>
-				Activo
+				No
 			</Estado>
 		</Bug>
 	</Bugs>
