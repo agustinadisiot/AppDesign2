@@ -16,14 +16,6 @@ namespace BusinessLogic
             bugDataAccess = newbugDataAccess;
         }
 
-
-        /*      public List<Bug> Bugs { get; set; }
-
-              public BugBusinessLogic()
-              {
-                  Bugs = new List<Bug>();
-              }
-      */
         public Bug GetById(int idBug)
         {
             Bug bug = bugDataAccess.GetById(idBug);
@@ -52,38 +44,6 @@ namespace BusinessLogic
             return bugDataAccess.Delete(Id);
 
         }
-
-
-        /*        public Bug Update(int idbugToUpdate, Bug bugModified)
-                {
-                    Bug bug = Bugs.FirstOrDefault(i => i.Id == idbugToUpdate);
-
-                    if (bug is null)
-                    {
-                        throw new NonexistentBugException();
-                    }
-
-                    bug.Name = bugModified.Name;
-                    bug.Description = bugModified.Description;
-                    bug.Version = bugModified.Version;
-                    bug.CompletedBy = bugModified.CompletedBy;
-                    bug.IsActive = bugModified.IsActive;
-
-                    return bug;
-                }
-
-                public ResponseMessage Delete(int idbugToDelete)
-                {
-                    Bug bug = Bugs.FirstOrDefault(i => i.Id == idbugToDelete);
-
-                    if (bug is null)
-                    {
-                        throw new NonexistentBugException();
-                    }
-
-                    Bugs.Remove(bug);
-                    return new ResponseMessage(""); //todo agregar mensaje
-                }*/
     }
 
 
