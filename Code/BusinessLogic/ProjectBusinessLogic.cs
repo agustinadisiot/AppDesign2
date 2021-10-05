@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,101 +9,52 @@ namespace BusinessLogic
 {
     public class ProjectBusinessLogic : IProjectBusinessLogic
     {
-        public List<Project> Projects { get; set; }
+        public IProjectDataAccess projectDataAccess { get; set; }
 
-        public ProjectBusinessLogic()
+        public ProjectBusinessLogic(IProjectDataAccess newProjectDataAccess)
         {
-            Projects = new List<Project>();
+            projectDataAccess = newProjectDataAccess;
         }
 
         public Project Add(Project project)
         {
-            Projects.Add(project);
-            return project;
+            return projectDataAccess.Create(project);
         }
 
         public ResponseMessage Delete(int Id)
         {
-            Project project = Projects.FirstOrDefault(i => i.Id == Id);
-
-            if (project is null)
-            {
-                throw new NonexistentProjectException();
-            }
-
-            Projects.Remove(project);
-            return new ResponseMessage("Deleted successfully");
+            return projectDataAccess.Delete(Id);
         }
 
         public IEnumerable<Project> GetAll()
         {
-            return Projects;
+            return projectDataAccess.GetAll();
         }
 
         public Project GetById(int Id)
         {
-            Project project = Projects.FirstOrDefault((i) => i.Id == Id);
-            if (project is null)
-            {
-                throw new NonexistentProjectException();
-            }
-
-            return project;
+            return projectDataAccess.GetById(Id);
         }
 
         public Project Update(int Id, Project projectModified)
         {
-            Project project = Projects.FirstOrDefault(i => i.Id == Id);
-
-            if (project is null)
-            {
-                throw new NonexistentProjectException();
-            }
-
-            project.Name = projectModified.Name;
-            project.Testers = projectModified.Testers;
-            project.Developers = projectModified.Developers;
-            project.Bugs = projectModified.Bugs;
-            return project;
+            return projectDataAccess.Update(Id, projectModified);
         }
 
         public ResponseMessage DeleteByName(string nameProject)
         {
-            Project project = Projects.FirstOrDefault(i => i.Name == nameProject);
-
-            if (project is null)
-            {
-                throw new NonexistentProjectException();
-            }
-
-            Projects.Remove(project);
-            return new ResponseMessage("Deleted successfully");
+            return projectDataAccess.DeleteByName(nameProject);
         }
 
         public Project GetByName(string nameProject)
         {
-            Project project = Projects.FirstOrDefault((i) => i.Name == nameProject);
-            if (project is null)
-            {
-                throw new NonexistentProjectException();
-            }
-
-            return project;
+            return projectDataAccess.GetByName(nameProject);
         }
 
-        public void UpdateByName(string nameProjectToUpdate, Project projectModified)
+        public Project UpdateByName(string nameProjectToUpdate, Project projectModified)
         {
-            Project project = Projects.FirstOrDefault(i => i.Name == nameProjectToUpdate);
-
-            if (project is null)
-            {
-                throw new NonexistentProjectException();
-            }
-
-            project.Name = projectModified.Name;
-            project.Testers = projectModified.Testers;
-            project.Developers = projectModified.Developers;
-            project.Bugs = projectModified.Bugs;
+            return projectDataAccess.UpdateByName(nameProjectToUpdate, projectModified);
         }
+
     }
 }

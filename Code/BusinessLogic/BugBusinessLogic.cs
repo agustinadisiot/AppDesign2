@@ -11,9 +11,9 @@ namespace BusinessLogic
     {
         public IBugDataAccess bugDataAccess { get; set; }
 
-        public BugBusinessLogic(IBugDataAccess newbugDataAccess)
+        public BugBusinessLogic(IBugDataAccess newBugDataAccess)
         {
-            bugDataAccess = newbugDataAccess;
+            bugDataAccess = newBugDataAccess;
         }
 
         public Bug GetById(int idBug)

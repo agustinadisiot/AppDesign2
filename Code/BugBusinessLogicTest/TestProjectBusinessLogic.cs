@@ -3,6 +3,7 @@ using BusinessLogicInterfaces;
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using RepositoryInterfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -65,7 +66,7 @@ namespace TestProjectBusinessLogic
             string nameProjectToDelete = "Empty project";
 
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.Delete(nameProjectToDelete)).Throws(new NonexistentProjectException());
+            mock.Setup(b => b.DeleteByName(nameProjectToDelete)).Throws(new NonexistentProjectException());
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
             Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.DeleteByName(nameProjectToDelete));
@@ -171,10 +172,10 @@ namespace TestProjectBusinessLogic
             };
 
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.GetById(projectExpected.Id)).Returns(projectExpected.Id);
+            mock.Setup(b => b.GetById(projectExpected.Id)).Returns(projectExpected);
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            var result = projectBusinessLogic.GetById(projectExpected.Name);
+            var result = projectBusinessLogic.GetById(projectExpected.Id);
 
             Assert.AreEqual(projectExpected, result);
         }
@@ -182,7 +183,7 @@ namespace TestProjectBusinessLogic
         [TestMethod]
         public void GetAllProjects()
         {
-            List<Project> projectExpected = new List<Project>()
+            List<Project> projectsExpected = new List<Project>()
             {
                 new Project()
                 {
@@ -225,20 +226,22 @@ namespace TestProjectBusinessLogic
         [TestMethod]
         public void UpdateProjectByName()
         {
-            projectBusinessLogic.Projects = projects;
             string nameProjectToUpdate = "Web API";
-
             Project projectModified = new Project()
             {
-                Name = "Modiefied Name",
-                Testers = testers,
-                Developers = developers,
-                Bugs = bugs
+                Id = 0,
+                Name = "projectMod"
             };
 
-            projectBusinessLogic.UpdateByName(nameProjectToUpdate, projectModified);
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.UpdateByName(nameProjectToUpdate, projectModified)).Returns(projectModified);
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            Assert.AreEqual(project, projectModified);
+            var projectResult = projectBusinessLogic.UpdateByName(nameProjectToUpdate, projectModified);
+
+            mock.VerifyAll();
+
+            Assert.AreEqual(projectResult, projectModified);
         }
 
         [TestMethod]
