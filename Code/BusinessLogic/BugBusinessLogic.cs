@@ -41,15 +41,18 @@ namespace BusinessLogic
             return bug;
         }
 
-        public Bug Update(int Id, Bug t)
+        public Bug Update(int Id, Bug bug)
         {
-            throw new NotImplementedException();
+            return bugDataAccess.Update(Id, bug);
         }
+
 
         public ResponseMessage Delete(int Id)
         {
-            throw new NotImplementedException();
+            return bugDataAccess.Delete(Id);
+
         }
+
 
         /*        public Bug Update(int idbugToUpdate, Bug bugModified)
                 {

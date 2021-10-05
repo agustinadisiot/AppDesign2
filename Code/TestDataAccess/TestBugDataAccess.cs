@@ -72,7 +72,7 @@ namespace TestDataAccess
         [TestMethod]
         public void Update()
         {
-            bugDataAccess.Create(new Bug
+            Bug bug = bugDataAccess.Create(new Bug
             {
                 Id = 1,
                 Name = "b",
@@ -90,7 +90,7 @@ namespace TestDataAccess
                 IsActive = true
             };
 
-            bugDataAccess.Update(bugUpdated);
+            bugDataAccess.Update(bug.Id, bugUpdated);
 
             var bugSaved = bugDataAccess.GetById(1);
 
@@ -136,7 +136,7 @@ namespace TestDataAccess
                 IsActive = true
             };
             bugDataAccess.Create(notExpectedBug);
-            bugDataAccess.Delete(notExpectedBug);
+            bugDataAccess.Delete(notExpectedBug.Id);
             var bugsSaved = bugDataAccess.GetAll().ToList();
 
             CollectionAssert.DoesNotContain(bugsSaved, notExpectedBug);

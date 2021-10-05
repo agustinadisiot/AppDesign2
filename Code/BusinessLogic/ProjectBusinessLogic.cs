@@ -31,7 +31,7 @@ namespace BusinessLogic
             }
 
             Projects.Remove(project);
-            return new ResponseMessage(""); //todo mensaje
+            return new ResponseMessage("Deleted successfully");
         }
 
         public IEnumerable<Project> GetAll()
@@ -66,7 +66,7 @@ namespace BusinessLogic
             return project;
         }
 
-        public void DeleteByName(string nameProject)
+        public ResponseMessage DeleteByName(string nameProject)
         {
             Project project = Projects.FirstOrDefault(i => i.Name == nameProject);
 
@@ -76,6 +76,7 @@ namespace BusinessLogic
             }
 
             Projects.Remove(project);
+            return new ResponseMessage("Deleted successfully");
         }
 
         public Project GetByName(string nameProject)

@@ -103,48 +103,19 @@ namespace TestWebApi
         [TestMethod]
         public void Delete()
         {
-            Bug bugExpected = new Bug()
-            {
-                Name = "Not working button",
-                Description = "Upload button not working",
-                Version = "1",
-                IsActive = true,
-                CompletedBy = null,
-                Id = 0
-            };
-
-            List<Bug> bugs = new List<Bug>()
-            {
-                bugExpected,
-                new Bug()
-                {
-                    Name = "button",
-                    Description = "Upload not working",
-                    Version = "1.4.5",
-                    IsActive = false,
-                    CompletedBy = null,
-                    Id = 1
-                },
-                 new Bug()
-                {
-                    Name = "Not working button",
-                    Description = "Upload button not working",
-                    Version = "6.2",
-                    IsActive = true,
-                    CompletedBy = null,
-                    Id = 2
-                },
-            };
-
+            int idBugToDelete = 0;
+            ResponseMessage responseExpected = new ResponseMessage("Deleted successfully");
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.Delete(bugExpected.Id)).Returns(new ResponseMessage(""));
+            mock.Setup(b => b.Delete(idBugToDelete)).Returns(responseExpected);
             var controller = new BugController(mock.Object);
 
-            var result = controller.Delete(bugExpected.Id);
+            var result = controller.Delete(idBugToDelete);
             var okResult = result as OkObjectResult;
+            var ResponseResult = okResult.Value as ResponseMessage;
+
             mock.VerifyAll();
 
-            Assert.IsTrue(okResult.Value is ResponseMessage);
+            Assert.AreEqual(ResponseResult.responseMessage, responseExpected.responseMessage);
         }
 
         [TestMethod]
