@@ -1,4 +1,6 @@
-﻿using Domain;
+﻿using BusinessLogic;
+using BusinessLogicInterfaces;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 using Repository.Design;
 using RepositoryInterfaces;
@@ -24,7 +26,7 @@ namespace Repository
 
             if (bug is null)
             {
-                throw new ArgumentNullException("Bug can't be null");// TODO cambiar excepcion
+                throw new NonexistentBugException();
             }
 
             context.Add(bug);
@@ -37,6 +39,7 @@ namespace Repository
         public Bug GetById(int id)
         {
             Bug bug = bugs.First(bug => bug.Id == id);
+            if (bug == null) throw new NonexistentBugException();
             return bug;
         }
 
@@ -45,28 +48,30 @@ namespace Repository
             return context.Bugs;
         }
 
-        public void Update(Bug bugUpdated)
+        public Bug Update(int Id, Bug bugUpdated)
         {
             if (bugs is null)
-                throw new ArgumentNullException("Bugs can't be null"); // TODO cambiar excepcion
+                throw new NonexistentBugException(); 
             //bugs.Update(bugUpdated); // TODO ver porque no anda  esto, seguramente tenga que 
             // ver con el context
-            // esto es lo que haciamos en DA1: 
-            Bug bugToUpdate = GetById(bugUpdated.Id);
+            Bug bugToUpdate = GetById(Id);
             bugToUpdate.Name = bugUpdated.Name;
             bugToUpdate.Version = bugUpdated.Version;
             bugToUpdate.IsActive = bugUpdated.IsActive;
             bugToUpdate.ProjectName = bugUpdated.ProjectName;
+            bugToUpdate.CompletedBy = bugUpdated.CompletedBy;
             bugToUpdate.Project = bugUpdated.Project;
             bugToUpdate.Description = bugUpdated.Description;
             context.SaveChanges();
+            return bugToUpdate;
         }
 
-        public void Delete(Bug bugToDelete)
+        public ResponseMessage Delete(int id)
         {
-            Bug bugDelete = GetById(bugToDelete.Id);
+            Bug bugDelete = GetById(id);
             bugs.Remove(bugDelete);
             context.SaveChanges();
+            return new ResponseMessage("Deleted successfully");
         }
     }
 }

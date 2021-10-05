@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using BusinessLogicInterfaces;
+using Domain;
 using System;
 using System.Collections.Generic;
 
@@ -11,8 +12,8 @@ namespace RepositoryInterfaces
 
         public IEnumerable<Bug> GetAll();
 
-        public void Update(Bug bugUpdated);
+        public Bug Update(int id, Bug bugUpdated);
 
-        public void Delete(Bug bugToDelete);
+        ResponseMessage Delete(int id);
     }
 }

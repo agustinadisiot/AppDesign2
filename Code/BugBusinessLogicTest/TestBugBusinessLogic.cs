@@ -3,116 +3,185 @@ using Domain;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic;
+using RepositoryInterfaces;
+using Domain.Utils;
+using Moq;
+using Microsoft.AspNetCore.Mvc;
+using BusinessLogicInterfaces;
 
 namespace TestBugBusinessLogic
 {
     [TestClass]
     public class TestBugBusinessLogic
     {
+        private IBugDataAccess newbugDataAccess;
         private BugBusinessLogic bugBusinessLogic;
         private Bug bug;
         private Bug bug1;
-        private Bug bug2;
         private List<Bug> bugs;
 
 
-        /*        [TestCleanup]
-                public void TearDown()
+        [TestCleanup]
+        public void TearDown()
+        {
+
+        }
+
+        [TestInitialize]
+        public void Setup()
+        {
+            bugBusinessLogic = new BugBusinessLogic(newbugDataAccess);
+
+            bug = new Bug()
+            {
+                Id = 0,
+                Name = "Bug1",
+                Description = "Cuando el servidor se cierra y estoy en login se rompe",
+                Version = "12.4.5"
+            };
+
+            bug1 = new Bug() { Id = 1 };
+
+        }
+
+
+        [TestMethod]
+        public void CreateBug()
+        {
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Create(bug)).Returns(bug);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            var bugResult = bugBusinessLogic.Add(bug);
+            mock.VerifyAll();
+
+            Assert.AreEqual(bugResult, bug);
+        }
+
+        [TestMethod]
+        public void DeleteBugNotFound()
+        {
+            int idbugToDelete = 1;
+
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Delete(idbugToDelete)).Throws(new NonexistentBugException());
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            Assert.ThrowsException<NonexistentBugException>(() => bugBusinessLogic.Delete(idbugToDelete));
+        }
+
+        [TestMethod]
+        public void DeleteBug()
+        {
+            int idbugToDelete = 0;
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Delete(idbugToDelete)).Returns(new ResponseMessage("Deleted successfully"));
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            var result = bugBusinessLogic.Delete(idbugToDelete);
+            mock.VerifyAll();
+            Assert.IsTrue(result is ResponseMessage);
+        }
+
+        [TestMethod]
+        public void GetById()
+        {
+            Bug bugExpected = new Bug()
+            {
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 0
+            };
+
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetById(bugExpected.Id)).Returns(bugExpected);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            var result = bugBusinessLogic.GetById(bugExpected.Id);
+
+            Assert.AreEqual(bugExpected, result);
+        }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug()
                 {
-
-                }
-
-                [TestInitialize]
-                public void Setup()
+                     Name = "Not working button",
+                     Description = "Upload button not working",
+                     Version = "1",
+                     IsActive = true,
+                     CompletedBy = null,
+                     Id = 0
+                }, 
+                new Bug()
                 {
-                    bugBusinessLogic = new BugBusinessLogic();
-
-                    bug = new Bug()
-                    {
-                        Id = 0,
-                        Name = "Bug1",
-                        Description = "Cuando el servidor se cierra y estoy en login se rompe",
-                        Version = "12.4.5"
-                    };
-
-                    bug1 = new Bug() { Id = 1 };
-                    bug2 = new Bug() { Id = 2 };
-
-                    bugs = new List<Bug>() {
-                        bug
-                    };
-
-                }
-
-
-                [TestMethod]
-                public void CreateBug()
+                    Name = "button",
+                    Description = "Upload not working",
+                    Version = "1.4.5",
+                    IsActive = false,
+                    CompletedBy = null,
+                    Id = 1
+                },
+                 new Bug()
                 {
-                    bugBusinessLogic.Add(bug);
-                    // TODO arreglar
-                    Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.GetAll()));
-                }
+                    Name = "Not working button",
+                    Description = "Upload button not working",
+                    Version = "6.2",
+                    IsActive = true,
+                    CompletedBy = null,
+                    Id = 2
+                },
+            };
 
-                [TestMethod]
-                public void DeleteBugNotFound()
-                {
-                    int idbugToDelete = 1;
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetAll()).Returns(bugsExpected);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-                    Assert.ThrowsException<NonexistentBugException>(() => bugBusinessLogic.Delete(idbugToDelete));
-                }
+            var result = bugBusinessLogic.GetAll();
 
-                [TestMethod]
-                public void DeleteBug()
-                {
-                    bugBusinessLogic = bugs;
-                    int idbugToDelete = 0;
-                    bugBusinessLogic.Delete(idbugToDelete);
+            Assert.IsTrue(bugsExpected.SequenceEqual(result));
+        }
 
-                    Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.Bugs));
-                }
+        [TestMethod]
+        public void UpdateBugNotFound()
+        {
+            int idbugToUpdate = 1;
 
-                [TestMethod]
-                public void GetById()
-                {
-                    bugBusinessLogic.Add(bug);
-                    int idBug = 0;
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Update(idbugToUpdate, bug)).Throws(new NonexistentBugException());
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-                    Assert.AreEqual(bug, bugBusinessLogic.GetById(idBug));
-                }
+            Assert.ThrowsException<NonexistentBugException>(() => bugBusinessLogic.Update(idbugToUpdate, bug));
+        }
 
-                [TestMethod]
-                public void GetAll()
-                {
-                    bugBusinessLogic.Bugs = bugs;
+        [TestMethod]
+        public void UpdateBug()
+        {
+            int idbugToUpdate = 0;
 
-                    Assert.IsTrue(bugs.SequenceEqual(bugBusinessLogic.GetAll()));
-                }
+            Bug bugModified = new Bug()
+            {
+                Id = 0,
+                Name = "bugMod",
+                Description = "No funciona el boton aceptar",
+                Version = "12.2.2."
+            };
 
-                [TestMethod]
-                public void UpdateBugNotFound()
-                {
-                    int idbugToUpdate = 2;
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Update(idbugToUpdate, bugModified)).Returns(bugModified);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-                    Assert.ThrowsException<NonexistentBugException>(() => bugBusinessLogic.Update(idbugToUpdate, bug1));
-                }
+            var bugResult = bugBusinessLogic.Update(idbugToUpdate, bugModified);
 
-                [TestMethod]
-                public void UpdateBug()
-                {
-                    bugBusinessLogic.Bugs = bugs;
-                    int idbugToUpdate = 0;
+            mock.VerifyAll();
 
-                    Bug bugModified = new Bug()
-                    {
-                        Id = 0,
-                        Name = "bugMod",
-                        Description = "No funciona el boton aceptar",
-                        Version = "12.2.2."
-                    };
-
-                    bugBusinessLogic.Update(idbugToUpdate, bugModified);
-
-                    Assert.AreEqual(bug, bugModified);
-                }*/
+            Assert.AreEqual(bugResult, bugModified);
+        }
     }
 }
