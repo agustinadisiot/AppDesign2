@@ -10,7 +10,7 @@ namespace BugParser
 {
 
     [Serializable]
-    [XmlRoot("Empresa")]
+    [XmlRoot("Empresa1")]
     public class BugModel
     {
         [XmlElement("Proyecto")]
