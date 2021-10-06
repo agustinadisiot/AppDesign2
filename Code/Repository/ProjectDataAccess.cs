@@ -100,5 +100,21 @@ namespace Repository
         {
             return GetById(id).Bugs;
         }
+
+        public BugsQuantity GetBugsQuantity(int idProject)
+        {
+            var quantity = GetBugs(idProject).Count();
+            return new BugsQuantity(quantity);
+        }
+
+        public List<Developer> GetDevelopers(int id)
+        {
+            return GetById(id).Developers;
+        }
+
+        public List<Tester> GetTesters(int id)
+        {
+            return GetById(id).Testers;
+        }
     }
 }

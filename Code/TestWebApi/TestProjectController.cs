@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
+using System.Linq;
 using WebApi.Controllers;
 
 namespace TestWebApi
@@ -234,5 +235,126 @@ namespace TestWebApi
                     mock.VerifyAll();
                     Assert.AreEqual(bugExpected, bugResult);
                 }*/
+        [TestMethod]
+        public void GetBugsQuantity()
+        {
+            Project project = new Project()
+            {
+                Id = 1,
+                Name = "project",
+                Bugs = new List<Bug>()
+                    {
+                     new Bug(){
+                         Name = "Bug",
+                         Id = 0,
+                     },
+                     new Bug(){
+                          Name = "Project2",
+                          Id = 1
+                     }
+                }
+            };
+
+            int cantExpected = project.Bugs.Count();
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetBugsQuantity(project.Id)).Returns(new BugsQuantity(cantExpected));
+            var controller = new ProjectController(mock.Object);
+
+            var result = controller.GetBugsQuantity(project.Id);
+            var okResult = result as OkObjectResult;
+            var cantResult = okResult.Value as BugsQuantity;
+
+            mock.VerifyAll();
+            Assert.AreEqual(cantExpected, cantResult.quantity);
+        }
+
+        [TestMethod]
+        public void GetAllDevelopers()
+        {
+            List<Developer> devsExpected = new List<Developer>()
+            {
+                new Developer(){
+                Name = "Ivan",
+                Lastname = "monja",
+                Username = "Ivo",
+                Password = "456738",
+                Email = "ivi@gmail.com"
+
+                },
+                new Developer(){
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+                }
+            };
+
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Developers = devsExpected
+            };
+
+
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetDevelopers(project.Id)).Returns(devsExpected);
+            mock.Setup(b => b.Add(project)).Returns(project);
+            var controller = new ProjectController(mock.Object);
+
+            controller.Post(project);
+            var result = controller.GetDevelopers(project.Id);
+            var okResult = result as OkObjectResult;
+            var devsResult = okResult.Value as IEnumerable<Developer>;
+
+            mock.VerifyAll();
+            CollectionAssert.AreEqual(devsExpected, (System.Collections.ICollection)devsResult, new UserComparer());
+        }
+
+        [TestMethod]
+        public void GetAllTesters()
+        {
+            List<Tester> testersExpected = new List<Tester>()
+            {
+                new Tester(){
+                 Name = "Ivan",
+                Lastname = "monja",
+                Username = "Ivo",
+                Password = "456738",
+                Email = "ivi@gmail.com"
+
+                },
+                new Tester(){
+                  Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+                }
+            };
+
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Testers = testersExpected
+            };
+
+
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetTesters(project.Id)).Returns(testersExpected);
+            mock.Setup(b => b.Add(project)).Returns(project);
+            var controller = new ProjectController(mock.Object);
+
+            controller.Post(project);
+            var result = controller.GetTesters(project.Id);
+            var okResult = result as OkObjectResult;
+            var testersResult = okResult.Value as IEnumerable<Tester>;
+
+            mock.VerifyAll();
+            CollectionAssert.AreEqual(testersExpected, (System.Collections.ICollection)testersResult, new UserComparer());
+        }
+
     }
 }
