@@ -47,8 +47,11 @@ namespace BusinessLogic
 
         }
 
-        public void ImportBugs(string path, ImportCompany format, IParserFactory factory)
+        public void ImportBugs(string path, ImportCompany format, IParserFactory factory = null)
         {
+            // This is to allow the tests to include their own mock factory
+            if (factory == null)
+                factory = new ParserFactory();
             IBugParser parser = factory.GetBugParser(format);
             List<Bug> bugsToImport = parser.GetBugs(path);
             foreach (var bug in bugsToImport)

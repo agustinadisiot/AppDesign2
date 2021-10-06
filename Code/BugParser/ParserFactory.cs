@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*namespace BugParser
+namespace BugParser
 {
     public class ParserFactory : IParserFactory
     {
-        IBugParser GetBugParser(ImportCompany format)
+        public IBugParser GetBugParser(ImportCompany format)
         {
-
+            throw new NotImplementedException();
         }
 
     }
-}*/
+}
