@@ -5,8 +5,7 @@ using System.Collections.Generic;
 
 namespace RepositoryInterfaces
 {
-    public interface IDeveloperDataAccess
+    public interface IDeveloperDataAccess : IUserDataAccess<Developer>
     {
-        public Developer Create(Developer dev);
     }
 }
