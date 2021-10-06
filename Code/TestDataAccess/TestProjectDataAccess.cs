@@ -139,7 +139,7 @@ namespace TestDataAccess
             Project project = new Project()
             {
                 Id = 1,
-                Name = "NotAProject"
+                Name = "project1"
             };
             var bugsExpected = new List<Bug>
             {
