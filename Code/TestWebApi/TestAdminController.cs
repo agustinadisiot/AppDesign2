@@ -21,7 +21,6 @@ namespace TestWebApi
         {
             Admin adminExpected = new Admin()
             {
-                Id = 0,
                 Username = "admin",
                 Name = "Juana",
                 Lastname = "Perez",

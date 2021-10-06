@@ -45,7 +45,6 @@ namespace TestDataAccess
         {
             Admin expectedAdmin = new Admin
             {
-                Id = 1,
                 Username = "administradorPedro",
                 Name = "Pedro",
                 Lastname = "López",
@@ -56,7 +55,6 @@ namespace TestDataAccess
 
             Admin adminSaved = adminDataAccess.Create(new Admin()
             {
-                Id = 1,
                 Username = "administradorPedro",
                 Name = "Pedro",
                 Lastname = "López",
