@@ -67,5 +67,57 @@ namespace TestDomain
             string expected = "myPasscode";
             Assert.AreEqual(expected, admin.Password);
         }
+
+        [TestMethod]
+        public void ComparerTrue()
+        {
+            Admin admin1 = new Admin()
+            {
+                Id = 0,
+                Username = "agustinadisiot",
+                Name = "Agustina",
+                Lastname = "Disiot",
+                Password = "thisIsNotActuallyMyPassword",
+                Email = "agus@email.com",
+            };
+
+            Admin admin2 = new Admin()
+            {
+                Id = 0,
+                Username = "agustinadisiot",
+                Name = "Agustina",
+                Lastname = "Disiot",
+                Password = "thisIsNotActuallyMyPassword",
+                Email = "agus@email.com",
+            };
+
+            Assert.AreEqual(0, new AdminComparer().Compare(admin1, admin2));
+        }
+
+        [TestMethod]
+        public void ComparerFalse()
+        {
+            Admin admin1 = new Admin()
+            {
+                Id = 0,
+                Username = "agustinadisiot",
+                Name = "Agustina",
+                Lastname = "Disiot",
+                Password = "thisIsNotActuallyMyPassword",
+                Email = "agus@email.com",
+            };
+
+            Admin admin2 = new Admin()
+            {
+                Id = 0,
+                Username = "agustinadisiot",
+                Name = "Juan",
+                Lastname = "Disiot",
+                Password = "thisIsNotActuallyMyPassword2",
+                Email = "juan@email.com",
+            };
+
+            Assert.AreEqual(0, new AdminComparer().Compare(admin1, admin2));
+        }
     }
 }
