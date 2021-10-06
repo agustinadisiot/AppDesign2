@@ -9,6 +9,7 @@ namespace Repository
         public DbSet<Project> Projects { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Developer> Developers { get; set; }
+        public DbSet<Tester> Tester { get; set; }
 
         public BugManagerContext(DbContextOptions options) : base(options) { }
 
