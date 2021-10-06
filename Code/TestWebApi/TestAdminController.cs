@@ -36,10 +36,10 @@ namespace TestWebApi
 
             var result = controller.Post(adminExpected);
             var okResult = result as OkObjectResult;
-            var bugResult = okResult.Value as Admin;
+            var adminResult = okResult.Value as Admin;
 
             mock.VerifyAll();
-            Assert.AreEqual(bugExpected, bugResult);
+            Assert.AreEqual(adminExpected, adminResult);
         }
     }
 };
