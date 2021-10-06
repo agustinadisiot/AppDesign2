@@ -132,5 +132,34 @@ namespace TestDataAccess
             CollectionAssert.DoesNotContain(projectsSaved, notExpectedProject);
 
         }
+
+        [TestMethod]
+        public void GetAllBugs()
+        {
+            var bugsExpected = new List<Bug>
+            {
+                new Bug
+                {
+                    Id = 1,
+                    Name = "a",
+                    Description = "a",
+                    Version = "1.0",
+                    IsActive = true
+                    }
+                };
+            bugManagerContext.Add(new Bug
+            {
+                Id = 1,
+                Name = "a",
+                Description = "a",
+                Version = "1.0",
+                IsActive = true
+            });
+            bugManagerContext.SaveChanges();
+            List<Bug> bugsFromDb = projectDataAccess.GetBugs(1).ToList();
+
+            Assert.AreEqual(1, bugsFromDb.Count);
+            CollectionAssert.AreEqual(bugsExpected, bugsFromDb, new BugComparer());
+        }
     }
 }

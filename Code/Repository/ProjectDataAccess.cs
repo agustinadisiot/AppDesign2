@@ -53,6 +53,7 @@ namespace Repository
             return context.Projects;
         }
 
+
         public Project GetById(int id)
         {
             Project project = projects.First(proj => proj.Id == id);
@@ -91,6 +92,12 @@ namespace Repository
             projectToUpdate.Bugs = projectUpdated.Bugs;
             context.SaveChanges();
             return projectToUpdate;
+        }
+
+
+        public List<Bug> GetBugs(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
