@@ -168,6 +168,13 @@ namespace TestWebApi
         [TestMethod]
         public void GetAllBugs()
         {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1
+            };
+
+
             List<Bug> bugsExpected = new List<Bug>()
             {
                 new Bug(){
@@ -189,10 +196,12 @@ namespace TestWebApi
             };
 
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetBugs()).Returns(bugsExpected);
+            mock.Setup(b => b.GetBugs(1)).Returns(bugsExpected);
+            mock.Setup(b => b.Add(project)).Returns(project);
             var controller = new ProjectController(mock.Object);
 
-            var result = controller.Get();
+            controller.Post(project);
+            var result = controller.GetBugs(1);
             var okResult = result as OkObjectResult;
             var bugsResult = okResult.Value as IEnumerable<Bug>;
 
@@ -214,10 +223,10 @@ namespace TestWebApi
             };
 
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.AddBug(bugExpected)).Returns(bugExpected);
+            mock.Setup(b => b.AddBug(1, bugExpected)).Returns(bugExpected);
             var controller = new ProjectController(mock.Object);
 
-            var result = controller.Post(bugExpected);
+            var result = controller.Post(1, bugExpected);
             var okResult = result as OkObjectResult;
             var bugResult = okResult.Value as Bug;
 

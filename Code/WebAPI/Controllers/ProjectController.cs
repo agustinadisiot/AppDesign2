@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -50,6 +51,18 @@ namespace WebApi.Controllers
         public object Delete([FromRoute] int id)
         {
             return Ok(businessLogic.Delete(id));
+        }
+
+        [HttpGet("{id}/bugs")]
+        public object GetBugs([FromRoute] int id)
+        {
+            return Ok(businessLogic.GetBugs(id));
+        }
+
+        [HttpPost("{id}/bugs")]
+        public object Post([FromRoute] int id, [FromBody] Bug bugExpected)
+        {
+            return Ok(businessLogic.AddBug(id, bugExpected));
         }
     }
 }
