@@ -30,7 +30,7 @@ namespace TestTesterBusinessLogic
 
             };
             var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
-            mock.Setup(d => d.Create(tester)).Returns(tester);
+            mock.Setup(t => t.Create(tester)).Returns(tester);
             var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
 
             var testerResult = testerBusinessLogic.Add(tester);
