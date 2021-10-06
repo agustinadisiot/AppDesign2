@@ -42,10 +42,10 @@ namespace TestWebApi
 
             string path = "file.xml";
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.ImportXML(path, IMPORT_COMPANY.XML)).Returns(bugsExpected);
+            mock.Setup(b => b.ImportBugs(path, ImportCompany.XML)).Returns(bugsExpected);
             var controller = new BugController(mock.Object);
 
-            var result = controller.Get();
+            var result = controller.ImportBugs(path, ImportCompany.XML);
             var okResult = result as OkObjectResult;
             var bugsResult = okResult.Value as IEnumerable<Bug>;
 

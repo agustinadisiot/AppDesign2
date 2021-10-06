@@ -4,6 +4,7 @@ using BusinessLogicInterfaces;
 using System.Collections.Generic;
 using System.Linq;
 using RepositoryInterfaces;
+using Domain.Utils;
 
 namespace BusinessLogic
 {
@@ -43,6 +44,11 @@ namespace BusinessLogic
         {
             return bugDataAccess.Delete(Id);
 
+        }
+
+        public List<Bug> ImportBugs(string path, ImportCompany format)
+        {
+            throw new NotImplementedException();
         }
     }
 
