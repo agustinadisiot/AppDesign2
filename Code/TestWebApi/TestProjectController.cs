@@ -163,5 +163,66 @@ namespace TestWebApi
             mock.VerifyAll();
             Assert.AreEqual(projectExpected, projectResult);
         }
+
+
+        [TestMethod]
+        public void GetAllBugs()
+        {
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug(){
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 0
+                },
+                new Bug(){
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 1
+                }
+            };
+
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetBugs()).Returns(bugsExpected);
+            var controller = new ProjectController(mock.Object);
+
+            var result = controller.Get();
+            var okResult = result as OkObjectResult;
+            var bugsResult = okResult.Value as IEnumerable<Bug>;
+
+            mock.VerifyAll();
+            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
+        }
+
+        [TestMethod]
+        public void AddBug()
+        {
+            Bug bugExpected = new Bug()
+            {
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 0
+            };
+
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.AddBug(bugExpected)).Returns(bugExpected);
+            var controller = new ProjectController(mock.Object);
+
+            var result = controller.Post(bugExpected);
+            var okResult = result as OkObjectResult;
+            var bugResult = okResult.Value as Bug;
+
+            mock.VerifyAll();
+            Assert.AreEqual(bugExpected, bugResult);
+        }
     }
 }
