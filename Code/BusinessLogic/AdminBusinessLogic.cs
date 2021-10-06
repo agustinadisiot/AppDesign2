@@ -13,10 +13,10 @@ namespace BusinessLogic
             adminDataAccess = newAdminDataAccess;
         }
 
-        public Admin Add(Admin admin)
+        public Admin Add(Admin newAdmin)
         {
-            adminDataAccess.Create(admin);
-            return admin;
+            adminDataAccess.Create(newAdmin);
+            return newAdmin;
         }
 
     }
