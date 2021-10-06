@@ -201,5 +201,64 @@ namespace TestDataAccess
             Assert.AreEqual(cantExpected, projectDataAccess.GetBugsQuantity(project.Id).quantity);
 
         }
+
+        [TestMethod]
+        public void GetAllDevelopers()
+        {
+            var devsExpected = new List<Developer>
+            {
+                new Developer()
+                {
+                    Username = "aguspink",
+                },
+                new Developer()
+                {
+                    Username = "ivo",
+                }
+            };
+
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Developers = devsExpected
+            };
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+            List<Developer> devsFromDb = projectDataAccess.GetDevelopers(project.Id).ToList();
+
+            Assert.AreEqual(2, devsFromDb.Count);
+            CollectionAssert.AreEqual(devsExpected, devsFromDb, new DevComparer());
+        }
+
+        [TestMethod]
+        public void GetAllTesters()
+        {
+            var testersExpected = new List<Tester>
+            {
+                new Tester()
+                {
+                    Username = "aguspink",
+                },
+                new Tester()
+                {
+                    Username = "ivo",
+                }
+            };
+
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Testers = testerExpected
+            };
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+            List<Tester> testersFromDb = projectDataAccess.GetTesters(project.Id).ToList();
+
+            Assert.AreEqual(2, testersFromDb.Count);
+            CollectionAssert.AreEqual(testersExpected, testersFromDb, new TesterComparer());
+        }
+
     }
 }
