@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RepositoryInterfaces
 {
-    public interface IAdminDataAccess : IUserDataAccess<Admin>
+    public interface ITesterDataAccess : IUserDataAccess<Tester>
     {
     }
 }

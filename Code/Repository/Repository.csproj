@@ -21,8 +21,4 @@
 		<ProjectReference Include="..\RepositoryInterfaces\RepositoryInterfaces.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Environment\" />
-	</ItemGroup>
-
 </Project>

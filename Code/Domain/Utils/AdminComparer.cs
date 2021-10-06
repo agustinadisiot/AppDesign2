@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Domain.Utils
 {
-    public class AdminComparer : IComparer
+    public class UserComparer : IComparer
     {
         public int Compare(object x, object y)
         {
-            Admin adminExpected = x as Admin;
-            Admin adminReturned = y as Admin;
+            User userExpected = x as User;
+            User userReturned = y as User;
 
-            bool equals = adminExpected.Name == adminReturned.Name &&
-                        adminExpected.Lastname == adminReturned.Lastname &&
-                        adminExpected.Password == adminReturned.Password &&
-                        adminExpected.Email == adminReturned.Email;
+            bool equals = userExpected.Name == userReturned.Name &&
+                        userExpected.Lastname == userReturned.Lastname &&
+                        userExpected.Password == userReturned.Password &&
+                        userExpected.Email == userReturned.Email;
             ;
 
             return equals ? 0 : -1;

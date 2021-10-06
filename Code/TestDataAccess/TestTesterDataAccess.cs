@@ -11,20 +11,20 @@ using Repository;
 namespace TestDataAccess
 {
     [TestClass]
-    public class TestAdminDataAccess
+    public class TestTesterDataAccess
     {
 
         private readonly DbConnection connection;
-        private readonly AdminDataAccess adminDataAccess;
+        private readonly TesterDataAccess testerDataAccess;
         private readonly BugManagerContext bugManagerContext;
         private readonly DbContextOptions<BugManagerContext> contextOptions;
 
-        public TestAdminDataAccess()
+        public TestTesterDataAccess()
         {
             connection = new SqliteConnection("Filename=:memory:");
             contextOptions = new DbContextOptionsBuilder<BugManagerContext>().UseSqlite(connection).Options;
             bugManagerContext = new BugManagerContext(contextOptions);
-            adminDataAccess = new AdminDataAccess(bugManagerContext);
+            testerDataAccess = new TesterDataAccess(bugManagerContext);
         }
 
         [TestInitialize]
@@ -43,9 +43,9 @@ namespace TestDataAccess
         [TestMethod]
         public void Create()
         {
-            Admin expectedAdmin = new Admin
+            Developer expectedDev = new Developer
             {
-                Username = "administradorPedro",
+                Username = "developerPedro",
                 Name = "Pedro",
                 Lastname = "López",
                 Password = "fransico234",
@@ -53,16 +53,16 @@ namespace TestDataAccess
 
             };
 
-            Admin adminSaved = adminDataAccess.Create(new Admin()
+            Tester devSaved = testerDataAccess.Create(new Tester()
             {
-                Username = "administradorPedro",
+                Username = "testerPedro",
                 Name = "Pedro",
                 Lastname = "López",
                 Password = "fransico234",
                 Email = "pedrooo2@hotmail.com"
             });
 
-            Assert.AreEqual(0, new UserComparer().Compare(expectedAdmin, adminSaved));
+            Assert.AreEqual(0, new UserComparer().Compare(expectedDev, devSaved));
 
         }
     }

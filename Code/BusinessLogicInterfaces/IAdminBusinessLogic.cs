@@ -2,9 +2,7 @@
 
 namespace BusinessLogicInterfaces
 {
-    public interface IAdminBusinessLogic
-    {
-        Admin Add(Admin newAdmin);
-    }
+    public interface IAdminBusinessLogic : IUserBusinessLogic<Admin>
+    { }
 }
 
