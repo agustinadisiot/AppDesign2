@@ -412,7 +412,7 @@ namespace TestProjectBusinessLogic
                     Username = "Ivan"
                 },
                  new Tester()
-                {
+                { 
                     Username = "Agus"
                 },
             };
