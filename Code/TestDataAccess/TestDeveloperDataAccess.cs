@@ -53,7 +53,7 @@ namespace TestDataAccess
 
             };
 
-            Admin DevSaved = devDataAccess.Create(new Developer()
+            Developer devSaved = devDataAccess.Create(new Developer()
             {
                 Username = "developerPedro",
                 Name = "Pedro",
@@ -62,7 +62,7 @@ namespace TestDataAccess
                 Email = "pedrooo2@hotmail.com"
             });
 
-            Assert.AreEqual(0, new AdminComparer().Compare(expectedDev, DevSaved));
+            Assert.AreEqual(0, new AdminComparer().Compare(expectedDev, devSaved));
 
         }
     }
