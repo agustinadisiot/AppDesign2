@@ -6,6 +6,6 @@ namespace BusinessLogicInterfaces
 {
     public interface IBugBusinessLogic : IBusinessLogic<Bug>
     {
-        List<Bug> ImportBugs(string path, ImportCompany xML);
+        List<Bug> ImportBugs(string path, ImportCompany format);
     }
 }
