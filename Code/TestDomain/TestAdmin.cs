@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDomain
@@ -117,7 +118,7 @@ namespace TestDomain
                 Email = "juan@email.com",
             };
 
-            Assert.AreEqual(0, new AdminComparer().Compare(admin1, admin2));
+            Assert.AreNotEqual(0, new AdminComparer().Compare(admin1, admin2));
         }
     }
 }

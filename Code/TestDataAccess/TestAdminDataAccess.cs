@@ -24,7 +24,7 @@ namespace TestDataAccess
             connection = new SqliteConnection("Filename=:memory:");
             contextOptions = new DbContextOptionsBuilder<BugManagerContext>().UseSqlite(connection).Options;
             bugManagerContext = new BugManagerContext(contextOptions);
-            adminDataAccess = new adminDataAccess(bugManagerContext);
+            adminDataAccess = new AdminDataAccess(bugManagerContext);
         }
 
         [TestInitialize]
@@ -54,7 +54,7 @@ namespace TestDataAccess
 
             };
 
-            adminDataAccess.Create(new Admin()
+            Admin adminSaved = adminDataAccess.Create(new Admin()
             {
                 Id = 1,
                 Username = "administradorPedro",
@@ -64,7 +64,6 @@ namespace TestDataAccess
                 Email = "pedrooo2@hotmail.com"
             });
 
-            var adminSaved = adminDataAccess.GetById(1);
             Assert.AreEqual(0, new AdminComparer().Compare(expectedAdmin, adminSaved));
 
         }
