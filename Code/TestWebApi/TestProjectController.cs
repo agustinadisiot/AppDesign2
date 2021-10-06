@@ -356,5 +356,66 @@ namespace TestWebApi
             CollectionAssert.AreEqual(testersExpected, (System.Collections.ICollection)testersResult, new UserComparer());
         }
 
+        [TestMethod]
+        public void AddDeveloperToProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            Developer devExpected = new Developer()
+            {
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+
+
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.AddDeveloperToProject(project.Id, devExpected.Id)).Returns(devExpected);
+            var controller = new ProjectController(mock.Object);
+
+            var result = controller.AddDeveloperToProject(project.Id, devExpected.Id);
+            var okResult = result as OkObjectResult;
+            var devResult = okResult.Value as Developer;
+
+            mock.VerifyAll();
+            Assert.AreEqual(devExpected, devResult);
+        }
+
+        [TestMethod]
+        public void AddTesterToProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            Tester testerExpected = new Tester()
+            {
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+
+
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.AddTesterToProject(project.Id, testerExpected.Id)).Returns(testerExpected);
+            var controller = new ProjectController(mock.Object);
+
+            var result = controller.AddTesterToProject(project.Id, testerExpected.Id);
+            var okResult = result as OkObjectResult;
+            var testerResult = okResult.Value as Tester;
+
+            mock.VerifyAll();
+            Assert.AreEqual(testerExpected, testerResult);
+        }
     }
 }
