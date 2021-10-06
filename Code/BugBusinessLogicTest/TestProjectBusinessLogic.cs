@@ -312,11 +312,12 @@ namespace TestProjectBusinessLogic
                 },
             };
 
+
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.GetBugs()).Returns(bugsExpected);
+            mock.Setup(b => b.GetBugs(1)).Returns(bugsExpected);
             var bugBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.GetAll();
+            var result = bugBusinessLogic.GetBugs(1);
 
             Assert.IsTrue(bugsExpected.SequenceEqual(result));
         }
