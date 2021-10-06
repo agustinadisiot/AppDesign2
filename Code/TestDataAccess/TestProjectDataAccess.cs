@@ -136,6 +136,11 @@ namespace TestDataAccess
         [TestMethod]
         public void GetAllBugs()
         {
+            Project project = new Project()
+            {
+                Id = 1,
+                Name = "NotAProject"
+            };
             var bugsExpected = new List<Bug>
             {
                 new Bug
@@ -144,7 +149,8 @@ namespace TestDataAccess
                     Name = "a",
                     Description = "a",
                     Version = "1.0",
-                    IsActive = true
+                    IsActive = true,
+                     Project = project
                     }
                 };
             bugManagerContext.Add(new Bug
@@ -153,7 +159,8 @@ namespace TestDataAccess
                 Name = "a",
                 Description = "a",
                 Version = "1.0",
-                IsActive = true
+                IsActive = true,
+                Project = project
             });
             bugManagerContext.SaveChanges();
             List<Bug> bugsFromDb = projectDataAccess.GetBugs(1).ToList();

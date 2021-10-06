@@ -97,7 +97,7 @@ namespace Repository
 
         public List<Bug> GetBugs(int id)
         {
-            throw new System.NotImplementedException();
+            return GetById(id).Bugs;
         }
     }
 }
