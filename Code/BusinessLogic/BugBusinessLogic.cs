@@ -48,7 +48,7 @@ namespace BusinessLogic
 
         public List<Bug> ImportBugs(string path, ImportCompany format)
         {
-            throw new NotImplementedException();
+            bugDataAccess.Create(bug);
         }
     }
 

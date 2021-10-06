@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using BugParser;
 using BusinessLogic;
 using BusinessLogicInterfaces;
 using Domain;
@@ -41,6 +42,14 @@ namespace TestWebApi
             };
 
             string path = "file.xml";
+
+
+            var parserMock = new Mock<IBugParser>(MockBehavior.Strict);
+            parserMock.Setup(p => p.GetBugs(path)).Returns(bugsExpected);
+
+            var factoryMock = new Mock<IBugParserFactory>(MockBehavior.Strict);
+            factoryMock.Setup(b => b.GetParser(ImportCompany.XML).Returns(bugsExpected);
+
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
             mock.Setup(b => b.ImportBugs(path, ImportCompany.XML)).Returns(bugsExpected);
             var controller = new BugController(mock.Object);
