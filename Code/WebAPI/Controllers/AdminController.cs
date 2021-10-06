@@ -10,15 +10,15 @@ namespace WebApi.Controllers
     {
         private readonly IAdminBusinessLogic businessLogic;
 
-        public AdminController(IAdminBusinessLogic newProjectBusinessLogic)
+        public AdminController(IAdminBusinessLogic newAdminBusinessLogic)
         {
-            businessLogic = newProjectBusinessLogic;
+            businessLogic = newAdminBusinessLogic;
         }
 
         [HttpPost]
-        public object Post([FromBody] Admin projectExpected)
+        public object Post([FromBody] Admin adminExpected)
         {
-            return Ok(businessLogic.Add(projectExpected));
+            return Ok(businessLogic.Add(adminExpected));
         }
 
     }
