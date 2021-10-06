@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RepositoryInterfaces;
 using Domain.Utils;
+using BugParser;
 
 namespace BusinessLogic
 {
@@ -46,10 +47,16 @@ namespace BusinessLogic
 
         }
 
-        public List<Bug> ImportBugs(string path, ImportCompany format)
+        public void ImportBugs(string path, ImportCompany format, IParserFactory factory)
         {
-            bugDataAccess.Create(bug);
+            IBugParser parser = factory.GetBugParser(format);
+            List<Bug> bugsToImport = parser.GetBugs(path);
+            foreach (var bug in bugsToImport)
+            {
+                bugDataAccess.Create(bug);
+            }
         }
+
     }
 
 

@@ -8,6 +8,7 @@ using Domain.Utils;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogicInterfaces;
+using BugParser;
 
 namespace TestBugImportationBusinessLogic
 {
@@ -51,16 +52,27 @@ namespace TestBugImportationBusinessLogic
             string path = "file.xml";
             List<Bug> expectedBugs = new List<Bug>() { bug1, bug2, bug3 };
             List<Bug> actualBugs = new List<Bug>() { };
+
+            var parserMock = new Mock<IBugParser>(MockBehavior.Strict);
+            parserMock.Setup(p => p.GetBugs(path)).Returns(expectedBugs);
+
+            var factoryMock = new Mock<IParserFactory>(MockBehavior.Strict);
+            factoryMock.Setup(b => b.GetBugParser(ImportCompany.XML)).Returns(parserMock.Object);
+
+
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.Create(bug1)).Callback(() => actualBugs.Add(bug1));
-            mock.Setup(b => b.Create(bug2)).Callback(() => actualBugs.Add(bug2));
-            mock.Setup(b => b.Create(bug3)).Callback(() => actualBugs.Add(bug3));
+            mock.Setup(b => b.Create(bug1)).Returns(bug1);
+            mock.Setup(b => b.Create(bug2)).Returns(bug2);
+            mock.Setup(b => b.Create(bug3)).Returns(bug3);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.ImportBugs(path, ImportCompany.XML);
+            bugBusinessLogic.ImportBugs(path, ImportCompany.XML, factoryMock.Object);
 
-            CollectionAssert.AreEquivalent(expectedBugs, actualBugs);
+            mock.VerifyAll();
+            parserMock.VerifyAll();
+            factoryMock.VerifyAll();
         }
 
     }
 }
+
