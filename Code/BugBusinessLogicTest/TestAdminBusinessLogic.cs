@@ -17,7 +17,7 @@ namespace TestAdminBusinessLogic
 
 
         [TestMethod]
-        public void CreateBug()
+        public void CreateAdmin()
         {
             Admin admin = new Admin
             {
