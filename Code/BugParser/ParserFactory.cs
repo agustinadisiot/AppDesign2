@@ -11,7 +11,10 @@ namespace BugParser
     {
         public IBugParser GetBugParser(ImportCompany format)
         {
-            throw new NotImplementedException();
+            if (format == ImportCompany.XML)
+                return new BugParserXML();
+            else
+                throw new NotImplementedException("Bug parsers for this company not available");
         }
 
     }

@@ -49,7 +49,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("import/{format}")]
-        public object ImportBugs(string path, ImportCompany format)
+        public object ImportBugs([FromBody] string path, [FromRoute] ImportCompany format)
         {
             businessLogic.ImportBugs(path, format);
             return Ok(); // TODO devolver 201
