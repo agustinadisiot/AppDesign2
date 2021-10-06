@@ -103,8 +103,7 @@ namespace Repository
 
         public BugsQuantity GetBugsQuantity(int idProject)
         {
-            var project = GetById(idProject);
-            int quantity = project.Bugs.Count();
+            var quantity = GetBugs(idProject).Count();
             return new BugsQuantity(quantity);
         }
     }

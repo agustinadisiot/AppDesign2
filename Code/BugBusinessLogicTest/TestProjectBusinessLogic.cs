@@ -325,43 +325,46 @@ namespace TestProjectBusinessLogic
         [TestMethod]
         public void GetBugsQuantity()
         {
-            List<Bug> bugsExpected = new List<Bug>()
+            Project project = new Project()
             {
-                new Bug()
+                Name = "project",
+                Id = 1,
+                Bugs = new List<Bug>()
                 {
+                    new Bug()
+                     {
                      Name = "Not working button",
                      Description = "Upload button not working",
                      Version = "1",
                      IsActive = true,
-                     CompletedBy = null,
-                     Id = 0
-                },
-                new Bug()
-                {
+                     CompletedBy = null
+                    },
+                    new Bug()
+                    {
                     Name = "button",
                     Description = "Upload not working",
                     Version = "1.4.5",
                     IsActive = false,
-                    CompletedBy = null,
-                    Id = 1
-                },
-                 new Bug()
-                {
+                    CompletedBy = null
+                    },
+                    new Bug()
+                    {
                     Name = "Not working button",
                     Description = "Upload button not working",
                     Version = "6.2",
                     IsActive = true,
-                    CompletedBy = null,
-                    Id = 2
-                },
+                    CompletedBy = null
+                     }
+                }
             };
-            int cant = bugsExpected.Count();
+
+            int cant = project.Bugs.Count();
 
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.GetBugsQuantity(cant)).Returns(new BugsQuantity(cant));
-            var bugBusinessLogic = new ProjectBusinessLogic(mock.Object);
+            mock.Setup(b => b.GetBugsQuantity(project.Id)).Returns(new BugsQuantity(cant));
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.GetBugsQuantity(cant);
+            var result = projectBusinessLogic.GetBugsQuantity(project.Id);
             
             mock.VerifyAll();
             Assert.AreEqual(cant,result.quantity);
