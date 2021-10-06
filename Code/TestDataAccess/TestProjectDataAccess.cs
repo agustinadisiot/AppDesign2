@@ -168,5 +168,38 @@ namespace TestDataAccess
             Assert.AreEqual(1, bugsFromDb.Count);
             CollectionAssert.AreEqual(bugsExpected, bugsFromDb, new BugComparer());
         }
+
+        [TestMethod]
+        public void GetBugsQuantity()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Bugs = new List<Bug>()
+                {
+                    new Bug() {
+                        Name = "Not working button",
+                        Description = "Upload button not working",
+                        Version = "1",
+                        IsActive = true,
+                        CompletedBy = null,
+                    },
+                    new Bug() {
+                        Name = "Not working button",
+                        Description = "Upload button not working",
+                        Version = "1",
+                        IsActive = true,
+                        CompletedBy = null,
+                    }
+                }
+              };
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+
+            int cantExpected = project.Bugs.Count();
+            Assert.AreEqual(cantExpected, projectDataAccess.GetBugsQuantity(project.Id).quantity);
+
+        }
     }
 }
