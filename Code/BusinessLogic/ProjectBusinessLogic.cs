@@ -56,11 +56,6 @@ namespace BusinessLogic
             return projectDataAccess.UpdateByName(nameProjectToUpdate, projectModified);
         }
 
-        public Bug AddBug(int id, Bug bugExpected)
-        {
-            throw new NotImplementedException();
-        } // TODO
-
         public List<Bug> GetBugs(int id)
         {
             return projectDataAccess.GetBugs(id);

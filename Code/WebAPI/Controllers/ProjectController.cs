@@ -59,10 +59,10 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetBugs(id));
         }
 
-        [HttpPost("{id}/bugs")]
-        public object Post([FromRoute] int id, [FromBody] Bug bugExpected)
-        {
-            return Ok(businessLogic.AddBug(id, bugExpected));
-        }
+        /*        [HttpPost("{id}/bugs")] TODO borrar
+                public object Post([FromRoute] int id, [FromBody] Bug bugExpected)
+                {
+                    return Ok(businessLogic.AddBug(id, bugExpected));
+                }*/
     }
 }

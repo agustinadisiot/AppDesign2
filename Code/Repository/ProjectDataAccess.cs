@@ -56,8 +56,9 @@ namespace Repository
 
         public Project GetById(int id)
         {
-            Project project = projects.First(proj => proj.Id == id);
+            Project project = projects.Include("Bugs").First(proj => proj.Id == id);
             if (project == null) throw new NonexistentProjectException();
+            project.Bugs.ForEach(b => b.Project = null) ;
             return project;
         }
 
