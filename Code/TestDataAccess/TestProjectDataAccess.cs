@@ -1,35 +1,43 @@
-﻿using System.Collections.Generic;
+﻿using Domain;
+using Domain.Utils;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Repository;
+using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 
 namespace TestDataAccess
 {
-    class TestProjectDataAccess
+    [TestClass]
+    public class TestProjectDataAccess
     {
 
         private readonly DbConnection connection;
         private readonly ProjectDataAccess projectDataAccess;
-        private readonly ProjectManagerContext projectManagerContext;
-        private readonly DbContextOptions<ProjectManagerContext> contextOptions;
+        private readonly BugManagerContext bugManagerContext;
+        private readonly DbContextOptions<BugManagerContext> contextOptions;
 
         public TestProjectDataAccess()
         {
             connection = new SqliteConnection("Filename=:memory:");
-            contextOptions = new DbContextOptionsBuilder<ProjectManagerContext>().UseSqlite(connection).Options;
-            projectManagerContext = new ProjectManagerContext(contextOptions);
-            projectDataAccess = new ProjectDataAccess(projectsManagerContext);
+            contextOptions = new DbContextOptionsBuilder<BugManagerContext>().UseSqlite(connection).Options;
+            bugManagerContext = new BugManagerContext(contextOptions);
+            projectDataAccess = new ProjectDataAccess(bugManagerContext);
         }
 
         [TestInitialize]
         public void Setup()
         {
             connection.Open();
-            projectManagerContext.Database.EnsureCreated();
+            bugManagerContext.Database.EnsureCreated();
         }
 
         [TestCleanup]
         public void CleanUp()
         {
-            projectManagerContext.Database.EnsureDeleted();
+            bugManagerContext.Database.EnsureDeleted();
         }
 
         [TestMethod]
@@ -39,26 +47,32 @@ namespace TestDataAccess
             {
                 new Project
                 {
-                    Id = 0,
-                    Name = "a"
+                    Id = 1,
+                    Name = "a",
+                    Testers = new List<Tester>(),
+                    Developers = new List<Developer>(),
+                    Bugs = new List<Bug>()
                 }
              };
-            proejectManagerContext.Add(new Project
+            bugManagerContext.Add(new Project
             {
-                Id = 0,
-                Name = "a"
-            });
-            projectManagerContext.SaveChanges();
+                Id = 1,
+                Name = "a",
+                Testers = new List<Tester>(),
+                Developers = new List<Developer>(),
+                Bugs = new List<Bug>()
+            }); ;
+            bugManagerContext.SaveChanges();
             List<Project> projectDataBase = projectDataAccess.GetAll().ToList();
 
             Assert.AreEqual(1, projectDataBase.Count);
-            CollectionAssert.AreEqual(projectExpected, projectDataBase, new ProjectComparer());
+            CollectionAssert.AreEqual(projectsExpected, projectDataBase, new ProjectComparer());
         }
 
         [TestMethod]
         public void Update()
         {
-            Project project = proejectDataAccess.Create(new Project
+            Project project = projectDataAccess.Create(new Project
             {
                 Id = 1,
                 Name = "b"
@@ -71,6 +85,7 @@ namespace TestDataAccess
             };
 
             projectDataAccess.Update(project.Id, projectUpdated);
+            bugManagerContext.SaveChanges();
 
             var projectSaved = projectDataAccess.GetById(1);
 
@@ -84,14 +99,16 @@ namespace TestDataAccess
             Project expectedProject = new Project()
             {
                 Id = 1,
-                Name = "project1"
+                Name = "project1",
+
             };
 
             projectDataAccess.Create(new Project()
             {
                 Id = 1,
-                Name = "Error"
+                Name = "project1"
             });
+            bugManagerContext.SaveChanges();
 
             var projectSaved = projectDataAccess.GetById(1);
             Assert.AreEqual(0, new ProjectComparer().Compare(expectedProject, projectSaved));
@@ -108,6 +125,8 @@ namespace TestDataAccess
             };
             projectDataAccess.Create(notExpectedProject);
             projectDataAccess.Delete(notExpectedProject.Id);
+            bugManagerContext.SaveChanges();
+
             var projectsSaved = projectDataAccess.GetAll().ToList();
 
             CollectionAssert.DoesNotContain(projectsSaved, notExpectedProject);
