@@ -21,7 +21,10 @@ namespace Factory
         public void AddCustomServices()
         {
             serviceCollection.AddScoped<IBugDataAccess, BugDataAccess>();
+            serviceCollection.AddScoped<IProjectDataAccess, ProjectDataAccess>();
             serviceCollection.AddScoped<IBugBusinessLogic, BugBusinessLogic>();
+            serviceCollection.AddScoped<IProjectBusinessLogic, ProjectBusinessLogic>();
+
         }
 
         public void AddDbContextService(string connectionString)
