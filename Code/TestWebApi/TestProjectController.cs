@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
+using System.Linq;
 using WebApi.Controllers;
 
 namespace TestWebApi
@@ -234,5 +235,36 @@ namespace TestWebApi
                     mock.VerifyAll();
                     Assert.AreEqual(bugExpected, bugResult);
                 }*/
+        [TestMethod]
+        public void GetBugsQuantity()
+        {
+            Project project = new Project()
+            {
+                Name = "project",
+                Bugs = new List<Bug>()
+                    {
+                     new Bug(){
+                         Name = "Bug",
+                         Id = 0,
+                     },
+                     new Bug(){
+                          Name = "Project2",
+                          Id = 1
+                     }
+                }
+            };
+
+            int cantExpected = project.Bugs.Count();
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetBugsQuantity()).Returns(new BugQuantity(cantExpected));
+            var controller = new ProjectController(mock.Object);
+
+            var result = controller.GetBugsQuantity();
+            var okResult = result as OkObjectResult;
+            var cantResult = okResult.Value BugQuantity;
+
+            mock.VerifyAll();
+            Assert.AreEqual(cantExpected, cantResult);
+        }
     }
 }
