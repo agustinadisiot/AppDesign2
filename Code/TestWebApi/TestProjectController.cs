@@ -297,12 +297,49 @@ namespace TestWebApi
             var controller = new ProjectController(mock.Object);
 
             controller.Post(project);
-            var result = controller.GetBugsDevelopers(project.Id);
+            var result = controller.GetDevelopers(project.Id);
             var okResult = result as OkObjectResult;
             var devsResult = okResult.Value as IEnumerable<Bug>;
 
             mock.VerifyAll();
             CollectionAssert.AreEqual(devsExpected, (System.Collections.ICollection)devsResult, new DevComparer());
+        }
+
+        [TestMethod]
+        public void GetAllTesters()
+        {
+            List<Tester> testersExpected = new List<Tester>()
+            {
+                new Tester(){
+                Name = "Ivan",
+                Username = "Ivo",
+                },
+                new Tester(){
+                Name = "Agustina",
+                Username = "Agus",
+                }
+            };
+
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Testers = testersExpected
+            };
+
+
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetTesters(project.Id)).Returns(testersExpected);
+            mock.Setup(b => b.Add(project)).Returns(project);
+            var controller = new ProjectController(mock.Object);
+
+            controller.Post(project);
+            var result = controller.GetTesters(project.Id);
+            var okResult = result as OkObjectResult;
+            var testersResult = okResult.Value as IEnumerable<Bug>;
+
+            mock.VerifyAll();
+            CollectionAssert.AreEqual(testersExpected, (System.Collections.ICollection)testersResult, new TesterComparer());
         }
 
     }
