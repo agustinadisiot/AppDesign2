@@ -23,10 +23,12 @@ namespace Factory
             // TODO separar en dos funciones o en dos clases
             serviceCollection.AddScoped<IBugDataAccess, BugDataAccess>();
             serviceCollection.AddScoped<IAdminDataAccess, AdminDataAccess>();
+            serviceCollection.AddScoped<IDeveloperDataAccess, DeveloperDataAccess>();
             serviceCollection.AddScoped<IProjectDataAccess, ProjectDataAccess>();
-          
+
             serviceCollection.AddScoped<IBugBusinessLogic, BugBusinessLogic>();
             serviceCollection.AddScoped<IAdminBusinessLogic, AdminBusinessLogic>();
+            serviceCollection.AddScoped<IDeveloperBusinessLogic, DeveloperBusinessLogic>();
             serviceCollection.AddScoped<IProjectBusinessLogic, ProjectBusinessLogic>();
         }
 
