@@ -14,7 +14,7 @@ namespace Domain.Utils
         public int Compare(object x, object y)
         {
             Bug bugExpected = x as Bug;
-            Bug bugReturned = x as Bug;
+            Bug bugReturned = y as Bug;
 
             bool equals = bugExpected.Id == bugReturned.Id &&
                         bugExpected.Description == bugReturned.Description &&
@@ -23,8 +23,7 @@ namespace Domain.Utils
                         bugExpected.Version == bugReturned.Version &&
                         bugExpected.ProjectName == bugReturned.ProjectName &&
                         ((bugExpected.CompletedBy == null && bugReturned.CompletedBy == null) ||
-                        (bugExpected.Equals(bugReturned)));
-            ;
+                        (bugExpected.CompletedBy.Equals(bugReturned.CompletedBy)));
 
             return equals ? 0 : -1;
         }

@@ -20,11 +20,14 @@ namespace Factory
 
         public void AddCustomServices()
         {
+            // TODO separar en dos funciones o en dos clases
             serviceCollection.AddScoped<IBugDataAccess, BugDataAccess>();
+            serviceCollection.AddScoped<IAdminDataAccess, AdminDataAccess>();
             serviceCollection.AddScoped<IProjectDataAccess, ProjectDataAccess>();
+          
             serviceCollection.AddScoped<IBugBusinessLogic, BugBusinessLogic>();
+            serviceCollection.AddScoped<IAdminBusinessLogic, AdminBusinessLogic>();
             serviceCollection.AddScoped<IProjectBusinessLogic, ProjectBusinessLogic>();
-
         }
 
         public void AddDbContextService(string connectionString)

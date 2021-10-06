@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain;
 using System.Collections.Generic;
+using Domain.Utils;
 
 namespace TestDomain
 {
@@ -83,7 +84,7 @@ namespace TestDomain
         {
             bug.ProjectName = name;
             string expected = name;
-            Assert.AreEqual(name, bug.ProjectName);
+            Assert.AreEqual(expected, bug.ProjectName);
         }
 
         [TestMethod]
@@ -96,6 +97,48 @@ namespace TestDomain
         public void NullDeveloper()
         {
             Assert.IsNull(bug.CompletedBy);
+        }
+
+        [TestMethod]
+        public void ComparerTrue()
+        {
+            Bug bug1 = new Bug()
+            {
+
+                Name = "Bug1",
+                Description = "Cuando el servidor se cierra y estoy en login se rompe",
+                Version = "12.4.5"
+            };
+
+            Bug bug2 = new Bug()
+            {
+                Name = "Bug1",
+                Description = "Cuando el servidor se cierra y estoy en login se rompe",
+                Version = "12.4.5"
+            };
+
+            Assert.AreEqual(0, new BugComparer().Compare(bug1, bug2));
+        }
+
+        [TestMethod]
+        public void ComparerFalse()
+        {
+            Bug bug1 = new Bug()
+            {
+
+                Name = "Bug1",
+                Description = "Cuando el servidor se cierra y estoy en login se rompe",
+                Version = "12.4.5"
+            };
+
+            Bug bug2 = new Bug()
+            {
+                Name = "Bug2",
+                Description = "IU bug",
+                Version = "12.4.5"
+            };
+
+            Assert.AreNotEqual(0, new BugComparer().Compare(bug1, bug2));
         }
 
     }
