@@ -45,12 +45,9 @@ namespace TestWebApi
             mock.Setup(b => b.ImportBugs(path, ImportCompany.XML, null));
             var controller = new BugController(mock.Object);
 
-            var result = controller.ImportBugs(path, ImportCompany.XML);
-            var okResult = result as OkObjectResult;
-            var bugsResult = okResult.Value as IEnumerable<Bug>;
+            controller.ImportBugs(path, ImportCompany.XML);
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
         }
 
     }
