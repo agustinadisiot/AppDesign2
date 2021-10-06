@@ -277,5 +277,49 @@ namespace TestProjectBusinessLogic
 
             Assert.AreEqual(projectResult, projectModified);
         }
+
+        [TestMethod]
+        public void GetBugs()
+        {
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug()
+                {
+                     Name = "Not working button",
+                     Description = "Upload button not working",
+                     Version = "1",
+                     IsActive = true,
+                     CompletedBy = null,
+                     Id = 0
+                },
+                new Bug()
+                {
+                    Name = "button",
+                    Description = "Upload not working",
+                    Version = "1.4.5",
+                    IsActive = false,
+                    CompletedBy = null,
+                    Id = 1
+                },
+                 new Bug()
+                {
+                    Name = "Not working button",
+                    Description = "Upload button not working",
+                    Version = "6.2",
+                    IsActive = true,
+                    CompletedBy = null,
+                    Id = 2
+                },
+            };
+
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetBugs(1)).Returns(bugsExpected);
+            var bugBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+            var result = bugBusinessLogic.GetBugs(1);
+            mock.VerifyAll();
+            Assert.IsTrue(bugsExpected.SequenceEqual(result));
+        }
     }
 }

@@ -56,5 +56,9 @@ namespace BusinessLogic
             return projectDataAccess.UpdateByName(nameProjectToUpdate, projectModified);
         }
 
+        public List<Bug> GetBugs(int id)
+        {
+            return projectDataAccess.GetBugs(id);
+        }
     }
 }

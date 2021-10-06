@@ -163,5 +163,76 @@ namespace TestWebApi
             mock.VerifyAll();
             Assert.AreEqual(projectExpected, projectResult);
         }
+
+
+        [TestMethod]
+        public void GetAllBugs()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1
+            };
+
+
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug(){
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 0
+                },
+                new Bug(){
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedBy = null,
+                Id = 1
+                }
+            };
+
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetBugs(1)).Returns(bugsExpected);
+            mock.Setup(b => b.Add(project)).Returns(project);
+            var controller = new ProjectController(mock.Object);
+
+            controller.Post(project);
+            var result = controller.GetBugs(1);
+            var okResult = result as OkObjectResult;
+            var bugsResult = okResult.Value as IEnumerable<Bug>;
+
+            mock.VerifyAll();
+            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
+        }
+
+        // TODO borrar, ahora se agrega el project mediante POST /bugs
+        /*        [TestMethod]
+                public void AddBug()
+                {
+                    Bug bugExpected = new Bug()
+                    {
+                        Name = "Not working button",
+                        Description = "Upload button not working",
+                        Version = "1",
+                        IsActive = true,
+                        CompletedBy = null,
+                        Id = 0
+                    };
+
+                    var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+                    mock.Setup(b => b.AddBug(1, bugExpected)).Returns(bugExpected);
+                    var controller = new ProjectController(mock.Object);
+
+                    var result = controller.Post(1, bugExpected);
+                    var okResult = result as OkObjectResult;
+                    var bugResult = okResult.Value as Bug;
+
+                    mock.VerifyAll();
+                    Assert.AreEqual(bugExpected, bugResult);
+                }*/
     }
 }

@@ -12,7 +12,8 @@ namespace Domain
         public Developer CompletedBy { get; set; }
         public int Id { get; set; }
         public Project Project { get; set; }
-        public string ProjectName { get; set; }
+        public string ProjectName { get; set; } // TODO ver si lo usamos
+        public int ProjectId { get; set; }
 
         public Bug()
         {
