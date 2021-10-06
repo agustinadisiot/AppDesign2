@@ -22,5 +22,7 @@ namespace RepositoryInterfaces
         List<Bug> GetBugs(int id);
 
         public BugsQuantity GetBugsQuantity(int idProject);
+        List<Developer> GetDevelopers(int id);
+        List<Tester> GetTesters(int id);
     }
 }

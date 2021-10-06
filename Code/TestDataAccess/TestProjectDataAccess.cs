@@ -228,7 +228,7 @@ namespace TestDataAccess
             List<Developer> devsFromDb = projectDataAccess.GetDevelopers(project.Id).ToList();
 
             Assert.AreEqual(2, devsFromDb.Count);
-            CollectionAssert.AreEqual(devsExpected, devsFromDb, new DevComparer());
+            CollectionAssert.AreEqual(devsExpected, devsFromDb, new UserComparer());
         }
 
         [TestMethod]
@@ -250,14 +250,14 @@ namespace TestDataAccess
             {
                 Name = "project3",
                 Id = 1,
-                Testers = testerExpected
+                Testers = testersExpected
             };
             projectDataAccess.Create(project);
             bugManagerContext.SaveChanges();
             List<Tester> testersFromDb = projectDataAccess.GetTesters(project.Id).ToList();
 
             Assert.AreEqual(2, testersFromDb.Count);
-            CollectionAssert.AreEqual(testersExpected, testersFromDb, new TesterComparer());
+            CollectionAssert.AreEqual(testersExpected, testersFromDb, new UserComparer());
         }
 
     }
