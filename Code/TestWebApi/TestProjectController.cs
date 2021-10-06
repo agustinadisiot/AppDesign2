@@ -267,5 +267,43 @@ namespace TestWebApi
             mock.VerifyAll();
             Assert.AreEqual(cantExpected, cantResult.quantity);
         }
+
+        [TestMethod]
+        public void GetAllDevelopers()
+        {
+            List<Developer> devsExpected = new List<Developer>()
+            {
+                new Developer(){
+                Name = "Ivan",
+                Username = "Ivo",
+                },
+                new Developer(){
+                Name = "Agustina",
+                Username = "Agus",
+                }
+            };
+
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Developers = devsExpected
+            };
+
+
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetDevelopers(project.Id)).Returns(devsExpected);
+            mock.Setup(b => b.Add(project)).Returns(project);
+            var controller = new ProjectController(mock.Object);
+
+            controller.Post(project);
+            var result = controller.GetBugsDevelopers(project.Id);
+            var okResult = result as OkObjectResult;
+            var devsResult = okResult.Value as IEnumerable<Bug>;
+
+            mock.VerifyAll();
+            CollectionAssert.AreEqual(devsExpected, (System.Collections.ICollection)devsResult, new DevComparer());
+        }
+
     }
 }
