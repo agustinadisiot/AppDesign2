@@ -65,5 +65,15 @@ namespace BusinessLogic
         {
             return projectDataAccess.GetBugsQuantity(idProject);
         }
+
+        public List<Developer> GetDevelopers(int id)
+        {
+            return projectDataAccess.GetDevelopers(id);
+        }
+
+        public List<Tester> GetTesters(int id)
+        {
+            return projectDataAccess.GetTesters(id);
+        }
     }
 }

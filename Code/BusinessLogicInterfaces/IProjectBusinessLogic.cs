@@ -12,6 +12,8 @@ namespace BusinessLogicInterfaces
         ResponseMessage DeleteByName(string name);
         List<Bug> GetBugs(int id);
         BugsQuantity GetBugsQuantity(int idProject);
+        List<Developer> GetDevelopers(int id);
+        List<Tester> GetTesters(int id);
     }
 }
 
