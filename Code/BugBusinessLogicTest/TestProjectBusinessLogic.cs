@@ -318,7 +318,7 @@ namespace TestProjectBusinessLogic
             var bugBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
             var result = bugBusinessLogic.GetBugs(1);
-
+            mock.VerifyAll();
             Assert.IsTrue(bugsExpected.SequenceEqual(result));
         }
     }

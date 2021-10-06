@@ -59,11 +59,11 @@ namespace BusinessLogic
         public Bug AddBug(int id, Bug bugExpected)
         {
             throw new NotImplementedException();
-        }
+        } // TODO
 
         public List<Bug> GetBugs(int id)
         {
-            throw new NotImplementedException();
+            return projectDataAccess.GetBugs(id);
         }
     }
 }

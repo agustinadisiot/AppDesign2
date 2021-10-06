@@ -16,8 +16,9 @@ namespace RepositoryInterfaces
 
         public Project UpdateByName(string name, Project projectUpdated);
 
-        public ResponseMessage Delete(int id);
+        public ResponseMessage Delete(int id); // TODO sacar response message
 
         public ResponseMessage DeleteByName(string name);
+        List<Bug> GetBugs(int id);
     }
 }
