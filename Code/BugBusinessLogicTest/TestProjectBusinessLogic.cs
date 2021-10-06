@@ -321,5 +321,50 @@ namespace TestProjectBusinessLogic
             mock.VerifyAll();
             Assert.IsTrue(bugsExpected.SequenceEqual(result));
         }
+
+        [TestMethod]
+        public void GetBugsQuantity()
+        {
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug()
+                {
+                     Name = "Not working button",
+                     Description = "Upload button not working",
+                     Version = "1",
+                     IsActive = true,
+                     CompletedBy = null,
+                     Id = 0
+                },
+                new Bug()
+                {
+                    Name = "button",
+                    Description = "Upload not working",
+                    Version = "1.4.5",
+                    IsActive = false,
+                    CompletedBy = null,
+                    Id = 1
+                },
+                 new Bug()
+                {
+                    Name = "Not working button",
+                    Description = "Upload button not working",
+                    Version = "6.2",
+                    IsActive = true,
+                    CompletedBy = null,
+                    Id = 2
+                },
+            };
+            int cant = bugsExpected.Count();
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetBugsQuantity(cant)).Returns(new BugsQuantity(cant));
+            var bugBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+            var result = bugBusinessLogic.GetBugsQuantity(cant);
+            
+            mock.VerifyAll();
+            Assert.AreEqual(cant,result.quantity);
+        }
     }
 }
