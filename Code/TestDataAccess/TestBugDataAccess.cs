@@ -47,7 +47,7 @@ namespace TestDataAccess
             {
                 new Bug
                 {
-                    Id = 0,
+                    Id = 1,
                     Name = "a",
                     Description = "a",
                     Version = "1.0",
@@ -56,7 +56,7 @@ namespace TestDataAccess
     };
             bugManagerContext.Add(new Bug
             {
-                Id = 0,
+                Id = 1,
                 Name = "a",
                 Description = "a",
                 Version = "1.0",
@@ -74,7 +74,7 @@ namespace TestDataAccess
         {
             Bug bug = bugDataAccess.Create(new Bug
             {
-                Id = 1,
+                Id = 2,
                 Name = "b",
                 Description = "a",
                 Version = "1.0",
@@ -83,7 +83,7 @@ namespace TestDataAccess
 
             var bugUpdated = new Bug
             {
-                Id = 1,
+                Id = 2,
                 Name = "a",
                 Description = "a",
                 Version = "1.0",
@@ -91,8 +91,9 @@ namespace TestDataAccess
             };
 
             bugDataAccess.Update(bug.Id, bugUpdated);
+            bugManagerContext.SaveChanges();
 
-            var bugSaved = bugDataAccess.GetById(1);
+            var bugSaved = bugDataAccess.GetById(2);
 
             Assert.AreEqual(0, new BugComparer().Compare(bugUpdated, bugSaved));
 

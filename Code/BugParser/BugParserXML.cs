@@ -38,11 +38,4 @@ namespace BugParser
         }
 
     }
-
-    /*  XmlDocument xdoc = new XmlDocument();
-    xdoc.Load(File.OpenRead(fullPath));
-            var algo = xdoc.DocumentElement.FirstChild;
-    XmlSerializer serializer = new XmlSerializer(typeof(BugModel));
-    // FileStream fs = new FileStream(fullPath, FileMode.Open);
-    BugModel completeImportedData = (BugModel)serializer.Deserialize(new XmlNodeReader(algo));*/
 }

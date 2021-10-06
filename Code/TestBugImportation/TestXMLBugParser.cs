@@ -56,7 +56,7 @@ namespace TestBugParser
                 {
                  Name = "Error en el envío de correo 2",
                 Description = "El error se produce cuando el usuario no tiene un correo asignado 2",
-                Version = "1",
+                Version = "1.0",
                 IsActive = true,
                 CompletedBy = null,
                 ProjectName = "Nombre del Proyecto",
@@ -88,7 +88,7 @@ namespace TestBugParser
                 {
                  Name = "Error en el envío de correo 2",
                 Description = "El error se produce cuando el usuario no tiene un correo asignado 2",
-                Version = "1",
+                Version = "1.0",
                 IsActive = true,
                 CompletedBy = null,
                 ProjectName = "Nombre del Proyecto",
@@ -98,11 +98,11 @@ namespace TestBugParser
                 {
                  Name = "Error en el envío de correo 3",
                 Description = "El error se produce cuando el usuario no tiene un correo asignado 3",
-                Version = "2",
+                Version = "1.0",
                 IsActive = true,
                 CompletedBy = null,
                 ProjectName = "Nombre del Proyecto",
-                Id = 2
+                Id = 3
                 }
             };
 

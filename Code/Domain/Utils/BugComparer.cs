@@ -23,8 +23,7 @@ namespace Domain.Utils
                         bugExpected.Version == bugReturned.Version &&
                         bugExpected.ProjectName == bugReturned.ProjectName &&
                         ((bugExpected.CompletedBy == null && bugReturned.CompletedBy == null) ||
-                        (bugExpected.Equals(bugReturned)));
-            ;
+                        (bugExpected.CompletedBy.Equals(bugReturned.CompletedBy)));
 
             return equals ? 0 : -1;
         }

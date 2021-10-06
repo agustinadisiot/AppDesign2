@@ -14,7 +14,7 @@ namespace BugParser
     public class BugModel
     {
         [XmlElement("Proyecto")]
-        public string Projecto { get; set; }
+        public string Proyecto { get; set; }
         [XmlElement("Bugs")]
         public BugsXML BugList { get; set; } // TODO cambiar xml a algo que no se acople a un formato de achivo
 
@@ -30,6 +30,8 @@ namespace BugParser
                     {
                         Name = bugXML.Nombre.Trim(),
                         Description = bugXML.Descripcion.Trim(),
+                        ProjectName = this.Proyecto.Trim(),
+                        Version = bugXML.Version.Trim(),
                         IsActive = bugXML.Estado.Trim() == "Activo", // TODO ver tirar ex. si dice algo tipo "dfas" en vez de Inactivo o lo que sea
                         Id = int.Parse(bugXML.Id.Trim()) // TODO chequear cosas 
                     };
