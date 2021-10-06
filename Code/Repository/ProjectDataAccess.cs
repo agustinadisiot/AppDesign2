@@ -116,5 +116,27 @@ namespace Repository
         {
             return GetById(id).Testers;
         }
+
+        public ResponseMessage RemoveTesterFromProject(int idProject, int idTester)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ResponseMessage RemoveDeveloperFromProject(int idProject, int idDev)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Tester AddTesterToProject(int idProject, int idTester)
+        {
+            throw new System.NotImplementedException();
+
+        }
+
+        public Developer AddDeveloperToProject(int idProject, int idDev)
+        {
+            throw new System.NotImplementedException();
+
+        }
     }
 }

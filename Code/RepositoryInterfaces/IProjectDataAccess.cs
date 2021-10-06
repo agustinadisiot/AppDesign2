@@ -24,5 +24,9 @@ namespace RepositoryInterfaces
         public BugsQuantity GetBugsQuantity(int idProject);
         List<Developer> GetDevelopers(int id);
         List<Tester> GetTesters(int id);
+        ResponseMessage RemoveTesterFromProject(int idProject, int idTester);
+        ResponseMessage RemoveDeveloperFromProject(int idProject, int idDev);
+        Tester AddTesterToProject(int idProject, int idTester);
+        Developer AddDeveloperToProject(int idProject, int idDev);
     }
 }

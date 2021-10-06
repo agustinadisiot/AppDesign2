@@ -78,22 +78,26 @@ namespace BusinessLogic
 
         public ResponseMessage RemoveDeveloperFromProject(int idproject, int idDev)
         {
-            throw new NotImplementedException();
+            return projectDataAccess.RemoveDeveloperFromProject(idproject, idDev);
+
         }
 
         public ResponseMessage RemoveTesterFromProject(int idproject, int idTester)
         {
-            throw new NotImplementedException();
+            return projectDataAccess.RemoveTesterFromProject(idproject, idTester);
+
         }
 
         public Developer AddDeveloperToProject(int idproject, int idDev)
         {
-            throw new NotImplementedException();
+            return projectDataAccess.AddDeveloperToProject(idproject, idDev);
+
         }
 
         public Tester AddTesterToProject(int idproject, int idTester)
         {
-            throw new NotImplementedException();
+            return projectDataAccess.AddTesterToProject(idproject, idTester);
+
         }
     }
 }
