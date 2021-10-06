@@ -1,8 +1,5 @@
-﻿using Domain;
-using System;
-using BusinessLogicInterfaces;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BusinessLogicInterfaces;
+using Domain;
 using RepositoryInterfaces;
 
 namespace BusinessLogic
