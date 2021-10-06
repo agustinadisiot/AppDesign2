@@ -92,7 +92,7 @@ namespace TestDomain
                 Email = "agus@email.com",
             };
 
-            Assert.AreEqual(0, new AdminComparer().Compare(admin1, admin2));
+            Assert.AreEqual(0, new UserComparer().Compare(admin1, admin2));
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace TestDomain
                 Email = "juan@email.com",
             };
 
-            Assert.AreNotEqual(0, new AdminComparer().Compare(admin1, admin2));
+            Assert.AreNotEqual(0, new UserComparer().Compare(admin1, admin2));
         }
     }
 }

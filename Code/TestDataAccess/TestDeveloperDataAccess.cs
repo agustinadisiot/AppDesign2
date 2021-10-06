@@ -62,7 +62,7 @@ namespace TestDataAccess
                 Email = "pedrooo2@hotmail.com"
             });
 
-            Assert.AreEqual(0, new AdminComparer().Compare(expectedDev, devSaved));
+            Assert.AreEqual(0, new UserComparer().Compare(expectedDev, devSaved));
 
         }
     }
