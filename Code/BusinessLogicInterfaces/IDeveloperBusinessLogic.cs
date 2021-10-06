@@ -2,9 +2,8 @@
 
 namespace BusinessLogicInterfaces
 {
-    public interface IDeveloperBusinessLogic
+    public interface IDeveloperBusinessLogic : IUserBusinessLogic<Developer>
     {
-        Developer Add(Developer newDev);
     }
 }
 
