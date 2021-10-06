@@ -32,7 +32,6 @@ namespace TestBugParser
                 Version = "1.0",
                 IsActive = true,
                 CompletedBy = null,
-                Id = 1,
                 ProjectName = "Nombre del Proyecto"
                 }
             };
@@ -55,7 +54,6 @@ namespace TestBugParser
                 Version = "1.0",
                 IsActive = true,
                 CompletedBy = null,
-                Id = 1,
                 ProjectName = "Nombre del Proyecto"
                 },
                 new Bug()
@@ -66,7 +64,6 @@ namespace TestBugParser
                 IsActive = true,
                 CompletedBy = null,
                 ProjectName = "Nombre del Proyecto",
-                Id = 2
                 }
             };
 
@@ -87,7 +84,6 @@ namespace TestBugParser
                 Version = "1.0",
                 IsActive = true,
                 CompletedBy = null,
-                Id = 1,
                 ProjectName = "Nombre del Proyecto"
                 },
                 new Bug()
@@ -98,7 +94,6 @@ namespace TestBugParser
                 IsActive = true,
                 CompletedBy = null,
                 ProjectName = "Nombre del Proyecto",
-                Id = 2
                 },
                 new Bug()
                 {
@@ -108,7 +103,6 @@ namespace TestBugParser
                 IsActive = true,
                 CompletedBy = null,
                 ProjectName = "Nombre del Proyecto",
-                Id = 3
                 }
             };
 
@@ -136,7 +130,7 @@ namespace TestBugParser
 
         [TestMethod]
         public void InvalidBugs()
-        {// TODO testear cada propiedad? 
+        {
             string fullPath = baseDirectory + "InvalidBugs.xml";
             Assert.ThrowsException<XmlException>(() => bugParser.GetBugs(fullPath));
             // TODO cambiar por otra excepcion

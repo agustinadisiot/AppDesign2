@@ -49,9 +49,10 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("import/{format}")]
-        public object ImportBugs([FromBody] string path, [FromRoute] ImportCompany format)
+        public object ImportBugs([FromHeader] string path, [FromRoute] string format)
         {
-            businessLogic.ImportBugs(path, format);
+            ImportCompany parsedFormat = (ImportCompany)Enum.Parse(typeof(ImportCompany), format, true);
+            businessLogic.ImportBugs(path, parsedFormat);
             return Ok(); // TODO devolver 201
         }
     }

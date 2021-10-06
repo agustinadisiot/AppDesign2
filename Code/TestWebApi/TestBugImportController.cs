@@ -45,7 +45,7 @@ namespace TestWebApi
             mock.Setup(b => b.ImportBugs(path, ImportCompany.XML, null));
             var controller = new BugController(mock.Object);
 
-            controller.ImportBugs(path, ImportCompany.XML);
+            controller.ImportBugs(path, ImportCompany.XML.ToString());
 
             mock.VerifyAll();
         }

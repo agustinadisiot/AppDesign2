@@ -32,8 +32,7 @@ namespace BugParser
                         Description = bugXML.Descripcion.Trim(),
                         ProjectName = this.Proyecto.Trim(),
                         Version = bugXML.Version.Trim(),
-                        IsActive = bugXML.Estado.Trim() == "Activo", // TODO ver tirar ex. si dice algo tipo "dfas" en vez de Inactivo o lo que sea
-                        Id = int.Parse(bugXML.Id.Trim()) // TODO chequear cosas 
+                        IsActive = bugXML.Estado.Trim() == "Activo",
                     };
                     bugs.Add(convertedBug);
                     // bug.Validate TODO 
