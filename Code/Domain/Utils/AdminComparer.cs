@@ -15,8 +15,7 @@ namespace Domain.Utils
             Admin adminExpected = x as Admin;
             Admin adminReturned = y as Admin;
 
-            bool equals = adminExpected.Id == adminReturned.Id &&
-                        adminExpected.Name == adminReturned.Name &&
+            bool equals = adminExpected.Name == adminReturned.Name &&
                         adminExpected.Lastname == adminReturned.Lastname &&
                         adminExpected.Password == adminReturned.Password &&
                         adminExpected.Email == adminReturned.Email;
