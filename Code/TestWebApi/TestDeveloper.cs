@@ -30,15 +30,15 @@ namespace TestWebApi
             };
 
             var mock = new Mock<IDeveloperBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(a => a.Add(devExpected)).Returns(devExpected);
+            mock.Setup(d => d.Add(devExpected)).Returns(devExpected);
             var controller = new DeveloperController(mock.Object);
 
             var result = controller.Post(devExpected);
             var okResult = result as OkObjectResult;
-            var devResult = okResult.Value as Admin;
+            var devResult = okResult.Value as Developer;
 
             mock.VerifyAll();
-            Assert.AreEqual(devExpected, adminResult);
+            Assert.AreEqual(devExpected, devResult);
         }
     }
 };
