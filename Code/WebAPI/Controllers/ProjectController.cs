@@ -77,6 +77,33 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetTesters(id));
         }
 
+        [HttpDelete("{idProject}/devs/{idDev}")]
+        public object RemoveDeveloperFromProject(int idProject, int idDev)
+        {
+            return Ok(businessLogic.RemoveDeveloperFromProject(idProject, idDev));
+        }
+
+        [HttpDelete("{idProject}/devs/{idTester}")]
+
+        public object RemoveTesterFromProject(int idProject, int idTester)
+        {
+            return Ok(businessLogic.RemoveTesterFromProject(idProject, idTester));
+        }
+
+        [HttpPost("{idProject}/devs/{idTester}")]
+
+        public object AddDeveloperToProject(int idProject, int idDev)
+        {
+            return Ok(businessLogic.AddDeveloperToProject(idProject, idDev));
+        }
+
+        [HttpPost("{idProject}/devs/{idTester}")]
+
+        public object AddTesterToProject(int idProject, int idTester)
+        {
+            return Ok(businessLogic.AddTesterToProject(idProject, idTester));
+        }
+
         /*        [HttpPost("{id}/bugs")] TODO borrar
                 public object Post([FromRoute] int id, [FromBody] Bug bugExpected)
                 {
