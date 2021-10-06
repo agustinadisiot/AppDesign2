@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace BusinessLogicInterfaces
 {
     public class ResponseMessage{

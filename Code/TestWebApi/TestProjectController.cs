@@ -240,6 +240,7 @@ namespace TestWebApi
         {
             Project project = new Project()
             {
+                Id = 1,
                 Name = "project",
                 Bugs = new List<Bug>()
                     {
@@ -256,15 +257,15 @@ namespace TestWebApi
 
             int cantExpected = project.Bugs.Count();
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetBugsQuantity()).Returns(new BugQuantity(cantExpected));
+            mock.Setup(b => b.GetBugsQuantity(project.Id)).Returns(new BugsQuantity(cantExpected));
             var controller = new ProjectController(mock.Object);
 
-            var result = controller.GetBugsQuantity();
+            var result = controller.GetBugsQuantity(project.Id);
             var okResult = result as OkObjectResult;
-            var cantResult = okResult.Value BugQuantity;
+            var cantResult = okResult.Value as BugsQuantity;
 
             mock.VerifyAll();
-            Assert.AreEqual(cantExpected, cantResult);
+            Assert.AreEqual(cantExpected, cantResult.quantity);
         }
     }
 }

@@ -20,5 +20,7 @@ namespace RepositoryInterfaces
 
         public ResponseMessage DeleteByName(string name);
         List<Bug> GetBugs(int id);
+
+        public BugsQuantity GetBugsQuantity(int idProject);
     }
 }

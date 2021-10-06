@@ -59,6 +59,12 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetBugs(id));
         }
 
+        [HttpGet("{id}/bugs/quantity")]
+        public object GetBugsQuantity([FromRoute]int id)
+        {
+            return Ok(businessLogic.GetBugsQuantity(id));
+        }
+
         /*        [HttpPost("{id}/bugs")] TODO borrar
                 public object Post([FromRoute] int id, [FromBody] Bug bugExpected)
                 {
