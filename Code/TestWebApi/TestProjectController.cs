@@ -275,11 +275,18 @@ namespace TestWebApi
             {
                 new Developer(){
                 Name = "Ivan",
+                Lastname = "monja",
                 Username = "Ivo",
+                Password = "456738",
+                Email = "ivi@gmail.com"
+
                 },
                 new Developer(){
                 Name = "Agustina",
+                Lastname = "didios",
                 Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
                 }
             };
 
@@ -299,10 +306,10 @@ namespace TestWebApi
             controller.Post(project);
             var result = controller.GetDevelopers(project.Id);
             var okResult = result as OkObjectResult;
-            var devsResult = okResult.Value as IEnumerable<Bug>;
+            var devsResult = okResult.Value as IEnumerable<Developer>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(devsExpected, (System.Collections.ICollection)devsResult, new DevComparer());
+            CollectionAssert.AreEqual(devsExpected, (System.Collections.ICollection)devsResult, new UserComparer());
         }
 
         [TestMethod]
@@ -311,12 +318,19 @@ namespace TestWebApi
             List<Tester> testersExpected = new List<Tester>()
             {
                 new Tester(){
-                Name = "Ivan",
+                 Name = "Ivan",
+                Lastname = "monja",
                 Username = "Ivo",
+                Password = "456738",
+                Email = "ivi@gmail.com"
+
                 },
                 new Tester(){
-                Name = "Agustina",
+                  Name = "Agustina",
+                Lastname = "didios",
                 Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
                 }
             };
 
@@ -336,10 +350,10 @@ namespace TestWebApi
             controller.Post(project);
             var result = controller.GetTesters(project.Id);
             var okResult = result as OkObjectResult;
-            var testersResult = okResult.Value as IEnumerable<Bug>;
+            var testersResult = okResult.Value as IEnumerable<Tester>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(testersExpected, (System.Collections.ICollection)testersResult, new TesterComparer());
+            CollectionAssert.AreEqual(testersExpected, (System.Collections.ICollection)testersResult, new UserComparer());
         }
 
     }
