@@ -35,9 +35,12 @@ namespace WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
             });
 
-            var serviceContainer = new ServiceFactory(services);
-            serviceContainer.AddCustomServices();
-            serviceContainer.AddDbContextService(this.Configuration.GetConnectionString("BugManagerDb"));
+            var dataAccessContainer = new DataAccessFactory(services);
+            dataAccessContainer.AddCustomServices();
+            dataAccessContainer.AddDbContextService(this.Configuration.GetConnectionString("BugManagerDb"));
+
+            var businessContainer = new BusinessLogicFactory(services);
+            businessContainer.AddCustomServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
