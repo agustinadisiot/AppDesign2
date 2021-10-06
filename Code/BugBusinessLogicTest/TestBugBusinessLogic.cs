@@ -14,12 +14,7 @@ namespace TestBugBusinessLogic
     [TestClass]
     public class TestBugBusinessLogic
     {
-        private IBugDataAccess newbugDataAccess;
-        private BugBusinessLogic bugBusinessLogic;
         private Bug bug;
-        private Bug bug1;
-        private List<Bug> bugs;
-
 
         [TestCleanup]
         public void TearDown()
@@ -30,8 +25,6 @@ namespace TestBugBusinessLogic
         [TestInitialize]
         public void Setup()
         {
-            bugBusinessLogic = new BugBusinessLogic(newbugDataAccess);
-
             bug = new Bug()
             {
                 Id = 0,
@@ -39,8 +32,6 @@ namespace TestBugBusinessLogic
                 Description = "Cuando el servidor se cierra y estoy en login se rompe",
                 Version = "12.4.5"
             };
-
-            bug1 = new Bug() { Id = 1 };
 
         }
 
