@@ -47,7 +47,7 @@ namespace TestDataAccess
             {
                 new Bug
                 {
-                    Id = 1,
+                    Id = 0,
                     Name = "a",
                     Description = "a",
                     Version = "1.0",
@@ -56,7 +56,7 @@ namespace TestDataAccess
     };
             bugManagerContext.Add(new Bug
             {
-                Id = 1,
+                Id = 0,
                 Name = "a",
                 Description = "a",
                 Version = "1.0",
