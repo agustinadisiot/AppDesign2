@@ -39,6 +39,8 @@ namespace TestDataAccess
                 Name = "project1"
             };
             bugManagerContext.Projects.Add(project);
+            bugManagerContext.SaveChanges();
+
         }
 
         [TestCleanup]
@@ -172,16 +174,17 @@ namespace TestDataAccess
             Project project1 = new Project()
             {
                 Name = "Project 1",
-                Id = 1
+                Id = 2
             };
 
             Project project2 = new Project()
             {
                 Name = "Project 2",
-                Id = 2
+                Id = 3
             };
 
             bugManagerContext.Add(project1);
+            bugManagerContext.SaveChanges();
             bugManagerContext.Add(project2);
             bugManagerContext.SaveChanges();
 
@@ -207,8 +210,8 @@ namespace TestDataAccess
 
             var bugSaved1 = bugDataAccess.GetById(1);
             var bugSaved2 = bugDataAccess.GetById(2);
-            Assert.AreEqual(bugSaved1.ProjectId, 1);
-            Assert.AreEqual(bugSaved2.ProjectId, 2);
+            Assert.AreEqual(bugSaved1.ProjectId, 2);
+            Assert.AreEqual(bugSaved2.ProjectId, 3);
         }
 
 
