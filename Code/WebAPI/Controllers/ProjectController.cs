@@ -60,7 +60,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{id}/bugs/quantity")]
-        public object GetBugsQuantity([FromRoute]int id)
+        public object GetBugsQuantity([FromRoute] int id)
         {
             return Ok(businessLogic.GetBugsQuantity(id));
         }
@@ -104,10 +104,5 @@ namespace WebApi.Controllers
             return Ok(businessLogic.AddTesterToProject(idProject, idTester));
         }
 
-        /*        [HttpPost("{id}/bugs")] TODO borrar
-                public object Post([FromRoute] int id, [FromBody] Bug bugExpected)
-                {
-                    return Ok(businessLogic.AddBug(id, bugExpected));
-                }*/
     }
 }

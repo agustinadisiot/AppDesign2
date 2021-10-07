@@ -162,6 +162,16 @@ namespace TestDataAccess
 
         }
 
+        [TestMethod]
+        public void CreateNull()
+        {
+
+
+            bugDataAccess.Create(null);
+            Assert.AreEqual(0, new BugComparer().Compare(expectedBug, bugSaved));
+
+        }
+
 
 
         [TestMethod]

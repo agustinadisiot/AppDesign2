@@ -20,7 +20,7 @@ namespace Domain
         public override bool Equals(object obj)
         {
             Project project = (Project)obj;
-            return (project.Id == this.Id) && (project.Name == this.Name);
+            return (project.Id == this.Id);
         }
     }
 }
