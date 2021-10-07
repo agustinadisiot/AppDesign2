@@ -36,7 +36,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{name}")]
-        public object GetByName([FromRoute] string name)
+        public object GetByName([FromBody] string name)
         {
             return Ok(businessLogic.GetByName(name));
         }
@@ -75,6 +75,33 @@ namespace WebApi.Controllers
         public object GetTesters([FromRoute] int id)
         {
             return Ok(businessLogic.GetTesters(id));
+        }
+
+        [HttpDelete("{idProject}/devs/{idDev}")]
+        public object RemoveDeveloperFromProject(int idProject, int idDev)
+        {
+            return Ok(businessLogic.RemoveDeveloperFromProject(idProject, idDev));
+        }
+
+        [HttpDelete("{idProject}/testers/{idTester}")]
+
+        public object RemoveTesterFromProject(int idProject, int idTester)
+        {
+            return Ok(businessLogic.RemoveTesterFromProject(idProject, idTester));
+        }
+
+        [HttpPost("{idProject}/devs/{idDev}")]
+
+        public object AddDeveloperToProject(int idProject, int idDev)
+        {
+            return Ok(businessLogic.AddDeveloperToProject(idProject, idDev));
+        }
+
+        [HttpPost("{idProject}/testers/{idTester}")]
+
+        public object AddTesterToProject(int idProject, int idTester)
+        {
+            return Ok(businessLogic.AddTesterToProject(idProject, idTester));
         }
 
         /*        [HttpPost("{id}/bugs")] TODO borrar
