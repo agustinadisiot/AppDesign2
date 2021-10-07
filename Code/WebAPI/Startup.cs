@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using WebApi.Filters;
 
 namespace WebApi
 {
@@ -29,11 +29,12 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(options => options.Filters.Add(typeof(ExceptionFilter)));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
             });
+
 
             var dataAccessContainer = new DataAccessFactory(services);
             dataAccessContainer.AddCustomServices();

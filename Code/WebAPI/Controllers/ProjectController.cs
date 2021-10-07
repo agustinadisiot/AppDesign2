@@ -2,6 +2,7 @@
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
@@ -35,8 +36,8 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetById(id));
         }
 
-        [HttpGet("{name}")]
-        public object GetByName([FromBody] string name)
+        [HttpGet("name/{name}")]
+        public object GetByName([FromRoute] string name)
         {
             return Ok(businessLogic.GetByName(name));
         }
