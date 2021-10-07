@@ -37,7 +37,7 @@ namespace Repository
 
         public int GetQuantityBugsResolved(int idDev)
         {
-            return context.Bugs.Count(b => b.CompletedBy.Id == idDev);
+            return context.Bugs.Count(b => b.CompletedById == idDev);
         }
     }
 }

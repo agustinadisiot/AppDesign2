@@ -113,6 +113,11 @@ namespace TestDataAccess
         [TestMethod]
         public void Create()
         {
+            bugManagerContext.Add(new Project() {
+            Name = "project",
+            Id = 1
+            });
+            bugManagerContext.SaveChanges();
             Bug expectedBug = new Bug()
             {
                 Id = 1,
@@ -120,7 +125,8 @@ namespace TestDataAccess
                 Description = "Erorr critico",
                 ProjectId = 1,
                 Version = "2.0",
-                IsActive = true
+                IsActive = true,
+                CompletedById = 0 
             };
 
             bugDataAccess.Create(new Bug()
@@ -130,7 +136,9 @@ namespace TestDataAccess
                 Description = "Erorr critico",
                 Version = "2.0",
                 ProjectId = 1,
-                IsActive = true
+                IsActive = true,
+                CompletedById = 0
+
             });
 
             var bugSaved = bugDataAccess.GetById(1);
