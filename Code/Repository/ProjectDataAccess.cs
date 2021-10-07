@@ -60,6 +60,8 @@ namespace Repository
             if (project == null) throw new NonexistentProjectException();
             project = projects.Include("Bugs").First(proj => proj.Id == id);
             project.Bugs.ForEach(b => b.Project = null) ;
+            project.Developers.ForEach(d => d.Projects = null);
+            project.Testers.ForEach(t => t.Projects = null);
             return project;
         }
 
@@ -124,6 +126,7 @@ namespace Repository
             Tester tester = context.Tester.FirstOrDefault(t => t.Id == idTester);
             if (tester == null) throw new NonexistentUserException();
             project.Testers.Remove(tester);
+            tester.Projects.Remove(project);
             context.SaveChanges();
             return new ResponseMessage("Removed tester from project");
         }
@@ -134,6 +137,9 @@ namespace Repository
             Developer dev = context.Developer.FirstOrDefault(t => t.Id == idDev);
             if (dev == null) throw new NonexistentUserException();
             project.Developers.Remove(dev);
+            //context.Projects.Update(project); no funcionaaa
+            dev.Projects.Remove(project);
+            //Update(idProject, project);
             context.SaveChanges();
             return new ResponseMessage("Removed developer from project");
 
@@ -146,7 +152,7 @@ namespace Repository
             if (tester == null) throw new NonexistentUserException();
             project.Testers.Add(tester);
             context.SaveChanges();
-            return tester; 
+            return new Tester(); 
 
         }
 
@@ -157,8 +163,9 @@ namespace Repository
             if (dev == null) throw new NonexistentUserException();
             project.Developers.Add(dev);
             context.SaveChanges();
-            return dev;
+            return new Developer();
 
         }
+
     }
 }
