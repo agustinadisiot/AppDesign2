@@ -34,5 +34,20 @@ namespace Repository
 
             return tester;
         }
+
+        public List<Bug> GetBugsByName(int idTester, string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Bug> GetBugsByProject(int idTester, int v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Bug> GetBugsByStatus(int idTester, bool v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

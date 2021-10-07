@@ -22,17 +22,20 @@ namespace BusinessLogic
 
         public List<Bug> GetBugsByStatus(int idTester, bool filter)
         {
-            throw new System.NotImplementedException();
+            return testerDataAccess.GetBugsByStatus(idTester, filter);
+
         }
 
         public List<Bug> GetBugsByName(int idTester, string filter)
         {
-            throw new System.NotImplementedException();
+            return testerDataAccess.GetBugsByName(idTester, filter);
+
         }
 
         public List<Bug> GetBugsByProject(int idTester, int filter)
         {
-            throw new System.NotImplementedException();
+            return testerDataAccess.GetBugsByProject(idTester, filter);
+
         }
     }
 
