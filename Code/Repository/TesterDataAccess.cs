@@ -26,7 +26,7 @@ namespace Repository
 
             if (tester is null)
             {
-                // TODO
+                throw new NonexistentUserException();
             }
 
             context.Add(tester);
@@ -39,7 +39,6 @@ namespace Repository
         {
             Tester tester = testers.FirstOrDefault(t => t.Id == idTester);
             List<Bug> filteredBugs = new List<Bug>();
-            if (tester == null) return filteredBugs;
             foreach (Project project in tester.Projects)
             {
                 foreach (Bug bug in project.Bugs)
@@ -50,7 +49,7 @@ namespace Repository
                     }
                 }
             }
-            
+
             return filteredBugs;
         }
 
@@ -58,7 +57,6 @@ namespace Repository
         {
             Tester tester = testers.FirstOrDefault(t => t.Id == idTester);
             List<Bug> filteredBugs = new List<Bug>();
-            if (tester == null) return filteredBugs;
             foreach (Project project in tester.Projects)
             {
                 foreach (Bug bug in project.Bugs)
@@ -76,12 +74,11 @@ namespace Repository
         {
             Tester tester = testers.FirstOrDefault(t => t.Id == idTester);
             List<Bug> filteredBugs = new List<Bug>();
-            if (tester == null) return filteredBugs;
-            foreach(Project project in tester.Projects)
+            foreach (Project project in tester.Projects)
             {
-                foreach(Bug bug in project.Bugs)
+                foreach (Bug bug in project.Bugs)
                 {
-                    if(bug.IsActive == filter)
+                    if (bug.IsActive == filter)
                     {
                         filteredBugs.Add(bug);
                     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using BusinessLogic;
 using Domain;
 using Domain.Utils;
 using Microsoft.Data.Sqlite;
@@ -66,6 +67,11 @@ namespace TestDataAccess
 
         }
 
+        [TestMethod]
+        public void CreateTesterNull()
+        {
+            Assert.ThrowsException<NonexistentUserException>(() => testerDataAccess.Create(null));
+        }
 
         [TestMethod]
         public void FilterBugsByStatus()
@@ -129,12 +135,12 @@ namespace TestDataAccess
                 Id = 45,
                 Name = "Agus",
                 Username = "agustina",
-                Projects = {project1, project2}
+                Projects = { project1, project2 }
             };
 
             bugManagerContext.Add(tester);
             bugManagerContext.SaveChanges();
-            
+
 
             List<Bug> bugsResult = testerDataAccess.GetBugsByStatus(tester.Id, true);
             CollectionAssert.AreEqual(bugsExpected, bugsResult, new BugComparer());
@@ -219,7 +225,7 @@ namespace TestDataAccess
                 },
                 new Bug()
                 {
-                    Id = 2, 
+                    Id = 2,
                     Name = "bug4",
                     ProjectId = 23
                 },
@@ -261,5 +267,6 @@ namespace TestDataAccess
             List<Bug> bugsResult = testerDataAccess.GetBugsByProject(tester.Id, 23);
             CollectionAssert.AreEqual(bugsExpected, bugsResult, new BugComparer());
         }
+
     }
 }

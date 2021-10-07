@@ -40,6 +40,8 @@ namespace TestTesterBusinessLogic
         }
 
 
+
+
         [TestMethod]
         public void FilterBugsByStatus()
         {
@@ -109,7 +111,7 @@ namespace TestTesterBusinessLogic
                     ProjectId = 3,
                 },
             };
-            int idTester = 1; 
+            int idTester = 1;
             var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
             mock.Setup(t => t.GetBugsByProject(idTester, 3)).Returns(bugsExpected);
             var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
