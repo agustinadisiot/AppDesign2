@@ -39,5 +39,85 @@ namespace TestTesterBusinessLogic
             Assert.AreEqual(testerResult, tester);
         }
 
+
+        [TestMethod]
+        public void FilterBugsByStatus()
+        {
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug()
+                {
+                    Name = "bug1",
+                    IsActive = true
+                },
+                new Bug()
+                {
+                    Name = "bug2",
+                    IsActive = true
+                },
+            };
+            int idTester = 1;
+
+            var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
+            mock.Setup(t => t.GetBugsByStatus(idTester, true)).Returns(bugsExpected);
+            var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
+
+
+            var bugsResult = testerBusinessLogic.GetBugsByStatus(idTester, true);
+
+            mock.VerifyAll();
+            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+        }
+
+        [TestMethod]
+        public void FilterBugsByName()
+        {
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug()
+                {
+                    Name = "bug1",
+                },
+                new Bug()
+                {
+                    Name = "bug1",
+                },
+            };
+            int idTester = 1;
+            var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
+            mock.Setup(t => t.GetBugsByName(idTester, "bug1")).Returns(bugsExpected);
+            var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
+
+
+            var bugsResult = testerBusinessLogic.GetBugsByName(idTester, "bug1");
+
+            mock.VerifyAll();
+            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+        }
+
+        [TestMethod]
+        public void FilterBugsByProject()
+        {
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug()
+                {
+                    ProjectId = 3,
+                },
+                new Bug()
+                {
+                    ProjectId = 3,
+                },
+            };
+            int idTester = 1; 
+            var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
+            mock.Setup(t => t.GetBugsByProject(idTester, 3)).Returns(bugsExpected);
+            var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
+
+            var bugsResult = testerBusinessLogic.GetBugsByProject(idTester, 3);
+
+            mock.VerifyAll();
+            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using RepositoryInterfaces;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -17,6 +18,24 @@ namespace BusinessLogic
         public Tester Add(Tester newDev)
         {
             return testerDataAccess.Create(newDev);
+        }
+
+        public List<Bug> GetBugsByStatus(int idTester, bool filter)
+        {
+            return testerDataAccess.GetBugsByStatus(idTester, filter);
+
+        }
+
+        public List<Bug> GetBugsByName(int idTester, string filter)
+        {
+            return testerDataAccess.GetBugsByName(idTester, filter);
+
+        }
+
+        public List<Bug> GetBugsByProject(int idTester, int filter)
+        {
+            return testerDataAccess.GetBugsByProject(idTester, filter);
+
         }
     }
 
