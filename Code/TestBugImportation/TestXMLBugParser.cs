@@ -125,7 +125,6 @@ namespace TestBugParser
         {
             string fullPath = baseDirectory + "InvalidXML.xml";
             Assert.ThrowsException<XmlException>(() => bugParser.GetBugs(fullPath));
-
         }
 
         [TestMethod]
@@ -133,7 +132,6 @@ namespace TestBugParser
         {
             string fullPath = baseDirectory + "InvalidBugs.xml";
             Assert.ThrowsException<XmlException>(() => bugParser.GetBugs(fullPath));
-            // TODO cambiar por otra excepcion
 
         }
 

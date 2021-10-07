@@ -48,8 +48,15 @@ namespace Repository
         }
         public Bug GetById(int id)
         {
-            Bug bug = bugs.First(bug => bug.Id == id);
-            if (bug == null) throw new NonexistentBugException();
+            Bug bug;
+            try
+            {
+                bug = bugs.First(bug => bug.Id == id);
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new NonexistentBugException();
+            }
             return bug;
         }
 
@@ -60,7 +67,7 @@ namespace Repository
 
         public Bug Update(int Id, Bug bugUpdated)
         {
-            if (bugs is null)
+            if (bugUpdated is null)
                 throw new NonexistentBugException();
             Bug bugToUpdate = GetById(Id);
             bugToUpdate.Name = bugUpdated.Name;
