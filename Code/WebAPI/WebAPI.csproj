@@ -12,5 +12,8 @@
 		<ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
 		<ProjectReference Include="..\Factory\Factory.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Controllers\Utils\" />
+	</ItemGroup>
 
 </Project>
