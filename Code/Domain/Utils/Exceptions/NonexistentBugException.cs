@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace BusinessLogic
+namespace Domain.Utils
 {
     public class NonexistentBugException : Exception
     {
