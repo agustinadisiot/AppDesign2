@@ -7,8 +7,8 @@ namespace RepositoryInterfaces
 {
     public interface ITesterDataAccess : IUserDataAccess<Tester>
     {
-        List<Bug> GetBugsByStatus(int idTester, bool v);
-        List<Bug> GetBugsByName(int idTester, string v);
-        List<Bug> GetBugsByProject(int idTester, int v);
+        List<Bug> GetBugsByStatus(int idTester, bool filter);
+        List<Bug> GetBugsByName(int idTester, string filter);
+        List<Bug> GetBugsByProject(int idTester, int filter);
     }
 }

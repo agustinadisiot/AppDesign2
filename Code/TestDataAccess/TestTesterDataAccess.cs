@@ -70,36 +70,75 @@ namespace TestDataAccess
         [TestMethod]
         public void FilterBugsByStatus()
         {
+
             List<Bug> bugsExpected = new List<Bug>()
             {
                 new Bug()
                 {
+                    Id = 1,
                     Name = "bug1",
-                    IsActive = true
+                    IsActive = true,
+                    ProjectId = 23,
                 },
                 new Bug()
                 {
+                    Id = 2,
                     Name = "bug2",
-                    IsActive = true
+                    IsActive = true,
+                    ProjectId = 24,
+
                 },
             };
+            Project project1 = new Project()
+            {
+                Name = "project",
+                Id = 23,
+
+            };
+            bugManagerContext.Add(project1);
+
+            Project project2 = new Project()
+            {
+                Name = "project",
+                Id = 24,
+
+            };
+            bugManagerContext.Add(project2);
+            bugManagerContext.SaveChanges();
 
             bugManagerContext.Add(new Bug()
             {
+                Id = 1,
                 Name = "bug1",
-                IsActive = true
+                IsActive = true,
+                ProjectId = 23,
+
             });
             bugManagerContext.Add(new Bug()
             {
+                Id = 2,
                 Name = "bug2",
-                IsActive = true
+                IsActive = true,
+                ProjectId = 24,
+
             });
             bugManagerContext.SaveChanges();
 
-            int idTester = 1;
+            Tester tester = new Tester()
+            {
+                Id = 45,
+                Name = "Agus",
+                Username = "agustina",
+                Projects = {project1, project2}
+            };
 
-            List<Bug> bugsResult = testerDataAccess.GetBugsByStatus(idTester, true);
-            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+            bugManagerContext.Add(tester);
+            bugManagerContext.SaveChanges();
+            
+
+            List<Bug> bugsResult = testerDataAccess.GetBugsByStatus(tester.Id, true);
+            CollectionAssert.AreEqual(bugsExpected, bugsResult, new BugComparer());
+
         }
 
         [TestMethod]
@@ -109,27 +148,62 @@ namespace TestDataAccess
             {
                 new Bug()
                 {
+                    Id = 1,
                     Name = "bug1",
+                    ProjectId = 23,
+
                 },
                 new Bug()
                 {
+                    Id = 2,
                     Name = "bug1",
+                    ProjectId = 24,
+
                 },
             };
-            bugManagerContext.Add(new Bug()
+            Tester tester = new Tester()
             {
-                Name = "bug1"
+                Name = "Agus",
+                Username = "agustina",
+            };
+
+            bugManagerContext.Add(tester);
+            bugManagerContext.SaveChanges();
+            bugManagerContext.Add(new Project()
+            {
+                Name = "project",
+                Id = 23,
+                Testers = new List<Tester>() { tester }
             });
-            bugManagerContext.Add(new Bug()
+            bugManagerContext.Add(new Project()
             {
-                Name = "bug1"
+                Name = "project",
+                Id = 24,
+                Testers = new List<Tester>() { tester }
+
             });
             bugManagerContext.SaveChanges();
 
-            int idTester = 1;
+            bugManagerContext.Add(new Bug()
+            {
+                Id = 1,
+                Name = "bug1",
+                ProjectId = 23,
 
-            List<Bug> bugsResult = testerDataAccess.GetBugsByName(idTester, "bug1");
-            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+
+            });
+            bugManagerContext.Add(new Bug()
+            {
+                Id = 2,
+                Name = "bug1",
+                ProjectId = 24,
+
+            });
+            bugManagerContext.SaveChanges();
+
+
+            List<Bug> bugsResult = testerDataAccess.GetBugsByName(tester.Id, "bug1");
+            CollectionAssert.AreEqual(bugsExpected, bugsResult, new BugComparer());
         }
 
         [TestMethod]
@@ -139,30 +213,53 @@ namespace TestDataAccess
             {
                 new Bug()
                 {
-                    ProjectId = 3,
+                    Id = 1,
+                    Name = "bug3",
+                    ProjectId = 23
                 },
                 new Bug()
                 {
-                    ProjectId = 3,
+                    Id = 2, 
+                    Name = "bug4",
+                    ProjectId = 23
                 },
             };
-
-            bugManagerContext.Add(new Bug()
+            Tester tester = new Tester()
             {
-                ProjectId = 3,
+                Name = "Agus",
+                Username = "agustina",
+            };
 
-            });
-            bugManagerContext.Add(new Bug()
+            bugManagerContext.Add(tester);
+            bugManagerContext.SaveChanges();
+            bugManagerContext.Add(new Project()
             {
-                ProjectId = 3,
+                Name = "project",
+                Id = 23,
+                Testers = new List<Tester>() { tester }
 
             });
             bugManagerContext.SaveChanges();
 
-            int idTester = 1;
+            bugManagerContext.Add(new Bug()
+            {
+                Id = 1,
+                Name = "bug3",
+                ProjectId = 23
 
-            List<Bug> bugsResult = testerDataAccess.GetBugsByProject(idTester, 3);
-            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+            });
+            bugManagerContext.Add(new Bug()
+            {
+                Id = 2,
+                Name = "bug4",
+                ProjectId = 23
+
+            });
+            bugManagerContext.SaveChanges();
+
+
+            List<Bug> bugsResult = testerDataAccess.GetBugsByProject(tester.Id, 23);
+            CollectionAssert.AreEqual(bugsExpected, bugsResult, new BugComparer());
         }
     }
 }

@@ -35,19 +35,59 @@ namespace Repository
             return tester;
         }
 
-        public List<Bug> GetBugsByName(int idTester, string v)
+        public List<Bug> GetBugsByName(int idTester, string filter)
         {
-            throw new NotImplementedException();
+            Tester tester = testers.FirstOrDefault(t => t.Id == idTester);
+            List<Bug> filteredBugs = new List<Bug>();
+            if (tester == null) return filteredBugs;
+            foreach (Project project in tester.Projects)
+            {
+                foreach (Bug bug in project.Bugs)
+                {
+                    if (bug.Name == filter)
+                    {
+                        filteredBugs.Add(bug);
+                    }
+                }
+            }
+            
+            return filteredBugs;
         }
 
-        public List<Bug> GetBugsByProject(int idTester, int v)
+        public List<Bug> GetBugsByProject(int idTester, int filter)
         {
-            throw new NotImplementedException();
+            Tester tester = testers.FirstOrDefault(t => t.Id == idTester);
+            List<Bug> filteredBugs = new List<Bug>();
+            if (tester == null) return filteredBugs;
+            foreach (Project project in tester.Projects)
+            {
+                foreach (Bug bug in project.Bugs)
+                {
+                    if (bug.ProjectId == filter)
+                    {
+                        filteredBugs.Add(bug);
+                    }
+                }
+            }
+            return filteredBugs;
         }
 
-        public List<Bug> GetBugsByStatus(int idTester, bool v)
+        public List<Bug> GetBugsByStatus(int idTester, bool filter)
         {
-            throw new NotImplementedException();
+            Tester tester = testers.FirstOrDefault(t => t.Id == idTester);
+            List<Bug> filteredBugs = new List<Bug>();
+            if (tester == null) return filteredBugs;
+            foreach(Project project in tester.Projects)
+            {
+                foreach(Bug bug in project.Bugs)
+                {
+                    if(bug.IsActive == filter)
+                    {
+                        filteredBugs.Add(bug);
+                    }
+                }
+            }
+            return filteredBugs;
         }
     }
 }
