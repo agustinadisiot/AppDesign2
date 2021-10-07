@@ -28,18 +28,23 @@ namespace Repository
             {
                 throw new NonexistentBugException();
             }
+            AddProjectIdToBug(bug);
 
-            if ((bug.ProjectId == 0) && (bug.ProjectName != null))
-            {
-                Project bugsProject = context.Projects.First(p => p.Name == bug.ProjectName);
-                bug.ProjectId = bugsProject.Id;
-            }
             context.Add(bug);
             context.SaveChanges();
 
             return bug;
 
 
+        }
+
+        private void AddProjectIdToBug(Bug bug)
+        {
+            if ((bug.ProjectId == 0) && (bug.ProjectName != null))
+            {
+                Project bugsProject = context.Projects.First(p => p.Name == bug.ProjectName);
+                bug.ProjectId = bugsProject.Id;
+            }
         }
         public Bug GetById(int id)
         {
