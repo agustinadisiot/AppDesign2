@@ -18,6 +18,11 @@ namespace BusinessLogic
         {
             return devDataAccess.Create(newDev);
         }
+
+        public BugsQuantity GetQuantityBugsResolved(int idDev)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
 

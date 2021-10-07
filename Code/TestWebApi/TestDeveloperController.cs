@@ -58,6 +58,18 @@ namespace TestWebApi
             mock.VerifyAll();
             Assert.AreEqual(cantBugsResolved, cantResult.quantity);
         }
+
+        [TestMethod]
+        public void QuantityBugsResolvedDevNotFound()
+        {
+            int idDev = 1;
+
+            var mock = new Mock<IDeveloperBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(d => d.GetQuantityBugsResolved(idDev)).Throws(new NonexistentUserException);
+            var controller = new DeveloperController(mock.Object);
+
+            Assert.ThrowsException<NonexistentUserException>(() => controller.GetQuantityBugsResolved(idDev));
+        }
     }
 };
 

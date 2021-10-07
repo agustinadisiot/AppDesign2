@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -21,5 +22,9 @@ namespace WebApi.Controllers
             return Ok(businessLogic.Add(devExpected));
         }
 
+        public object GetQuantityBugsResolved(int idDev)
+        {
+            return Ok(businessLogic.GetQuantityBugsResolved(idDev));
+        }
     }
 }
