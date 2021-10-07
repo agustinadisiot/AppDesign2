@@ -40,6 +40,24 @@ namespace TestWebApi
             mock.VerifyAll();
             Assert.AreEqual(devExpected, devResult);
         }
+
+        [TestMethod]
+        public void QuantityBugsResolved()
+        {
+            int idDev = 1;
+            int cantBugsResolved = 1;
+
+            var mock = new Mock<IDeveloperBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(d => d.GetQuantityBugsResolved(idDev)).Returns(new BugsQuantity(cantBugsResolved));
+            var controller = new DeveloperController(mock.Object);
+
+            var result = controller.GetQuantityBugsResolved(idDev);
+            var okResult = result as OkObjectResult;
+            var cantResult = okResult.Value as BugsQuantity;
+
+            mock.VerifyAll();
+            Assert.AreEqual(cantBugsResolved, cantResult.quantity);
+        }
     }
 };
 
