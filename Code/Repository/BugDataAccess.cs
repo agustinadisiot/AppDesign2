@@ -62,8 +62,6 @@ namespace Repository
         {
             if (bugs is null)
                 throw new NonexistentBugException();
-            //bugs.Update(bugUpdated); // TODO ver porque no anda  esto, seguramente tenga que 
-            // ver con el context
             Bug bugToUpdate = GetById(Id);
             bugToUpdate.Name = bugUpdated.Name;
             bugToUpdate.Version = bugUpdated.Version;
@@ -74,6 +72,7 @@ namespace Repository
             bugToUpdate.CompletedById = bugUpdated.CompletedById;
             bugToUpdate.Description = bugUpdated.Description;
             context.SaveChanges();
+            bugToUpdate.Project = null;
             return bugToUpdate;
         }
 
