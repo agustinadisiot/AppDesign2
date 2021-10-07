@@ -195,7 +195,7 @@ namespace TestDataAccess
                         CompletedBy = null,
                     }
                 }
-              };
+            };
             projectDataAccess.Create(project);
             bugManagerContext.SaveChanges();
 
@@ -390,7 +390,7 @@ namespace TestDataAccess
 
             Tester testerResult = projectDataAccess.AddTesterToProject(project.Id, testerExpected.Id);
 
-            Assert.AreEqual(testerExpected, testerResult);
+            Assert.AreEqual(0, new UserComparer().Compare(testerResult, testerExpected));
         }
 
         [TestMethod]
@@ -431,32 +431,32 @@ namespace TestDataAccess
         [TestMethod]
         public void DeleteDeveloperFromProject()
         {
-            
-                Project project = new Project()
-                {
-                    Name = "project3",
-                    Id = 1,
-                };
 
-                Developer devExpected = new Developer()
-                {
-                    Id = 2,
-                    Name = "Agustina",
-                    Lastname = "didios",
-                    Username = "Agus",
-                    Password = "rosadopastel",
-                    Email = "hell@yahoo.com"
-                };
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            Developer devExpected = new Developer()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
 
 
-                projectDataAccess.Create(project);
-                bugManagerContext.Developer.Add(devExpected);
-                bugManagerContext.SaveChanges();
+            projectDataAccess.Create(project);
+            bugManagerContext.Developer.Add(devExpected);
+            bugManagerContext.SaveChanges();
 
-                ResponseMessage result = projectDataAccess.RemoveDeveloperFromProject(project.Id, devExpected.Id);
+            ResponseMessage result = projectDataAccess.RemoveDeveloperFromProject(project.Id, devExpected.Id);
 
-                Assert.IsTrue(result is ResponseMessage);
-         }
+            Assert.IsTrue(result is ResponseMessage);
+        }
 
 
         [TestMethod]
