@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using BusinessLogicInterfaces;
 using Domain;
+using Domain.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RepositoryInterfaces;
@@ -365,9 +366,9 @@ namespace TestProjectBusinessLogic
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
             var result = projectBusinessLogic.GetBugsQuantity(project.Id);
-            
+
             mock.VerifyAll();
-            Assert.AreEqual(cant,result.quantity);
+            Assert.AreEqual(cant, result.quantity);
         }
 
         [TestMethod]
@@ -412,7 +413,7 @@ namespace TestProjectBusinessLogic
                     Username = "Ivan"
                 },
                  new Tester()
-                { 
+                {
                     Username = "Agus"
                 },
             };

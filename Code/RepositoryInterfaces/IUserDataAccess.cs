@@ -1,9 +1,4 @@
-﻿using BusinessLogicInterfaces;
-using Domain;
-using System;
-using System.Collections.Generic;
-
-namespace RepositoryInterfaces
+﻿namespace RepositoryInterfaces
 {
     public interface IUserDataAccess<T>
     {

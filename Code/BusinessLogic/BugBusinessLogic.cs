@@ -1,49 +1,47 @@
-﻿using Domain;
-using System;
+﻿using BugParser;
 using BusinessLogicInterfaces;
-using System.Collections.Generic;
-using System.Linq;
-using RepositoryInterfaces;
+using Domain;
 using Domain.Utils;
-using BugParser;
+using RepositoryInterfaces;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
     public class BugBusinessLogic : IBugBusinessLogic
     {
-        public IBugDataAccess bugDataAccess { get; set; }
+        public IBugDataAccess BugDataAccess { get; set; }
 
         public BugBusinessLogic(IBugDataAccess newBugDataAccess)
         {
-            bugDataAccess = newBugDataAccess;
+            BugDataAccess = newBugDataAccess;
         }
 
         public Bug GetById(int idBug)
         {
-            Bug bug = bugDataAccess.GetById(idBug);
+            Bug bug = BugDataAccess.GetById(idBug);
             return bug;
         }
 
         public IEnumerable<Bug> GetAll()
         {
-            return bugDataAccess.GetAll();
+            return BugDataAccess.GetAll();
         }
 
         public Bug Add(Bug bug)
         {
-            bugDataAccess.Create(bug);
+            BugDataAccess.Create(bug);
             return bug;
         }
 
         public Bug Update(int Id, Bug bug)
         {
-            return bugDataAccess.Update(Id, bug);
+            return BugDataAccess.Update(Id, bug);
         }
 
 
         public ResponseMessage Delete(int Id)
         {
-            return bugDataAccess.Delete(Id);
+            return BugDataAccess.Delete(Id);
 
         }
 
@@ -56,7 +54,7 @@ namespace BusinessLogic
             List<Bug> bugsToImport = parser.GetBugs(path);
             foreach (var bug in bugsToImport)
             {
-                bugDataAccess.Create(bug);
+                BugDataAccess.Create(bug);
             }
         }
 

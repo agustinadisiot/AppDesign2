@@ -1,6 +1,6 @@
-﻿using BusinessLogic;
-using BusinessLogicInterfaces;
+﻿using BusinessLogicInterfaces;
 using Domain;
+using Domain.Utils;
 using Microsoft.EntityFrameworkCore;
 using RepositoryInterfaces;
 using System.Collections.Generic;

@@ -1,7 +1,6 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain;
-using System.Collections.Generic;
 using Domain.Utils;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDomain
 {
@@ -60,7 +59,6 @@ namespace TestDomain
             };
             bug.Project = expectedProject;
             var actualProject = bug.Project;
-            // TODO hacer comparable de project
             Assert.AreEqual(expectedProject, actualProject);
         }
 
@@ -97,7 +95,7 @@ namespace TestDomain
             Assert.AreEqual(expected, bug.CompletedById);
         }
 
-      
+
         [DataTestMethod]
         [DataRow("New project")]
         [DataRow("Second project")]

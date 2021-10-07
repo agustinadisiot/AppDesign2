@@ -1,11 +1,6 @@
 ﻿using BusinessLogic;
 using BusinessLogicInterfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Repository;
-using Repository.Design;
-using RepositoryInterfaces;
-using System;
 
 namespace Factory
 {

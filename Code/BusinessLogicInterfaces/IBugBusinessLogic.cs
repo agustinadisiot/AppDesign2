@@ -1,7 +1,6 @@
 ﻿using BugParser;
 using Domain;
 using Domain.Utils;
-using System.Collections.Generic;
 
 namespace BusinessLogicInterfaces
 {

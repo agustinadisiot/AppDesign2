@@ -1,9 +1,6 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace BugParser
@@ -16,7 +13,7 @@ namespace BugParser
         [XmlElement("Proyecto")]
         public string Proyecto { get; set; }
         [XmlElement("Bugs")]
-        public BugsXML BugList { get; set; } // TODO cambiar xml a algo que no se acople a un formato de achivo
+        public BugsXML BugList { get; set; }
 
         internal List<Bug> ConvertToBugs()
         {
@@ -35,7 +32,6 @@ namespace BugParser
                         IsActive = bugXML.Estado.Trim() == "Activo",
                     };
                     bugs.Add(convertedBug);
-                    // bug.Validate TODO 
                 }
             }
             return bugs;

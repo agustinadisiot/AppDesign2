@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
-namespace BusinessLogic
+namespace Domain.Utils
 {
     [Serializable]
     public class NonexistentProjectException : Exception

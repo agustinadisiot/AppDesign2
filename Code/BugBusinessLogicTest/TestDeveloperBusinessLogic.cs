@@ -1,13 +1,8 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Domain;
-using System.Collections.Generic;
-using System.Linq;
 using BusinessLogic;
-using RepositoryInterfaces;
-using Domain.Utils;
+using Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Microsoft.AspNetCore.Mvc;
-using BusinessLogicInterfaces;
+using RepositoryInterfaces;
 
 namespace TestDeveloperBusinessLogic
 {

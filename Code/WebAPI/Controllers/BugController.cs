@@ -3,7 +3,6 @@ using Domain;
 using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
