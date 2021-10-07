@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using BusinessLogic;
 using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
@@ -70,7 +71,6 @@ namespace TestDataAccess
         [TestMethod]
         public void QuantityBugsResolved()
         {
-            int cantBugsResolved = 0;
             Developer expectedDev = new Developer
             {
                 Id = 1,
@@ -93,23 +93,12 @@ namespace TestDataAccess
                 CompletedBy = null,
             });
 
-            foreach (Bug bug in bugManagerContext.Bugs)
-            {
-                if (bug.CompletedBy == expectedDev) cantBugsResolved++;
-            }
+            int expectedQuantity = 2;
           
-            BugsQuantity result = devDataAccess.GetQuantityBugsResolved(expectedDev.Id);
+            int result = devDataAccess.GetQuantityBugsResolved(expectedDev.Id);
         
-            Assert.AreEqual(cantBugsResolved, result.quantity);
+            Assert.AreEqual(expectedQuantity, result);
         }
 
-        [TestMethod]
-        public void QuantityBugsResolvedDevNotFound()
-        {
-            int idDevNonExistent = 1;
-            BugsQuantity result = devDataAccess.GetQuantityBugsResolved(idDevNonExistent);
-
-            Assert.ThrowsException<NonexistentUserException>(() => devDataAccess.GetQuantityBugsResolved(idDevNonExistent));
-        }
     }
 }

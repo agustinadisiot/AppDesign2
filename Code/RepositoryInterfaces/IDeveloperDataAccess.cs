@@ -7,6 +7,6 @@ namespace RepositoryInterfaces
 {
     public interface IDeveloperDataAccess : IUserDataAccess<Developer>
     {
-        BugsQuantity GetQuantityBugsResolved(int idDev);
+        int GetQuantityBugsResolved(int idDev);
     }
 }

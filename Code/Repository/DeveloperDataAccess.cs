@@ -35,9 +35,9 @@ namespace Repository
             return dev;
         }
 
-        public BugsQuantity GetQuantityBugsResolved(int idDev)
+        public int GetQuantityBugsResolved(int idDev)
         {
-            throw new NotImplementedException();
+            return context.Bugs.Count(b => b.CompletedBy.Id == idDev);
         }
     }
 }

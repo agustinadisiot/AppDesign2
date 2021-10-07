@@ -48,7 +48,7 @@ namespace TestWebApi
             int cantBugsResolved = 1;
 
             var mock = new Mock<IDeveloperBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(d => d.GetQuantityBugsResolved(idDev)).Returns(new BugsQuantity(cantBugsResolved));
+            mock.Setup(d => d.GetQuantityBugsResolved(idDev)).Returns(cantBugsResolved);
             var controller = new DeveloperController(mock.Object);
 
             var result = controller.GetQuantityBugsResolved(idDev);

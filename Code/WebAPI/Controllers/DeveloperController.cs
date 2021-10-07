@@ -22,9 +22,11 @@ namespace WebApi.Controllers
             return Ok(businessLogic.Add(devExpected));
         }
 
-        public object GetQuantityBugsResolved(int idDev)
+        [HttpGet("{id}/bugs/quantity")]
+        public object GetQuantityBugsResolved([FromRoute]int idDev)
         {
-            return Ok(businessLogic.GetQuantityBugsResolved(idDev));
+            
+            return Ok(new BugsQuantity(businessLogic.GetQuantityBugsResolved(idDev)));
         }
     }
 }
