@@ -67,7 +67,34 @@ namespace TestWebApi
             var bugsResult = okResult.Value as List<Bug>;
 
             mock.VerifyAll();
-            Assert.AreEqual(bugsExpected, bugsResult);
+            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+        }
+
+        [TestMethod]
+        public void FilterBugsByName()
+        {
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug()
+                {
+                    Name = "bug1",
+                },
+                new Bug()
+                {
+                    Name = "bug1",
+                },
+            };
+            int idTester = 1;
+            var mock = new Mock<ITesterBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(t => t.GetBugsByName(idTester, "bug1")).Returns(bugsExpected);
+            var controller = new TesterController(mock.Object);
+
+            var result = controller.GetBugsByName(idTester, "bug1");
+            var okResult = result as OkObjectResult;
+            var bugsResult = okResult.Value as List<Bug>;
+
+            mock.VerifyAll();
+            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
         }
     }
 };
