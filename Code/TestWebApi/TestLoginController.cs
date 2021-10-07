@@ -19,20 +19,17 @@ namespace TestWebApi
         [TestMethod]
         public void Login()
         {
-            LoginDTO login = new LoginDTO()
-            {
-                Username = "admin",
-                Password = "Juana1223#@"
-            };
+            string username = "admin";
+            string password = "Juana1223#@";
 
             var mock = new Mock<ILoginBusinessLogic>(MockBehavior.Strict);
             string guid = "adsfasdfasdfasdf";
-            mock.Setup(l => l.login).Returns(guid);
+            mock.Setup(l => l.Login(username, password)).Returns(guid);
             var controller = new LoginController(mock.Object);
 
-            var result = controller.Post(login);
+            var result = controller.Login(username, password);
             var okResult = result as OkObjectResult;
-            var adminResult = okResult.Value as LoginToken;
+            var loginResult = okResult.Value as LoginToken;
 
             mock.VerifyAll();
             Assert.AreEqual(LoginToken.Token, adminResult);
