@@ -88,17 +88,25 @@ namespace TestDataAccess
                 Id = 4,
                 Name = "Juan"
             };
-            bugManagerContext.Developer.Add(dev);
+            bugManagerContext.Add(dev);
             bugManagerContext.SaveChanges();
+
+            Project project = new Project()
+            {
+                Name = "project",
+                Id = 4,
+            };
+            bugManagerContext.Add(project);
+            bugManagerContext.SaveChanges();
+
             Bug bug = bugDataAccess.Create(new Bug
             {
                 Id = 2,
                 Name = "b",
                 Description = "a",
                 Version = "1.0",
-                ProjectId = 1,
-                IsActive = false,
-                CompletedById = 4,
+                ProjectId = 4,
+                IsActive = false
             });
 
             var bugUpdated = new Bug
@@ -106,18 +114,16 @@ namespace TestDataAccess
                 Id = 2,
                 Name = "a",
                 Description = "a",
-                ProjectId = 1,
+                ProjectId = 4,
                 Version = "1.0",
-                IsActive = true,
-                CompletedById = null,
+                IsActive = true
             };
 
-            bugDataAccess.Update(bug.Id, bugUpdated);
+            Bug bugModified = bugDataAccess.Update(bug.Id, bugUpdated);
             bugManagerContext.SaveChanges();
 
-            var bugSaved = bugDataAccess.GetById(2);
 
-            Assert.AreEqual(0, new BugComparer().Compare(bugUpdated, bugSaved));
+            Assert.AreEqual(0, new BugComparer().Compare(bugUpdated, bugModified));
 
         }
 
