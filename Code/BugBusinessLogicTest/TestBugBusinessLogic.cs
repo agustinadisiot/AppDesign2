@@ -1,12 +1,13 @@
-using BusinessLogic;
-using BusinessLogicInterfaces;
-using Domain;
-using Domain.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using RepositoryInterfaces;
+using Domain;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessLogic;
+using RepositoryInterfaces;
+using Domain.Utils;
+using Moq;
+using Microsoft.AspNetCore.Mvc;
+using BusinessLogicInterfaces;
 
 namespace TestBugBusinessLogic
 {
@@ -108,7 +109,7 @@ namespace TestBugBusinessLogic
                      IsActive = true,
                      CompletedBy = null,
                      Id = 0
-                },
+                }, 
                 new Bug()
                 {
                     Name = "button",

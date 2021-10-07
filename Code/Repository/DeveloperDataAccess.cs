@@ -1,6 +1,11 @@
-﻿using Domain;
+﻿using BusinessLogic;
+using BusinessLogicInterfaces;
+using Domain;
 using Microsoft.EntityFrameworkCore;
+using Repository.Design;
 using RepositoryInterfaces;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Repository

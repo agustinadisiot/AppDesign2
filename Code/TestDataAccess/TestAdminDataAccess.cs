@@ -1,10 +1,12 @@
-﻿using Domain;
+﻿using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
+using Domain;
 using Domain.Utils;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repository;
-using System.Data.Common;
 
 namespace TestDataAccess
 {

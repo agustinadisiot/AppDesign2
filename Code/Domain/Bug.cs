@@ -1,4 +1,8 @@
-﻿namespace Domain
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain
 {
     public class Bug
     {
