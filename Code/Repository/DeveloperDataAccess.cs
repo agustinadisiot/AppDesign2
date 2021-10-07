@@ -23,12 +23,6 @@ namespace Repository
 
         public Developer Create(Developer dev)
         {
-
-            if (dev is null)
-            {
-                // TODO
-            }
-
             context.Add(dev);
             context.SaveChanges();
 

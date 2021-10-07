@@ -136,6 +136,24 @@ namespace TestDataAccess
         }
 
         [TestMethod]
+        public void DeleteByName()
+        {
+            Project notExpectedProject = new Project()
+            {
+                Id = 1,
+                Name = "NotAProject"
+            };
+            projectDataAccess.Create(notExpectedProject);
+            projectDataAccess.DeleteByName(notExpectedProject.Name);
+            bugManagerContext.SaveChanges();
+
+            var projectsSaved = projectDataAccess.GetAll().ToList();
+
+            CollectionAssert.DoesNotContain(projectsSaved, notExpectedProject);
+
+        }
+
+        [TestMethod]
         public void GetAllBugs()
         {
             Project project = new Project()
@@ -277,6 +295,13 @@ namespace TestDataAccess
 
             int nonexistentDevId = 4;
             Assert.ThrowsException<NonexistentUserException>(() => projectDataAccess.AddDeveloperToProject(project.Id, nonexistentDevId));
+
+        }
+
+        [TestMethod]
+        public void CreateNull()
+        {
+            Assert.ThrowsException<NonexistentProjectException>(() => projectDataAccess.Create(null));
 
         }
 

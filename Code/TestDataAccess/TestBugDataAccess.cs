@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using BusinessLogic;
 using Domain;
 using Domain.Utils;
 using Microsoft.Data.Sqlite;
@@ -165,14 +166,21 @@ namespace TestDataAccess
         [TestMethod]
         public void CreateNull()
         {
-
-
-            bugDataAccess.Create(null);
-            Assert.AreEqual(0, new BugComparer().Compare(expectedBug, bugSaved));
+            Assert.ThrowsException<NonexistentBugException>(() => bugDataAccess.Create(null));
 
         }
 
+        [TestMethod]
+        public void GetNonExistant()
+        {
+            Assert.ThrowsException<NonexistentBugException>(() => bugDataAccess.GetById(90));
+        }
 
+        [TestMethod]
+        public void UpdateNonExistant()
+        {
+            Assert.ThrowsException<NonexistentBugException>(() => bugDataAccess.Update(90, null));
+        }
 
         [TestMethod]
         public void AddsIdFromProjectName()
