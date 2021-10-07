@@ -81,6 +81,13 @@ namespace TestDataAccess
         [TestMethod]
         public void Update()
         {
+            Developer dev = new Developer()
+            {
+                Id = 4,
+                Name = "Juan"
+            };
+            bugManagerContext.Developer.Add(dev);
+            bugManagerContext.SaveChanges();
             Bug bug = bugDataAccess.Create(new Bug
             {
                 Id = 2,
@@ -88,7 +95,8 @@ namespace TestDataAccess
                 Description = "a",
                 Version = "1.0",
                 ProjectId = 1,
-                IsActive = true
+                IsActive = false,
+                CompletedById = 4,
             });
 
             var bugUpdated = new Bug
@@ -98,7 +106,8 @@ namespace TestDataAccess
                 Description = "a",
                 ProjectId = 1,
                 Version = "1.0",
-                IsActive = true
+                IsActive = true,
+                CompletedById = null,
             };
 
             bugDataAccess.Update(bug.Id, bugUpdated);
