@@ -50,11 +50,9 @@ namespace TestDeveloperBusinessLogic
             var devBusinessLogic = new DeveloperBusinessLogic(mock.Object);
 
             var result = devBusinessLogic.GetQuantityBugsResolved(idDev);
-            var okResult = result as OkObjectResult;
-            var cantResult = okResult.Value as BugsQuantity;
 
             mock.VerifyAll();
-            Assert.AreEqual(cantBugsResolved, cantResult.quantity);
+            Assert.AreEqual(cantBugsResolved, result.quantity);
         }
 
         [TestMethod]

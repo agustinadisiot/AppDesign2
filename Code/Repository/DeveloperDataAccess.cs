@@ -34,5 +34,10 @@ namespace Repository
 
             return dev;
         }
+
+        public BugsQuantity GetQuantityBugsResolved(int idDev)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

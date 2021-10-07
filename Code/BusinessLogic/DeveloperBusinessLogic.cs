@@ -21,7 +21,7 @@ namespace BusinessLogic
 
         public BugsQuantity GetQuantityBugsResolved(int idDev)
         {
-            throw new System.NotImplementedException();
+            return devDataAccess.GetQuantityBugsResolved(idDev);
         }
     }
 
