@@ -23,12 +23,6 @@ namespace Repository
 
         public Admin Create(Admin admin)
         {
-
-            if (admin is null)
-            {
-                // TODO
-            }
-
             context.Add(admin);
             context.SaveChanges();
 
