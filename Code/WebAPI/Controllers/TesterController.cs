@@ -22,21 +22,21 @@ namespace WebApi.Controllers
             return Ok(businessLogic.Add(testerExpected));
         }
 
-        [HttpGet("{idTester}/bugs")]
-        public object GetBugsByStatus([FromRoute]int idTester, [FromQuery]bool filter)
+        [HttpGet("{idTester}/bugs/status/{filter}")]
+        public object GetBugsByStatus([FromRoute]int idTester, [FromRoute]bool filter)
         {
             return Ok(businessLogic.GetBugsByStatus(idTester, filter));
         }
 
-        [HttpGet("{idTester}/bugs")]
-        public object GetBugsByName([FromRoute]int idTester, [FromQuery]string filter)
+        [HttpGet("{idTester}/bugs/name/{filter}")]
+        public object GetBugsByName([FromRoute]int idTester, [FromRoute]string filter)
         {
             return Ok(businessLogic.GetBugsByName(idTester, filter));
 
         }
 
-        [HttpGet("{idTester}/bugs")]
-        public object GetBugsByProject([FromRoute]int idTester, [FromQuery]int filter)
+        [HttpGet("{idTester}/bugs/project/{filter}")]
+        public object GetBugsByProject([FromRoute]int idTester, [FromRoute]int filter)
         {
             return Ok(businessLogic.GetBugsByProject(idTester, filter));
 
