@@ -132,5 +132,133 @@ namespace TestDataAccess
             CollectionAssert.DoesNotContain(projectsSaved, notExpectedProject);
 
         }
+
+        [TestMethod]
+        public void GetAllBugs()
+        {
+            Project project = new Project()
+            {
+                Id = 1,
+                Name = "project1"
+            };
+            var bugsExpected = new List<Bug>
+            {
+                new Bug
+                {
+                    Id = 1,
+                    Name = "a",
+                    Description = "a",
+                    Version = "1.0",
+                    IsActive = true,
+                     Project = project
+                    }
+                };
+            bugManagerContext.Add(new Bug
+            {
+                Id = 1,
+                Name = "a",
+                Description = "a",
+                Version = "1.0",
+                IsActive = true,
+                Project = project
+            });
+            bugManagerContext.SaveChanges();
+            List<Bug> bugsFromDb = projectDataAccess.GetBugs(1).ToList();
+
+            Assert.AreEqual(1, bugsFromDb.Count);
+            CollectionAssert.AreEqual(bugsExpected, bugsFromDb, new BugComparer());
+        }
+
+        [TestMethod]
+        public void GetBugsQuantity()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Bugs = new List<Bug>()
+                {
+                    new Bug() {
+                        Name = "Not working button",
+                        Description = "Upload button not working",
+                        Version = "1",
+                        IsActive = true,
+                        CompletedBy = null,
+                    },
+                    new Bug() {
+                        Name = "Not working button",
+                        Description = "Upload button not working",
+                        Version = "1",
+                        IsActive = true,
+                        CompletedBy = null,
+                    }
+                }
+              };
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+
+            int cantExpected = project.Bugs.Count();
+            Assert.AreEqual(cantExpected, projectDataAccess.GetBugsQuantity(project.Id).quantity);
+
+        }
+
+        [TestMethod]
+        public void GetAllDevelopers()
+        {
+            var devsExpected = new List<Developer>
+            {
+                new Developer()
+                {
+                    Username = "aguspink",
+                },
+                new Developer()
+                {
+                    Username = "ivo",
+                }
+            };
+
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Developers = devsExpected
+            };
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+            List<Developer> devsFromDb = projectDataAccess.GetDevelopers(project.Id).ToList();
+
+            Assert.AreEqual(2, devsFromDb.Count);
+            CollectionAssert.AreEqual(devsExpected, devsFromDb, new UserComparer());
+        }
+
+        [TestMethod]
+        public void GetAllTesters()
+        {
+            var testersExpected = new List<Tester>
+            {
+                new Tester()
+                {
+                    Username = "aguspink",
+                },
+                new Tester()
+                {
+                    Username = "ivo",
+                }
+            };
+
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Testers = testersExpected
+            };
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+            List<Tester> testersFromDb = projectDataAccess.GetTesters(project.Id).ToList();
+
+            Assert.AreEqual(2, testersFromDb.Count);
+            CollectionAssert.AreEqual(testersExpected, testersFromDb, new UserComparer());
+        }
+
     }
 }

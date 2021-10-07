@@ -53,10 +53,12 @@ namespace Repository
             return context.Projects;
         }
 
+
         public Project GetById(int id)
         {
-            Project project = projects.First(proj => proj.Id == id);
+            Project project = projects.Include("Bugs").First(proj => proj.Id == id);
             if (project == null) throw new NonexistentProjectException();
+            project.Bugs.ForEach(b => b.Project = null) ;
             return project;
         }
 
@@ -91,6 +93,28 @@ namespace Repository
             projectToUpdate.Bugs = projectUpdated.Bugs;
             context.SaveChanges();
             return projectToUpdate;
+        }
+
+
+        public List<Bug> GetBugs(int id)
+        {
+            return GetById(id).Bugs;
+        }
+
+        public BugsQuantity GetBugsQuantity(int idProject)
+        {
+            var quantity = GetBugs(idProject).Count();
+            return new BugsQuantity(quantity);
+        }
+
+        public List<Developer> GetDevelopers(int id)
+        {
+            return GetById(id).Developers;
+        }
+
+        public List<Tester> GetTesters(int id)
+        {
+            return GetById(id).Testers;
         }
     }
 }

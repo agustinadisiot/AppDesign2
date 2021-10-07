@@ -1,4 +1,5 @@
 ﻿using Domain;
+using System.Collections.Generic;
 
 namespace BusinessLogicInterfaces
 {
@@ -9,6 +10,10 @@ namespace BusinessLogicInterfaces
         Project UpdateByName(string name, Project projectUpdated);
 
         ResponseMessage DeleteByName(string name);
+        List<Bug> GetBugs(int id);
+        BugsQuantity GetBugsQuantity(int idProject);
+        List<Developer> GetDevelopers(int id);
+        List<Tester> GetTesters(int id);
     }
 }
 

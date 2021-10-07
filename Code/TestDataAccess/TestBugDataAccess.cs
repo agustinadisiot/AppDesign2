@@ -32,6 +32,13 @@ namespace TestDataAccess
         {
             connection.Open();
             bugManagerContext.Database.EnsureCreated();
+
+            Project project = new Project()
+            {
+                Id = 1,
+                Name = "project1"
+            };
+            bugManagerContext.Projects.Add(project);
         }
 
         [TestCleanup]
@@ -50,6 +57,7 @@ namespace TestDataAccess
                     Id = 1,
                     Name = "a",
                     Description = "a",
+                    ProjectId = 1,
                     Version = "1.0",
                     IsActive = true
         }
@@ -59,6 +67,7 @@ namespace TestDataAccess
                 Id = 1,
                 Name = "a",
                 Description = "a",
+                ProjectId = 1,
                 Version = "1.0",
                 IsActive = true
             });
@@ -78,6 +87,7 @@ namespace TestDataAccess
                 Name = "b",
                 Description = "a",
                 Version = "1.0",
+                ProjectId = 1,
                 IsActive = true
             });
 
@@ -86,6 +96,7 @@ namespace TestDataAccess
                 Id = 2,
                 Name = "a",
                 Description = "a",
+                ProjectId = 1,
                 Version = "1.0",
                 IsActive = true
             };
@@ -107,6 +118,7 @@ namespace TestDataAccess
                 Id = 1,
                 Name = "Error",
                 Description = "Erorr critico",
+                ProjectId = 1,
                 Version = "2.0",
                 IsActive = true
             };
@@ -117,6 +129,7 @@ namespace TestDataAccess
                 Name = "Error",
                 Description = "Erorr critico",
                 Version = "2.0",
+                ProjectId = 1,
                 IsActive = true
             });
 
@@ -207,6 +220,7 @@ namespace TestDataAccess
                 Id = 1,
                 Name = "Error",
                 Description = "Erorr critico",
+                ProjectId = 1,
                 Version = "2.0",
                 IsActive = true
             };

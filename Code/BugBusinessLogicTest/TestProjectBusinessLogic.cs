@@ -277,5 +277,154 @@ namespace TestProjectBusinessLogic
 
             Assert.AreEqual(projectResult, projectModified);
         }
+
+        [TestMethod]
+        public void GetBugs()
+        {
+            List<Bug> bugsExpected = new List<Bug>()
+            {
+                new Bug()
+                {
+                     Name = "Not working button",
+                     Description = "Upload button not working",
+                     Version = "1",
+                     IsActive = true,
+                     CompletedBy = null,
+                     Id = 0
+                },
+                new Bug()
+                {
+                    Name = "button",
+                    Description = "Upload not working",
+                    Version = "1.4.5",
+                    IsActive = false,
+                    CompletedBy = null,
+                    Id = 1
+                },
+                 new Bug()
+                {
+                    Name = "Not working button",
+                    Description = "Upload button not working",
+                    Version = "6.2",
+                    IsActive = true,
+                    CompletedBy = null,
+                    Id = 2
+                },
+            };
+
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetBugs(1)).Returns(bugsExpected);
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+            var result = projectBusinessLogic.GetBugs(1);
+            mock.VerifyAll();
+            Assert.IsTrue(bugsExpected.SequenceEqual(result));
+        }
+
+        [TestMethod]
+        public void GetBugsQuantity()
+        {
+            Project project = new Project()
+            {
+                Name = "project",
+                Id = 1,
+                Bugs = new List<Bug>()
+                {
+                    new Bug()
+                     {
+                     Name = "Not working button",
+                     Description = "Upload button not working",
+                     Version = "1",
+                     IsActive = true,
+                     CompletedBy = null
+                    },
+                    new Bug()
+                    {
+                    Name = "button",
+                    Description = "Upload not working",
+                    Version = "1.4.5",
+                    IsActive = false,
+                    CompletedBy = null
+                    },
+                    new Bug()
+                    {
+                    Name = "Not working button",
+                    Description = "Upload button not working",
+                    Version = "6.2",
+                    IsActive = true,
+                    CompletedBy = null
+                     }
+                }
+            };
+
+            int cant = project.Bugs.Count();
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetBugsQuantity(project.Id)).Returns(new BugsQuantity(cant));
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+            var result = projectBusinessLogic.GetBugsQuantity(project.Id);
+            
+            mock.VerifyAll();
+            Assert.AreEqual(cant,result.quantity);
+        }
+
+        [TestMethod]
+        public void GetDevelopers()
+        {
+            List<Developer> devsExpected = new List<Developer>()
+            {
+                new Developer()
+                {
+                     Username = "Nicolas"
+                },
+                new Developer()
+                {
+                    Username = "Ivan"
+                },
+                 new Developer()
+                {
+                    Username = "Agus"
+                },
+            };
+
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetDevelopers(1)).Returns(devsExpected);
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+            var result = projectBusinessLogic.GetDevelopers(1);
+            mock.VerifyAll();
+            Assert.IsTrue(devsExpected.SequenceEqual(result));
+        }
+        [TestMethod]
+        public void GetTesters()
+        {
+            List<Tester> testersExpected = new List<Tester>()
+            {
+                new Tester()
+                {
+                     Username = "Nicolas"
+                },
+                new Tester()
+                {
+                    Username = "Ivan"
+                },
+                 new Tester()
+                { 
+                    Username = "Agus"
+                },
+            };
+
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetTesters(1)).Returns(testersExpected);
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+            var result = projectBusinessLogic.GetTesters(1);
+            mock.VerifyAll();
+            Assert.IsTrue(testersExpected.SequenceEqual(result));
+        }
     }
 }
