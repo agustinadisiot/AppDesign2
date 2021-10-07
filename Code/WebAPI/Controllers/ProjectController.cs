@@ -36,7 +36,7 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetById(id));
         }
 
-        [HttpGet("{name}")]
+        [HttpGet()]
         public object GetByName([FromBody] string name)
         {
             return Ok(businessLogic.GetByName(name));
