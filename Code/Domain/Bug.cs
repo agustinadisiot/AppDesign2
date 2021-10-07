@@ -15,7 +15,6 @@ namespace Domain
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
         public int? CompletedById { get; set; }
-        [ForeignKey("CompletedById")] // TODO
         public Developer CompletedBy { get; set; }
 
         public Bug()
