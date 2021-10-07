@@ -1,9 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using RepositoryInterfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BusinessLogic
 {

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Domain
+﻿namespace Domain
 {
     public class Bug
     {
@@ -29,6 +25,5 @@ namespace Domain
             return bug.Id == this.Id;
         }
 
-        // TODO validate
     }
 }

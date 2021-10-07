@@ -85,7 +85,6 @@ namespace TestDomain
         };
             developer.Projects = expectedProjects;
             var actualProjects = developer.Projects;
-            // TODO hacer comparable de project
             CollectionAssert.AreEqual(expectedProjects, actualProjects);
         }
 

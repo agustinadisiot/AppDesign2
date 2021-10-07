@@ -1,7 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
