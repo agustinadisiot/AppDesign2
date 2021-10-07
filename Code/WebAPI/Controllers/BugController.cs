@@ -3,10 +3,12 @@ using Domain;
 using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
     [ApiController]
+    [ServiceFilter(typeof(ExceptionFilter))]
     [Route("bugs")]
     public class BugController : ControllerBase
     {

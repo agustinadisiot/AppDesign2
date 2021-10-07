@@ -2,10 +2,12 @@
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
     [ApiController]
+    [ServiceFilter(typeof(ExceptionFilter))]
     [Route("devs")]
     public class DeveloperController : ControllerBase
     {
@@ -23,9 +25,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{id}/bugs/quantity")]
-        public object GetQuantityBugsResolved([FromRoute]int idDev)
+        public object GetQuantityBugsResolved([FromRoute] int idDev)
         {
-            
+
             return Ok(new BugsQuantity(businessLogic.GetQuantityBugsResolved(idDev)));
         }
     }
