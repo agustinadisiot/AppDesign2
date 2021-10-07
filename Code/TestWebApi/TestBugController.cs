@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
+using BusinessLogic;
 using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
 using WebApi.Controllers;
 
 
@@ -108,12 +110,9 @@ namespace TestWebApi
             var controller = new BugController(mock.Object);
 
             var result = controller.Delete(idBugToDelete);
-            var okResult = result as OkObjectResult;
-            var ResponseResult = okResult.Value as ResponseMessage;
 
+            Assert.IsTrue(result is NoContentResult);
             mock.VerifyAll();
-
-            Assert.AreEqual(ResponseResult.responseMessage, responseExpected.responseMessage);
         }
 
         [TestMethod]

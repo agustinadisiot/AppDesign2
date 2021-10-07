@@ -3,6 +3,7 @@ using Domain;
 using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
@@ -45,7 +46,8 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public object Delete([FromRoute] int id)
         {
-            return Ok(businessLogic.Delete(id));
+            businessLogic.Delete(id);
+            return NoContent();
         }
 
         [HttpPost("import/{format}")]

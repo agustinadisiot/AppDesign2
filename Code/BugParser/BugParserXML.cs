@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace BugParser
 {
-    public class BugParserXML : IBugParser
+    public class BugParserXML : IBugParser 
     {
         public List<Bug> GetBugs(string fullPath)
         {

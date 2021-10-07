@@ -1,4 +1,6 @@
-﻿namespace BusinessLogicInterfaces
+﻿using Domain;
+
+namespace BusinessLogicInterfaces
 {
     public interface IUserBusinessLogic<T>
     {

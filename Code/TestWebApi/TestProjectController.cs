@@ -132,10 +132,9 @@ namespace TestWebApi
             var controller = new ProjectController(mock.Object);
 
             var result = controller.Delete(projectExpected.Id);
-            var okResult = result as OkObjectResult;
+            Assert.IsTrue(result is NoContentResult);
             mock.VerifyAll();
 
-            Assert.IsTrue(okResult.Value is ResponseMessage);
         }
 
         [TestMethod]
@@ -209,7 +208,6 @@ namespace TestWebApi
             mock.VerifyAll();
             CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
         }
-
         [TestMethod]
         public void GetBugsQuantity()
         {

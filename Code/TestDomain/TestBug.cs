@@ -1,6 +1,7 @@
-using Domain;
-using Domain.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Domain;
+using System.Collections.Generic;
+using Domain.Utils;
 
 namespace TestDomain
 {
@@ -95,7 +96,7 @@ namespace TestDomain
             Assert.AreEqual(expected, bug.CompletedById);
         }
 
-
+      
         [DataTestMethod]
         [DataRow("New project")]
         [DataRow("Second project")]
