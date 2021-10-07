@@ -13,9 +13,8 @@ namespace Repository.Design
 
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer(connectionString);
-
+            optionsBuilder.LogTo(Console.WriteLine);
             var bugManagerContext = new BugManagerContext(optionsBuilder.Options);
-
             return bugManagerContext;
         }
     }

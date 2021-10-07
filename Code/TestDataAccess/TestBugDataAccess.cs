@@ -113,9 +113,10 @@ namespace TestDataAccess
         [TestMethod]
         public void Create()
         {
-            bugManagerContext.Add(new Project() {
-            Name = "project",
-            Id = 1
+            bugManagerContext.Add(new Project()
+            {
+                Name = "project",
+                Id = 2
             });
             bugManagerContext.SaveChanges();
             Bug expectedBug = new Bug()
@@ -123,10 +124,9 @@ namespace TestDataAccess
                 Id = 1,
                 Name = "Error",
                 Description = "Erorr critico",
-                ProjectId = 1,
+                ProjectId = 2,
                 Version = "2.0",
                 IsActive = true,
-                CompletedById = 0 
             };
 
             bugDataAccess.Create(new Bug()
@@ -135,9 +135,8 @@ namespace TestDataAccess
                 Name = "Error",
                 Description = "Erorr critico",
                 Version = "2.0",
-                ProjectId = 1,
+                ProjectId = 2,
                 IsActive = true,
-                CompletedById = 0
 
             });
 
@@ -180,13 +179,13 @@ namespace TestDataAccess
             Project project1 = new Project()
             {
                 Name = "Project 1",
-                Id = 1
+                Id = 2
             };
 
             Project project2 = new Project()
             {
                 Name = "Project 2",
-                Id = 2
+                Id = 3
             };
 
             bugManagerContext.Add(project1);
@@ -215,8 +214,8 @@ namespace TestDataAccess
 
             var bugSaved1 = bugDataAccess.GetById(1);
             var bugSaved2 = bugDataAccess.GetById(2);
-            Assert.AreEqual(bugSaved1.ProjectId, 1);
-            Assert.AreEqual(bugSaved2.ProjectId, 2);
+            Assert.AreEqual(bugSaved1.ProjectId, 2);
+            Assert.AreEqual(bugSaved2.ProjectId, 3);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
@@ -9,12 +10,13 @@ namespace Domain
         public string Description { get; set; }
         public string Version { get; set; }
         public bool IsActive { get; set; }
-        public Developer CompletedBy { get; set; }
         public int Id { get; set; }
         public Project Project { get; set; }
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
-        public int CompletedById { get; set; }
+        public int? CompletedById { get; set; }
+        [ForeignKey("CompletedById")] // TODO
+        public Developer CompletedBy { get; set; }
 
         public Bug()
         {

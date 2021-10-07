@@ -16,9 +16,9 @@ namespace Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Bug>().Ignore(bug => bug.CompletedBy);
-            modelBuilder.Entity<Bug>().HasOne(b => b.CompletedBy).WithMany().IsRequired(false);
+            //modelBuilder.Entity<Bug>().HasOne(b => b.CompletedById).WithMany().IsNullable(true);
             //modelBuilder.Entity<Bug>().Property(bug => bug.CompletedBy).IsRequired(false);
-            modelBuilder.Entity<Bug>().Property(bug => bug.CompletedById).IsRequired(false);
+
         }
     }
 }

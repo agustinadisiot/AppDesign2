@@ -71,9 +71,16 @@ namespace TestDataAccess
         [TestMethod]
         public void QuantityBugsResolved()
         {
+            bugManagerContext.Add(new Project()
+            {
+                Name = "project",
+                Id = 2
+            });
+            bugManagerContext.SaveChanges();
+
             Developer expectedDev = new Developer
             {
-                Id = 1,
+                Id = 2,
                 Username = "developerPedro",
                 Name = "Pedro",
                 Lastname = "López",
@@ -82,21 +89,29 @@ namespace TestDataAccess
 
             };
             devDataAccess.Create(expectedDev);
-            bugManagerContext.Add(new Bug() { 
-                CompletedBy = expectedDev,});
             bugManagerContext.Add(new Bug()
             {
-                CompletedBy = expectedDev,
+                CompletedById = 2,
+                Id = 1,
+                ProjectId = 2
             });
             bugManagerContext.Add(new Bug()
             {
-                CompletedBy = null,
+                CompletedById = 2,
+                Id = 2,
+                ProjectId = 2
             });
+            bugManagerContext.Add(new Bug()
+            {
+                Id = 3,
+                ProjectId = 2
 
+            });
+            bugManagerContext.SaveChanges();
             int expectedQuantity = 2;
-          
+
             int result = devDataAccess.GetQuantityBugsResolved(expectedDev.Id);
-        
+
             Assert.AreEqual(expectedQuantity, result);
         }
 
