@@ -7,7 +7,6 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [ServiceFilter(typeof(ExceptionFilter))]
     [Route("testers")]
     public class TesterController : ControllerBase
     {

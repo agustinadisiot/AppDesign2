@@ -7,7 +7,6 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [ServiceFilter(typeof(ExceptionFilter))]
     [Route("projects")]
     public class ProjectController : ControllerBase
     {

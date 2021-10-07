@@ -8,7 +8,6 @@ using WebApi.Filters;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [ServiceFilter(typeof(ExceptionFilter))]
     [Route("bugs")]
     public class BugController : ControllerBase
     {
