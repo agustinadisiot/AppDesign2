@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
 using Microsoft.Data.Sqlite;
@@ -64,6 +65,51 @@ namespace TestDataAccess
 
             Assert.AreEqual(0, new UserComparer().Compare(expectedDev, devSaved));
 
+        }
+
+        [TestMethod]
+        public void QuantityBugsResolved()
+        {
+            int cantBugsResolved = 0;
+            Developer expectedDev = new Developer
+            {
+                Id = 1,
+                Username = "developerPedro",
+                Name = "Pedro",
+                Lastname = "López",
+                Password = "fransico234",
+                Email = "pedrooo2@hotmail.com"
+
+            };
+            devDataAccess.Create(expectedDev);
+            bugManagerContext.Add(new Bug() { 
+                CompletedBy = expectedDev,});
+            bugManagerContext.Add(new Bug()
+            {
+                CompletedBy = expectedDev,
+            });
+            bugManagerContext.Add(new Bug()
+            {
+                CompletedBy = null,
+            });
+
+            foreach (Bug bug in bugManagerContext.Bugs)
+            {
+                if (bug.CompletedBy == expectedDev) cantBugsResolved++;
+            }
+          
+            BugsQuantity result = devDataAccess.GetQuantityBugsResolved(expectedDev.Id);
+        
+            Assert.AreEqual(cantBugsResolved, result.quantity);
+        }
+
+        [TestMethod]
+        public void QuantityBugsResolvedDevNotFound()
+        {
+            int idDevNonExistent = 1;
+            BugsQuantity result = devDataAccess.GetQuantityBugsResolved(idDevNonExistent);
+
+            Assert.ThrowsException<NonexistentUserException>(() => devDataAccess.GetQuantityBugsResolved(idDevNonExistent));
         }
     }
 }
