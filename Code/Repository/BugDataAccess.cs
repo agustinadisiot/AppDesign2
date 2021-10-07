@@ -71,6 +71,7 @@ namespace Repository
             bugToUpdate.ProjectName = bugUpdated.ProjectName;
             bugToUpdate.ProjectId = bugUpdated.ProjectId;
             bugToUpdate.CompletedBy = bugUpdated.CompletedBy;
+            bugToUpdate.CompletedById = bugUpdated.CompletedById;
             bugToUpdate.Description = bugUpdated.Description;
             context.SaveChanges();
             return bugToUpdate;
