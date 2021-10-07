@@ -51,7 +51,8 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public object Delete([FromRoute] int id)
         {
-            return Ok(businessLogic.Delete(id));
+            businessLogic.Delete(id);
+            return NoContent();
         }
 
         [HttpGet("{id}/bugs")]
