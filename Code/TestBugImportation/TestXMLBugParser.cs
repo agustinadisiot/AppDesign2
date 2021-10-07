@@ -12,11 +12,17 @@ namespace TestBugParser
     public class TestXMLBugParser
     {
         const string baseDirectory = "../../../TestFiles/XMLTestFiles/";
+        private BugParserXML bugParser;
+        [TestInitialize]
+        public void CreateBugParserInstance()
+        {
+            bugParser = new BugParserXML();
+        }
         [TestMethod]
         public void ImportOneBug()
         {
             string fullPath = baseDirectory + "OneBug.xml";
-            List<Bug> actualBugs = BugParserXML.GetBugs(fullPath);
+            List<Bug> actualBugs = bugParser.GetBugs(fullPath);
 
             List<Bug> expectedBugs = new List<Bug>()
             {
@@ -26,7 +32,6 @@ namespace TestBugParser
                 Version = "1.0",
                 IsActive = true,
                 CompletedBy = null,
-                Id = 1,
                 ProjectName = "Nombre del Proyecto"
                 }
             };
@@ -39,7 +44,7 @@ namespace TestBugParser
         public void ImportTwoBugs()
         {
             string fullPath = baseDirectory + "TwoBugs.xml";
-            List<Bug> actualBugs = BugParserXML.GetBugs(fullPath);
+            List<Bug> actualBugs = bugParser.GetBugs(fullPath);
 
             List<Bug> expectedBugs = new List<Bug>()
             {
@@ -49,7 +54,6 @@ namespace TestBugParser
                 Version = "1.0",
                 IsActive = true,
                 CompletedBy = null,
-                Id = 1,
                 ProjectName = "Nombre del Proyecto"
                 },
                 new Bug()
@@ -60,7 +64,6 @@ namespace TestBugParser
                 IsActive = true,
                 CompletedBy = null,
                 ProjectName = "Nombre del Proyecto",
-                Id = 2
                 }
             };
 
@@ -71,7 +74,7 @@ namespace TestBugParser
         public void ImportThreeBugs()
         {
             string fullPath = baseDirectory + "ThreeBugs.xml";
-            List<Bug> actualBugs = BugParserXML.GetBugs(fullPath);
+            List<Bug> actualBugs = bugParser.GetBugs(fullPath);
 
             List<Bug> expectedBugs = new List<Bug>()
             {
@@ -81,7 +84,6 @@ namespace TestBugParser
                 Version = "1.0",
                 IsActive = true,
                 CompletedBy = null,
-                Id = 1,
                 ProjectName = "Nombre del Proyecto"
                 },
                 new Bug()
@@ -92,7 +94,6 @@ namespace TestBugParser
                 IsActive = true,
                 CompletedBy = null,
                 ProjectName = "Nombre del Proyecto",
-                Id = 2
                 },
                 new Bug()
                 {
@@ -102,7 +103,6 @@ namespace TestBugParser
                 IsActive = true,
                 CompletedBy = null,
                 ProjectName = "Nombre del Proyecto",
-                Id = 3
                 }
             };
 
@@ -113,7 +113,7 @@ namespace TestBugParser
         public void ImportNoBugs()
         {
             string fullPath = baseDirectory + "NoBugs.xml";
-            List<Bug> actualBugs = BugParserXML.GetBugs(fullPath);
+            List<Bug> actualBugs = bugParser.GetBugs(fullPath);
 
 
             Assert.IsTrue(actualBugs.Count == 0);
@@ -124,15 +124,15 @@ namespace TestBugParser
         public void InvalidXML()
         {
             string fullPath = baseDirectory + "InvalidXML.xml";
-            Assert.ThrowsException<XmlException>(() => BugParserXML.GetBugs(fullPath));
+            Assert.ThrowsException<XmlException>(() => bugParser.GetBugs(fullPath));
 
         }
 
         [TestMethod]
         public void InvalidBugs()
-        {// TODO testear cada propiedad? 
+        {
             string fullPath = baseDirectory + "InvalidBugs.xml";
-            Assert.ThrowsException<XmlException>(() => BugParserXML.GetBugs(fullPath));
+            Assert.ThrowsException<XmlException>(() => bugParser.GetBugs(fullPath));
             // TODO cambiar por otra excepcion
 
         }

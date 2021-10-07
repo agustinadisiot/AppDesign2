@@ -4,6 +4,8 @@ using BusinessLogicInterfaces;
 using System.Collections.Generic;
 using System.Linq;
 using RepositoryInterfaces;
+using Domain.Utils;
+using BugParser;
 
 namespace BusinessLogic
 {
@@ -44,6 +46,20 @@ namespace BusinessLogic
             return bugDataAccess.Delete(Id);
 
         }
+
+        public void ImportBugs(string path, ImportCompany format, IParserFactory factory = null)
+        {
+            // This is to allow the tests to include their own mock factory
+            if (factory == null)
+                factory = new ParserFactory();
+            IBugParser parser = factory.GetBugParser(format);
+            List<Bug> bugsToImport = parser.GetBugs(path);
+            foreach (var bug in bugsToImport)
+            {
+                bugDataAccess.Create(bug);
+            }
+        }
+
     }
 
 
