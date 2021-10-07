@@ -14,7 +14,7 @@ namespace BusinessLogic
 
         public NonexistentUserException()
         {
-            this.message = "The bug does not exist";
+            this.message = "The user does not exist or could not be found";
         }
     }
 }

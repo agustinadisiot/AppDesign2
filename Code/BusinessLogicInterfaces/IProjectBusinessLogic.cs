@@ -14,6 +14,10 @@ namespace BusinessLogicInterfaces
         BugsQuantity GetBugsQuantity(int idProject);
         List<Developer> GetDevelopers(int id);
         List<Tester> GetTesters(int id);
+        ResponseMessage RemoveDeveloperFromProject(int idproject, int idDev);
+        ResponseMessage RemoveTesterFromProject(int idproject, int idTester);
+        Developer AddDeveloperToProject(int idproject, int idDev);
+        Tester AddTesterToProject(int idproject, int idTester);
     }
 }
 

@@ -1,4 +1,6 @@
-﻿using Domain;
+﻿using BusinessLogic;
+using BusinessLogicInterfaces;
+using Domain;
 using Domain.Utils;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -193,7 +195,7 @@ namespace TestDataAccess
                         CompletedBy = null,
                     }
                 }
-              };
+            };
             projectDataAccess.Create(project);
             bugManagerContext.SaveChanges();
 
@@ -258,6 +260,268 @@ namespace TestDataAccess
 
             Assert.AreEqual(2, testersFromDb.Count);
             CollectionAssert.AreEqual(testersExpected, testersFromDb, new UserComparer());
+        }
+
+
+        [TestMethod]
+        public void AddDeveloperNotFoundToProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+
+            int nonexistentDevId = 4;
+            Assert.ThrowsException<NonexistentUserException>(() => projectDataAccess.AddDeveloperToProject(project.Id, nonexistentDevId));
+
+        }
+
+        [TestMethod]
+        public void AddDeveloperToProjectNotFound()
+        {
+            Developer devExpected = new Developer()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+            bugManagerContext.Add(devExpected);
+            bugManagerContext.SaveChanges();
+            int nonexistentProjectId = 4;
+            Assert.ThrowsException<NonexistentProjectException>(() => projectDataAccess.AddDeveloperToProject(nonexistentProjectId, devExpected.Id));
+
+        }
+
+        [TestMethod]
+        public void AddDeveloperToProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            Developer devExpected = new Developer()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+
+
+            projectDataAccess.Create(project);
+            bugManagerContext.Developer.Add(devExpected);
+            bugManagerContext.SaveChanges();
+
+            Developer devResult = projectDataAccess.AddDeveloperToProject(project.Id, devExpected.Id);
+
+            Assert.AreEqual(devExpected, devResult);
+        }
+
+        [TestMethod]
+        public void AddTesterNotFoundToProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+
+            int nonexistentTesterId = 4;
+            Assert.ThrowsException<NonexistentUserException>(() => projectDataAccess.AddTesterToProject(project.Id, nonexistentTesterId));
+
+        }
+
+        [TestMethod]
+        public void AddTesterToProjectNotFound()
+        {
+            Tester testerExpected = new Tester()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+            bugManagerContext.Add(testerExpected);
+            bugManagerContext.SaveChanges();
+            int nonexistentProjectId = 4;
+            Assert.ThrowsException<NonexistentProjectException>(() => projectDataAccess.AddDeveloperToProject(nonexistentProjectId, testerExpected.Id));
+
+        }
+
+        [TestMethod]
+        public void AddTesterToProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            Tester testerExpected = new Tester()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+
+
+            projectDataAccess.Create(project);
+            bugManagerContext.Tester.Add(testerExpected);
+            bugManagerContext.SaveChanges();
+
+            Tester testerResult = projectDataAccess.AddTesterToProject(project.Id, testerExpected.Id);
+
+            Assert.AreEqual(0, new UserComparer().Compare(testerResult, testerExpected));
+        }
+
+        [TestMethod]
+        public void DeleteDeveloperNotFoundFromProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+
+            int nonexistentDevId = 4;
+            Assert.ThrowsException<NonexistentUserException>(() => projectDataAccess.RemoveDeveloperFromProject(project.Id, nonexistentDevId));
+
+        }
+
+        [TestMethod]
+        public void DeleteDeveloperFromProjectNotFound()
+        {
+            Developer devExpected = new Developer()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+            bugManagerContext.Add(devExpected);
+            bugManagerContext.SaveChanges();
+            int nonexistentProjectId = 4;
+            Assert.ThrowsException<NonexistentProjectException>(() => projectDataAccess.RemoveDeveloperFromProject(nonexistentProjectId, devExpected.Id));
+
+        }
+        [TestMethod]
+        public void DeleteDeveloperFromProject()
+        {
+
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            Developer devExpected = new Developer()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+
+
+            projectDataAccess.Create(project);
+            bugManagerContext.Developer.Add(devExpected);
+            bugManagerContext.SaveChanges();
+
+            ResponseMessage result = projectDataAccess.RemoveDeveloperFromProject(project.Id, devExpected.Id);
+
+            Assert.IsTrue(result is ResponseMessage);
+        }
+
+
+        [TestMethod]
+        public void DeleteTesterNotFoundFromProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+
+            int nonexistentTesterId = 4;
+            Assert.ThrowsException<NonexistentUserException>(() => projectDataAccess.RemoveTesterFromProject(project.Id, nonexistentTesterId));
+
+        }
+
+        [TestMethod]
+        public void DeleteTesterFromProjectNotFound()
+        {
+            Tester testerExpected = new Tester()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+            bugManagerContext.Add(testerExpected);
+            bugManagerContext.SaveChanges();
+            int nonexistentProjectId = 4;
+            Assert.ThrowsException<NonexistentProjectException>(() => projectDataAccess.RemoveDeveloperFromProject(nonexistentProjectId, testerExpected.Id));
+
+        }
+
+        [TestMethod]
+        public void DeleteTesterFromProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            Tester testerExpected = new Tester()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+
+
+            projectDataAccess.Create(project);
+            bugManagerContext.Tester.Add(testerExpected);
+            bugManagerContext.SaveChanges();
+
+            ResponseMessage result = projectDataAccess.RemoveTesterFromProject(project.Id, testerExpected.Id);
+
+            Assert.IsTrue(result is ResponseMessage);
         }
 
     }

@@ -97,6 +97,7 @@ namespace TestDomain
             Assert.AreEqual(expected, bug.CompletedById);
         }
 
+      
         [DataTestMethod]
         [DataRow("New project")]
         [DataRow("Second project")]

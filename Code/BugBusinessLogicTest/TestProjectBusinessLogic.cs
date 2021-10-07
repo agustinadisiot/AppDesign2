@@ -426,5 +426,125 @@ namespace TestProjectBusinessLogic
             mock.VerifyAll();
             Assert.IsTrue(testersExpected.SequenceEqual(result));
         }
+
+
+        [TestMethod]
+        public void AddDeveloperToProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            Developer devExpected = new Developer()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.AddDeveloperToProject(project.Id, devExpected.Id)).Returns(devExpected);
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+
+            var result = projectBusinessLogic.AddDeveloperToProject(project.Id, devExpected.Id);
+
+            mock.VerifyAll();
+            Assert.AreEqual(devExpected, result);
+        }
+
+        [TestMethod]
+        public void AddTesterToProject()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+            };
+
+            Tester testerExpected = new Tester()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.AddTesterToProject(project.Id, testerExpected.Id)).Returns(testerExpected);
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+
+            var result = projectBusinessLogic.AddTesterToProject(project.Id, testerExpected.Id);
+
+            mock.VerifyAll();
+            Assert.AreEqual(testerExpected, result);
+        }
+
+        [TestMethod]
+        public void DeleteDeveloperFromProject()
+        {
+            Project project = new Project()
+            {
+                Id = 1,
+            };
+
+            Developer dev = new Developer()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.RemoveDeveloperFromProject(project.Id, dev.Id)).Returns(new ResponseMessage("Deleted from project"));
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+
+            var result = projectBusinessLogic.RemoveDeveloperFromProject(project.Id, dev.Id);
+
+            mock.VerifyAll();
+            Assert.IsTrue(result is ResponseMessage);
+        }
+
+        [TestMethod]
+        public void DeleteTesterFromProject()
+        {
+            Project project = new Project()
+            {
+                Id = 1,
+            };
+
+            Tester tester = new Tester()
+            {
+                Id = 2,
+                Name = "Agustina",
+                Lastname = "didios",
+                Username = "Agus",
+                Password = "rosadopastel",
+                Email = "hell@yahoo.com"
+            };
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.RemoveTesterFromProject(project.Id, tester.Id)).Returns(new ResponseMessage("Deleted from project"));
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+
+            var result = projectBusinessLogic.RemoveTesterFromProject(project.Id, tester.Id);
+
+            mock.VerifyAll();
+            Assert.IsTrue(result is ResponseMessage);
+        }
     }
 }

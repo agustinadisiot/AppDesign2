@@ -75,5 +75,29 @@ namespace BusinessLogic
         {
             return projectDataAccess.GetTesters(id);
         }
+
+        public ResponseMessage RemoveDeveloperFromProject(int idproject, int idDev)
+        {
+            return projectDataAccess.RemoveDeveloperFromProject(idproject, idDev);
+
+        }
+
+        public ResponseMessage RemoveTesterFromProject(int idproject, int idTester)
+        {
+            return projectDataAccess.RemoveTesterFromProject(idproject, idTester);
+
+        }
+
+        public Developer AddDeveloperToProject(int idproject, int idDev)
+        {
+            return projectDataAccess.AddDeveloperToProject(idproject, idDev);
+
+        }
+
+        public Tester AddTesterToProject(int idproject, int idTester)
+        {
+            return projectDataAccess.AddTesterToProject(idproject, idTester);
+
+        }
     }
 }

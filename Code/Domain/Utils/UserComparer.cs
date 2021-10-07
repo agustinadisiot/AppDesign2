@@ -19,7 +19,6 @@ namespace Domain.Utils
                         userExpected.Lastname == userReturned.Lastname &&
                         userExpected.Password == userReturned.Password &&
                         userExpected.Email == userReturned.Email;
-            ;
 
             return equals ? 0 : -1;
         }

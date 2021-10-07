@@ -39,6 +39,8 @@ namespace TestDataAccess
                 Name = "project1"
             };
             bugManagerContext.Projects.Add(project);
+            bugManagerContext.SaveChanges();
+
         }
 
         [TestCleanup]
@@ -198,6 +200,7 @@ namespace TestDataAccess
             };
 
             bugManagerContext.Add(project1);
+            bugManagerContext.SaveChanges();
             bugManagerContext.Add(project2);
             bugManagerContext.SaveChanges();
 
