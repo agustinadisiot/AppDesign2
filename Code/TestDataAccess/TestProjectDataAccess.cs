@@ -292,7 +292,7 @@ namespace TestDataAccess
                 Password = "rosadopastel",
                 Email = "hell@yahoo.com"
             };
-            bugManagerContext.Developer.Add(devExpected);
+            bugManagerContext.Add(devExpected);
             bugManagerContext.SaveChanges();
             int nonexistentProjectId = 4;
             Assert.ThrowsException<NonexistentProjectException>(() => projectDataAccess.AddDeveloperToProject(nonexistentProjectId, devExpected.Id));
@@ -357,7 +357,7 @@ namespace TestDataAccess
                 Password = "rosadopastel",
                 Email = "hell@yahoo.com"
             };
-            bugManagerContext.Tester.Add(testerExpected);
+            bugManagerContext.Add(testerExpected);
             bugManagerContext.SaveChanges();
             int nonexistentProjectId = 4;
             Assert.ThrowsException<NonexistentProjectException>(() => projectDataAccess.AddDeveloperToProject(nonexistentProjectId, testerExpected.Id));
@@ -422,7 +422,7 @@ namespace TestDataAccess
                 Password = "rosadopastel",
                 Email = "hell@yahoo.com"
             };
-            bugManagerContext.Developer.Add(devExpected);
+            bugManagerContext.Add(devExpected);
             bugManagerContext.SaveChanges();
             int nonexistentProjectId = 4;
             Assert.ThrowsException<NonexistentProjectException>(() => projectDataAccess.RemoveDeveloperFromProject(nonexistentProjectId, devExpected.Id));
@@ -488,7 +488,7 @@ namespace TestDataAccess
                 Password = "rosadopastel",
                 Email = "hell@yahoo.com"
             };
-            bugManagerContext.Tester.Add(testerExpected);
+            bugManagerContext.Add(testerExpected);
             bugManagerContext.SaveChanges();
             int nonexistentProjectId = 4;
             Assert.ThrowsException<NonexistentProjectException>(() => projectDataAccess.RemoveDeveloperFromProject(nonexistentProjectId, testerExpected.Id));

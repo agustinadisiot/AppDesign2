@@ -56,8 +56,9 @@ namespace Repository
 
         public Project GetById(int id)
         {
-            Project project = projects.Include("Bugs").First(proj => proj.Id == id);
+            Project project = projects.FirstOrDefault(proj => proj.Id == id);
             if (project == null) throw new NonexistentProjectException();
+            project = projects.Include("Bugs").First(proj => proj.Id == id);
             project.Bugs.ForEach(b => b.Project = null) ;
             return project;
         }
@@ -119,23 +120,44 @@ namespace Repository
 
         public ResponseMessage RemoveTesterFromProject(int idProject, int idTester)
         {
-            throw new System.NotImplementedException();
+            Project project = GetById(idProject);
+            Tester tester = context.Tester.FirstOrDefault(t => t.Id == idTester);
+            if (tester == null) throw new NonexistentUserException();
+            project.Testers.Remove(tester);
+            context.SaveChanges();
+            return new ResponseMessage("Removed tester from project");
         }
 
         public ResponseMessage RemoveDeveloperFromProject(int idProject, int idDev)
         {
-            throw new System.NotImplementedException();
+            Project project = GetById(idProject);
+            Developer dev = context.Developer.FirstOrDefault(t => t.Id == idDev);
+            if (dev == null) throw new NonexistentUserException();
+            project.Developers.Remove(dev);
+            context.SaveChanges();
+            return new ResponseMessage("Removed developer from project");
+
         }
 
         public Tester AddTesterToProject(int idProject, int idTester)
         {
-            throw new System.NotImplementedException();
+            Project project = GetById(idProject);
+            Tester tester = context.Tester.FirstOrDefault(t => t.Id == idTester);
+            if (tester == null) throw new NonexistentUserException();
+            project.Testers.Add(tester);
+            context.SaveChanges();
+            return tester; 
 
         }
 
         public Developer AddDeveloperToProject(int idProject, int idDev)
         {
-            throw new System.NotImplementedException();
+            Project project = GetById(idProject);
+            Developer dev = context.Developer.FirstOrDefault(t => t.Id == idDev);
+            if (dev == null) throw new NonexistentUserException();
+            project.Developers.Add(dev);
+            context.SaveChanges();
+            return dev;
 
         }
     }
