@@ -39,5 +39,35 @@ namespace TestDeveloperBusinessLogic
             Assert.AreEqual(devResult, dev);
         }
 
+        [TestMethod]
+        public void QuantityBugsResolved()
+        {
+            int idDev = 1;
+            int cantBugsResolved = 1;
+
+            var mock = new Mock<IDeveloperDataAccess>(MockBehavior.Strict);
+            mock.Setup(d => d.GetQuantityBugsResolved(idDev)).Returns(new BugsQuantity(cantBugsResolved));
+            var devBusinessLogic = new DeveloperBusinessLogic(mock.Object);
+
+            var result = devBusinessLogic.GetQuantityBugsResolved(idDev);
+            var okResult = result as OkObjectResult;
+            var cantResult = okResult.Value as BugsQuantity;
+
+            mock.VerifyAll();
+            Assert.AreEqual(cantBugsResolved, cantResult.quantity);
+        }
+
+        [TestMethod]
+        public void QuantityBugsResolvedDevNotFound()
+        {
+            int idDev = 1;
+
+            var mock = new Mock<IDeveloperDataAccess>(MockBehavior.Strict);
+            mock.Setup(d => d.GetQuantityBugsResolved(idDev)).Throws(new NonexistentUserException());
+            var devBusinessLogic = new DeveloperBusinessLogic(mock.Object);
+
+            Assert.ThrowsException<NonexistentUserException>(() => devBusinessLogic.GetQuantityBugsResolved(idDev));
+        }
+
     }
 }
