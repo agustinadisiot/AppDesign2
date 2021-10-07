@@ -34,5 +34,10 @@ namespace Repository
 
             return dev;
         }
+
+        public int GetQuantityBugsResolved(int idDev)
+        {
+            return context.Bugs.Count(b => b.CompletedById == idDev);
+        }
     }
 }

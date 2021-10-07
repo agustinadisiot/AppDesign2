@@ -18,6 +18,11 @@ namespace BusinessLogic
         {
             return devDataAccess.Create(newDev);
         }
+
+        public int GetQuantityBugsResolved(int idDev)
+        {
+            return devDataAccess.GetQuantityBugsResolved(idDev);
+        }
     }
 
 

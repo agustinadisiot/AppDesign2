@@ -86,12 +86,23 @@ namespace TestDomain
             Assert.AreEqual(expected, bug.ProjectId);
         }
 
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(2)]
+        public void CompletedByIdIdGetSet(int id)
+        {
+            bug.CompletedById = id;
+            int expected = id;
+            Assert.AreEqual(expected, bug.CompletedById);
+        }
 
+      
         [DataTestMethod]
         [DataRow("New project")]
         [DataRow("Second project")]
         [DataRow("The new new project")]
-        public void ProyectNameSet(string name)
+        public void ProjectNameSet(string name)
         {
             bug.ProjectName = name;
             string expected = name;

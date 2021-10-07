@@ -15,8 +15,14 @@ namespace Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Bug>().Ignore(bug => bug.CompletedBy);
-            //modelBuilder.Entity<Bug>().Property(bug => bug.CompletedBy).IsRequired(false);
+            //modelBuilder.Entity<Bug>().Ignore(bug => bug.CompletedBy);
+            //modelBuilder.Entity<Bug>().HasOne(b => b.CompletedById).WithMany().IsNullable(true);
+            //modelBuilder.Entity<Bug>().Property(bug => bug.ProjectId).IsRequired(true);
+            //modelBuilder.Entity<Project>().HasKey(p => p.Id);
+            //modelBuilder.Entity<Bug>().HasKey(p => p.ProjectId);
+            //modelBuilder.Entity<Bug>().HasOne(p => p.Project).WithMany().HasForeignKey(p => p.ProjectId);
+            // TODO 
+
         }
     }
 }

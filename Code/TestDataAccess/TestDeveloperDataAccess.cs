@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using BusinessLogic;
+using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
 using Microsoft.Data.Sqlite;
@@ -65,5 +67,53 @@ namespace TestDataAccess
             Assert.AreEqual(0, new UserComparer().Compare(expectedDev, devSaved));
 
         }
+
+        [TestMethod]
+        public void QuantityBugsResolved()
+        {
+            bugManagerContext.Add(new Project()
+            {
+                Name = "project",
+                Id = 2
+            });
+            bugManagerContext.SaveChanges();
+
+            Developer expectedDev = new Developer
+            {
+                Id = 2,
+                Username = "developerPedro",
+                Name = "Pedro",
+                Lastname = "López",
+                Password = "fransico234",
+                Email = "pedrooo2@hotmail.com"
+
+            };
+            devDataAccess.Create(expectedDev);
+            bugManagerContext.Add(new Bug()
+            {
+                CompletedById = 2,
+                Id = 1,
+                ProjectId = 2
+            });
+            bugManagerContext.Add(new Bug()
+            {
+                CompletedById = 2,
+                Id = 2,
+                ProjectId = 2
+            });
+            bugManagerContext.Add(new Bug()
+            {
+                Id = 3,
+                ProjectId = 2
+
+            });
+            bugManagerContext.SaveChanges();
+            int expectedQuantity = 2;
+
+            int result = devDataAccess.GetQuantityBugsResolved(expectedDev.Id);
+
+            Assert.AreEqual(expectedQuantity, result);
+        }
+
     }
 }

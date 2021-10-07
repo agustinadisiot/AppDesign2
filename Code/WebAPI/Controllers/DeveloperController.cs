@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -21,5 +22,11 @@ namespace WebApi.Controllers
             return Ok(businessLogic.Add(devExpected));
         }
 
+        [HttpGet("{id}/bugs/quantity")]
+        public object GetQuantityBugsResolved([FromRoute]int idDev)
+        {
+            
+            return Ok(new BugsQuantity(businessLogic.GetQuantityBugsResolved(idDev)));
+        }
     }
 }
