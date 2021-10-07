@@ -15,7 +15,7 @@ namespace WebApi.Filters
         {
             int statusCode;
 
-            String errorMesssage = context.Exception.Message;
+            string errorMesssage = context.Exception.Message;
 
             if (context.Exception is NonexistentBugException)
             {
@@ -34,10 +34,10 @@ namespace WebApi.Filters
                 statusCode = 500;
             }
 
-            context.Result = new ContentResult()
+            ResponseMessage message = new ResponseMessage(errorMesssage);
+            context.Result = new ObjectResult(message)
             {
                 StatusCode = statusCode,
-                Content = errorMesssage
             };
         }
     }
