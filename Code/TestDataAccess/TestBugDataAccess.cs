@@ -130,15 +130,16 @@ namespace TestDataAccess
         [TestMethod]
         public void AddsIdFromProjectName()
         {
-            Project project1 = new Project
+            Project project1 = new Project()
             {
                 Name = "Project5",
                 Id = 5
             };
 
-            bugManagerContext.Projects.Add(project1);
+            bugManagerContext.Add(project1);
+            bugManagerContext.SaveChanges();
 
-            Bug expectedBug = new Bug()
+            bugDataAccess.Create(new Bug()
             {
                 Id = 1,
                 Name = "Error",
@@ -146,31 +147,32 @@ namespace TestDataAccess
                 Version = "2.0",
                 IsActive = true,
                 ProjectName = "Project5"
-            };
+            });
             var bugSaved1 = bugDataAccess.GetById(1);
-            Assert.AreEqual(bugSaved1.ProjectId, 1);
+            Assert.AreEqual(bugSaved1.ProjectId, 5);
         }
 
 
         [TestMethod]
         public void AddsIdFromProjectNameMultipleProjects()
         {
-            Project project1 = new Project
+            Project project1 = new Project()
             {
                 Name = "Project 1",
                 Id = 1
             };
 
-            Project project2 = new Project
+            Project project2 = new Project()
             {
                 Name = "Project 2",
                 Id = 2
             };
 
-            bugManagerContext.Projects.Add(project1);
-            bugManagerContext.Projects.Add(project2);
+            bugManagerContext.Add(project1);
+            bugManagerContext.Add(project2);
+            bugManagerContext.SaveChanges();
 
-            Bug expectedBug = new Bug()
+            bugDataAccess.Create(new Bug()
             {
                 Id = 1,
                 Name = "Error",
@@ -178,11 +180,11 @@ namespace TestDataAccess
                 Version = "2.0",
                 IsActive = true,
                 ProjectName = "Project 1"
-            };
+            });
 
             bugDataAccess.Create(new Bug()
             {
-                Id = 1,
+                Id = 2,
                 Name = "Error",
                 Description = "Erorr critico",
                 Version = "2.0",

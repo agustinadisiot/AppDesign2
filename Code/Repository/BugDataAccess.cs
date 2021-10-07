@@ -29,6 +29,11 @@ namespace Repository
                 throw new NonexistentBugException();
             }
 
+            if ((bug.ProjectId == 0) && (bug.ProjectName != null))
+            {
+                Project bugsProject = context.Projects.First(p => p.Name == bug.ProjectName);
+                bug.ProjectId = bugsProject.Id;
+            }
             context.Add(bug);
             context.SaveChanges();
 
@@ -51,7 +56,7 @@ namespace Repository
         public Bug Update(int Id, Bug bugUpdated)
         {
             if (bugs is null)
-                throw new NonexistentBugException(); 
+                throw new NonexistentBugException();
             //bugs.Update(bugUpdated); // TODO ver porque no anda  esto, seguramente tenga que 
             // ver con el context
             Bug bugToUpdate = GetById(Id);
