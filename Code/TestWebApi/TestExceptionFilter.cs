@@ -27,6 +27,7 @@ namespace TestWebApi
             var result = controller.Post(adminExpected);
 
             var errorResult = result as ObjectResult;
+            var projectResult = errorResult.Value as ResponseMessage;
             var statusCode = errorResult.StatusCode;
 
             mock.VerifyAll();
