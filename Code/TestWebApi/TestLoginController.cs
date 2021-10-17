@@ -17,14 +17,14 @@ namespace TestWebApi
     public class TestLoginController
     {
 
-        [TestMethod]
-        public void Login()
+        [DataTestMethod]
+        [DataRow("admin", "Juana1223#@", "adsfasdfasdfasdf")]
+        [DataRow("dev12", "devvvv", "3hjg2jh34234")]
+        [DataRow("Pedro", "testqetrty", "zxcmvnwn1312m312,3")]
+        public void Login(string username, string password, string guid)
         {
-            string username = "admin";
-            string password = "Juana1223#@";
 
             var mock = new Mock<ILoginBusinessLogic>(MockBehavior.Strict);
-            string guid = "adsfasdfasdfasdf";
             mock.Setup(l => l.Login(username, password)).Returns(new LoginToken { Token = guid });
             var controller = new LoginController(mock.Object);
 
