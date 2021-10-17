@@ -26,7 +26,7 @@ namespace TestLoginBusinessLogic
             mock.Setup(l => l.Login(username, password)).Returns(new LoginToken { Token = guid });
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
-            LoginToken result = loginBusinessLogic.Login(username, password);
+            LoginToken loginResult = loginBusinessLogic.Login(username, password);
             mock.VerifyAll();
             Assert.AreEqual(loginResult.Token, guid);
         }
