@@ -22,8 +22,6 @@ namespace TestLoginBusinessLogic
         public void Login(string username, string password, string guid)
         {
 
-            var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
-            mock.Setup(l => l.Login(username, password)).Returns(new LoginToken { Token = guid });
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
             LoginToken loginResult = loginBusinessLogic.Login(username, password);
