@@ -18,7 +18,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public object Login([FromBody] LoginDTO login)
         {
-            return Ok(businessLogic.Login(login));
+            return Ok(businessLogic.Login(login.Username, login.Password));
         }
 
     }

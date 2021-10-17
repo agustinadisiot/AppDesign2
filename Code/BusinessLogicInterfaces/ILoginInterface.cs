@@ -1,12 +1,12 @@
-﻿using Domain;
-
+﻿using BusinessLogicInterfaces.Utils;
+using Domain;
+    
 namespace BusinessLogicInterfaces
 {
     public interface ILoginBusinessLogic
     {
 
-        public string Login(string username, string password);
-
+        public LoginToken Login(string username, string password);
 
     }
 }

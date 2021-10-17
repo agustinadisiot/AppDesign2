@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic;
 using BusinessLogicInterfaces;
+using BusinessLogicInterfaces.Utils;
 using Domain;
 using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -24,15 +25,19 @@ namespace TestWebApi
 
             var mock = new Mock<ILoginBusinessLogic>(MockBehavior.Strict);
             string guid = "adsfasdfasdfasdf";
-            mock.Setup(l => l.Login(username, password)).Returns(guid);
+            mock.Setup(l => l.Login(username, password)).Returns(new LoginToken { Token = guid });
             var controller = new LoginController(mock.Object);
 
-            var result = controller.Login(username, password);
+
+            var result = controller.Login(new LoginDTO { 
+            Username = username,
+            Password = password
+            });
             var okResult = result as OkObjectResult;
             var loginResult = okResult.Value as LoginToken;
 
             mock.VerifyAll();
-            Assert.AreEqual(LoginToken.Token, adminResult);
+            Assert.AreEqual(loginResult.Token, guid);
         }
     }
 };
