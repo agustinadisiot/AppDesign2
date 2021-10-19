@@ -43,8 +43,6 @@ namespace TestDataAccess
         [TestMethod]
         public void TokenNotEmpty()
         {
-            LoginToken token = loginDataAccess.Login("usernameAdmin", "123qewrty");
-            //Assert.IsTrue(token.Token);
         }
     }
 }

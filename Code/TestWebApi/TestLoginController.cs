@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic;
 using BusinessLogicInterfaces;
-using BusinessLogicInterfaces.Utils;
 using Domain;
 using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -29,9 +28,10 @@ namespace TestWebApi
             var controller = new LoginController(mock.Object);
 
 
-            var result = controller.Login(new LoginDTO { 
-            Username = username,
-            Password = password
+            var result = controller.Login(new LoginDTO
+            {
+                Username = username,
+                Password = password
             });
             var okResult = result as OkObjectResult;
             var loginResult = okResult.Value as LoginToken;
