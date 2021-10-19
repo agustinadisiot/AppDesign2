@@ -48,7 +48,8 @@ namespace TestDataAccess
         {
             LoginToken token = new LoginToken { Token = expectedToken };
             loginDataAccess.SaveLogin(token);
-            bool exists = bugManagerContext.Sessions.Any(s => s.Token = expectedToken);
+            bool exists = bugManagerContext.Sessions.Any(s => s.Token == expectedToken);
+            Assert.IsTrue(exists);
 
         }
     }

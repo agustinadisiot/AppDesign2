@@ -26,7 +26,8 @@ namespace Repository
 
         public void SaveLogin(LoginToken loginToken)
         {
-            throw new NotImplementedException();
+            context.Add(loginToken);
+            context.SaveChanges();
         }
 
         public bool VerifyUser(string username, string password)

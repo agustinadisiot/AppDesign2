@@ -10,6 +10,7 @@ namespace Repository
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Developer> Developer { get; set; }
         public DbSet<Tester> Tester { get; set; }
+        public DbSet<LoginToken> Sessions { get; set; }
 
         public BugManagerContext(DbContextOptions options) : base(options) { }
 
@@ -17,6 +18,7 @@ namespace Repository
         {
             modelBuilder.Entity<Bug>().Ignore(bug => bug.CompletedBy);
             //modelBuilder.Entity<Bug>().Property(bug => bug.CompletedBy).IsRequired(false);
+            modelBuilder.Entity<LoginToken>().HasKey(l => l.Token);
         }
     }
 }
