@@ -75,5 +75,18 @@ namespace TestLoginBusinessLogic
 
             Assert.ThrowsException<AuthenticationException>(() => loginBusinessLogic.Login("admin", "Juana1223#@"));
         }
+
+
+        [TestMethod]
+        public void ReturnedTokenSameAsSaved()
+        {
+            var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
+
+            mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(true);
+            mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
+            var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
+
+            Assert.ThrowsException<AuthenticationException>(() => loginBusinessLogic.Login("admin", "Juana1223#@"));
+        }
     }
 }
