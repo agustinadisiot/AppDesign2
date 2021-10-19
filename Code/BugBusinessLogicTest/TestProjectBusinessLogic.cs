@@ -573,7 +573,7 @@ namespace TestProjectBusinessLogic
         [TestMethod]
         public void GetProjectDuration()
         {
-            int expectedCost = 6;
+            int expectedDuration = 6;
 
             Project project = new Project()
             {
@@ -582,14 +582,14 @@ namespace TestProjectBusinessLogic
             };
 
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.GetProjectDuration(project.Id)).Returns(new ProjectCost(expectedCost));
+            mock.Setup(b => b.GetProjectDuration(project.Id)).Returns(new ProjectDuration(expectedDuration));
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
             var projectResult = projectBusinessLogic.GetProjectDuration(project.Id);
 
             mock.VerifyAll();
 
-            Assert.AreEqual(projectResult.Duration, expectedCost);
+            Assert.AreEqual(projectResult.Duration, expectedDuration);
         }
     }
 }

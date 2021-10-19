@@ -166,5 +166,14 @@ namespace Repository
 
         }
 
+        public ProjectCost GetProjectCost(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ProjectDuration GetProjectDuration(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

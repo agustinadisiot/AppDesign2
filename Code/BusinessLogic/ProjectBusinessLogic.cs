@@ -102,12 +102,12 @@ namespace BusinessLogic
 
         public ProjectCost GetProjectCost(int id)
         {
-            throw new NotImplementedException();
+            return projectDataAccess.GetProjectCost(id);
         }
 
         public ProjectDuration GetProjectDuration(int id)
         {
-            throw new NotImplementedException();
+            return projectDataAccess.GetProjectDuration(id);
         }
     }
 }
