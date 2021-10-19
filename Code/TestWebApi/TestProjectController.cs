@@ -450,5 +450,47 @@ namespace TestWebApi
             mock.VerifyAll();
             Assert.IsTrue(testerResult is ResponseMessage);
         }
+
+        [TestMethod]
+        public void GetProjectCost()
+        {
+            Project projectExpected = new Project()
+            {
+                Name = "Project1",
+                Id = 0
+            };
+            int expectedCost = 5;
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetProjectCost(projectExpected.Id)).Returns(new ProjectCost(expectedCost));
+            var controller = new ProjectController(mock.Object);
+
+            var result = controller.GetProjectCost(projectExpected.Id);
+            var okResult = result as OkObjectResult;
+            var projectResult = okResult.Value as ProjectCost;
+
+            mock.VerifyAll();
+            Assert.AreEqual(expectedCost, projectResult.Cost);
+        }
+
+        [TestMethod]
+        public void GetProjectDuration()
+        {
+            Project projectExpected = new Project()
+            {
+                Name = "Project1",
+                Id = 0
+            };
+            int expectedDuration = 5;
+            var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetProjectDuration(projectExpected.Id)).Returns(new ProjectDuration(expectedDuration));
+            var controller = new ProjectController(mock.Object);
+
+            var result = controller.GetProjectDuration(projectExpected.Id);
+            var okResult = result as OkObjectResult;
+            var projectResult = okResult.Value as ProjectDuration;
+
+            mock.VerifyAll();
+            Assert.AreEqual(expectedDuration, projectResult.Duration);
+        }
     }
 }
