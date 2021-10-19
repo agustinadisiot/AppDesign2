@@ -82,5 +82,22 @@ namespace TestDomain
             Assert.IsTrue(expectedBugs.SequenceEqual(project.Bugs));
         }
 
+        [TestMethod]
+        public void GetWorksEmpty()
+        {
+            List<Work> expectedWorks = new List<Work>();
+            Assert.IsTrue(expectedWorks.SequenceEqual(project.Works));
+        }
+
+        [TestMethod]
+        public void GetSetWorks()
+        {
+            Work work = new Work();
+            List<Work> expectedWorks = new List<Work>();
+            expectedWorks.Add(work);
+            project.Works = expectedWorks;
+            Assert.IsTrue(expectedWorks.SequenceEqual(project.Works));
+        }
+
     }
 }
