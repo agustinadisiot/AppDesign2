@@ -2,6 +2,7 @@
 using Domain;
 using RepositoryInterfaces;
 using System;
+using System.Security.Authentication;
 
 namespace BusinessLogic
 {
@@ -16,7 +17,10 @@ namespace BusinessLogic
 
         public LoginToken Login(string username, string password)
         {
-            loginDataAccess.VerifyUser(username, password);
+            bool validCredentials = loginDataAccess.VerifyUser(username, password);
+            if (!validCredentials)
+                throw new AuthenticationException();
+
             LoginToken token = new LoginToken { Token = Guid.NewGuid().ToString() };
             loginDataAccess.SaveLogin(token);
             return token;

@@ -81,12 +81,14 @@ namespace TestLoginBusinessLogic
         public void ReturnedTokenSameAsSaved()
         {
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
-
             mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(true);
-            mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
+            LoginToken saved = null;
+            mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>())).Callback<LoginToken>((t) => { saved = t; });
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
-            Assert.ThrowsException<AuthenticationException>(() => loginBusinessLogic.Login("admin", "Juana1223#@"));
+            LoginToken returned = loginBusinessLogic.Login("admin", "Juana1223#@");
+
+            Assert.AreEqual(saved.Token, returned.Token);
         }
     }
 }
