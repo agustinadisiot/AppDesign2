@@ -3,6 +3,7 @@ using Domain;
 using BusinessLogic;
 using RepositoryInterfaces;
 using Moq;
+using System.Security.Authentication;
 
 namespace TestLoginBusinessLogic
 {
@@ -64,5 +65,15 @@ namespace TestLoginBusinessLogic
             Assert.IsTrue(first.Token != second.Token);
         }
 
+        [TestMethod]
+        public void LoginNotVerify()
+        {
+            var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
+
+            mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(false);
+            var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
+
+            Assert.ThrowsException<AuthenticationException>(() => loginBusinessLogic.Login("admin", "Juana1223#@"));
+        }
     }
 }
