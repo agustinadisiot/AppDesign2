@@ -9,12 +9,14 @@ namespace Domain
         public List<Developer> Developers { get; set; }
         public List<Bug> Bugs { get; set; }
         public int Id { get; set; }
+        public List<Work> Works { get; set; }
 
         public Project()
         {
             Testers = new List<Tester>();
             Developers = new List<Developer>();
             Bugs = new List<Bug>();
+            Works = new List<Work>();
         }
 
         public override bool Equals(object obj)

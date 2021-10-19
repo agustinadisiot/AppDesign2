@@ -33,6 +33,7 @@ namespace TestDomain
             int expected = 1;
             Assert.AreEqual(expected, work.Id);
         }
+
         [TestMethod]
         public void NameGetSet()
         {
