@@ -16,6 +16,7 @@ namespace Domain
         public string ProjectName { get; set; }
         public int? CompletedById { get; set; }
         public Developer CompletedBy { get; set; }
+        public int Time { get; set; }
 
         public Bug()
         {
