@@ -99,5 +99,15 @@ namespace BusinessLogic
             return projectDataAccess.AddTesterToProject(idproject, idTester);
 
         }
+
+        public ProjectCost GetProjectCost(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ProjectDuration GetProjectDuration(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
