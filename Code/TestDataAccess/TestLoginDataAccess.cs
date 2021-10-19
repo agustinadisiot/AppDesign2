@@ -24,7 +24,7 @@ namespace TestDataAccess
             connection = new SqliteConnection("Filename=:memory:");
             contextOptions = new DbContextOptionsBuilder<BugManagerContext>().UseSqlite(connection).Options;
             bugManagerContext = new BugManagerContext(contextOptions);
-            // loginDataAccess = new LoginDataAccess(bugManagerContext);
+            loginDataAccess = new LoginDataAccess(bugManagerContext);
         }
 
         [TestInitialize]
@@ -40,9 +40,16 @@ namespace TestDataAccess
             bugManagerContext.Database.EnsureDeleted();
         }
 
-        [TestMethod]
-        public void TokenNotEmpty()
+        [DataTestMethod]
+        [DataRow("asdlfk")]
+        [DataRow("as8df8asdf")]
+        [DataRow("3423k423j42k342m34")]
+        public void SaveLogin(string expectedToken)
         {
+            LoginToken token = new LoginToken { Token = expectedToken };
+            loginDataAccess.SaveLogin(token);
+            bool exists = bugManagerContext.Sessions.Any(s => s.Token = expectedToken);
+
         }
     }
 }

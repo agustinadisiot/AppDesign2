@@ -61,7 +61,7 @@ namespace TestDataAccess
                 Testers = new List<Tester>(),
                 Developers = new List<Developer>(),
                 Bugs = new List<Bug>()
-            }); ;
+            });
             bugManagerContext.SaveChanges();
             List<Project> projectDataBase = projectDataAccess.GetAll().ToList();
 
@@ -193,7 +193,7 @@ namespace TestDataAccess
                         CompletedBy = null,
                     }
                 }
-              };
+            };
             projectDataAccess.Create(project);
             bugManagerContext.SaveChanges();
 
