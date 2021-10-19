@@ -15,7 +15,10 @@ namespace BusinessLogic
 
         public LoginToken Login(string username, string password)
         {
-            return null;
+            loginDataAccess.VerifyUser(username, password);
+            LoginToken token = new LoginToken { Token = "as;ldfkjasd" };
+            loginDataAccess.SaveLogin(token);
+            return token;
         }
     }
 
