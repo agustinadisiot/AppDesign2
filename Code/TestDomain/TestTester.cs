@@ -93,6 +93,14 @@ namespace TestDomain
             var actualProjects = tester.Projects;
             Assert.IsTrue(actualProjects.Count == 0);
         }
+
+        [TestMethod]
+        public void CostGetSet()
+        {
+            tester.Cost = 4;
+            int expected = 4;
+            Assert.AreEqual(expected, tester.Cost);
+        }
     }
 }
 
