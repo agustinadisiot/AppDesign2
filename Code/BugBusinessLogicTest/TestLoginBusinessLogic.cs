@@ -8,25 +8,66 @@ using Domain.Utils;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogicInterfaces;
-using BusinessLogicInterfaces.Utils;
 
 namespace TestLoginBusinessLogic
 {
     [TestClass]
     public class TestLoginBusinessLogic
     {
+
         [DataTestMethod]
-        [DataRow("admin", "Juana1223#@", "adsfasdfasdfasdf")]
-        [DataRow("dev12", "devvvv", "3hjg2jh34234")]
-        [DataRow("Pedro", "testqetrty", "zxcmvnwn1312m312,3")]
-        public void Login(string username, string password, string guid)
+        [DataRow("admin", "Juana1223#@")]
+        [DataRow("dev12", "devvvv")]
+        [DataRow("Pedro", "testqetrty")]
+        public void LoginTokenNotEmpty(string username, string password)
         {
 
+            var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
+
+            mock.Setup(l => l.VerifyUser(username, password)).Returns(true);
+            mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
-            LoginToken loginResult = loginBusinessLogic.Login(username, password);
+            LoginToken token = loginBusinessLogic.Login(username, password);
             mock.VerifyAll();
-            Assert.AreEqual(loginResult.Token, guid);
+            Assert.IsTrue(token.Token.Length > 0);
         }
+
+        [DataTestMethod]
+        [DataRow("admin", "Juana1223#@")]
+        [DataRow("dev12", "devvvv")]
+        [DataRow("Pedro", "testqetrty")]
+        public void LoginTokenDifferentEachLogin(string username, string password)
+        {
+
+            var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
+
+            mock.Setup(l => l.VerifyUser(username, password)).Returns(true);
+            mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
+            var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
+
+            LoginToken first = loginBusinessLogic.Login(username, password);
+            LoginToken second = loginBusinessLogic.Login(username, password);
+            mock.VerifyAll();
+            Assert.IsTrue(first.Token != second.Token);
+        }
+
+        [TestMethod]
+        public void LoginTokenDifferentEachLoginDifferentAccounts()
+        {
+
+            var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
+
+            mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(true);
+            mock.Setup(l => l.VerifyUser("dev12", "devvvv")).Returns(true);
+            mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
+            var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
+
+            LoginToken first = loginBusinessLogic.Login("admin", "Juana1223#@");
+            LoginToken second = loginBusinessLogic.Login("dev12", "devvvv");
+            mock.VerifyAll();
+            Assert.IsTrue(first.Token != second.Token);
+        }
+
     }
 }
