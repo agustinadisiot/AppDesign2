@@ -547,5 +547,49 @@ namespace TestProjectBusinessLogic
             mock.VerifyAll();
             Assert.IsTrue(result is ResponseMessage);
         }
+
+        [TestMethod]
+        public void GetProjectCost()
+        {
+            int expectedCost = 6;
+
+            Project project = new Project()
+            {
+                Id = 0,
+                Name = "projectMod"
+            };
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetProjectCost(project.Id)).Returns(new ProjectCost(expectedCost));
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+            var projectResult = projectBusinessLogic.GetProjectCost(project.Id);
+
+            mock.VerifyAll();
+
+            Assert.AreEqual(projectResult.Cost, expectedCost);
+        }
+
+        [TestMethod]
+        public void GetProjectDuration()
+        {
+            int expectedCost = 6;
+
+            Project project = new Project()
+            {
+                Id = 0,
+                Name = "projectMod"
+            };
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetProjectDuration(project.Id)).Returns(new ProjectCost(expectedCost));
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+            var projectResult = projectBusinessLogic.GetProjectDuration(project.Id);
+
+            mock.VerifyAll();
+
+            Assert.AreEqual(projectResult.Duration, expectedCost);
+        }
     }
 }
