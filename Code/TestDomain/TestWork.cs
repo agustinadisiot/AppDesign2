@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,14 @@ namespace TestDomain
             {
                 Name = "Work",
             };
+        }
+
+        [TestMethod]
+        public void IdGetSet()
+        {
+            work.Id = 1;
+            int expected = 1;
+            Assert.AreEqual(expected, work.Id);
         }
         [TestMethod]
         public void NameGetSet()
