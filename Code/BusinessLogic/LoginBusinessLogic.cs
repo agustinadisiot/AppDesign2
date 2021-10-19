@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using RepositoryInterfaces;
+using System;
 
 namespace BusinessLogic
 {
@@ -16,7 +17,7 @@ namespace BusinessLogic
         public LoginToken Login(string username, string password)
         {
             loginDataAccess.VerifyUser(username, password);
-            LoginToken token = new LoginToken { Token = "as;ldfkjasd" };
+            LoginToken token = new LoginToken { Token = Guid.NewGuid().ToString() };
             loginDataAccess.SaveLogin(token);
             return token;
         }
