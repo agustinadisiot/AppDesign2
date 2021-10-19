@@ -162,5 +162,13 @@ namespace TestDomain
             Assert.AreNotEqual(0, new BugComparer().Compare(bug1, bug2));
         }
 
+        [TestMethod]
+        public void TimeGetSet()
+        {
+            bug.Time = 4;
+            int expected = 4;
+            Assert.AreEqual(expected, bug.Time);
+        }
+
     }
 }
