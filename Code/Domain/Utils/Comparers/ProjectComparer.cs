@@ -19,7 +19,9 @@ namespace Domain.Utils
                 !projectReturned.Developers.Where(i => !projectExpected.Developers.Contains(i)).Any() &&
                 !projectReturned.Developers.Where(i => !projectExpected.Developers.Contains(i)).Any() &&
                 !projectReturned.Bugs.Where(i => !projectExpected.Bugs.Contains(i)).Any() &&
-                !projectReturned.Bugs.Where(i => !projectExpected.Bugs.Contains(i)).Any();
+                !projectReturned.Bugs.Where(i => !projectExpected.Bugs.Contains(i)).Any() &&
+                !projectReturned.Works.Where(i => !projectExpected.Works.Contains(i)).Any() &&
+                !projectReturned.Works.Where(i => !projectExpected.Works.Contains(i)).Any();
 
             return equals ? 0 : -1;
         }
