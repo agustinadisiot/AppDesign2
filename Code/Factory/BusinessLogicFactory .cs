@@ -25,6 +25,7 @@ namespace Factory
             serviceCollection.AddScoped<IAdminBusinessLogic, AdminBusinessLogic>();
             serviceCollection.AddScoped<IDeveloperBusinessLogic, DeveloperBusinessLogic>();
             serviceCollection.AddScoped<ITesterBusinessLogic, TesterBusinessLogic>();
+            serviceCollection.AddScoped<ILoginBusinessLogic, LoginBusinessLogic>();
         }
 
     }
