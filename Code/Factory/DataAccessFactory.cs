@@ -25,6 +25,7 @@ namespace Factory
             serviceCollection.AddScoped<IAdminDataAccess, AdminDataAccess>();
             serviceCollection.AddScoped<IDeveloperDataAccess, DeveloperDataAccess>();
             serviceCollection.AddScoped<ITesterDataAccess, TesterDataAccess>();
+            serviceCollection.AddScoped<ILoginDataAccess, LoginDataAccess>();
         }
 
         public void AddDbContextService(string connectionString)
