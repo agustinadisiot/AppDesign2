@@ -53,5 +53,117 @@ namespace TestDataAccess
             bool exists = bugManagerContext.Sessions.Any(s => s.Token == expectedToken);
             Assert.IsTrue(exists);
         }
+
+        [TestMethod]
+        public void VerifyValidAdminCredentials()
+        {
+            bugManagerContext.Add(new Admin()
+            {
+                Username = "administradorPedro",
+                Name = "Pedro",
+                Lastname = "López",
+                Password = "fransico234",
+                Email = "pedrooo2@hotmail.com"
+            });
+
+            bool valid = loginDataAccess.VerifyUser("administradorPedro", "fransico234");
+
+            Assert.IsTrue(valid);
+        }
+
+        [TestMethod]
+        public void VerifyNotValidAdminCredentials()
+        {
+            bugManagerContext.Add(new Admin()
+            {
+                Username = "administradorPedro",
+                Name = "Pedro",
+                Lastname = "López",
+                Password = "fransico234",
+                Email = "pedrooo2@hotmail.com"
+            });
+
+            bool valid = loginDataAccess.VerifyUser("administradorPedro", "contraseñaIncorrecta");
+
+            Assert.IsFalse(valid);
+        }
+
+        [TestMethod]
+        public void VerifyValidTesterCredentials()
+        {
+            bugManagerContext.Add(new Tester()
+            {
+                Username = "Juan",
+                Name = "Holaaa",
+                Lastname = "Rodi",
+                Password = "qewrty123",
+                Email = "juaaan@gmail.com"
+            });
+
+            bool valid = loginDataAccess.VerifyUser("Juan", "qewrty123");
+
+            Assert.IsTrue(valid);
+        }
+
+        [TestMethod]
+        public void VerifyNotValidTesterCredentials()
+        {
+            bugManagerContext.Add(new Tester()
+            {
+                Username = "Juan",
+                Name = "Holaaa",
+                Lastname = "Rodi",
+                Password = "qewrty123",
+                Email = "juaaan@gmail.com"
+            });
+
+            bool valid = loginDataAccess.VerifyUser("Juan", "qewrty124");
+
+            Assert.IsFalse(valid);
+        }
+
+
+        [TestMethod]
+        public void VerifyValidDevCredentials()
+        {
+            bugManagerContext.Add(new Developer()
+            {
+                Username = "dev123",
+                Name = "Jose",
+                Lastname = "Perez",
+                Password = "123dev",
+                Email = "juaaan@gmail.com"
+            });
+
+            bool valid = loginDataAccess.VerifyUser("dev123", "123dev");
+
+            Assert.IsFalse(valid);
+        }
+
+        [TestMethod]
+        public void VerifyNotValidDevCredentials()
+        {
+            bugManagerContext.Add(new Developer()
+            {
+                Username = "dev123",
+                Name = "Jose",
+                Lastname = "Perez",
+                Password = "123dev",
+                Email = "juaaan@gmail.com"
+            });
+
+            bool valid = loginDataAccess.VerifyUser("dev123", "sdfasdfasd");
+
+            Assert.IsFalse(valid);
+        }
+
+
+        [TestMethod]
+        public void VerifyNonExistingUser()
+        {
+            bool valid = loginDataAccess.VerifyUser("administradorPedro", "contraseñaIncorrecta");
+
+            Assert.IsFalse(valid);
+        }
     }
 }
