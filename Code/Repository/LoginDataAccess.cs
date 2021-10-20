@@ -32,7 +32,10 @@ namespace Repository
 
         public bool VerifyUser(string username, string password)
         {
-            throw new NotImplementedException();
+            bool verified = context.Admins.Any(u => u.Username == username && u.Password == password) ||
+                            context.Developer.Any(u => u.Username == username && u.Password == password) ||
+                            context.Tester.Any(u => u.Username == username && u.Password == password);
+            return verified;
         }
     }
 }

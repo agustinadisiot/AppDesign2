@@ -65,6 +65,7 @@ namespace TestDataAccess
                 Password = "fransico234",
                 Email = "pedrooo2@hotmail.com"
             });
+            bugManagerContext.SaveChanges();
 
             bool valid = loginDataAccess.VerifyUser("administradorPedro", "fransico234");
 
@@ -82,6 +83,7 @@ namespace TestDataAccess
                 Password = "fransico234",
                 Email = "pedrooo2@hotmail.com"
             });
+            bugManagerContext.SaveChanges();
 
             bool valid = loginDataAccess.VerifyUser("administradorPedro", "contraseñaIncorrecta");
 
@@ -99,8 +101,27 @@ namespace TestDataAccess
                 Password = "qewrty123",
                 Email = "juaaan@gmail.com"
             });
+            bugManagerContext.SaveChanges();
 
             bool valid = loginDataAccess.VerifyUser("Juan", "qewrty123");
+
+            Assert.IsTrue(valid);
+        }
+
+        [TestMethod]
+        public void VerifyValidDevCredentials()
+        {
+            bugManagerContext.Add(new Developer()
+            {
+                Username = "dev123",
+                Name = "Jose",
+                Lastname = "Perez",
+                Password = "123dev",
+                Email = "juaaan@gmail.com"
+            });
+            bugManagerContext.SaveChanges();
+
+            bool valid = loginDataAccess.VerifyUser("dev123", "123dev");
 
             Assert.IsTrue(valid);
         }
@@ -116,6 +137,7 @@ namespace TestDataAccess
                 Password = "qewrty123",
                 Email = "juaaan@gmail.com"
             });
+            bugManagerContext.SaveChanges();
 
             bool valid = loginDataAccess.VerifyUser("Juan", "qewrty124");
 
@@ -123,22 +145,6 @@ namespace TestDataAccess
         }
 
 
-        [TestMethod]
-        public void VerifyValidDevCredentials()
-        {
-            bugManagerContext.Add(new Developer()
-            {
-                Username = "dev123",
-                Name = "Jose",
-                Lastname = "Perez",
-                Password = "123dev",
-                Email = "juaaan@gmail.com"
-            });
-
-            bool valid = loginDataAccess.VerifyUser("dev123", "123dev");
-
-            Assert.IsFalse(valid);
-        }
 
         [TestMethod]
         public void VerifyNotValidDevCredentials()
@@ -151,6 +157,7 @@ namespace TestDataAccess
                 Password = "123dev",
                 Email = "juaaan@gmail.com"
             });
+            bugManagerContext.SaveChanges();
 
             bool valid = loginDataAccess.VerifyUser("dev123", "sdfasdfasd");
 
