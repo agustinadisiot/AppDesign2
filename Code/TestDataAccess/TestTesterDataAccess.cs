@@ -43,9 +43,9 @@ namespace TestTesterDataAccess
         [TestMethod]
         public void Create()
         {
-            Developer expectedDev = new Developer
+            Tester expectedTester = new Tester
             {
-                Username = "developerPedro",
+                Username = "testerPedro",
                 Name = "Pedro",
                 Lastname = "López",
                 Password = "fransico234",
@@ -53,7 +53,7 @@ namespace TestTesterDataAccess
 
             };
 
-            Tester devSaved = testerDataAccess.Create(new Tester()
+            Tester testerSaved = testerDataAccess.Create(new Tester()
             {
                 Username = "testerPedro",
                 Name = "Pedro",
@@ -62,7 +62,7 @@ namespace TestTesterDataAccess
                 Email = "pedrooo2@hotmail.com"
             });
 
-            Assert.AreEqual(0, new UserComparer().Compare(expectedDev, devSaved));
+            Assert.AreEqual(0, new UserComparer().Compare(expectedTester, testerSaved));
 
         }
     }
