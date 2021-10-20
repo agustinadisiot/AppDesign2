@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repository;
 
-namespace TestDataAccess
+namespace TestTesterDataAccess
 {
     [TestClass]
     public class TestTesterDataAccess
