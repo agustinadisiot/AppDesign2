@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 
 namespace WebApi.Filters
@@ -29,6 +30,11 @@ namespace WebApi.Filters
             else if (context.Exception is NonexistentUserException)
             {
                 statusCode = 404;
+            }
+            else if (context.Exception is AuthenticationException)
+            {
+                statusCode = 401;
+                errorMesssage = "Incorrect password or username";
             }
             else
             {
