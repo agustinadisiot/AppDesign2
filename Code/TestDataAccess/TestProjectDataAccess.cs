@@ -561,7 +561,8 @@ namespace TestDataAccess
                 {
                     new Bug(){
                     Id = 3,
-                    Time = 2
+                    Time = 2,
+                    IsActive = false
                     }
                 },
                 Testers = new List<Tester>()
@@ -600,7 +601,7 @@ namespace TestDataAccess
                 }
             };
 
-            int expectedDuration = 5;
+            int expectedDuration = 6;
 
             projectDataAccess.Create(project);
             bugManagerContext.SaveChanges();
@@ -610,34 +611,6 @@ namespace TestDataAccess
             Assert.AreEqual(expectedDuration, result.Duration);
         }
 
-        [TestMethod]
-        public void DeleteTesterFromProject()
-        {
-            Project project = new Project()
-            {
-                Name = "project3",
-                Id = 1,
-            };
-
-            Tester testerExpected = new Tester()
-            {
-                Id = 2,
-                Name = "Agustina",
-                Lastname = "didios",
-                Username = "Agus",
-                Password = "rosadopastel",
-                Email = "hell@yahoo.com"
-            };
-
-
-            projectDataAccess.Create(project);
-            bugManagerContext.Tester.Add(testerExpected);
-            bugManagerContext.SaveChanges();
-
-            ResponseMessage result = projectDataAccess.RemoveTesterFromProject(project.Id, testerExpected.Id);
-
-            Assert.IsTrue(result is ResponseMessage);
-        }
 
         [TestMethod]
         public void GetProjectCost()
@@ -650,7 +623,8 @@ namespace TestDataAccess
                 {
                     new Bug(){
                     Id = 3,
-                    Time = 2
+                    Time = 2,
+                    IsActive = false
                     }
                 },
                 Testers = new List<Tester>()
