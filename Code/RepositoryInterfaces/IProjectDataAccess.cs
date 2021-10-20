@@ -20,7 +20,6 @@ namespace RepositoryInterfaces
 
         public ResponseMessage DeleteByName(string name);
         List<Bug> GetBugs(int id);
-
         public BugsQuantity GetBugsQuantity(int idProject);
         List<Developer> GetDevelopers(int id);
         List<Tester> GetTesters(int id);
@@ -28,5 +27,7 @@ namespace RepositoryInterfaces
         ResponseMessage RemoveDeveloperFromProject(int idProject, int idDev);
         Tester AddTesterToProject(int idProject, int idTester);
         Developer AddDeveloperToProject(int idProject, int idDev);
+        ProjectCost GetProjectCost(int id);
+        ProjectDuration GetProjectDuration(int id);
     }
 }

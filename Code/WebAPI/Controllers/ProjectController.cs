@@ -106,5 +106,18 @@ namespace WebApi.Controllers
             return Ok(businessLogic.AddTesterToProject(idProject, idTester));
         }
 
+        [HttpGet("{id}/cost")]
+
+        public object GetProjectCost([FromRoute] int id)
+        {
+            return Ok(businessLogic.GetProjectCost(id));
+        }
+
+        [HttpGet("{id}/duration")]
+
+        public object GetProjectDuration([FromRoute] int id)
+        {
+            return Ok(businessLogic.GetProjectDuration(id));
+        }
     }
 }

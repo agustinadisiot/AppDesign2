@@ -18,6 +18,8 @@ namespace BusinessLogicInterfaces
         ResponseMessage RemoveTesterFromProject(int idproject, int idTester);
         Developer AddDeveloperToProject(int idproject, int idDev);
         Tester AddTesterToProject(int idproject, int idTester);
+        ProjectCost GetProjectCost(int id);
+        ProjectDuration GetProjectDuration(int id);
     }
 }
 

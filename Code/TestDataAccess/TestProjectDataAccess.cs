@@ -550,5 +550,127 @@ namespace TestDataAccess
             Assert.IsTrue(result is ResponseMessage);
         }
 
+        [TestMethod]
+        public void GetProjectDuration()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Bugs = new List<Bug>()
+                {
+                    new Bug(){
+                    Id = 3,
+                    Time = 2,
+                    IsActive = false
+                    }
+                },
+                Testers = new List<Tester>()
+                {
+                    new Tester()
+                    {
+                           Id = 2,
+                            Name = "Agustina",
+                            Lastname = "didios",
+                            Username = "Agus",
+                            Password = "rosadopastel",
+                            Email = "hell@yahoo.com",
+                            Cost = 3
+                    }
+                },
+                Works = new List<Work>()
+                {
+                    new Work()
+                    {   Id = 2,
+                        Time = 4,
+                        Cost = 3
+                    }
+                },
+                Developers = new List<Developer>() { 
+                    new Developer()
+                    { 
+                        Id = 5,
+                            Name = "Agustina",
+                            Lastname = "didios",
+                            Username = "Agus",
+                            Password = "rosadopastel",
+                            Email = "hell@yahoo.com",
+                            Cost = 3
+
+                    }
+                }
+            };
+
+            int expectedDuration = 6;
+
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+
+            ProjectDuration result = projectDataAccess.GetProjectDuration(project.Id);
+
+            Assert.AreEqual(expectedDuration, result.Duration);
+        }
+
+
+        [TestMethod]
+        public void GetProjectCost()
+        {
+            Project project = new Project()
+            {
+                Name = "project3",
+                Id = 1,
+                Bugs = new List<Bug>()
+                {
+                    new Bug(){
+                    Id = 3,
+                    Time = 2,
+                    IsActive = false
+                    }
+                },
+                Testers = new List<Tester>()
+                {
+                    new Tester()
+                    {
+                           Id = 2,
+                            Name = "Agustina",
+                            Lastname = "didios",
+                            Username = "Agus",
+                            Password = "rosadopastel",
+                            Email = "hell@yahoo.com",
+                            Cost = 3
+                    }
+                },
+                Works = new List<Work>()
+                {
+                    new Work()
+                    {   Id = 2,
+                        Time = 4,
+                        Cost = 3
+                    }
+                },
+                Developers = new List<Developer>() {
+                    new Developer()
+                    {
+                        Id = 5,
+                            Name = "Agustina",
+                            Lastname = "didios",
+                            Username = "Agus",
+                            Password = "rosadopastel",
+                            Email = "hell@yahoo.com",
+                            Cost = 3
+
+                    }
+                }
+            };
+
+            int expectedCost = 24;
+
+            projectDataAccess.Create(project);
+            bugManagerContext.SaveChanges();
+
+            ProjectCost result = projectDataAccess.GetProjectCost(project.Id);
+
+            Assert.AreEqual(expectedCost, result.Cost);
+        }
     }
 }

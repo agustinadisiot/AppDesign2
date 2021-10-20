@@ -166,5 +166,24 @@ namespace Repository
 
         }
 
+        public ProjectCost GetProjectCost(int id)
+        {
+            Project project = GetById(id);
+            int workCost = project.Works.Sum(w => w.Time*w.Cost);
+            int bugsDuration = project.Bugs.Sum(b => b.Time*(b.IsActive ? 0 : 1));
+            int bugsCostTesters = project.Testers.Sum(t => t.Cost * bugsDuration);
+            int bugsCostDevs = project.Developers.Sum(t => t.Cost * bugsDuration);
+            int totalCost = workCost + bugsCostTesters + bugsCostDevs;
+            return new ProjectCost(totalCost);
+        }
+
+        public ProjectDuration GetProjectDuration(int id)
+        {
+            Project project = GetById(id);
+            int bugsDuration = project.Bugs.Sum(b => b.Time*(b.IsActive ? 0:1));
+            int workDuration = project.Works.Sum(w => w.Time);
+            int totalDuration = bugsDuration + workDuration;
+            return new ProjectDuration(totalDuration);
+        }
     }
 }

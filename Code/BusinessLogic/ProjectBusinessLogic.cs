@@ -99,5 +99,15 @@ namespace BusinessLogic
             return projectDataAccess.AddTesterToProject(idproject, idTester);
 
         }
+
+        public ProjectCost GetProjectCost(int id)
+        {
+            return projectDataAccess.GetProjectCost(id);
+        }
+
+        public ProjectDuration GetProjectDuration(int id)
+        {
+            return projectDataAccess.GetProjectDuration(id);
+        }
     }
 }
