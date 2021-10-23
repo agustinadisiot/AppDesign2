@@ -90,5 +90,24 @@ namespace TestLoginBusinessLogic
 
             Assert.AreEqual(saved.Token, returned.Token);
         }
+
+
+        [DataTestMethod]
+        [DataRow("admin", "Juana1223#@")]
+        [DataRow("dev12", "devvvv")]
+        [DataRow("Pedro", "testqetrty")]
+        public void LoginTokenHasUsername(string username, string password)
+        {
+
+            var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
+
+            mock.Setup(l => l.VerifyUser(username, password)).Returns(true);
+            mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
+            var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
+
+            LoginToken token = loginBusinessLogic.Login(username, password);
+            mock.VerifyAll();
+            Assert.IsTrue(token.Username = username);
+        }
     }
 }
