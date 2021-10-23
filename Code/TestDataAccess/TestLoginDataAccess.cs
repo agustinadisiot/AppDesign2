@@ -201,5 +201,53 @@ namespace TestDataAccess
             bool isAdmin = loginDataAccess.VerifyAdmin("asdfasdfa34234");
             Assert.IsTrue(isAdmin);
         }
+
+        [TestMethod]
+        public void VerifyGetRoleTester()
+        {
+            bugManagerContext.Add(new Tester()
+            {
+                Username = "Juan",
+                Name = "Holaaa",
+                Lastname = "Rodi",
+                Password = "qewrty123",
+                Email = "juaaan@gmail.com"
+            });
+            bugManagerContext.SaveChanges();
+
+            LoginToken token = new LoginToken
+            {
+                Token = "23432rdwe",
+                Username = "Juan"
+            };
+
+            loginDataAccess.SaveLogin(token);
+            bool isTester = loginDataAccess.VerifyTester("23432rdwe");
+            Assert.IsTrue(isTester);
+        }
+
+        [TestMethod]
+        public void VerifyGetRoleDev()
+        {
+            bugManagerContext.Add(new Developer()
+            {
+                Username = "dev123",
+                Name = "Jose",
+                Lastname = "Perez",
+                Password = "123dev",
+                Email = "juaaan@gmail.com"
+            });
+            bugManagerContext.SaveChanges();
+
+            LoginToken token = new LoginToken
+            {
+                Token = "23432423asdgf",
+                Username = "dev123"
+            };
+
+            loginDataAccess.SaveLogin(token);
+            bool isAdmin = loginDataAccess.VerifyAdmin("23432423asdgf");
+            Assert.IsTrue(isAdmin);
+        }
     }
 }
