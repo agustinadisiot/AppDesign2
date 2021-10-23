@@ -198,8 +198,8 @@ namespace TestDataAccess
             };
 
             loginDataAccess.SaveLogin(token);
-            Role role = loginDataAccess.GetRole("asdfasdfa34234");
-            Assert.IsTrue(role == Role.Admin);
+            bool isAdmin = loginDataAccess.VerifyAdmin("asdfasdfa34234");
+            Assert.IsTrue(isAdmin);
         }
     }
 }
