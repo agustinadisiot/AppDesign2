@@ -107,7 +107,7 @@ namespace TestLoginBusinessLogic
 
             LoginToken token = loginBusinessLogic.Login(username, password);
             mock.VerifyAll();
-            Assert.IsTrue(token.Username = username);
+            Assert.IsTrue(token.Username == username);
         }
     }
 }
