@@ -46,11 +46,15 @@ namespace TestDataAccess
         [DataRow("3423k423j42k342m34", "devName")]
         public void SaveLogin(string expectedToken, string username)
         {
-            LoginToken token = new LoginToken { Token = expectedToken, Username = username };
+            LoginToken token = new LoginToken {
+                Token = expectedToken,
+                Username = username 
+            };
 
             loginDataAccess.SaveLogin(token);
 
-            bool exists = bugManagerContext.Sessions.Any(s => s.Token == expectedToken && s.Username == username);
+            bool exists = bugManagerContext.Sessions.Any(s => s.Token == expectedToken 
+                                                        && s.Username == username);
             Assert.IsTrue(exists);
         }
 
