@@ -176,5 +176,30 @@ namespace TestDataAccess
 
             Assert.IsFalse(valid);
         }
+
+
+        [TestMethod]
+        public void VerifyGetRoleAdmin()
+        {
+            bugManagerContext.Add(new Admin()
+            {
+                Username = "administradorPedro",
+                Name = "Pedro",
+                Lastname = "López",
+                Password = "fransico234",
+                Email = "pedrooo2@hotmail.com"
+            });
+            bugManagerContext.SaveChanges();
+
+            LoginToken token = new LoginToken
+            {
+                Token = "asdfasdfa34234",
+                Username = "administradorPedro"
+            };
+
+            loginDataAccess.SaveLogin(token);
+            Role role = loginDataAccess.GetRole("asdfasdfa34234");
+            Assert.IsTrue(role == Role.Admin);
+        }
     }
 }
