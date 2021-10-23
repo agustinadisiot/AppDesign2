@@ -41,16 +41,16 @@ namespace TestDataAccess
         }
 
         [DataTestMethod]
-        [DataRow("asdlfk")]
-        [DataRow("as8df8asdf")]
-        [DataRow("3423k423j42k342m34")]
-        public void SaveLogin(string expectedToken)
+        [DataRow("asdlfk", "jose")]
+        [DataRow("as8df8asdf", "admin1")]
+        [DataRow("3423k423j42k342m34", "devName")]
+        public void SaveLogin(string expectedToken, string username)
         {
-            LoginToken token = new LoginToken { Token = expectedToken };
+            LoginToken token = new LoginToken { Token = expectedToken, Username = username };
 
             loginDataAccess.SaveLogin(token);
 
-            bool exists = bugManagerContext.Sessions.Any(s => s.Token == expectedToken);
+            bool exists = bugManagerContext.Sessions.Any(s => s.Token == expectedToken && s.Username == username);
             Assert.IsTrue(exists);
         }
 
