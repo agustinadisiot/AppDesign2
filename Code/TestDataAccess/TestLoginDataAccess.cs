@@ -46,14 +46,15 @@ namespace TestDataAccess
         [DataRow("3423k423j42k342m34", "devName")]
         public void SaveLogin(string expectedToken, string username)
         {
-            LoginToken token = new LoginToken {
+            LoginToken token = new LoginToken
+            {
                 Token = expectedToken,
-                Username = username 
+                Username = username
             };
 
             loginDataAccess.SaveLogin(token);
 
-            bool exists = bugManagerContext.Sessions.Any(s => s.Token == expectedToken 
+            bool exists = bugManagerContext.Sessions.Any(s => s.Token == expectedToken
                                                         && s.Username == username);
             Assert.IsTrue(exists);
         }
@@ -202,52 +203,52 @@ namespace TestDataAccess
             Assert.IsTrue(isAdmin);
         }
 
-        [TestMethod]
-        public void VerifyGetRoleTester()
-        {
-            bugManagerContext.Add(new Tester()
-            {
-                Username = "Juan",
-                Name = "Holaaa",
-                Lastname = "Rodi",
-                Password = "qewrty123",
-                Email = "juaaan@gmail.com"
-            });
-            bugManagerContext.SaveChanges();
+        /*        [TestMethod]
+                public void VerifyGetRoleTester()
+                {
+                    bugManagerContext.Add(new Tester()
+                    {
+                        Username = "Juan",
+                        Name = "Holaaa",
+                        Lastname = "Rodi",
+                        Password = "qewrty123",
+                        Email = "juaaan@gmail.com"
+                    });
+                    bugManagerContext.SaveChanges();
 
-            LoginToken token = new LoginToken
-            {
-                Token = "23432rdwe",
-                Username = "Juan"
-            };
+                    LoginToken token = new LoginToken
+                    {
+                        Token = "23432rdwe",
+                        Username = "Juan"
+                    };
 
-            loginDataAccess.SaveLogin(token);
-            bool isTester = loginDataAccess.VerifyTester("23432rdwe");
-            Assert.IsTrue(isTester);
-        }
+                    loginDataAccess.SaveLogin(token);
+                    bool isTester = loginDataAccess.VerifyTester("23432rdwe");
+                    Assert.IsTrue(isTester);
+                }
 
-        [TestMethod]
-        public void VerifyGetRoleDev()
-        {
-            bugManagerContext.Add(new Developer()
-            {
-                Username = "dev123",
-                Name = "Jose",
-                Lastname = "Perez",
-                Password = "123dev",
-                Email = "juaaan@gmail.com"
-            });
-            bugManagerContext.SaveChanges();
+                [TestMethod]
+                public void VerifyGetRoleDev()
+                {
+                    bugManagerContext.Add(new Developer()
+                    {
+                        Username = "dev123",
+                        Name = "Jose",
+                        Lastname = "Perez",
+                        Password = "123dev",
+                        Email = "juaaan@gmail.com"
+                    });
+                    bugManagerContext.SaveChanges();
 
-            LoginToken token = new LoginToken
-            {
-                Token = "23432423asdgf",
-                Username = "dev123"
-            };
+                    LoginToken token = new LoginToken
+                    {
+                        Token = "23432423asdgf",
+                        Username = "dev123"
+                    };
 
-            loginDataAccess.SaveLogin(token);
-            bool isAdmin = loginDataAccess.VerifyAdmin("23432423asdgf");
-            Assert.IsTrue(isAdmin);
-        }
+                    loginDataAccess.SaveLogin(token);
+                    bool isAdmin = loginDataAccess.VerifyAdmin("23432423asdgf");
+                    Assert.IsTrue(isAdmin);
+                }*/
     }
 }

@@ -10,23 +10,12 @@ using System.Linq;
 
 namespace Repository
 {
-    public class AdminDataAccess : IAdminDataAccess
+    public class AdminDataAccess : UserDataAccess<Admin>, IAdminDataAccess
     {
-        private readonly DbSet<Admin> admins;
-        private readonly BugManagerContext context;
 
-        public AdminDataAccess(DbContext newContext)
+        public AdminDataAccess(DbContext newContext) : base(newContext)
         {
-            context = (BugManagerContext)newContext;
-            admins = context.Set<Admin>();
-        }
-
-        public Admin Create(Admin admin)
-        {
-            context.Add(admin);
-            context.SaveChanges();
-
-            return admin;
+            users = context.Set<Admin>();
         }
     }
 }
