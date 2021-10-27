@@ -218,7 +218,7 @@ namespace TestDomain
             }
             catch(ValidationException e)
             {
-                Assert.Fail("Expected ValidationException but instead threw ValidBug");
+                Assert.Fail("Expected ValidationException but instead threw" + e.Message);
             }
         }
     }

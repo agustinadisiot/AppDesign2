@@ -33,7 +33,16 @@ namespace Domain
 
         public void Validate()
         {
-            throw new ValidationException();
+            bool hasNoProject = this.ProjectId == 0 &&
+                                this.Project == null &&
+                                this.ProjectName == null;
+            if (this.Name == null ||
+                this.Description == null ||
+                this.Version == null ||
+                hasNoProject)
+            {
+                throw new ValidationException();
+            }
         }
     }
 }
