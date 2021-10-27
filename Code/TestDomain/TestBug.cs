@@ -106,7 +106,7 @@ namespace TestDomain
             Assert.AreEqual(expected, bug.CompletedById);
         }
 
-      
+
         [DataTestMethod]
         [DataRow("New project")]
         [DataRow("Second project")]
@@ -184,7 +184,7 @@ namespace TestDomain
         public void IsEmptyName()
         {
             bug.Name = null;
-            Assert.ThrowsException<ValidationException>(()=>bug.Validate());
+            Assert.ThrowsException<ValidationException>(() => bug.Validate());
         }
 
         [TestMethod]
@@ -208,6 +208,18 @@ namespace TestDomain
             bug.ProjectId = 0;
             bug.ProjectName = null;
             Assert.ThrowsException<ValidationException>(() => bug.Validate());
+        }
+
+        [TestMethod]
+        public void IsValidBug()
+        {
+            try {
+                bug.Validate();
+            }
+            catch(ValidationException e)
+            {
+                Assert.Fail("Expected ValidationException but instead threw ValidBug");
+            }
         }
     }
 }
