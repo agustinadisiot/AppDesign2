@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,5 +31,9 @@ namespace Domain
             return bug.Id == this.Id;
         }
 
+        public void Validate()
+        {
+            throw new ValidationException();
+        }
     }
 }
