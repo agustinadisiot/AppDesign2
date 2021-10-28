@@ -22,6 +22,8 @@ namespace TestTesterDataAccess
             userDataAccess = testerDataAccess;
             user = new Tester();
             users = bugManagerContext.Tester;
+            userDifferentRole = new Developer();
+
         }
 
         [TestMethod]

@@ -19,6 +19,7 @@ namespace TestDataAccess
             userDataAccess = new AdminDataAccess(bugManagerContext);
             user = new Admin();
             users = bugManagerContext.Admins;
+            userDifferentRole = new Tester();
         }
 
     }

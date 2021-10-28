@@ -23,6 +23,8 @@ namespace TestDataAccess
             userDataAccess = devDataAccess;
             user = new Developer();
             users = bugManagerContext.Developer;
+            userDifferentRole = new Admin();
+
         }
 
         [TestMethod]

@@ -17,6 +17,7 @@ namespace TestDataAccess
         protected IUserDataAccess<T> userDataAccess { get; set; }
         protected DbSet<T> users;
         protected T user;
+        protected User userDifferentRole;
         protected readonly DbConnection connection;
         protected readonly LoginDataAccess loginDataAccess;
         protected readonly BugManagerContext bugManagerContext;
@@ -104,6 +105,53 @@ namespace TestDataAccess
         public void CreateNull()
         {
             Assert.ThrowsException<NonexistentUserException>(() => userDataAccess.Create(null));
+        }
+
+        [TestMethod]
+        public void VerifyRoleValid()
+        {
+
+            user.Username = "userPedro";
+            user.Name = "Pedro";
+            user.Lastname = "Jorge";
+            user.Password = "fransico234";
+            user.Email = "pedrooo2@hotmail.com";
+
+            User userSaved = userDataAccess.Create(user);
+
+            LoginToken token = new LoginToken
+            {
+                Token = "asdfasdfa34234",
+                Username = "userPedro"
+            };
+
+            loginDataAccess.SaveLogin(token);
+            bool isRole = userDataAccess.VerifyRole("asdfasdfa34234");
+            Assert.IsTrue(isRole);
+        }
+
+
+        [TestMethod]
+        public void VerifyRoleInvalid()
+        {
+
+            userDifferentRole.Username = "juana";
+            userDifferentRole.Name = "Juana";
+            userDifferentRole.Lastname = "Perez";
+            userDifferentRole.Password = "123qwerty";
+            userDifferentRole.Email = "Perez@gmail.com";
+
+            User userSaved = userDataAccess.Create(userDifferentRole);
+
+            LoginToken token = new LoginToken
+            {
+                Token = "234234wfadsf",
+                Username = "juana"
+            };
+
+            loginDataAccess.SaveLogin(token);
+            bool isRole = userDataAccess.VerifyRole("234234wfadsf");
+            Assert.IsFalse(isRole);
         }
     }
 }
