@@ -11,29 +11,14 @@ using System.Linq;
 
 namespace Repository
 {
-    public class TesterDataAccess : ITesterDataAccess
+    public class TesterDataAccess : UserDataAccess<Tester>, ITesterDataAccess
     {
         private readonly DbSet<Tester> testers;
-        private readonly BugManagerContext context;
 
-        public TesterDataAccess(DbContext newContext)
+        public TesterDataAccess(DbContext newContext) : base(newContext)
         {
-            context = (BugManagerContext)newContext;
             testers = context.Set<Tester>();
-        }
-
-        public Tester Create(Tester tester)
-        {
-
-            if (tester is null)
-            {
-                throw new NonexistentUserException();
-            }
-
-            context.Add(tester);
-            context.SaveChanges();
-
-            return tester;
+            users = testers;
         }
 
         public List<Bug> GetBugsByName(int idTester, string filter)
