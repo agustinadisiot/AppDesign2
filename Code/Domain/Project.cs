@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -23,6 +24,18 @@ namespace Domain
         {
             Project project = (Project)obj;
             return (project.Id == this.Id);
+        }
+
+        public void Validate()
+        {
+            if(this.Name == null ||
+                this.Testers == null ||
+                this.Developers == null ||
+                this.Bugs == null||
+                this.Works == null)
+            {
+                throw new ValidationException();
+            }
         }
     }
 }
