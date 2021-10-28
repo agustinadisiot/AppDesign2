@@ -99,5 +99,11 @@ namespace TestDataAccess
             User userSaved = userDataAccess.Create(user);
             Assert.AreEqual(0, new UserComparer().Compare(user, userSaved));
         }
+
+        [TestMethod]
+        public void CreateNull()
+        {
+            Assert.ThrowsException<NonexistentUserException>(() => userDataAccess.Create(null));
+        }
     }
 }
