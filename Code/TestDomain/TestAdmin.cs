@@ -120,5 +120,40 @@ namespace TestDomain
 
             Assert.AreNotEqual(0, new UserComparer().Compare(admin1, admin2));
         }
+
+        [TestMethod]
+        public void IsEmptyUsername()
+        {
+            admin.Username = null;
+            Assert.ThrowsException<ValidationException>(() => admin.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyName()
+        {
+            admin.Name = null;
+            Assert.ThrowsException<ValidationException>(() => admin.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyLastname()
+        {
+            admin.Lastname = null;
+            Assert.ThrowsException<ValidationException>(() => admin.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyPassword()
+        {
+            admin.Password = null;
+            Assert.ThrowsException<ValidationException>(() => admin.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyEmail()
+        {
+            admin.Email = null;
+            Assert.ThrowsException<ValidationException>(() => admin.Validate());
+        }
     }
 }
