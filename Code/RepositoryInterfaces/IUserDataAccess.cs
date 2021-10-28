@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RepositoryInterfaces
 {
-    public interface IUserDataAccess<T>
+    public interface IUserDataAccess<T> where T : User
     {
         public T Create(T newUser);
     }

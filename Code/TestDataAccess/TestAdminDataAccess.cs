@@ -7,24 +7,17 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repository;
+using RepositoryInterfaces;
 
 namespace TestDataAccess
 {
     [TestClass]
-    public class TestAdminDataAccess
+    public class TestAdminDataAccess : TestUserDataAccess<Admin>
     {
-
-        private readonly DbConnection connection;
-        private readonly AdminDataAccess adminDataAccess;
-        private readonly BugManagerContext bugManagerContext;
-        private readonly DbContextOptions<BugManagerContext> contextOptions;
-
-        public TestAdminDataAccess()
+        public TestAdminDataAccess() : base()
         {
-            connection = new SqliteConnection("Filename=:memory:");
-            contextOptions = new DbContextOptionsBuilder<BugManagerContext>().UseSqlite(connection).Options;
-            bugManagerContext = new BugManagerContext(contextOptions);
-            adminDataAccess = new AdminDataAccess(bugManagerContext);
+            userDataAccess = new AdminDataAccess(bugManagerContext);
+            user = new Admin();
         }
 
         [TestInitialize]
@@ -53,7 +46,7 @@ namespace TestDataAccess
 
             };
 
-            Admin adminSaved = adminDataAccess.Create(new Admin()
+            Admin adminSaved = userDataAccess.Create(new Admin()
             {
                 Username = "administradorPedro",
                 Name = "Pedro",
