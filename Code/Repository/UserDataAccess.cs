@@ -32,5 +32,12 @@ namespace Repository
 
             return user;
         }
+
+        public bool VerifyRole(string token)
+        {
+            string username = context.Sessions.FirstOrDefault(s => s.Token == token).Username;
+            bool isRole = users.Any(u => u.Username == username);
+            return isRole;
+        }
     }
 }

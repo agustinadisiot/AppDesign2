@@ -38,11 +38,6 @@ namespace Repository
             return verified;
         }
 
-        public bool VerifyAdmin(string token)
-        {
-            string username = context.Sessions.FirstOrDefault(s => s.Token == token).Username;
-            bool isAdmin = context.Admins.Any(u => u.Username == username);
-            return isAdmin;
-        }
+
     }
 }

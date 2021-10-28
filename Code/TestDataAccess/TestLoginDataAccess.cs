@@ -199,7 +199,8 @@ namespace TestDataAccess
             };
 
             loginDataAccess.SaveLogin(token);
-            bool isAdmin = loginDataAccess.VerifyAdmin("asdfasdfa34234");
+            AdminDataAccess adminDataAccess = new AdminDataAccess(bugManagerContext);
+            bool isAdmin = adminDataAccess.VerifyRole("asdfasdfa34234");
             Assert.IsTrue(isAdmin);
         }
 
