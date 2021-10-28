@@ -73,6 +73,31 @@ namespace TestBugImportationBusinessLogic
             factoryMock.VerifyAll();
         }
 
+        [TestMethod]
+        public void ImportInvalidBug()
+        {
+            Bug invalidBug = new Bug()
+            {
+                Name = "invalid bug",
+                Description = "this is a bug",
+                Version = "24.2.4"
+            };
+            string path = "file.xml";
+            List<Bug> expectedBugs = new List<Bug>() { invalidBug };
+
+            var parserMock = new Mock<IBugParser>(MockBehavior.Strict);
+            parserMock.Setup(p => p.GetBugs(path)).Returns(expectedBugs);
+
+            var factoryMock = new Mock<IParserFactory>(MockBehavior.Strict);
+            factoryMock.Setup(b => b.GetBugParser(ImportCompany.XML)).Returns(parserMock.Object);
+
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Create(invalidBug)).Returns(invalidBug);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            Assert.ThrowsException<ValidationException>(() => bugBusinessLogic.ImportBugs(path, ImportCompany.XML, factoryMock.Object));
+            mock.Verify(m => m.Create(invalidBug), Times.Never);
+        }
     }
 }
 

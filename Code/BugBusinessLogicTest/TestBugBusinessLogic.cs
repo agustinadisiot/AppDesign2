@@ -187,12 +187,11 @@ namespace TestBugBusinessLogic
             };
 
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.Create(invalidBug)).Throws(new ValidationException());
+            mock.Setup(b => b.Create(invalidBug)).Returns(invalidBug);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            mock.VerifyAll();
-
             Assert.ThrowsException<ValidationException>(()=> bugBusinessLogic.Add(invalidBug));
+            mock.Verify(m => m.Create(invalidBug), Times.Never);
 
         }
     }

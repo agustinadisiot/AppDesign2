@@ -31,6 +31,7 @@ namespace BusinessLogic
 
         public Bug Add(Bug bug)
         {
+            bug.Validate();
             BugDataAccess.Create(bug);
             return bug;
         }
