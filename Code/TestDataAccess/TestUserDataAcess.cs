@@ -141,7 +141,8 @@ namespace TestDataAccess
             userDifferentRole.Password = "123qwerty";
             userDifferentRole.Email = "Perez@gmail.com";
 
-            User userSaved = userDataAccess.Create(userDifferentRole);
+            bugManagerContext.Add(userDifferentRole);
+            bugManagerContext.SaveChanges();
 
             LoginToken token = new LoginToken
             {
