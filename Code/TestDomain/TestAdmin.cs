@@ -155,5 +155,18 @@ namespace TestDomain
             admin.Email = null;
             Assert.ThrowsException<ValidationException>(() => admin.Validate());
         }
+
+        [TestMethod]
+        public void IsValidAdmin()
+        {
+            try
+            {
+                admin.Validate();
+            }
+            catch (ValidationException e)
+            {
+                Assert.Fail("Expected ValidationException but instead threw" + e.Message);
+            }
+        }
     }
 }
