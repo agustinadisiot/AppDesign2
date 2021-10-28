@@ -23,6 +23,8 @@ namespace TestDomain
             work = new Work()
             {
                 Name = "Work",
+                Time = 4,
+                Cost = 2
             };
         }
 
@@ -88,7 +90,7 @@ namespace TestDomain
             }
             catch (ValidationException e)
             {
-                Assert.Fail("Expected ValidationException but instead threw" + e.Message);
+                Assert.Fail("Expected ValidationException but instead threw " + e.Message);
             }
         }
     }
