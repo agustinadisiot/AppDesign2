@@ -15,11 +15,12 @@ namespace TestDataAccess
     public abstract class TestUserDataAccess<T> where T : User
     {
         protected IUserDataAccess<T> userDataAccess { get; set; }
+        protected DbSet<T> users;
+        protected T user;
         protected readonly DbConnection connection;
         protected readonly LoginDataAccess loginDataAccess;
         protected readonly BugManagerContext bugManagerContext;
         protected readonly DbContextOptions<BugManagerContext> contextOptions;
-        protected T user;
 
         public TestUserDataAccess()
         {
@@ -54,9 +55,49 @@ namespace TestDataAccess
             bugManagerContext.Add(user);
             bugManagerContext.SaveChanges();
 
-            bool valid = loginDataAccess.VerifyUser("administradorPedro", "fransico234");
+            bool valid = loginDataAccess.VerifyUser("userPedro", "fransico234");
 
             Assert.IsTrue(valid);
+        }
+
+
+        [TestMethod]
+        public void VerifyNotValidCredentials()
+        {
+            user.Username = "userPedro";
+            user.Name = "Pedro";
+            user.Lastname = "Jorge";
+            user.Password = "fransico234";
+            user.Email = "pedrooo2@hotmail.com";
+
+            bugManagerContext.Add(user);
+            bugManagerContext.SaveChanges();
+
+            bool valid = loginDataAccess.VerifyUser("userPedro", "jose454");
+
+            Assert.IsFalse(valid);
+        }
+
+        [TestMethod]
+        public void VerifyNonExistingUser()
+        {
+            bool valid = loginDataAccess.VerifyUser("administradorPedro", "contraseñaIncorrecta");
+
+            Assert.IsFalse(valid);
+        }
+
+
+        [TestMethod]
+        public void Create()
+        {
+            user.Username = "userPedro";
+            user.Name = "Pedro";
+            user.Lastname = "Jorge";
+            user.Password = "fransico234";
+            user.Email = "pedrooo2@hotmail.com";
+
+            User userSaved = userDataAccess.Create(user);
+            Assert.AreEqual(0, new UserComparer().Compare(user, userSaved));
         }
     }
 }

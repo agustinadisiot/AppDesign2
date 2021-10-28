@@ -59,41 +59,6 @@ namespace TestDataAccess
             Assert.IsTrue(exists);
         }
 
-        [TestMethod]
-        public void VerifyValidAdminCredentials()
-        {
-            bugManagerContext.Add(new Admin()
-            {
-                Username = "administradorPedro",
-                Name = "Pedro",
-                Lastname = "López",
-                Password = "fransico234",
-                Email = "pedrooo2@hotmail.com"
-            });
-            bugManagerContext.SaveChanges();
-
-            bool valid = loginDataAccess.VerifyUser("administradorPedro", "fransico234");
-
-            Assert.IsTrue(valid);
-        }
-
-        [TestMethod]
-        public void VerifyNotValidAdminCredentials()
-        {
-            bugManagerContext.Add(new Admin()
-            {
-                Username = "administradorPedro",
-                Name = "Pedro",
-                Lastname = "López",
-                Password = "fransico234",
-                Email = "pedrooo2@hotmail.com"
-            });
-            bugManagerContext.SaveChanges();
-
-            bool valid = loginDataAccess.VerifyUser("administradorPedro", "contraseñaIncorrecta");
-
-            Assert.IsFalse(valid);
-        }
 
         [TestMethod]
         public void VerifyValidTesterCredentials()
@@ -170,13 +135,6 @@ namespace TestDataAccess
         }
 
 
-        [TestMethod]
-        public void VerifyNonExistingUser()
-        {
-            bool valid = loginDataAccess.VerifyUser("administradorPedro", "contraseñaIncorrecta");
-
-            Assert.IsFalse(valid);
-        }
 
 
         [TestMethod]
