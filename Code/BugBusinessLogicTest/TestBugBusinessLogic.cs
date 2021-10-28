@@ -162,7 +162,8 @@ namespace TestBugBusinessLogic
                 Id = 0,
                 Name = "bugMod",
                 Description = "No funciona el boton aceptar",
-                Version = "12.2.2."
+                Version = "12.2.2.",
+                ProjectId = 4
             };
 
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);

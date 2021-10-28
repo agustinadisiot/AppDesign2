@@ -24,6 +24,7 @@ namespace TestBugImportationBusinessLogic
                 Name = "Not working button",
                 Description = "Upload button not working",
                 Version = "1",
+                ProjectId = 3,
                 IsActive = true,
                 CompletedBy = null,
                 Id = 0
@@ -34,6 +35,7 @@ namespace TestBugImportationBusinessLogic
                 Name = "button",
                 Description = "Upload not working",
                 Version = "1.4.5",
+                ProjectId = 2,
                 IsActive = false,
                 CompletedBy = null,
                 Id = 1
@@ -44,6 +46,7 @@ namespace TestBugImportationBusinessLogic
                 Name = "Not working button",
                 Description = "Upload button not working",
                 Version = "6.2",
+                ProjectId = 5,
                 IsActive = true,
                 CompletedBy = null,
                 Id = 2
@@ -82,6 +85,7 @@ namespace TestBugImportationBusinessLogic
                 Description = "this is a bug",
                 Version = "24.2.4"
             };
+
             string path = "file.xml";
             List<Bug> expectedBugs = new List<Bug>() { invalidBug };
 
@@ -97,6 +101,8 @@ namespace TestBugImportationBusinessLogic
 
             Assert.ThrowsException<ValidationException>(() => bugBusinessLogic.ImportBugs(path, ImportCompany.XML, factoryMock.Object));
             mock.Verify(m => m.Create(invalidBug), Times.Never);
+            parserMock.VerifyAll();
+            factoryMock.VerifyAll();
         }
     }
 }
