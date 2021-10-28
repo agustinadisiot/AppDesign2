@@ -30,7 +30,8 @@ namespace TestBugBusinessLogic
                 Id = 0,
                 Name = "Bug1",
                 Description = "Cuando el servidor se cierra y estoy en login se rompe",
-                Version = "12.4.5"
+                Version = "12.4.5",
+                ProjectId = 3,
             };
 
         }
@@ -173,6 +174,26 @@ namespace TestBugBusinessLogic
             mock.VerifyAll();
 
             Assert.AreEqual(bugResult, bugModified);
+        }
+
+        [TestMethod]
+        public void CreateInvalidBug()
+        {
+            Bug invalidBug = new Bug()
+            {
+                Name = "invalid bug",
+                Description = "this is a bug",
+                Version = "24.2.4"
+            };
+
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Create(invalidBug)).Throws(new ValidationException());
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            mock.VerifyAll();
+
+            Assert.ThrowsException<ValidationException>(()=> bugBusinessLogic.Add(invalidBug));
+
         }
     }
 }
