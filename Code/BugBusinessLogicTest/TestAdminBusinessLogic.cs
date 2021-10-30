@@ -14,8 +14,6 @@ namespace TestAdminBusinessLogic
     [TestClass]
     public class TestAdminBusinessLogic
     {
-
-
         [TestMethod]
         public void CreateAdmin()
         {
