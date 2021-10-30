@@ -16,6 +16,7 @@ namespace BusinessLogic
 
         public Developer Add(Developer newDev)
         {
+            newDev.Validate();
             return devDataAccess.Create(newDev);
         }
 

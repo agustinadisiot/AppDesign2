@@ -64,6 +64,26 @@ namespace TestAdminBusinessLogic
 
             Assert.IsFalse(isRole);
         }
+      
+        public void CreateInvalidAdmin()
+        {
+            Admin invalidAdmin = new Admin
+            {
+                Id = 1,
+                Username = "admin",
+                Name = "Pedro",
+                Lastname = "Rodriguez",
+                Email = "pedrooo@hotmail.com"
 
+            };
+
+            var mock = new Mock<IAdminDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Create(invalidAdmin)).Returns(invalidAdmin);
+            var adminBusinessLogic = new AdminBusinessLogic(mock.Object);
+
+            Assert.ThrowsException<ValidationException>(() => adminBusinessLogic.Add(invalidAdmin));
+            mock.Verify(m => m.Create(invalidAdmin), Times.Never);
+
+        }
     }
 }

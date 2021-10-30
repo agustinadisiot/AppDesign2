@@ -19,11 +19,21 @@ namespace TestDomain
         [TestInitialize]
         public void Setup()
         {
+            Project project = new Project()
+            {
+                Name = "Project",
+                Id = 3
+            };
+
             bug = new Bug()
             {
                 Name = "Bug1",
                 Description = "Cuando el servidor se cierra y estoy en login se rompe",
-                Version = "12.4.5"
+                Version = "12.4.5",
+                Time = 4,
+                Project = project,
+                ProjectId = 3,
+                ProjectName = "Project"
             };
         }
         [TestMethod]
@@ -96,7 +106,7 @@ namespace TestDomain
             Assert.AreEqual(expected, bug.CompletedById);
         }
 
-      
+
         [DataTestMethod]
         [DataRow("New project")]
         [DataRow("Second project")]
@@ -170,5 +180,46 @@ namespace TestDomain
             Assert.AreEqual(expected, bug.Time);
         }
 
+        [TestMethod]
+        public void IsEmptyName()
+        {
+            bug.Name = null;
+            Assert.ThrowsException<ValidationException>(() => bug.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyDescription()
+        {
+            bug.Description = null;
+            Assert.ThrowsException<ValidationException>(() => bug.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyVersion()
+        {
+            bug.Version = null;
+            Assert.ThrowsException<ValidationException>(() => bug.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyProject()
+        {
+            bug.Project = null;
+            bug.ProjectId = 0;
+            bug.ProjectName = null;
+            Assert.ThrowsException<ValidationException>(() => bug.Validate());
+        }
+
+        [TestMethod]
+        public void IsValidBug()
+        {
+            try {
+                bug.Validate();
+            }
+            catch(ValidationException e)
+            {
+                Assert.Fail("Expected ValidationException but instead threw" + e.Message);
+            }
+        }
     }
 }

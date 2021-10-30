@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,5 +31,18 @@ namespace Domain
             return bug.Id == this.Id;
         }
 
+        public void Validate()
+        {
+            bool hasNoProject = this.ProjectId == 0 &&
+                                this.Project == null &&
+                                this.ProjectName == null;
+            if (this.Name == null ||
+                this.Description == null ||
+                this.Version == null ||
+                hasNoProject)
+            {
+                throw new ValidationException();
+            }
+        }
     }
 }

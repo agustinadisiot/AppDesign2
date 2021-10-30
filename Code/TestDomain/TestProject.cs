@@ -99,5 +99,52 @@ namespace TestDomain
             Assert.IsTrue(expectedWorks.SequenceEqual(project.Works));
         }
 
+        [TestMethod]
+        public void IsEmptyName()
+        {
+            project.Name = null;
+            Assert.ThrowsException<ValidationException>(() => project.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyBugs()
+        {
+            project.Bugs = null;
+            Assert.ThrowsException<ValidationException>(() => project.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyTesters()
+        {
+            project.Testers = null;
+            Assert.ThrowsException<ValidationException>(() => project.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyDevelopers()
+        {
+            project.Developers = null;
+            Assert.ThrowsException<ValidationException>(() => project.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyWorks()
+        {
+            project.Works = null;
+            Assert.ThrowsException<ValidationException>(() => project.Validate());
+        }
+
+        [TestMethod]
+        public void IsValidBug()
+        {
+            try
+            {
+                project.Validate();
+            }
+            catch (ValidationException e)
+            {
+                Assert.Fail("Expected ValidationException but instead threw" + e.Message);
+            }
+        }
     }
 }

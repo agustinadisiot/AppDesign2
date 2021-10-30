@@ -68,5 +68,52 @@ namespace TestDomain
             Assert.AreEqual(expected, user.Password);
         }
 
+        [TestMethod]
+        public void IsEmptyUsername()
+        {
+            user.Username = null;
+            Assert.ThrowsException<ValidationException>(() => user.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyName()
+        {
+            user.Name = null;
+            Assert.ThrowsException<ValidationException>(() => user.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyLastname()
+        {
+            user.Lastname = null;
+            Assert.ThrowsException<ValidationException>(() => user.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyPassword()
+        {
+            user.Password = null;
+            Assert.ThrowsException<ValidationException>(() => user.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyEmail()
+        {
+            user.Email = null;
+            Assert.ThrowsException<ValidationException>(() => user.Validate());
+        }
+
+        [TestMethod]
+        public void IsValidAdmin()
+        {
+            try
+            {
+                user.Validate();
+            }
+            catch (ValidationException e)
+            {
+                Assert.Fail("Expected ValidationException but instead threw" + e.Message);
+            }
+        }
     }
 }

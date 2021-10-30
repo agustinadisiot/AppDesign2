@@ -31,12 +31,14 @@ namespace BusinessLogic
 
         public Bug Add(Bug bug)
         {
+            bug.Validate();
             BugDataAccess.Create(bug);
             return bug;
         }
 
         public Bug Update(int Id, Bug bug)
         {
+            bug.Validate();
             return BugDataAccess.Update(Id, bug);
         }
 
@@ -56,7 +58,7 @@ namespace BusinessLogic
             List<Bug> bugsToImport = parser.GetBugs(path);
             foreach (var bug in bugsToImport)
             {
-                BugDataAccess.Create(bug);
+                Add(bug);
             }
         }
 
