@@ -121,5 +121,27 @@ namespace TestTesterBusinessLogic
             mock.VerifyAll();
             Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
         }
+
+        [TestMethod]
+        public void CreateInvalidTester()
+        {
+            Tester invalidTester = new Tester
+            {
+                Id = 1,
+                Username = "admin",
+                Name = "Pedro",
+                Lastname = "Rodriguez",
+                Email = "pedrooo@hotmail.com"
+
+            };
+
+            var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Create(invalidTester)).Returns(invalidTester);
+            var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
+
+            Assert.ThrowsException<ValidationException>(() => testerBusinessLogic.Add(invalidTester));
+            mock.Verify(m => m.Create(invalidTester), Times.Never);
+
+        }
     }
 }
