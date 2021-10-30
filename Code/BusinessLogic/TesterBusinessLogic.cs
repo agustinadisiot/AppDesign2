@@ -17,6 +17,7 @@ namespace BusinessLogic
 
         public Tester Add(Tester newDev)
         {
+            newDev.Validate();
             return testerDataAccess.Create(newDev);
         }
 
