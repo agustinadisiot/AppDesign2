@@ -121,5 +121,33 @@ namespace TestTesterBusinessLogic
             mock.VerifyAll();
             Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
         }
+
+        [TestMethod]
+        public void VerifyRole()
+        {
+            string token = "asdfdasf";
+            var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(true);
+            var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
+
+            var isRole = testerBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsTrue(isRole);
+        }
+
+        [TestMethod]
+        public void VerifyRoleNotValid()
+        {
+            string token = "23423423";
+            var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(false);
+            var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
+
+            var isRole = testerBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsFalse(isRole);
+        }
     }
 }

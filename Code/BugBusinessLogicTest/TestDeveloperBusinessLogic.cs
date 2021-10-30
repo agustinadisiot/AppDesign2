@@ -55,6 +55,32 @@ namespace TestDeveloperBusinessLogic
             Assert.AreEqual(cantBugsResolved, result);
         }
 
+        [TestMethod]
+        public void VerifyRole()
+        {
+            string token = "asdfdasf";
+            var mock = new Mock<IDeveloperDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(true);
+            var testerBusinessLogic = new DeveloperBusinessLogic(mock.Object);
 
+            var isRole = testerBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsTrue(isRole);
+        }
+
+        [TestMethod]
+        public void VerifyRoleNotValid()
+        {
+            string token = "23423423";
+            var mock = new Mock<IDeveloperDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(false);
+            var devBusinessLogic = new DeveloperBusinessLogic(mock.Object);
+
+            var isRole = devBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsFalse(isRole);
+        }
     }
 }
