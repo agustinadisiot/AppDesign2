@@ -35,28 +35,32 @@ namespace WebApi.Filters
                     StatusCode = 401,
                 };
             }
-            else if (arg == "Admin")
+            else
             {
-                var logic = context.HttpContext.RequestServices.GetService<IAdminBusinessLogic>();
-                isAuthorize = logic.VerifyRole(token);
-            }
-            else if (arg == "Developer")
-            {
-                var logic = context.HttpContext.RequestServices.GetService<IDeveloperBusinessLogic>();
-                isAuthorize = logic.VerifyRole(token);
-            }
-            else if (arg == "Tester")
-            {
-                var logic = context.HttpContext.RequestServices.GetService<ITesterBusinessLogic>();
-                isAuthorize = logic.VerifyRole(token);
-            }
-            if (token != null && !isAuthorize)
-            {
-                ResponseMessage message = new ResponseMessage("You aren't logued correctly.");
-                context.Result = new ObjectResult(message)
+                if (arg.Contains("Admin"))
                 {
-                    StatusCode = 403,
-                };
+                    var logic = context.HttpContext.RequestServices.GetService<IAdminBusinessLogic>();
+                    isAuthorize = isAuthorize || logic.VerifyRole(token);
+                }
+                if (arg.Contains("Developer"))
+                {
+                    var logic = context.HttpContext.RequestServices.GetService<IDeveloperBusinessLogic>();
+                    isAuthorize = isAuthorize || logic.VerifyRole(token);
+                }
+                if (arg.Contains("Tester"))
+                {
+                    var logic = context.HttpContext.RequestServices.GetService<ITesterBusinessLogic>();
+                    isAuthorize = isAuthorize || logic.VerifyRole(token);
+                }
+                if (!isAuthorize)
+                {
+                    ResponseMessage message = new ResponseMessage("You aren't logued correctly.");
+                    context.Result = new ObjectResult(message)
+                    {
+                        StatusCode = 403,
+                    };
+                }
+
             }
 
         }

@@ -17,12 +17,14 @@ namespace WebApi.Controllers
             businessLogic = newDeveloperBusinessLogic;
         }
 
+        [AuthorizationFilter("Admin")]
         [HttpPost]
         public object Post([FromBody] Developer devExpected)
         {
             return Ok(businessLogic.Add(devExpected));
         }
 
+        [AuthorizationFilter("Admin")]
         [HttpGet("{id}/bugs/quantity")]
         public object GetQuantityBugsResolved([FromRoute] int idDev)
         {
