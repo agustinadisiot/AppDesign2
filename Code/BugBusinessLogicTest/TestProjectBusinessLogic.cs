@@ -591,5 +591,19 @@ namespace TestProjectBusinessLogic
 
             Assert.AreEqual(projectResult.Duration, expectedDuration);
         }
+
+        [TestMethod]
+        public void CreateInvalidProject()
+        {
+            Project invalidProject = new Project();
+
+            var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Create(invalidProject)).Returns(invalidProject);
+            var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
+
+            Assert.ThrowsException<ValidationException>(() => projectBusinessLogic.Add(invalidProject));
+            mock.Verify(m => m.Create(invalidProject), Times.Never);
+
+        }
     }
 }

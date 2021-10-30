@@ -23,6 +23,8 @@ namespace TestDomain
             work = new Work()
             {
                 Name = "Work",
+                Time = 4,
+                Cost = 2
             };
         }
 
@@ -56,6 +58,40 @@ namespace TestDomain
             work.Time = 3;
             int expected = 3;
             Assert.AreEqual(expected, work.Time);
+        }
+
+        [TestMethod]
+        public void IsEmptyName()
+        {
+            work.Name = null;
+            Assert.ThrowsException<ValidationException>(() => work.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyCost()
+        {
+            work.Cost = 0;
+            Assert.ThrowsException<ValidationException>(() => work.Validate());
+        }
+
+        [TestMethod]
+        public void IsEmptyDuration()
+        {
+            work.Time = 0;
+            Assert.ThrowsException<ValidationException>(() => work.Validate());
+        }
+
+        [TestMethod]
+        public void IsValidAdmin()
+        {
+            try
+            {
+                work.Validate();
+            }
+            catch (ValidationException e)
+            {
+                Assert.Fail("Expected ValidationException but instead threw " + e.Message);
+            }
         }
     }
 }

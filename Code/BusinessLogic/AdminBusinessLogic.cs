@@ -15,6 +15,7 @@ namespace BusinessLogic
 
         public Admin Add(Admin newAdmin)
         {
+            newAdmin.Validate();
             adminDataAccess.Create(newAdmin);
             return newAdmin;
         }

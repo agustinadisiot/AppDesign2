@@ -55,6 +55,27 @@ namespace TestDeveloperBusinessLogic
             Assert.AreEqual(cantBugsResolved, result);
         }
 
+        [TestMethod]
+        public void CreateInvalidDev()
+        {
+            Developer invalidDeveloper = new Developer
+            {
+                Id = 1,
+                Username = "admin",
+                Name = "Pedro",
+                Lastname = "Rodriguez",
+                Email = "pedrooo@hotmail.com"
+
+            };
+
+            var mock = new Mock<IDeveloperDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.Create(invalidDeveloper)).Returns(invalidDeveloper);
+            var developerBusinessLogic = new DeveloperBusinessLogic(mock.Object);
+
+            Assert.ThrowsException<ValidationException>(() => developerBusinessLogic.Add(invalidDeveloper));
+            mock.Verify(m => m.Create(invalidDeveloper), Times.Never);
+
+        }
 
     }
 }
