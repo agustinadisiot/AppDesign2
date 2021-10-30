@@ -18,6 +18,7 @@ namespace BusinessLogic
 
         public Project Add(Project project)
         {
+            project.Validate();
             return projectDataAccess.Create(project);
         }
 
@@ -38,6 +39,7 @@ namespace BusinessLogic
 
         public Project Update(int Id, Project projectModified)
         {
+            projectModified.Validate();
             return projectDataAccess.Update(Id, projectModified);
         }
 
@@ -53,6 +55,7 @@ namespace BusinessLogic
 
         public Project UpdateByName(string nameProjectToUpdate, Project projectModified)
         {
+            projectModified.Validate();
             return projectDataAccess.UpdateByName(nameProjectToUpdate, projectModified);
         }
 
