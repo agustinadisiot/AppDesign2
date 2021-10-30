@@ -19,6 +19,10 @@ namespace BusinessLogic
             return newAdmin;
         }
 
+        public bool VerifyRole(string token)
+        {
+            return adminDataAccess.VerifyRole(token);
+        }
     }
 
 

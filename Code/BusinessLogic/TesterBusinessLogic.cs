@@ -37,6 +37,10 @@ namespace BusinessLogic
             return testerDataAccess.GetBugsByProject(idTester, filter);
 
         }
+        public bool VerifyRole(string token)
+        {
+            return testerDataAccess.VerifyRole(token);
+        }
     }
 
 
