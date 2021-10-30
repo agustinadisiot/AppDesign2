@@ -21,7 +21,10 @@ namespace BusinessLogic
             if (!validCredentials)
                 throw new AuthenticationException();
 
-            LoginToken token = new LoginToken { Token = Guid.NewGuid().ToString() };
+            LoginToken token = new LoginToken { 
+                Token = Guid.NewGuid().ToString(),
+                Username = username 
+            };
             loginDataAccess.SaveLogin(token);
             return token;
         }

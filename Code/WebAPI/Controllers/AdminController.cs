@@ -16,6 +16,7 @@ namespace WebApi.Controllers
             businessLogic = newAdminBusinessLogic;
         }
 
+        [AuthorizationFilter("Admin")]
         [HttpPost]
         public object Post([FromBody] Admin adminExpected)
         {

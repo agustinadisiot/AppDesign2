@@ -14,8 +14,6 @@ namespace TestAdminBusinessLogic
     [TestClass]
     public class TestAdminBusinessLogic
     {
-
-
         [TestMethod]
         public void CreateAdmin()
         {
@@ -40,6 +38,33 @@ namespace TestAdminBusinessLogic
         }
 
         [TestMethod]
+        public void VerifyRole()
+        {
+            string token = "asdfdasf";
+            var mock = new Mock<IAdminDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(true);
+            var adminBusinessLogic = new AdminBusinessLogic(mock.Object);
+
+            var isRole = adminBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsTrue(isRole);
+        }
+
+        [TestMethod]
+        public void VerifyRoleNotValid()
+        {
+            string token = "23423423";
+            var mock = new Mock<IAdminDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(false);
+            var adminBusinessLogic = new AdminBusinessLogic(mock.Object);
+
+            var isRole = adminBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsFalse(isRole);
+        }
+      
         public void CreateInvalidAdmin()
         {
             Admin invalidAdmin = new Admin

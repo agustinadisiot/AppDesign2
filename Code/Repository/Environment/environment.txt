@@ -1,1 +1,1 @@
-CONNECTION_STRING="Server=tuServer;Database=tuBaseDeDatos;Trusted_Connection=True;MultipleActiveResultSets=True;"
+CONNECTION_STRING="Server=tuServer;Database=BugManagerDb;Trusted_Connection=True;MultipleActiveResultSets=True;"

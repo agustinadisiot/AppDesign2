@@ -56,6 +56,18 @@ namespace TestDeveloperBusinessLogic
         }
 
         [TestMethod]
+        public void VerifyRole()
+        {
+            string token = "asdfdasf";
+            var mock = new Mock<IDeveloperDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(true);
+            var testerBusinessLogic = new DeveloperBusinessLogic(mock.Object);
+
+            var isRole = testerBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsTrue(isRole);
+          
         public void CreateInvalidDev()
         {
             Developer invalidDeveloper = new Developer
@@ -74,8 +86,20 @@ namespace TestDeveloperBusinessLogic
 
             Assert.ThrowsException<ValidationException>(() => developerBusinessLogic.Add(invalidDeveloper));
             mock.Verify(m => m.Create(invalidDeveloper), Times.Never);
-
         }
 
+        [TestMethod]
+        public void VerifyRoleNotValid()
+        {
+            string token = "23423423";
+            var mock = new Mock<IDeveloperDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(false);
+            var devBusinessLogic = new DeveloperBusinessLogic(mock.Object);
+
+            var isRole = devBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsFalse(isRole);
+        }
     }
 }

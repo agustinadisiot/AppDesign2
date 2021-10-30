@@ -24,6 +24,11 @@ namespace BusinessLogic
         {
             return devDataAccess.GetQuantityBugsResolved(idDev);
         }
+
+        public bool VerifyRole(string token)
+        {
+            return devDataAccess.VerifyRole(token);
+        }
     }
 
 

@@ -123,6 +123,32 @@ namespace TestTesterBusinessLogic
         }
 
         [TestMethod]
+        public void VerifyRole()
+        {
+            string token = "asdfdasf";
+            var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(true);
+            var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
+
+            var isRole = testerBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsTrue(isRole);
+        }
+
+        [TestMethod]
+        public void VerifyRoleNotValid()
+        {
+            string token = "23423423";
+            var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
+            mock.Setup(m => m.VerifyRole(token)).Returns(false);
+            var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
+
+            var isRole = testerBusinessLogic.VerifyRole(token);
+            mock.VerifyAll();
+
+            Assert.IsFalse(isRole);
+        }
         public void CreateInvalidTester()
         {
             Tester invalidTester = new Tester
@@ -141,7 +167,6 @@ namespace TestTesterBusinessLogic
 
             Assert.ThrowsException<ValidationException>(() => testerBusinessLogic.Add(invalidTester));
             mock.Verify(m => m.Create(invalidTester), Times.Never);
-
         }
     }
 }

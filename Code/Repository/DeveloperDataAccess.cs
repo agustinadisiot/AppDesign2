@@ -10,23 +10,11 @@ using System.Linq;
 
 namespace Repository
 {
-    public class DeveloperDataAccess : IDeveloperDataAccess
+    public class DeveloperDataAccess : UserDataAccess<Developer>, IDeveloperDataAccess
     {
-        private readonly DbSet<Developer> devs;
-        private readonly BugManagerContext context;
-
-        public DeveloperDataAccess(DbContext newContext)
+        public DeveloperDataAccess(DbContext newContext) : base(newContext)
         {
-            context = (BugManagerContext)newContext;
-            devs = context.Set<Developer>();
-        }
-
-        public Developer Create(Developer dev)
-        {
-            context.Add(dev);
-            context.SaveChanges();
-
-            return dev;
+            users = context.Set<Developer>();
         }
 
         public int GetQuantityBugsResolved(int idDev)
