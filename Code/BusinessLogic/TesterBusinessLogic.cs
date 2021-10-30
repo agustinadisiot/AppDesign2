@@ -15,10 +15,10 @@ namespace BusinessLogic
         }
 
 
-        public Tester Add(Tester newDev)
+        public Tester Add(Tester newTester)
         {
-            newDev.Validate();
-            return testerDataAccess.Create(newDev);
+            newTester.Validate();
+            return testerDataAccess.Create(newTester);
         }
 
         public List<Bug> GetBugsByStatus(int idTester, bool filter)
