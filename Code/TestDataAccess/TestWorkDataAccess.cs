@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Utils;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,7 +17,7 @@ namespace TestDataAccess
     public class TestWorkDataAccess
     {
         private readonly DbConnection connection;
-        private readonly BugDataAccess bugDataAccess;
+        private readonly WorkDataAccess workDataAccess;
         private readonly BugManagerContext bugManagerContext;
         private readonly DbContextOptions<BugManagerContext> contextOptions;
 
@@ -34,14 +35,12 @@ namespace TestDataAccess
             connection.Open();
             bugManagerContext.Database.EnsureCreated();
 
-            Work work = new Work()
+            Project project = new Project()
             {
                 Id = 1,
-                Name = "work1",
-                Cost = 2,
-                Time = 3
+                Name = "project1"
             };
-            bugManagerContext.Works.Add(work);
+            bugManagerContext.Projects.Add(project);
             bugManagerContext.SaveChanges();
 
         }
@@ -64,7 +63,7 @@ namespace TestDataAccess
             Work expectedWork = new Work()
             {
                 Id = 1,
-                Name = "Error",
+                Name = "Work1",
                 Cost = 4,
                 Time = 2,
                 ProjectId = 2
@@ -73,14 +72,14 @@ namespace TestDataAccess
             workDataAccess.Create(new Work()
             {
                 Id = 1,
-                Name = "Error",
+                Name = "Work1",
                 Cost = 4,
                 Time = 2,
                 ProjectId = 2
 
             });
 
-            var workSaved = bugDataAccess.GetById(1);
+            var workSaved = workDataAccess.GetById(1);
             Assert.AreEqual(0, new WorkComparer().Compare(expectedWork, workSaved));
 
         }
