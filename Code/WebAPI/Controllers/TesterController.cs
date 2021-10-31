@@ -17,25 +17,27 @@ namespace WebApi.Controllers
             businessLogic = newTesterBusinessLogic;
         }
 
+        [AuthorizationFilter("Admin")]
         [HttpPost]
         public object Post([FromBody] Tester testerExpected)
         {
             return Ok(businessLogic.Add(testerExpected));
         }
 
+        [AuthorizationFilter("Tester")]
         [HttpGet("{idTester}/bugs/status/{filter}")]
         public object GetBugsByStatus([FromRoute] int idTester, [FromRoute] bool filter)
         {
             return Ok(businessLogic.GetBugsByStatus(idTester, filter));
         }
-
+        [AuthorizationFilter("Tester")]
         [HttpGet("{idTester}/bugs/name/{filter}")]
         public object GetBugsByName([FromRoute] int idTester, [FromRoute] string filter)
         {
             return Ok(businessLogic.GetBugsByName(idTester, filter));
 
         }
-
+        [AuthorizationFilter("Tester")]
         [HttpGet("{idTester}/bugs/project/{filter}")]
         public object GetBugsByProject([FromRoute] int idTester, [FromRoute] int filter)
         {

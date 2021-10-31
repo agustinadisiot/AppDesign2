@@ -25,6 +25,7 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetAll());
         }
 
+        [AuthorizationFilter("Admin/Tester")]
         [HttpPost]
         public object Post([FromBody] Bug bugExpected)
         {
@@ -43,6 +44,7 @@ namespace WebApi.Controllers
             return Ok(businessLogic.Update(id, bugModified));
         }
 
+        [AuthorizationFilter("Admin/Tester")]
         [HttpDelete("{id}")]
         public object Delete([FromRoute] int id)
         {
@@ -50,12 +52,13 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
+        [AuthorizationFilter("Admin")]
         [HttpPost("import/{format}")]
         public object ImportBugs([FromHeader] string path, [FromRoute] string format)
         {
             ImportCompany parsedFormat = (ImportCompany)Enum.Parse(typeof(ImportCompany), format, true);
             businessLogic.ImportBugs(path, parsedFormat);
-            return Ok(); // TODO devolver 201
+            return Ok();
         }
     }
 }

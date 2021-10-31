@@ -67,7 +67,9 @@ namespace TestDeveloperBusinessLogic
             mock.VerifyAll();
 
             Assert.IsTrue(isRole);
-          
+        }
+
+        [TestMethod]
         public void CreateInvalidDev()
         {
             Developer invalidDeveloper = new Developer
