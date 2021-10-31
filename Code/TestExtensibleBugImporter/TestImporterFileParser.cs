@@ -1,4 +1,3 @@
-using Domain;
 using ExtensibleBugImporter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Xml;
 namespace TestExtensibleBugImporter
 {
     [TestClass]
-    public class TestFileParser
+    public class TestImporterFileParser
     {
         const string baseDirectory = "../../../TestFiles/";
         private ExtensibleBugImporterManager extensibleBugImporter;
@@ -20,17 +19,17 @@ namespace TestExtensibleBugImporter
         public void GetAllImportersOneImporter()
         {
             string fullPath = baseDirectory + "OneEmptyImporter/";
-            List<ImporterInfo> actualImporters = extensibleBugImporter.GetAvailableImporters();
+            List<ImporterInfo> actualImportersInfo = extensibleBugImporter.GetAvailableImporters();
 
-            List<ImporterInfo> expectedImporters = new List<ImporterInfo>
+            List<ImporterInfo> expectedImportersInfo = new List<ImporterInfo>
             {
                 new ImporterInfo {
-                                ImporterName = "EmptyImporter",
+                                ImporterName = "Empty Importer",
                                 Params = new List<Parameter>{}
                 }
             };
 
-            CollectionAssert.AreEqual(expectedImporters, actualImporters /*, new BugComparer()*/ );
+            CollectionAssert.AreEquivalent(expectedImportersInfo, actualImportersInfo);
         }
 
 
