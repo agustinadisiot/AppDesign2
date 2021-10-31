@@ -30,7 +30,8 @@ namespace TestBusinessLogic
                 Id = 1,
                 Name = "work1",
                 Cost = 3,
-                Time = 2
+                Time = 2,
+                ProjectId = 1
             };
 
         }

@@ -24,7 +24,8 @@ namespace TestDomain
             {
                 Name = "Work",
                 Time = 4,
-                Cost = 2
+                Cost = 2,
+                ProjectId = 1
             };
         }
 

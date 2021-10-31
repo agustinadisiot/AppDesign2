@@ -14,13 +14,10 @@ namespace Domain
 
         public void Validate()
         {
-            bool hasNoProject = this.ProjectId == 0 &&
-                                this.Project == null &&
-                                this.ProjectName == null;
+            
             if (this.Name == null ||
                 this.Time == 0 ||
-                this.Cost == 0||
-                hasNoProject)
+                this.Cost == 0)
             {
                 throw new ValidationException();
             }
