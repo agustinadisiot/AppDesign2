@@ -19,7 +19,7 @@ namespace TestExtensibleBugImporter
         public void GetAllImportersOneImporter()
         {
             string fullPath = baseDirectory + "OneEmptyImporter/";
-            List<ImporterInfo> actualImportersInfo = extensibleBugImporter.GetAvailableImporters();
+            List<ImporterInfo> actualImportersInfo = extensibleBugImporter.GetAvailableImporters(fullPath);
 
             List<ImporterInfo> expectedImportersInfo = new List<ImporterInfo>
             {

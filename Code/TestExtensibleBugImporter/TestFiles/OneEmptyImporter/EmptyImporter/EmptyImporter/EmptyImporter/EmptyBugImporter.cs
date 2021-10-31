@@ -1,14 +1,10 @@
-﻿using Domain;
+﻿using System;
+using Domain;
 using ExtensibleBugImporter;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmptyImporter
 {
-    public class EmptyImporter : IBugImporter
+    public class EmptyBugImporter : IBugImporter
     {
         public ImporterInfo GetImporterInfo()
         {

@@ -11,6 +11,6 @@ namespace ExtensibleBugImporter
     {
         public ImporterInfo GetImporterInfo();
 
-        public List<Bug> ImportBugs(List<Parameter> parameters);
+        public List<ImportedBug> ImportBugs(List<Parameter> parameters);
     }
 }
