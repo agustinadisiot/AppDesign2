@@ -15,7 +15,7 @@ namespace TestWebApi
         {
             Work workExpected = new Work()
             {
-                Name = "Not working button",
+                Name = "implement menu",
                 Cost = 2,
                 Time = 4,
                 Id = 3
@@ -38,7 +38,7 @@ namespace TestWebApi
         {
             Work workExpected = new Work()
             {
-                Name = "Not working button",
+                Name = "Login and create user",
                 Cost = 2,
                 Time = 4,
                 Id = 3
