@@ -10,7 +10,8 @@ namespace ExtensibleBugImporter
         // Path parameter is only for testing, defaultPath is use in production
         public List<ImporterInfo> GetAvailableImporters(string path = defaultPath)
         {
-            throw new NotImplementedException();
+            List<ImporterInfo> importerInfos = new List<ImporterInfo>();
+            return importerInfos;
         }
     }
 }
