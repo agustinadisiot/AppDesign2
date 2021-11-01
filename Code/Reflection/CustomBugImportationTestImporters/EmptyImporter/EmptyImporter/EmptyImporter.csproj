@@ -5,12 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="CustomBugImportation">
-      <HintPath>..\Reflection\CustomBugImportation\CustomBugImportation\bin\Debug\net5.0\CustomBugImportation.dll</HintPath>
+      <HintPath>..\..\..\CustomBugImportation\CustomBugImportation\bin\Debug\net5.0\CustomBugImportation.dll</HintPath>
     </Reference>
   </ItemGroup>
 

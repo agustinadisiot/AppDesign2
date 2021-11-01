@@ -18,4 +18,10 @@
     <ProjectReference Include="..\ExtensibleBugImporter\ExtensibleBugImporter.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CustomBugImportation">
+      <HintPath>..\Reflection\CustomBugImportation\CustomBugImportation\bin\Debug\net5.0\CustomBugImportation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

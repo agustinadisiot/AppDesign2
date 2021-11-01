@@ -1,14 +1,10 @@
-﻿using Domain;
-using ExtensibleBugImporter;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CustomBugImportation;
 
 namespace EmptyImporter
 {
-    public class EmptyImporter : IBugImporter
+    public class Importer : IBugImporter
     {
         public ImporterInfo GetImporterInfo()
         {
@@ -19,9 +15,9 @@ namespace EmptyImporter
             };
         }
 
-        public List<Bug> ImportBugs(List<Parameter> parameters)
+        public List<ImportedBug> ImportBugs(List<Parameter> parameters)
         {
-            return new List<Bug> { };
+            return new List<ImportedBug> { };
         }
     }
 }
