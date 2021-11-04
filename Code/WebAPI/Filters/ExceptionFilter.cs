@@ -1,5 +1,6 @@
 using BusinessLogic;
 using BusinessLogicInterfaces;
+using CustomBugImportation;
 using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -30,6 +31,10 @@ namespace WebApi.Filters
             else if (context.Exception is NonexistentUserException)
             {
                 statusCode = 404;
+            }
+            else if (context.Exception is CustomImporterException)
+            {
+                statusCode = 400;
             }
             else if (context.Exception is AuthenticationException)
             {
