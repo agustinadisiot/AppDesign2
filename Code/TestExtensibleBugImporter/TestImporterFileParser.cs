@@ -114,7 +114,50 @@ namespace TestExtensibleBugImporter
             Assert.IsTrue(importedBugs.Count == 0);
         }
 
+        [TestMethod]
+        public void GetBugImporterWithParams()
+        {
+            string fullPath = baseDirectory + "ImporterWithParams";
 
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                new Parameter(){
+                    Name = "path",
+                    ParameterType = ParameterType.STRING
+                },
+                new Parameter(){
+                    Name = "port",
+                    ParameterType = ParameterType.INTEGER
+                }
+            };
+
+            List<ImportedBug> importedBugs = extensibleBugImporter.ImportBugs("ImporterWithParams", parameters, fullPath);
+
+            List<ImportedBug> expectedBugs = new List<ImportedBug>
+            {
+                new ImportedBug(){
+                    Name = "Bug1",
+                    Description = "The first bug",
+                    IsActive = true,
+                    ProjectName =  "The mega project"
+                },
+                new ImportedBug(){
+                    Name = "Bug2",
+                    Description = "The second bug",
+                    Time = 67,
+                    ProjectId =  2
+                },
+                new ImportedBug(){
+                    Name = "Bug3",
+                    Description = "The third bug",
+                    IsActive = false,
+                    CompletedById =  2,
+                    Version = "1.0.0"
+                }
+            };
+
+            Assert.IsTrue(expectedBugs.SequenceEqual(importedBugs));
+        }
     }
 
 }
