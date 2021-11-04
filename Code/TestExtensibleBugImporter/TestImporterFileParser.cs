@@ -55,6 +55,31 @@ namespace TestExtensibleBugImporter
             CollectionAssert.AreEquivalent(expectedImportersInfo, actualImportersInfo);
         }
 
+        [TestMethod]
+        public void GetTwoBugs()
+        {
+            string fullPath = baseDirectory + "TwoBugsImporter";
+            List<ImportedBug> importedBugs = extensibleBugImporter.ImportBugs("TwoBugsImporter", null, fullPath);
+
+            List<ImportedBug> expectedBugs = new List<ImportedBug>
+            {
+                new ImportedBug(){
+                    Name = "Bug1",
+                    Description = "The first bug",
+                    IsActive = true,
+                    ProjectName =  "The mega project"
+                },
+                new ImportedBug(){
+                    Name = "Bug2",
+                    Description = "The second bug",
+                    Time = 67,
+                    ProjectId =  2
+                }
+            };
+
+            Assert.IsTrue(expectedBugs.SequenceEqual(importedBugs));
+        }
+
 
     }
 

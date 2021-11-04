@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Reference Include="CustomBugImportation">
-      <HintPath>..\..\..\CustomBugImportation\CustomBugImportation\bin\Debug\net5.0\CustomBugImportation.dll</HintPath>
+      <HintPath>..\..\..\CustomBugImportation\CustomBugImportation\obj\Debug\net5.0\CustomBugImportation.dll</HintPath>
     </Reference>
   </ItemGroup>
 

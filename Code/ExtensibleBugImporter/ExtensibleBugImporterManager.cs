@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using Domain; //TODO eliminar
 namespace ExtensibleBugImporter
 {
     public class ExtensibleBugImporterManager
@@ -39,6 +38,41 @@ namespace ExtensibleBugImporter
                 }
             }
             return importerInfos;
+        }
+
+        public List<ImportedBug> ImportBugs(string importerName, List<Parameter> parameters, string path = defaultPath)
+        {
+            List<ImportedBug> bugs = new List<ImportedBug>();
+
+            string[] filePaths = Directory.GetFiles(path);
+            foreach (string filePath in filePaths)
+            {
+                FileInfo dllFile = new FileInfo(filePath);
+                Assembly assembly = Assembly.LoadFile(dllFile.FullName);
+                foreach (Type type in assembly.GetTypes())
+                {
+                    try
+                    {
+                        if (typeof(IBugImporter).IsAssignableFrom(type))
+                        {
+                            IBugImporter provider = (IBugImporter)Activator.CreateInstance(type);
+                            string actualImportName = provider.GetImporterInfo().ImporterName;
+                            if (actualImportName == importerName)
+                            {
+                                bugs = provider.ImportBugs(parameters);
+                                return bugs;
+                            }
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                        // TODO revise error handling
+                        // example: when a importer doesn't compile?
+                    }
+                }
+            }
+            return bugs;
         }
     }
 }
