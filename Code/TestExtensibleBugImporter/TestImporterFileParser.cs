@@ -110,8 +110,9 @@ namespace TestExtensibleBugImporter
         public void GetBugsFailedImporter()
         {
             string fullPath = baseDirectory + "FailedImporter";
-            List<ImportedBug> importedBugs = extensibleBugImporter.ImportBugs("FailedImporter", null, fullPath);
-            Assert.IsTrue(importedBugs.Count == 0);
+
+            Assert.ThrowsException<CustomImporterException>(() =>
+             extensibleBugImporter.ImportBugs("FailedImporter", null, fullPath));
         }
 
         [TestMethod]
@@ -123,11 +124,13 @@ namespace TestExtensibleBugImporter
             {
                 new Parameter(){
                     Name = "path",
-                    ParameterType = ParameterType.STRING
+                    Type = ParameterType.STRING,
+                    Value = "example.com"
                 },
                 new Parameter(){
                     Name = "port",
-                    ParameterType = ParameterType.INTEGER
+                    Type = ParameterType.INTEGER,
+                    Value = "80"
                 }
             };
 
