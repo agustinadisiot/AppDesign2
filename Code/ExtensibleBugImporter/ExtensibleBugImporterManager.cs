@@ -67,8 +67,8 @@ namespace ExtensibleBugImporter
                     }
                     catch (Exception e)
                     {
-                        // TODO revise error handling
-                        // example: when a importer doesn't compile?
+                        if (e is CustomImporterException)
+                            throw; // CustomImporter exception is re-throw
                     }
                 }
             }

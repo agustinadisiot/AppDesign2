@@ -107,12 +107,19 @@ namespace TestExtensibleBugImporter
         }
 
         [TestMethod]
-        public void GetBugsFailedImporter()
+        public void GetBugsFailedImporterCorrectExceptionIsThrow()
         {
             string fullPath = baseDirectory + "FailedImporter";
 
-            Assert.ThrowsException<CustomImporterException>(() =>
-             extensibleBugImporter.ImportBugs("FailedImporter", null, fullPath));
+            try
+            {
+                extensibleBugImporter.ImportBugs("FailedImporter", null, fullPath);
+            }
+            catch (CustomImporterException e)
+            {
+                Assert.IsTrue(e.Message == "Wrong parameters");
+            }
+
         }
 
         [TestMethod]
