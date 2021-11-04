@@ -106,6 +106,14 @@ namespace TestExtensibleBugImporter
             Assert.IsTrue(expectedBugs.SequenceEqual(importedBugs));
         }
 
+        [TestMethod]
+        public void GetBugsFailedImporter()
+        {
+            string fullPath = baseDirectory + "FailedImporter";
+            List<ImportedBug> importedBugs = extensibleBugImporter.ImportBugs("FailedImporter", null, fullPath);
+            Assert.IsTrue(importedBugs.Count == 0);
+        }
+
 
     }
 
