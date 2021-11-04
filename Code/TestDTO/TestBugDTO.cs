@@ -1,3 +1,4 @@
+using Domain;
 using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
@@ -102,5 +103,42 @@ namespace TestDTO
             Assert.AreEqual(expected, bugDTO.Time);
         }
 
+        [TestMethod]
+        public void FromBugToDTO()
+        {
+            Bug bug = new Bug()
+            {
+                Name = "bug",
+                Description = "button not work",
+                Version = "4.5",
+                Time = 4,
+                ProjectId = 2,
+                CompletedById = 6,
+                Id = 3
+            };
+
+            BugDTO bugDTO = new BugDTO(bug);
+
+            Assert.AreEqual(bug.Id, bugDTO.Id);
+        }
+
+        [TestMethod]
+        public void FromDTOtoBug()
+        {
+            BugDTO bugDTO = new BugDTO()
+            {
+                Name = "bug",
+                Description = "button not work",
+                Version = "4.5",
+                Time = 4,
+                ProjectId = 2,
+                CompletedById = 6,
+                Id = 3
+            };
+
+            Bug bug = bugDTO.ConvertToDomain();
+
+            Assert.AreEqual(bug.Id, bugDTO.Id);
+        }
     }
 }

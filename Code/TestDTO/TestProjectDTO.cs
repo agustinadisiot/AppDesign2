@@ -1,3 +1,4 @@
+using Domain;
 using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
@@ -31,6 +32,34 @@ namespace TestDTO
             projectDTO.Name = "Project1";
             string expected = "Project1";
             Assert.AreEqual(expected, projectDTO.Name);
+        }
+
+        [TestMethod]
+        public void FromProjectToDTO()
+        {
+            Project project = new Project()
+            {
+               Id= 3,
+               Name = "project"
+            };
+
+            ProjectDTO testerDTO = new ProjectDTO(project);
+
+            Assert.AreEqual(project.Id, projectDTO.Id);
+        }
+
+        [TestMethod]
+        public void FromDTOtoProject()
+        {
+            ProjectDTO projectDTO = new ProjectDTO()
+            {
+                Id = 3,
+                Name = "project"
+            };
+
+            ProjectDTO project = projectDTO.ConvertToDomain();
+
+            Assert.AreEqual(project.Id, projectDTO.Id);
         }
     }
 }

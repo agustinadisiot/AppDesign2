@@ -1,4 +1,5 @@
-﻿using DTO;
+﻿using Domain;
+using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using TDO;
@@ -94,6 +95,44 @@ namespace TestDTO
             testerDTO.Cost = 4;
             int expected = 4;
             Assert.AreEqual(expected, testerDTO.Cost);
+        }
+
+        [TestMethod]
+        public void FromTesterToDTO()
+        {
+            Tester tester = new Tester()
+            {
+                Name = "agus",
+                Lastname = "perez",
+                Id = 3,
+                Username = "perezsoy",
+                Password = "sdfgh",
+                Email = "xcvbnrty@cvbnm",
+                Cost = 6,
+            };
+
+            TesterDTO testerDTO = new TesterDTO(tester);
+
+            Assert.AreEqual(tester.Id, testerDTO.Id);
+        }
+
+        [TestMethod]
+        public void FromDTOtoTester()
+        {
+            TesterDTO testerDTO = new TesterDTO()
+            {
+                Name = "agus",
+                Lastname = "perez",
+                Id = 3,
+                Username = "perezsoy",
+                Password = "sdfgh",
+                Email = "xcvbnrty@cvbnm",
+                Cost = 6,
+            };
+
+            TesterDTO tester = testerDTO.ConvertToDomain();
+
+            Assert.AreEqual(tester.Id, testerDTO.Id);
         }
     }
 }
