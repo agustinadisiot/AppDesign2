@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-
+using Domain; //TODO eliminar
 namespace ExtensibleBugImporter
 {
     public class ExtensibleBugImporterManager

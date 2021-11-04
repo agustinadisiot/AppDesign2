@@ -2,13 +2,14 @@ using ExtensibleBugImporter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using CustomBugImportation;
+using System.Linq;
 
 namespace TestExtensibleBugImporter
 {
     [TestClass]
     public class TestImporterFileParser
     {
-        const string baseDirectory = "./TestFiles/";
+        const string baseDirectory = "../../../TestFiles/";
         private ExtensibleBugImporterManager extensibleBugImporter;
         [TestInitialize]
         public void CreateBugParserInstance()
@@ -19,7 +20,7 @@ namespace TestExtensibleBugImporter
         [TestMethod]
         public void GetAllImportersOneImporter()
         {
-            string fullPath = baseDirectory + "OneEmptyImporter";
+            string fullPath = baseDirectory + "OneEmptyImporter/EmptyImporter.dll";
             List<ImporterInfo> actualImportersInfo = extensibleBugImporter.GetAvailableImporters(fullPath);
 
             List<ImporterInfo> expectedImportersInfo = new List<ImporterInfo>
