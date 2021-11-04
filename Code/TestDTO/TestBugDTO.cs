@@ -114,7 +114,12 @@ namespace TestDTO
                 Time = 4,
                 ProjectId = 2,
                 CompletedById = 6,
-                Id = 3
+                Id = 3,
+                Project = new Project()
+                {
+                    Id = 2,
+                    Name = "project",
+                },
             };
 
             BugDTO bugDTO = new BugDTO(bug);

@@ -21,7 +21,7 @@ namespace TestDTO
         {
             developerDTO = new DeveloperDTO()
             {
-                Id = 0,
+                Id = 1,
                 Username = "agustinadisiot",
                 Name = "Agustina",
                 Lastname = "Disiot",
@@ -131,7 +131,7 @@ namespace TestDTO
                 Cost = 6,
             };
 
-            DeveloperDTO dev = developerDTO.ConvertToDomain();
+            Developer dev = devDTO.ConvertToDomain();
 
             Assert.AreEqual(dev.Id, devDTO.Id);
         }

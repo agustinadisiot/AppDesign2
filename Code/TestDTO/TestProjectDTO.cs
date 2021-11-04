@@ -19,7 +19,7 @@ namespace TestDTO
 
         [TestInitialize]
         public void Setup()
-        {
+        { 
             projectDTO = new ProjectDTO()
             {
                 Name = "Project",
@@ -43,7 +43,7 @@ namespace TestDTO
                Name = "project"
             };
 
-            ProjectDTO testerDTO = new ProjectDTO(project);
+            ProjectDTO projectDTO = new ProjectDTO(project);
 
             Assert.AreEqual(project.Id, projectDTO.Id);
         }
@@ -57,7 +57,7 @@ namespace TestDTO
                 Name = "project"
             };
 
-            ProjectDTO project = projectDTO.ConvertToDomain();
+            Project project = projectDTO.ConvertToDomain();
 
             Assert.AreEqual(project.Id, projectDTO.Id);
         }

@@ -1,4 +1,7 @@
-﻿namespace DTO
+﻿using Domain;
+using System;
+
+namespace DTO
 {
     public class BugDTO
     {
@@ -12,10 +15,40 @@
         public int CompletedById { get; set; }
         public bool IsActive { get; set; }
 
+        public BugDTO(Bug bug)
+        {
+            Name = bug.Name;
+            Description = bug.Description;
+            Version = bug.Version;
+            Time = bug.Time;
+            ProjectId = bug.Project.Id;
+            ProjectName = bug.Project.Name;
+            Id = bug.Id;
+            IsActive = bug.IsActive;
+            CompletedById = (int)bug.CompletedById;
+        }
+
         public BugDTO()
         {
             IsActive = true;
-    }
+        }
+
+        public Bug ConvertToDomain()
+        {
+            Bug bug = new Bug()
+            {
+                Name = this.Name,
+                Description = this.Description,
+                Version = this.Version,
+                CompletedById = this.CompletedById,
+                Id = this.Id,
+                IsActive = this.IsActive,
+                ProjectId = this.ProjectId,
+                ProjectName = this.ProjectName,
+                Time = this.Time,
+            };
+            return bug;
+        }
     }
 
    

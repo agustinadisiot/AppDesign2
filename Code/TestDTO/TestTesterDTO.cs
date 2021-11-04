@@ -130,7 +130,7 @@ namespace TestDTO
                 Cost = 6,
             };
 
-            TesterDTO tester = testerDTO.ConvertToDomain();
+            Tester tester = testerDTO.ConvertToDomain();
 
             Assert.AreEqual(tester.Id, testerDTO.Id);
         }
