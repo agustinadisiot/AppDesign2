@@ -1,8 +1,9 @@
-﻿using Domain;
+﻿using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using TDO;
 
-namespace TestDomain
+namespace TestDTO
 {
     [TestClass]
     public class TestTesterDTO
@@ -82,16 +83,9 @@ namespace TestDomain
                 Name = "Project2",
             }
         };
-            testerDTO.Projects = expectedProjects;
-            var actualProjects = testerDTO.Projects;
+            testerDTO.ProjectsDTO = expectedProjects;
+            var actualProjects = testerDTO.ProjectsDTO;
             CollectionAssert.AreEqual(expectedProjects, actualProjects);
-        }
-
-        [TestMethod]
-        public void ProjectsGetEmtpy()
-        {
-            var actualProjects = testerDTO.Projects;
-            Assert.IsTrue(actualProjects.Count == 0);
         }
 
         [TestMethod]

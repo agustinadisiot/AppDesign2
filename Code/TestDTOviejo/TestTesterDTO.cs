@@ -1,13 +1,15 @@
-﻿using DTO;
+﻿using Domain;
+using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using TDO;
 
-namespace TestDTO
+namespace TestDTOviejo
 {
     [TestClass]
-    public class TestDeveloperDTO
+    public class TestTesterDTO
     {
-        private DeveloperDTO developerDTO;
+        private TesterDTO testerDTO;
 
         [TestCleanup]
         public void TearDown()
@@ -18,7 +20,7 @@ namespace TestDTO
         [TestInitialize]
         public void Setup()
         {
-            developerDTO = new DeveloperDTO()
+            testerDTO = new TesterDTO()
             {
                 Id = 0,
                 Username = "agustinadisiot",
@@ -32,43 +34,42 @@ namespace TestDTO
         [TestMethod]
         public void IdGetSet()
         {
-            developerDTO.Id = 1;
+            testerDTO.Id = 1;
             int expected = 1;
-            Assert.AreEqual(expected, developerDTO.Id);
+            Assert.AreEqual(expected, testerDTO.Id);
         }
 
         [TestMethod]
         public void NameGetSet()
         {
-            developerDTO.Name = "Ivan";
+            testerDTO.Name = "Ivan";
             string expected = "Ivan";
-            Assert.AreEqual(expected, developerDTO.Name);
+            Assert.AreEqual(expected, testerDTO.Name);
         }
 
         [TestMethod]
         public void LastnameGetSet()
         {
-            developerDTO.Lastname = "Monjardin";
+            testerDTO.Lastname = "Monjardin";
             string expected = "Monjardin";
-            Assert.AreEqual(expected, developerDTO.Lastname);
+            Assert.AreEqual(expected, testerDTO.Lastname);
         }
 
         [TestMethod]
         public void UsernameGetSet()
         {
-            developerDTO.Username = "ivom";
+            testerDTO.Username = "ivom";
             string expected = "ivom";
-            Assert.AreEqual(expected, developerDTO.Username);
+            Assert.AreEqual(expected, testerDTO.Username);
         }
 
         [TestMethod]
         public void PasswordGetSet()
         {
-            developerDTO.Password = "myPasscode";
+            testerDTO.Password = "myPasscode";
             string expected = "myPasscode";
-            Assert.AreEqual(expected, developerDTO.Password);
+            Assert.AreEqual(expected, testerDTO.Password);
         }
-
 
         [TestMethod]
         public void ProjectsGet()
@@ -83,18 +84,25 @@ namespace TestDTO
                 Name = "Project2",
             }
         };
-            developerDTO.ProjectsDTO = expectedProjects;
-            var actualProjects = developerDTO.ProjectsDTO;
+            testerDTO.ProjectsDTO = expectedProjects;
+            var actualProjects = testerDTO.ProjectsDTO;
             CollectionAssert.AreEqual(expectedProjects, actualProjects);
         }
 
+        [TestMethod]
+        public void ProjectsGetEmtpy()
+        {
+            var actualProjects = testerDTO.ProjectsDTO;
+            Assert.IsTrue(actualProjects.Count == 0);
+        }
 
         [TestMethod]
         public void CostGetSet()
         {
-            developerDTO.Cost = 4;
+            testerDTO.Cost = 4;
             int expected = 4;
-            Assert.AreEqual(expected, developerDTO.Cost);
+            Assert.AreEqual(expected, testerDTO.Cost);
         }
     }
 }
+

@@ -1,8 +1,9 @@
-﻿using DTO;
+﻿using Domain;
+using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace TestDTO
+namespace TestDTOviejo
 {
     [TestClass]
     public class TestDeveloperDTO
