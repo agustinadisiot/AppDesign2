@@ -113,5 +113,33 @@ namespace TestJSONImporter
 
             Assert.IsTrue(actualBugs.Count == 0);
         }
+
+        [TestMethod]
+        public void MissingInfoBug()
+        {
+            string fullPath = baseDirectory + "MissingInfoBug.json";
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                new Parameter(){
+                    Name = "path",
+                    Type = ParameterType.STRING,
+                    Value = fullPath
+                }
+            };
+            List<ImportedBug> actualBugs = jsonImporter.ImportBugs(parameters);
+
+            List<ImportedBug> expectedBugs = new List<ImportedBug>()
+            {
+                new ImportedBug(){
+                Name = "Missing info  Bug",
+                IsActive = true,
+                ProjectId = 5,
+                ProjectName = "The Project Revange",
+                Time = 200
+                }
+            };
+
+            Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
+        }
     }
 }
