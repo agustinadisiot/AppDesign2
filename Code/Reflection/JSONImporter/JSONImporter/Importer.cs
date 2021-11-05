@@ -16,7 +16,15 @@ namespace JSONImporter
         public List<ImportedBug> ImportBugs(List<Parameter> parameters)
         {
             string fileName = parameters.Find(p => p.Name == "path").Value;
-            string jsonString = File.ReadAllText(fileName);
+            string jsonString = "";
+            try
+            {
+                jsonString = File.ReadAllText(fileName);
+            }
+            catch (FileNotFoundException e)
+            {
+                throw new CustomImporterException("Error acceding File");
+            }
             var importedBugs = new List<ImportedBug>();
             try
             {
