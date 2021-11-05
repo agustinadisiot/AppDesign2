@@ -29,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugParser", "BugParser\BugP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryInterfaces", "RepositoryInterfaces\RepositoryInterfaces.csproj", "{5DE350FD-6E8B-4381-99A4-427F338CE2C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestExtensibleBugImporter", "TestExtensibleBugImporter\TestExtensibleBugImporter.csproj", "{5B84087C-F8BB-4912-8D1A-9C3534781EC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCustomBugImporter", "TestExtensibleBugImporter\TestCustomBugImporter.csproj", "{5B84087C-F8BB-4912-8D1A-9C3534781EC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensibleBugImporter", "ExtensibleBugImporter\ExtensibleBugImporter.csproj", "{25562491-036D-40D1-996B-6533585B59C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomBugImporter", "ExtensibleBugImporter\CustomBugImporter.csproj", "{25562491-036D-40D1-996B-6533585B59C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
