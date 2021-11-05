@@ -195,5 +195,25 @@ namespace TestJSONImporter
             );
 
         }
+
+        [TestMethod]
+        public void GetImporterInfo()
+        {
+            ImporterInfo actualImporterInfo = jsonImporter.GetImporterInfo();
+
+            var expectedImporterInfo = new ImporterInfo
+            {
+                ImporterName = "JSON Importer",
+                Params = new List<Parameter>
+                {
+                    new Parameter(){
+                        Name = "path",
+                        Type = ParameterType.STRING
+                    }
+                }
+            };
+
+            Assert.AreEqual(expectedImporterInfo, actualImporterInfo);
+        }
     }
 }
