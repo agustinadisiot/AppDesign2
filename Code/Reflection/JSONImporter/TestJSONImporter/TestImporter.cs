@@ -159,5 +159,23 @@ namespace TestJSONImporter
             );
 
         }
+
+        [TestMethod]
+        public void NoFileImport()
+        {
+            string fullPath = baseDirectory + "adsfasdf";
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                new Parameter(){
+                    Name = "path",
+                    Type = ParameterType.STRING,
+                    Value = fullPath
+                }
+            };
+            Assert.ThrowsException<CustomImporterException>(() =>
+                            jsonImporter.ImportBugs(parameters)
+            );
+
+        }
     }
 }
