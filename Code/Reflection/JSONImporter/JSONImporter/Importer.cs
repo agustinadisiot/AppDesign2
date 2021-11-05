@@ -16,6 +16,14 @@ namespace JSONImporter
         public List<ImportedBug> ImportBugs(List<Parameter> parameters)
         {
             string fileName = parameters.Find(p => p.Name == "path").Value;
+            string jsonString = GetJSONString(fileName);
+            var importedBugs = DeserializeBugs(jsonString);
+
+            return importedBugs;
+        }
+
+        private string GetJSONString(string fileName)
+        {
             string jsonString = "";
             try
             {
@@ -25,6 +33,11 @@ namespace JSONImporter
             {
                 throw new CustomImporterException("Error acceding File");
             }
+            return jsonString;
+        }
+
+        private List<ImportedBug> DeserializeBugs(string jsonString)
+        {
             var importedBugs = new List<ImportedBug>();
             try
             {
