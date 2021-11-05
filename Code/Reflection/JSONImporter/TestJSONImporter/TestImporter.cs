@@ -1,5 +1,8 @@
+using CustomBugImportation;
 using JSONImporter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TestJSONImporter
 {
@@ -18,26 +21,31 @@ namespace TestJSONImporter
         [TestMethod]
         public void ImportOneBug()
         {
-            string fullPath = baseDirectory + "OneBug.xml";
+            string fullPath = baseDirectory + "OneBug.json";
             List<Parameter> parameters = new List<Parameter>()
             {
+                new Parameter(){
+                    Name = "path",
+                    Type = ParameterType.STRING,
+                    Value = fullPath
+                }
+            };
+            List<ImportedBug> actualBugs = jsonImporter.ImportBugs(parameters);
 
-            }
-            List<ImportedBug> actualBugs = jsonImporter.Import(fullPath);
-
-            List<Bug> expectedBugs = new List<Bug>()
+            List<ImportedBug> expectedBugs = new List<ImportedBug>()
             {
-                new Bug(){
-                Name = "Error en el envío de correo",
-                Description = "El error se produce cuando el usuario no tiene un correo asignado",
-                Version = "1.0",
+                new ImportedBug(){
+                Name = "Bug1",
+                Description = "This is the first bug from the json",
+                Version = "1.00",
                 IsActive = true,
-                CompletedBy = null,
-                ProjectName = "Nombre del Proyecto"
+                ProjectId = 3,
+                ProjectName = "The Project",
+                Time = 100
                 }
             };
 
-            CollectionAssert.AreEqual(expectedBugs, actualBugs, new BugComparer());
+            Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
         }
     }
 }

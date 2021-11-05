@@ -13,4 +13,18 @@
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JSONImporter\JSONImporter.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CustomBugImportation">
+      <HintPath>..\..\CustomBugImportation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
