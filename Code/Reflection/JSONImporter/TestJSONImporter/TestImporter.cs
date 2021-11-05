@@ -47,5 +47,52 @@ namespace TestJSONImporter
 
             Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
         }
+
+        [TestMethod]
+        public void ImportThreeBugs()
+        {
+            string fullPath = baseDirectory + "ThreeBugs.json";
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                new Parameter(){
+                    Name = "path",
+                    Type = ParameterType.STRING,
+                    Value = fullPath
+                }
+            };
+            List<ImportedBug> actualBugs = jsonImporter.ImportBugs(parameters);
+
+            List<ImportedBug> expectedBugs = new List<ImportedBug>()
+            {
+                new ImportedBug(){
+                Name = "Bug1",
+                Description = "This is the first bug from the json",
+                Version = "1.00",
+                IsActive = true,
+                ProjectId = 3,
+                ProjectName = "The Project",
+                Time = 100
+                },
+                new ImportedBug(){
+                Name = "Bug2",
+                Description = "This is the second bug from the json",
+                Version = "2.2",
+                IsActive = false,
+                ProjectId = 5,
+                ProjectName = "The Project Revange",
+                CompletedById = 2,
+                Time = 200
+                },
+                new ImportedBug(){
+                Name = "Third Bug",
+                IsActive = true,
+                ProjectId = 5,
+                ProjectName = "The Project Revange",
+                Time = 350
+                }
+            };
+
+            Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
+        }
     }
 }
