@@ -21,7 +21,7 @@ namespace JSONImporter
             {
                 jsonString = File.ReadAllText(fileName);
             }
-            catch (FileNotFoundException e)
+            catch (Exception e) when (e is DirectoryNotFoundException || e is FileNotFoundException)
             {
                 throw new CustomImporterException("Error acceding File");
             }
