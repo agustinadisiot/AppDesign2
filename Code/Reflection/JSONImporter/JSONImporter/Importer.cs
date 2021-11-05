@@ -8,9 +8,25 @@ namespace JSONImporter
 {
     public class Importer : IBugImporter
     {
+        private ImporterInfo info;
+        public Importer()
+        {
+            info = new ImporterInfo()
+            {
+                ImporterName = "JSON Importer",
+                Params = new List<Parameter>
+                {
+                    new Parameter(){
+                        Name = "path",
+                        Type = ParameterType.STRING
+                    }
+                }
+            };
+        }
+
         public ImporterInfo GetImporterInfo()
         {
-            throw new NotImplementedException();
+            return info;
         }
 
         public List<ImportedBug> ImportBugs(List<Parameter> parameters)
@@ -43,7 +59,7 @@ namespace JSONImporter
             {
                 importedBugs = JsonSerializer.Deserialize<List<ImportedBug>>(jsonString);
             }
-            catch (JsonException e)
+            catch (JsonException)
             {
                 throw new CustomImporterException("Error reading JSON");
             }
