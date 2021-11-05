@@ -94,5 +94,24 @@ namespace TestJSONImporter
 
             Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
         }
+
+
+        [TestMethod]
+        public void ImportEmptyBug()
+        {
+            string fullPath = baseDirectory + "Empty.json";
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                new Parameter(){
+                    Name = "path",
+                    Type = ParameterType.STRING,
+                    Value = fullPath
+                }
+            };
+            List<ImportedBug> actualBugs = jsonImporter.ImportBugs(parameters);
+
+
+            Assert.IsTrue(actualBugs.Count == 0);
+        }
     }
 }
