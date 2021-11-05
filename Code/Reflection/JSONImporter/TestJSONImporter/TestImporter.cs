@@ -141,5 +141,23 @@ namespace TestJSONImporter
 
             Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
         }
+
+        [TestMethod]
+        public void FailedJsonImport()
+        {
+            string fullPath = baseDirectory + "FailedJSON.json";
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                new Parameter(){
+                    Name = "path",
+                    Type = ParameterType.STRING,
+                    Value = fullPath
+                }
+            };
+            Assert.ThrowsException<CustomImporterException>(() =>
+                            jsonImporter.ImportBugs(parameters)
+            );
+
+        }
     }
 }

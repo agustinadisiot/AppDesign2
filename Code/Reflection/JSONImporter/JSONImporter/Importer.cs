@@ -17,7 +17,15 @@ namespace JSONImporter
         {
             string fileName = parameters.Find(p => p.Name == "path").Value;
             string jsonString = File.ReadAllText(fileName);
-            var importedBugs = JsonSerializer.Deserialize<List<ImportedBug>>(jsonString);
+            var importedBugs = new List<ImportedBug>();
+            try
+            {
+                importedBugs = JsonSerializer.Deserialize<List<ImportedBug>>(jsonString);
+            }
+            catch (JsonException e)
+            {
+                throw new CustomImporterException("Error reading JSON");
+            }
             return importedBugs;
         }
     }
