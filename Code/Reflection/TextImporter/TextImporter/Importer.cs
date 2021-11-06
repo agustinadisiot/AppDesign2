@@ -8,6 +8,8 @@ namespace TextImporter
     {
         private ImporterInfo info;
         private const string fileExtension = ".txt";
+        const string pathParameterName = "Folder path";
+        const string fileNameParameterName = "File Name";
         public Importer()
         {
             info = new ImporterInfo()
@@ -16,11 +18,11 @@ namespace TextImporter
                 Params = new List<Parameter>
                 {
                     new Parameter(){
-                    Name = "Folder path",
+                    Name = pathParameterName,
                     Type = ParameterType.STRING,
                 },
                 new Parameter(){
-                    Name = "File Name",
+                    Name = fileNameParameterName,
                     Type = ParameterType.INTEGER,
                 }
                 }
@@ -42,8 +44,8 @@ namespace TextImporter
 
         private string GetFilePath(List<Parameter> parameters)
         {
-            string path = parameters.Find(p => p.Name == "Folder path").Value;
-            string fileNameText = parameters.Find(p => p.Name == "File Name").Value;
+            string path = parameters.Find(p => p.Name == pathParameterName).Value;
+            string fileNameText = parameters.Find(p => p.Name == fileNameParameterName).Value;
 
             int fileName;
             bool parsed = Int32.TryParse(fileNameText, out fileName);
@@ -82,16 +84,28 @@ namespace TextImporter
         private List<ImportedBug> ImportBugsFromLines(string[] lines)
         {
             List<ImportedBug> bugs = new List<ImportedBug>();
+
+            const int projectNameStart = 0;
+            const int projectNameLength = 30;
+            const int NameStart = 34;
+            const int NameLength = 60;
+            const int DescriptionStart = 94;
+            const int DescriptionLength = 150;
+            const int VersionStart = 244;
+            const int VersionLength = 10;
+            const int isActivePos = 254;
+            const int TimeStart = 255;
+            const int TimeLength = 4;
             foreach (string line in lines)
             {
                 bugs.Add(new ImportedBug()
                 {
-                    ProjectName = line.Substring(0, 30).Trim(),
-                    Name = line.Substring(34, 60).Trim(),
-                    Description = line.Substring(94, 150).Trim(),
-                    Version = line.Substring(244, 10).Trim(),
-                    IsActive = (line[254].ToString()) == "1",
-                    Time = Int32.Parse(line.Substring(255, 4).Trim()),
+                    ProjectName = line.Substring(projectNameStart, projectNameLength).Trim(),
+                    Name = line.Substring(NameStart, NameLength).Trim(),
+                    Description = line.Substring(DescriptionStart, DescriptionLength).Trim(),
+                    Version = line.Substring(VersionStart, VersionLength).Trim(),
+                    IsActive = (line[isActivePos].ToString()) == "1",
+                    Time = Int32.Parse(line.Substring(TimeStart, TimeLength).Trim()),
                 });
             }
             return bugs;
