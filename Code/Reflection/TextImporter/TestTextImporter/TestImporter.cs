@@ -71,9 +71,8 @@ namespace TestTextImporter
                 Description = "El error se produce cuando el usuario no tiene un correo asignado.",
                 Version = "1.0",
                 IsActive = true,
-                ProjectId = 1,
                 ProjectName = "Nombre del Proyecto 1",
-                Time = 0
+                Time = 23
                 }
             };
             Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
@@ -100,18 +99,16 @@ namespace TestTextImporter
                 Description = "El error se produce cuando el usuario no tiene un correo asignado.",
                 Version = "1.0",
                 IsActive = true,
-                ProjectId = 1,
                 ProjectName = "Nombre del Proyecto 1",
-                Time = 0
+                Time = 2
                 },
                 new ImportedBug(){
                 Name = "Error en el envío de correo2",
                 Description = "El error se produce cuando el usuario no tiene un correo asignado 2.",
                 Version = "1.0",
                 IsActive = true,
-                ProjectId = 2,
                 ProjectName = "Nombre del Proyecto 2",
-                Time = 0
+                Time = 9999
                 }
             };
             Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
@@ -130,9 +127,9 @@ namespace TestTextImporter
                 }
             };
 
-            List<ImportedBug> actualBugs = textImporter.ImportBugs(parameters);
-            List<ImportedBug> expectedBugs = new List<ImportedBug>() { };
-            Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
+            Assert.ThrowsException<CustomImporterException>(() =>
+                            textImporter.ImportBugs(parameters)
+            );
         }
 
         [TestMethod]
