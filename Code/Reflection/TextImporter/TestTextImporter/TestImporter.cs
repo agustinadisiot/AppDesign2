@@ -9,13 +9,19 @@ namespace TestTextImporter
     [TestClass]
     public class TestImporter
     {
-        const string baseDirectory = "../../../TestFiles/";
+        private Parameter baseDirectoy;
         private Importer textImporter;
 
         [TestInitialize]
         public void CreateImporterInstance()
         {
             textImporter = new Importer();
+            baseDirectoy = new Parameter()
+            {
+                Name = "Folder path",
+                Type = ParameterType.STRING,
+                Value = "../../../TestFiles/"
+            };
         }
 
         [TestMethod]
@@ -49,11 +55,7 @@ namespace TestTextImporter
         {
             List<Parameter> parameters = new List<Parameter>()
             {
-                new Parameter(){
-                    Name = "Folder path",
-                    Type = ParameterType.STRING,
-                    Value = baseDirectory
-                },
+                baseDirectoy,
                 new Parameter(){
                     Name = "File Name",
                     Type = ParameterType.INTEGER,
@@ -65,16 +67,123 @@ namespace TestTextImporter
             List<ImportedBug> expectedBugs = new List<ImportedBug>()
             {
                 new ImportedBug(){
-                Name = "Bug1",
-                Description = "This is the first bug from the json",
-                Version = "1.00",
+                Name = "Error en el envío de correo",
+                Description = "El error se produce cuando el usuario no tiene un correo asignado.",
+                Version = "1.0",
                 IsActive = true,
-                ProjectId = 3,
-                ProjectName = "The Project",
-                Time = 100
+                ProjectId = 1,
+                ProjectName = "Nombre del Proyecto 1",
+                Time = 0
                 }
             };
             Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
+        }
+
+        [TestMethod]
+        public void ImportTwoBug()
+        {
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                baseDirectoy,
+                new Parameter(){
+                    Name = "File Name",
+                    Type = ParameterType.INTEGER,
+                    Value = "2"
+                }
+            };
+
+            List<ImportedBug> actualBugs = textImporter.ImportBugs(parameters);
+            List<ImportedBug> expectedBugs = new List<ImportedBug>()
+            {
+                new ImportedBug(){
+                Name = "Error en el envío de correo",
+                Description = "El error se produce cuando el usuario no tiene un correo asignado.",
+                Version = "1.0",
+                IsActive = true,
+                ProjectId = 1,
+                ProjectName = "Nombre del Proyecto 1",
+                Time = 0
+                },
+                new ImportedBug(){
+                Name = "Error en el envío de correo2",
+                Description = "El error se produce cuando el usuario no tiene un correo asignado 2.",
+                Version = "1.0",
+                IsActive = true,
+                ProjectId = 2,
+                ProjectName = "Nombre del Proyecto 2",
+                Time = 0
+                }
+            };
+            Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
+        }
+
+        [TestMethod]
+        public void ImportNoBug()
+        {
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                baseDirectoy,
+                new Parameter(){
+                    Name = "File Name",
+                    Type = ParameterType.INTEGER,
+                    Value = "0"
+                }
+            };
+
+            List<ImportedBug> actualBugs = textImporter.ImportBugs(parameters);
+            List<ImportedBug> expectedBugs = new List<ImportedBug>() { };
+            Assert.IsTrue(actualBugs.SequenceEqual(expectedBugs));
+        }
+
+        [TestMethod]
+        public void NoFileImport()
+        {
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                baseDirectoy,
+                new Parameter(){
+                    Name = "File Name",
+                    Type = ParameterType.INTEGER,
+                    Value = "1232131"
+                }
+            };
+            Assert.ThrowsException<CustomImporterException>(() =>
+                            textImporter.ImportBugs(parameters)
+            );
+        }
+
+        [TestMethod]
+        public void FailedFileImport()
+        {
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                baseDirectoy,
+                new Parameter(){
+                    Name = "File Name",
+                    Type = ParameterType.INTEGER,
+                    Value = "-1"
+                }
+            };
+            Assert.ThrowsException<CustomImporterException>(() =>
+                            textImporter.ImportBugs(parameters)
+            );
+        }
+
+        [TestMethod]
+        public void ParamNotNumber()
+        {
+            List<Parameter> parameters = new List<Parameter>()
+            {
+                baseDirectoy,
+                new Parameter(){
+                    Name = "File Name",
+                    Type = ParameterType.INTEGER,
+                    Value = "Bug"
+                }
+            };
+            Assert.ThrowsException<CustomImporterException>(() =>
+                            textImporter.ImportBugs(parameters)
+            );
         }
     }
 }
