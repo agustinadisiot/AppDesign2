@@ -26,7 +26,7 @@ import { ComponentsModule } from './components/components.module';
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
+    AdminLayoutComponent, // EXP: aca van todas las "pantallas" diferentes que puede haber
     AuthLayoutComponent
   ],
   providers: [],
