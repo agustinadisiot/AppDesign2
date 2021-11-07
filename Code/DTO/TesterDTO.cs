@@ -3,7 +3,7 @@ using DTO;
 using System;
 using System.Collections.Generic;
 
-namespace TDO
+namespace DTO
 {
     public class TesterDTO
     {
