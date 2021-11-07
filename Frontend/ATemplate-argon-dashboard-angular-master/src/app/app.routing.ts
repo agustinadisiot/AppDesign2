@@ -9,10 +9,10 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'dashboard', // TODO cambiar a log in
     pathMatch: 'full',
   }, {
-    path: '',
+    path: 'admin',
     component: AdminLayoutComponent,
     children: [
       {
@@ -31,7 +31,7 @@ const routes: Routes =[
     ]
   }, {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'not-found'
   }
 ];
 
