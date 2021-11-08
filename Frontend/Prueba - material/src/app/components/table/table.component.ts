@@ -36,4 +36,8 @@ export class TableComponent implements OnInit {
   boton() {
     console.log("Se apreto el boton TODO")
   }
+
+  rowAction(row: any) {
+    console.log(row);
+  }
 }
