@@ -19,4 +19,9 @@ import { AngularMaterialModule } from 'src/app/components/angular-material/angul
     AngularMaterialModule // EXP: se tiene que importar en cada modulo que use algo de material no solo en el app.module.ts
   ]
 })
-export class AdminModule { }
+export class AdminModule {
+
+  addData() {
+    console.log();
+  }
+}

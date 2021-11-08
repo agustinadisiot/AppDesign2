@@ -6,7 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { AngularMaterialModule } from './components/angular-material/angular-material.module';
-//import { BrowserModule } from './components/angular-material/angular-material.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [ // EXP: todo componente tiene que ser declarado por uno y uno solo modulo
@@ -18,6 +20,8 @@ import { AngularMaterialModule } from './components/angular-material/angular-mat
     AppRoutingModule,
     CommonModule,
     RouterModule,
+    BrowserAnimationsModule,
+    BrowserModule
   ],
   providers: [],
   exports: [],

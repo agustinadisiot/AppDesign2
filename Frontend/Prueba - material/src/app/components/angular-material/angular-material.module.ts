@@ -44,8 +44,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [],
@@ -85,9 +83,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule,
-    BrowserAnimationsModule,
-    BrowserModule
+    MatTableModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -124,9 +120,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule,
-    BrowserAnimationsModule,
-    BrowserModule
+    MatTableModule
   ]
 })
 export class AngularMaterialModule { }

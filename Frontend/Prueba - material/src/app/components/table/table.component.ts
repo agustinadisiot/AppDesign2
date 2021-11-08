@@ -33,4 +33,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  boton() {
+    console.log("Se apreto el boton TODO")
+  }
 }
