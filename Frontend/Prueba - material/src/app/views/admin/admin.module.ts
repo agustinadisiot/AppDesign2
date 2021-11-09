@@ -7,7 +7,6 @@ import { TableComponent } from 'src/app/components/table/table.component';
 import { AngularMaterialModule } from 'src/app/components/angular-material/angular-material.module';
 
 
-
 @NgModule({
   declarations: [
     AdminComponent,
@@ -16,7 +15,7 @@ import { AngularMaterialModule } from 'src/app/components/angular-material/angul
   imports: [
     CommonModule,
     AdminRoutingModule,
-    AngularMaterialModule // EXP: se tiene que importar en cada modulo que use algo de material no solo en el app.module.ts
+    AngularMaterialModule, // EXP: se tiene que importar en cada modulo que use algo de material no solo en el app.module.ts
   ]
 })
 export class AdminModule {

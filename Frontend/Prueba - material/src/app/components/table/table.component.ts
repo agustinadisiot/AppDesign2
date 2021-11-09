@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 export interface PeriodicElement {
   name: string;
@@ -33,11 +34,30 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // EXP: table
+  rowAction(row: any) {
+    console.log(row);
+  }
+
+  // EXP: boton
   boton() {
     console.log("Se apreto el boton TODO")
   }
 
-  rowAction(row: any) {
-    console.log(row);
+  // EXP: email
+
+  email = new FormControl('', [Validators.required, Validators.email]);
+
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+
+  // EXP: password
+  hide = true;
+
+
 }

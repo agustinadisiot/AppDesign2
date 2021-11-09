@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // Material Form Controls
@@ -43,11 +42,18 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
-
+// EXP: los modulos que agregamos nosotros (no el profesor)
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
   imports: [
+
+    // EXP: los modulos que agregamos nosotros (no el profesor)
+    FormsModule,
+    ReactiveFormsModule,
+
+
     CommonModule,
     MatAutocompleteModule,
     MatCheckboxModule,
@@ -86,6 +92,11 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule
   ],
   exports: [
+    // EXP: los modulos que agregamos nosotros (no el profesor)
+    FormsModule,
+    ReactiveFormsModule,
+
+
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
