@@ -8,6 +8,7 @@ import { LoginComponent } from './views/login/login.component';
 import { AngularMaterialModule } from './components/angular-material/angular-material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     RouterModule,
     BrowserAnimationsModule,
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   exports: [],
