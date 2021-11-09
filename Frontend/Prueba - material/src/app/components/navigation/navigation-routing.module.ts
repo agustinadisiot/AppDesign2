@@ -9,7 +9,7 @@ const routes: Routes = [
     component: NavigationComponent,
     children: [
       {
-        path: '',
+        path: 'admin',
         component: TableComponent
       }
     ]
