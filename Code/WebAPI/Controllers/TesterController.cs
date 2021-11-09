@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using WebApi.Filters;
@@ -19,7 +20,7 @@ namespace WebApi.Controllers
 
         [AuthorizationFilter("Admin")]
         [HttpPost]
-        public object Post([FromBody] Tester testerExpected)
+        public object Post([FromBody] TesterDTO testerExpected)
         {
             return Ok(businessLogic.Add(testerExpected));
         }

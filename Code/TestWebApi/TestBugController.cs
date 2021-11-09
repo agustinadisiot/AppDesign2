@@ -47,7 +47,7 @@ namespace TestWebApi
             var bugsResult = okResult.Value as IEnumerable<BugDTO>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
+            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer()); //bugdtocomparer
         }
 
         [TestMethod]

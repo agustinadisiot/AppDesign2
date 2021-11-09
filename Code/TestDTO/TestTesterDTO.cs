@@ -2,7 +2,6 @@
 using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using TDO;
 
 namespace TestDTO
 {

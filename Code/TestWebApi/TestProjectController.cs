@@ -1,4 +1,5 @@
 ﻿using BusinessLogicInterfaces;
+using Domain;
 using Domain.Utils;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,7 @@ namespace TestWebApi
             var projectsResult = okResult.Value as IEnumerable<ProjectDTO>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer());
+            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer()); //projectdtoComparer
         }
 
         [TestMethod]
@@ -195,10 +196,8 @@ namespace TestWebApi
 
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
             mock.Setup(b => b.GetBugs(1)).Returns(bugsExpected);
-            mock.Setup(b => b.Add(project)).Returns(project);
             var controller = new ProjectController(mock.Object);
 
-            controller.Post(project);
             var result = controller.GetBugs(1);
             var okResult = result as OkObjectResult;
             var bugsResult = okResult.Value as IEnumerable<BugDTO>;
@@ -209,17 +208,17 @@ namespace TestWebApi
         [TestMethod]
         public void GetBugsQuantity()
         {
-            ProjectDTO project = new ProjectDTO()
+            Project project = new Project()
             {
                 Id = 1,
                 Name = "project",
-                Bugs = new List<BugDTO>()
+                Bugs = new List<Bug>()
                     {
-                     new BugDTO(){
+                     new Bug(){
                          Name = "Bug",
                          Id = 0,
                      },
-                     new BugDTO(){
+                     new Bug(){
                           Name = "Project2",
                           Id = 1
                      }
@@ -264,17 +263,14 @@ namespace TestWebApi
             ProjectDTO project = new ProjectDTO()
             {
                 Name = "project3",
-                Id = 1,
-                Developers = devsExpected
+                Id = 1
             };
 
 
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
             mock.Setup(b => b.GetDevelopers(project.Id)).Returns(devsExpected);
-            mock.Setup(b => b.Add(project)).Returns(project);
             var controller = new ProjectController(mock.Object);
 
-            controller.Post(project);
             var result = controller.GetDevelopers(project.Id);
             var okResult = result as OkObjectResult;
             var devsResult = okResult.Value as IEnumerable<DeveloperDTO>;
