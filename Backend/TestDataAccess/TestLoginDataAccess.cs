@@ -84,13 +84,14 @@ namespace TestDataAccess
             };
 
             bugManagerContext.Add(admin);
-            bugManagerContext.Add(loginToken);
+            loginDataAccess.SaveLogin(loginToken);
 
             TokenIdDTO tokenExpected = loginDataAccess.GetIdRoleFromToken(token);
 
             Assert.AreEqual(tokenExpected.Id, id);
         }
 
+        [TestMethod]
         public void GetRoleFromToken()
         {
             string token = "sdfg-uytr-fds-dsdf";
@@ -114,7 +115,7 @@ namespace TestDataAccess
             };
 
             bugManagerContext.Add(admin);
-            bugManagerContext.Add(loginToken);
+            loginDataAccess.SaveLogin(loginToken);
 
             TokenIdDTO tokenExpected = loginDataAccess.GetIdRoleFromToken(token);
 
