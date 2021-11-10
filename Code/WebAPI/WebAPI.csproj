@@ -14,7 +14,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="CustomBugImportation">
-	    <HintPath>..\Reflection\CustomBugImportation\CustomBugImportation\bin\Debug\net5.0\CustomBugImportation.dll</HintPath>
+	    <HintPath>..\Reflection\CustomBugImportation.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 
