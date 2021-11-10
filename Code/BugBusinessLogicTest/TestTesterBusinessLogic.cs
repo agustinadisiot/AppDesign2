@@ -8,6 +8,7 @@ using Domain.Utils;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogicInterfaces;
+using DTO;
 
 namespace TestTesterBusinessLogic
 {
@@ -19,24 +20,25 @@ namespace TestTesterBusinessLogic
         [TestMethod]
         public void CreateTester()
         {
-            Tester tester = new Tester
+            Tester tester = new Tester()
             {
                 Id = 1,
                 Username = "pablito",
                 Name = "Pedro",
                 Lastname = "Rodriguez",
                 Password = "asdfsdf3242",
-                Email = "pedro@hotmail.com"
+                Email = "pedro@hotmail.com",
+                Cost = 1
 
             };
             var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
-            mock.Setup(t => t.Create(tester)).Returns(tester);
+            mock.Setup(t => t.Create(It.IsAny<Tester>())).Returns<Tester>(t => t);
             var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
 
-            var testerResult = testerBusinessLogic.Add(tester);
+            var testerResult = testerBusinessLogic.Add(new TesterDTO(tester));
             mock.VerifyAll();
 
-            Assert.AreEqual(testerResult, tester);
+            Assert.AreEqual(testerResult, new TesterDTO(tester));
         }
 
 
@@ -50,12 +52,34 @@ namespace TestTesterBusinessLogic
                 new Bug()
                 {
                     Name = "bug1",
-                    IsActive = true
+                    IsActive = true,
+                Description = "button not work",
+                Version = "4.5",
+                Time = 4,
+                ProjectId = 2,
+                CompletedById = 6,
+                Id = 3,
+                Project = new Project()
+                {
+                    Id = 2,
+                    Name = "project",
+                },
                 },
                 new Bug()
                 {
                     Name = "bug2",
-                    IsActive = true
+                    IsActive = true,
+                Description = "button not work",
+                Version = "4.5",
+                Time = 4,
+                ProjectId = 2,
+                CompletedById = 6,
+                Id = 3,
+                Project = new Project()
+                {
+                    Id = 2,
+                    Name = "project",
+                },
                 },
             };
             int idTester = 1;
@@ -68,7 +92,7 @@ namespace TestTesterBusinessLogic
             var bugsResult = testerBusinessLogic.GetBugsByStatus(idTester, true);
 
             mock.VerifyAll();
-            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+            Assert.IsTrue(bugsExpected.ConvertAll(b=>new BugDTO(b)).SequenceEqual(bugsResult));
         }
 
         [TestMethod]
@@ -79,10 +103,32 @@ namespace TestTesterBusinessLogic
                 new Bug()
                 {
                     Name = "bug1",
+                Description = "button not work",
+                Version = "4.5",
+                Time = 4,
+                ProjectId = 2,
+                CompletedById = 6,
+                Id = 3,
+                Project = new Project()
+                {
+                    Id = 2,
+                    Name = "project",
+                },
                 },
                 new Bug()
                 {
                     Name = "bug1",
+                Description = "button not work",
+                Version = "4.5",
+                Time = 4,
+                ProjectId = 2,
+                CompletedById = 6,
+                Id = 3,
+                Project = new Project()
+                {
+                    Id = 2,
+                    Name = "project",
+                },
                 },
             };
             int idTester = 1;
@@ -94,7 +140,7 @@ namespace TestTesterBusinessLogic
             var bugsResult = testerBusinessLogic.GetBugsByName(idTester, "bug1");
 
             mock.VerifyAll();
-            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+            Assert.IsTrue(bugsExpected.ConvertAll(b => new BugDTO(b)).SequenceEqual(bugsResult));
         }
 
         [TestMethod]
@@ -105,10 +151,32 @@ namespace TestTesterBusinessLogic
                 new Bug()
                 {
                     ProjectId = 3,
+                    Name = "bug",
+                Description = "button not work",
+                Version = "4.5",
+                Time = 4,
+                CompletedById = 6,
+                Id = 3,
+                Project = new Project()
+                {
+                    Id = 3,
+                    Name = "project",
+                },
                 },
                 new Bug()
                 {
                     ProjectId = 3,
+                    Name = "bug",
+                Description = "button not work",
+                Version = "4.5",
+                Time = 4,
+                CompletedById = 6,
+                Id = 3,
+                Project = new Project()
+                {
+                    Id = 3,
+                    Name = "project",
+                },
                 },
             };
             int idTester = 1;
@@ -119,7 +187,7 @@ namespace TestTesterBusinessLogic
             var bugsResult = testerBusinessLogic.GetBugsByProject(idTester, 3);
 
             mock.VerifyAll();
-            Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
+            Assert.IsTrue(bugsExpected.ConvertAll(b => new BugDTO(b)).SequenceEqual(bugsResult));
         }
 
         [TestMethod]
@@ -165,7 +233,7 @@ namespace TestTesterBusinessLogic
             mock.Setup(b => b.Create(invalidTester)).Returns(invalidTester);
             var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
 
-            Assert.ThrowsException<ValidationException>(() => testerBusinessLogic.Add(invalidTester));
+            Assert.ThrowsException<ValidationException>(() => testerBusinessLogic.Add(new TesterDTO(invalidTester)));
             mock.Verify(m => m.Create(invalidTester), Times.Never);
         }
     }

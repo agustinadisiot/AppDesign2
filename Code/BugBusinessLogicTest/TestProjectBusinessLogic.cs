@@ -2,6 +2,7 @@
 using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RepositoryInterfaces;
@@ -55,10 +56,10 @@ namespace TestProjectBusinessLogic
             mock.Setup(b => b.Create(project)).Returns(project);
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            var projectResult = projectBusinessLogic.Add(project);
+            var projectResult = projectBusinessLogic.Add(new ProjectDTO(project));
             mock.VerifyAll();
 
-            Assert.AreEqual(projectResult, project);
+            Assert.AreEqual(projectResult, new ProjectDTO(project));
         }
 
         [TestMethod]
@@ -143,7 +144,7 @@ namespace TestProjectBusinessLogic
 
             var result = projectBusinessLogic.GetByName(projectExpected.Name);
 
-            Assert.AreEqual(projectExpected, result);
+            Assert.AreEqual(new ProjectDTO(projectExpected), result);
         }
 
 
@@ -178,25 +179,25 @@ namespace TestProjectBusinessLogic
 
             var result = projectBusinessLogic.GetById(projectExpected.Id);
 
-            Assert.AreEqual(projectExpected, result);
+            Assert.AreEqual(new ProjectDTO(projectExpected), result);
         }
 
         [TestMethod]
         public void GetAllProjects()
         {
-            List<Project> projectsExpected = new List<Project>()
+            List<ProjectDTO> projectsExpected = new List<ProjectDTO>()
             {
-                new Project()
+                new ProjectDTO()
                 {
                      Name = "projecOne",
                      Id = 0
                 },
-                new Project()
+                new ProjectDTO()
                 {
                     Name = "projectDos",
                     Id = 1
                 },
-                 new Project()
+                 new ProjectDTO()
                 {
                     Name = "ProjectTrois",
                     Id = 2
@@ -204,7 +205,7 @@ namespace TestProjectBusinessLogic
             };
 
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(projectsExpected);
+            mock.Setup(b => b.GetAll()).Returns(projectsExpected.ConvertAll(p=>p.ConvertToDomain()));
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
             var result = projectBusinessLogic.GetAll();
@@ -221,7 +222,7 @@ namespace TestProjectBusinessLogic
             mock.Setup(b => b.UpdateByName(nameProjectToUpdate, project)).Throws(new NonexistentProjectException());
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.UpdateByName(nameProjectToUpdate, project));
+            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.UpdateByName(nameProjectToUpdate, new ProjectDTO(project)));
         }
 
         [TestMethod]
@@ -238,11 +239,11 @@ namespace TestProjectBusinessLogic
             mock.Setup(b => b.UpdateByName(nameProjectToUpdate, projectModified)).Returns(projectModified);
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            var projectResult = projectBusinessLogic.UpdateByName(nameProjectToUpdate, projectModified);
+            var projectResult = projectBusinessLogic.UpdateByName(nameProjectToUpdate, new ProjectDTO(projectModified));
 
             mock.VerifyAll();
 
-            Assert.AreEqual(projectResult, projectModified);
+            Assert.AreEqual(projectResult, new ProjectDTO(projectModified));
         }
 
         [TestMethod]
@@ -254,7 +255,7 @@ namespace TestProjectBusinessLogic
             mock.Setup(b => b.Update(idprojectToUpdate, project)).Throws(new NonexistentProjectException());
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.Update(idprojectToUpdate, project));
+            Assert.ThrowsException<NonexistentProjectException>(() => projectBusinessLogic.Update(idprojectToUpdate, new ProjectDTO(project)));
         }
 
         [TestMethod]
@@ -272,11 +273,11 @@ namespace TestProjectBusinessLogic
             mock.Setup(b => b.Update(idprojectToUpdate, projectModified)).Returns(projectModified);
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            var projectResult = projectBusinessLogic.Update(idprojectToUpdate, projectModified);
+            var projectResult = projectBusinessLogic.Update(idprojectToUpdate, new ProjectDTO(projectModified));
 
             mock.VerifyAll();
 
-            Assert.AreEqual(projectResult, projectModified);
+            Assert.AreEqual(projectResult, new ProjectDTO(projectModified));
         }
 
         [TestMethod]
@@ -291,7 +292,14 @@ namespace TestProjectBusinessLogic
                      Version = "1",
                      IsActive = true,
                      CompletedBy = null,
-                     Id = 0
+                     Id = 0,
+                     CompletedById = 6,
+                     ProjectId = 1,
+                    Project = new Project()
+                    {
+                    Id = 1,
+                    Name = "project",
+                    },
                 },
                 new Bug()
                 {
@@ -300,7 +308,14 @@ namespace TestProjectBusinessLogic
                     Version = "1.4.5",
                     IsActive = false,
                     CompletedBy = null,
-                    Id = 1
+                    Id = 1,
+                      CompletedById = 6,
+                     ProjectId = 1,
+                    Project = new Project()
+                    {
+                    Id = 1,
+                    Name = "project",
+                    },
                 },
                  new Bug()
                 {
@@ -309,7 +324,14 @@ namespace TestProjectBusinessLogic
                     Version = "6.2",
                     IsActive = true,
                     CompletedBy = null,
-                    Id = 2
+                    Id = 1,
+                      CompletedById = 0,
+                     ProjectId = 2,
+                    Project = new Project()
+                    {
+                    Id = 1,
+                    Name = "project",
+                    },
                 },
             };
 
@@ -320,7 +342,7 @@ namespace TestProjectBusinessLogic
 
             var result = projectBusinessLogic.GetBugs(1);
             mock.VerifyAll();
-            Assert.IsTrue(bugsExpected.SequenceEqual(result));
+            Assert.IsTrue(bugsExpected.ConvertAll(b=>new BugDTO(b)).SequenceEqual(result));
         }
 
         [TestMethod]
@@ -397,7 +419,7 @@ namespace TestProjectBusinessLogic
 
             var result = projectBusinessLogic.GetDevelopers(1);
             mock.VerifyAll();
-            Assert.IsTrue(devsExpected.SequenceEqual(result));
+            Assert.IsTrue(devsExpected.ConvertAll(b => new DeveloperDTO(b)).SequenceEqual(result));
         }
         [TestMethod]
         public void GetTesters()
@@ -425,7 +447,7 @@ namespace TestProjectBusinessLogic
 
             var result = projectBusinessLogic.GetTesters(1);
             mock.VerifyAll();
-            Assert.IsTrue(testersExpected.SequenceEqual(result));
+            Assert.IsTrue(testersExpected.ConvertAll(b => new TesterDTO(b)).SequenceEqual(result));
         }
 
 
@@ -445,7 +467,8 @@ namespace TestProjectBusinessLogic
                 Lastname = "didios",
                 Username = "Agus",
                 Password = "rosadopastel",
-                Email = "hell@yahoo.com"
+                Email = "hell@yahoo.com",
+                Cost = 4
             };
 
 
@@ -457,7 +480,7 @@ namespace TestProjectBusinessLogic
             var result = projectBusinessLogic.AddDeveloperToProject(project.Id, devExpected.Id);
 
             mock.VerifyAll();
-            Assert.AreEqual(devExpected, result);
+            Assert.AreEqual(new DeveloperDTO(devExpected), result);
         }
 
         [TestMethod]
@@ -476,7 +499,8 @@ namespace TestProjectBusinessLogic
                 Lastname = "didios",
                 Username = "Agus",
                 Password = "rosadopastel",
-                Email = "hell@yahoo.com"
+                Email = "hell@yahoo.com",
+                Cost = 3
             };
 
 
@@ -488,7 +512,7 @@ namespace TestProjectBusinessLogic
             var result = projectBusinessLogic.AddTesterToProject(project.Id, testerExpected.Id);
 
             mock.VerifyAll();
-            Assert.AreEqual(testerExpected, result);
+            Assert.AreEqual(new TesterDTO(testerExpected), result);
         }
 
         [TestMethod]
@@ -601,7 +625,7 @@ namespace TestProjectBusinessLogic
             mock.Setup(b => b.Create(invalidProject)).Returns(invalidProject);
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            Assert.ThrowsException<ValidationException>(() => projectBusinessLogic.Add(invalidProject));
+            Assert.ThrowsException<ValidationException>(() => projectBusinessLogic.Add(new ProjectDTO(invalidProject)));
             mock.Verify(m => m.Create(invalidProject), Times.Never);
 
         }

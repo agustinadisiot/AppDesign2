@@ -8,6 +8,7 @@ using Domain.Utils;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogicInterfaces;
+using DTO;
 
 namespace TestDeveloperBusinessLogic
 {
@@ -19,24 +20,25 @@ namespace TestDeveloperBusinessLogic
         [TestMethod]
         public void CreateDeveloper()
         {
-            Developer dev = new Developer
+            Developer dev = new Developer()
             {
                 Id = 1,
                 Username = "pablito",
                 Name = "Pedro",
                 Lastname = "Rodriguez",
                 Password = "asdfsdf3242",
-                Email = "pedro@hotmail.com"
-
+                Email = "pedro@hotmail.com",
+                Cost = 3
             };
+
             var mock = new Mock<IDeveloperDataAccess>(MockBehavior.Strict);
-            mock.Setup(d => d.Create(dev)).Returns(dev);
+            mock.Setup(d => d.Create(It.IsAny<Developer>())).Returns<Developer>(d => d);
             var devBusinessLogic = new DeveloperBusinessLogic(mock.Object);
 
-            var devResult = devBusinessLogic.Add(dev);
+            var devResult = devBusinessLogic.Add(new DeveloperDTO(dev));
             mock.VerifyAll();
 
-            Assert.AreEqual(devResult, dev);
+            Assert.AreEqual(devResult, new DeveloperDTO(dev));
         }
 
         [TestMethod]
@@ -86,7 +88,7 @@ namespace TestDeveloperBusinessLogic
             mock.Setup(b => b.Create(invalidDeveloper)).Returns(invalidDeveloper);
             var developerBusinessLogic = new DeveloperBusinessLogic(mock.Object);
 
-            Assert.ThrowsException<ValidationException>(() => developerBusinessLogic.Add(invalidDeveloper));
+            Assert.ThrowsException<ValidationException>(() => developerBusinessLogic.Add(new DeveloperDTO(invalidDeveloper)));
             mock.Verify(m => m.Create(invalidDeveloper), Times.Never);
         }
 

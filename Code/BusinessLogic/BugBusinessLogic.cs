@@ -6,6 +6,7 @@ using System.Linq;
 using RepositoryInterfaces;
 using Domain.Utils;
 using BugParser;
+using DTO;
 
 namespace BusinessLogic
 {
@@ -18,28 +19,31 @@ namespace BusinessLogic
             BugDataAccess = newBugDataAccess;
         }
 
-        public Bug GetById(int idBug)
+        public BugDTO GetById(int idBug)
         {
             Bug bug = BugDataAccess.GetById(idBug);
-            return bug;
+            return new BugDTO(bug);
         }
 
-        public IEnumerable<Bug> GetAll()
+        public IEnumerable<BugDTO> GetAll()
         {
-            return BugDataAccess.GetAll();
+            List<Bug> bugs = (List<Bug>)BugDataAccess.GetAll();
+            return bugs.ConvertAll(b => new BugDTO(b));
         }
 
-        public Bug Add(Bug bug)
+        public BugDTO Add(BugDTO bugDTO)
         {
+            Bug bug = bugDTO.ConvertToDomain();
             bug.Validate();
             BugDataAccess.Create(bug);
-            return bug;
+            return bugDTO;
         }
 
-        public Bug Update(int Id, Bug bug)
+        public BugDTO Update(int Id, BugDTO bugDTO)
         {
-            bug.Validate();
-            return BugDataAccess.Update(Id, bug);
+            Bug bugMod = bugDTO.ConvertToDomain();
+            bugMod.Validate();
+            return new BugDTO(BugDataAccess.Update(Id, bugMod));
         }
 
 
@@ -58,7 +62,7 @@ namespace BusinessLogic
             List<Bug> bugsToImport = parser.GetBugs(path);
             foreach (var bug in bugsToImport)
             {
-                Add(bug);
+                Add(new BugDTO(bug));
             }
         }
 

@@ -8,6 +8,7 @@ using Domain.Utils;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogicInterfaces;
+using DTO;
 
 namespace TestBugBusinessLogic
 {
@@ -15,6 +16,7 @@ namespace TestBugBusinessLogic
     public class TestBugBusinessLogic
     {
         private Bug bug;
+        private BugDTO bugDTO;
 
         [TestCleanup]
         public void TearDown()
@@ -32,6 +34,14 @@ namespace TestBugBusinessLogic
                 Description = "Cuando el servidor se cierra y estoy en login se rompe",
                 Version = "12.4.5",
                 ProjectId = 3,
+                IsActive = true,
+                CompletedById = 0,
+                Time = 3,
+                Project = new Project()
+                {
+                    Id = 3,
+                    Name = "project"
+                }
             };
 
         }
@@ -44,10 +54,10 @@ namespace TestBugBusinessLogic
             mock.Setup(b => b.Create(bug)).Returns(bug);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var bugResult = bugBusinessLogic.Add(bug);
+            var bugResult = bugBusinessLogic.Add(new BugDTO(bug));
             mock.VerifyAll();
 
-            Assert.AreEqual(bugResult, bug);
+            Assert.AreEqual(bugResult, new BugDTO(bug));
         }
 
         [TestMethod]
@@ -78,23 +88,13 @@ namespace TestBugBusinessLogic
         [TestMethod]
         public void GetById()
         {
-            Bug bugExpected = new Bug()
-            {
-                Name = "Not working button",
-                Description = "Upload button not working",
-                Version = "1",
-                IsActive = true,
-                CompletedBy = null,
-                Id = 0
-            };
-
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.GetById(bugExpected.Id)).Returns(bugExpected);
+            mock.Setup(b => b.GetById(bug.Id)).Returns(bug);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.GetById(bugExpected.Id);
+            var result = bugBusinessLogic.GetById(bug.Id);
 
-            Assert.AreEqual(bugExpected, result);
+            Assert.AreEqual(new BugDTO(bug), result);
         }
 
         [TestMethod]
@@ -104,30 +104,51 @@ namespace TestBugBusinessLogic
             {
                 new Bug()
                 {
-                     Name = "Not working button",
-                     Description = "Upload button not working",
-                     Version = "1",
-                     IsActive = true,
-                     CompletedBy = null,
-                     Id = 0
+                     Id = 0,
+                Name = "Bug1",
+                Description = "Cuando el servidor se cierra y estoy en login se rompe",
+                Version = "12.4.5",
+                ProjectId = 3,
+                IsActive = true,
+                CompletedById = 0,
+                Time = 3,
+                Project = new Project()
+                {
+                    Id = 3,
+                    Name = "project"
+                }
                 }, 
                 new Bug()
                 {
-                    Name = "button",
-                    Description = "Upload not working",
-                    Version = "1.4.5",
-                    IsActive = false,
-                    CompletedBy = null,
-                    Id = 1
+                    Id = 1,
+                Name = "Bug1",
+                Description = "Cuando el servidor se cierra y estoy en login se rompe",
+                Version = "12.4.5",
+                ProjectId = 3,
+                IsActive = true,
+                CompletedById = 0,
+                Time = 3,
+                Project = new Project()
+                {
+                    Id = 3,
+                    Name = "project"
+                }
                 },
                  new Bug()
                 {
-                    Name = "Not working button",
-                    Description = "Upload button not working",
-                    Version = "6.2",
-                    IsActive = true,
-                    CompletedBy = null,
-                    Id = 2
+                    Id = 2,
+                Name = "Bug1",
+                Description = "Cuando el servidor se cierra y estoy en login se rompe",
+                Version = "12.4.5",
+                ProjectId = 4,
+                IsActive = true,
+                CompletedById = 0,
+                Time = 3,
+                Project = new Project()
+                {
+                    Id = 4,
+                    Name = "project"
+                }
                 },
             };
 
@@ -137,19 +158,7 @@ namespace TestBugBusinessLogic
 
             var result = bugBusinessLogic.GetAll();
 
-            Assert.IsTrue(bugsExpected.SequenceEqual(result));
-        }
-
-        [TestMethod]
-        public void UpdateBugNotFound()
-        {
-            int idbugToUpdate = 1;
-
-            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.Update(idbugToUpdate, bug)).Throws(new NonexistentBugException());
-            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
-
-            Assert.ThrowsException<NonexistentBugException>(() => bugBusinessLogic.Update(idbugToUpdate, bug));
+            Assert.IsTrue(bugsExpected.ConvertAll(b=>new BugDTO(b)).SequenceEqual(result));
         }
 
         [TestMethod]
@@ -157,24 +166,15 @@ namespace TestBugBusinessLogic
         {
             int idbugToUpdate = 0;
 
-            Bug bugModified = new Bug()
-            {
-                Id = 0,
-                Name = "bugMod",
-                Description = "No funciona el boton aceptar",
-                Version = "12.2.2.",
-                ProjectId = 4
-            };
-
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.Update(idbugToUpdate, bugModified)).Returns(bugModified);
+            mock.Setup(b => b.Update(idbugToUpdate, bug)).Returns(bug);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var bugResult = bugBusinessLogic.Update(idbugToUpdate, bugModified);
+            var bugResult = bugBusinessLogic.Update(idbugToUpdate, new BugDTO(bug));
 
             mock.VerifyAll();
 
-            Assert.AreEqual(bugResult, bugModified);
+            Assert.AreEqual(bugResult, new BugDTO(bug));
         }
 
         [TestMethod]
@@ -182,16 +182,24 @@ namespace TestBugBusinessLogic
         {
             Bug invalidBug = new Bug()
             {
-                Name = "invalid bug",
-                Description = "this is a bug",
-                Version = "24.2.4"
+                Id = 0,
+                Version = "12.4.5",
+                ProjectId = 3,
+                IsActive = true,
+                CompletedById = 0,
+                Time = 3,
+                Project = new Project()
+                {
+                    Id = 3,
+                    Name = "project"
+                }
             };
 
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
             mock.Setup(b => b.Create(invalidBug)).Returns(invalidBug);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            Assert.ThrowsException<ValidationException>(()=> bugBusinessLogic.Add(invalidBug));
+            Assert.ThrowsException<ValidationException>(()=> bugBusinessLogic.Add(new BugDTO(invalidBug)));
             mock.Verify(m => m.Create(invalidBug), Times.Never);
 
         }

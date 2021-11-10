@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic;
 using BusinessLogicInterfaces;
-using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -19,7 +19,7 @@ namespace TestWebApi
         [TestMethod]
         public void Create()
         {
-            Developer devExpected = new Developer()
+            DeveloperDTO devExpected = new DeveloperDTO()
             {
                 Username = "juana",
                 Name = "Juana",
@@ -35,7 +35,7 @@ namespace TestWebApi
 
             var result = controller.Post(devExpected);
             var okResult = result as OkObjectResult;
-            var devResult = okResult.Value as Developer;
+            var devResult = okResult.Value as DeveloperDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(devExpected, devResult);

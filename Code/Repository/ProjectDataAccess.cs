@@ -60,9 +60,6 @@ namespace Repository
             Project project = projects.FirstOrDefault(proj => proj.Id == id);
             if (project == null) throw new NonexistentProjectException();
             project = projects.Include("Developers").Include("Bugs").Include("Testers").First(proj => proj.Id == id);
-            project.Bugs.ForEach(b => b.Project = null);
-            project.Developers.ForEach(d => d.Projects = null);
-            project.Testers.ForEach(t => t.Projects = null);
             return project;
         }
 
@@ -149,7 +146,6 @@ namespace Repository
             if (tester == null) throw new NonexistentUserException();
             project.Testers.Add(tester);
             context.SaveChanges();
-            tester.Projects.ForEach(p => { p.Testers = null; p.Developers = null; });
             return tester;
 
         }
@@ -161,7 +157,6 @@ namespace Repository
             if (dev == null) throw new NonexistentUserException();
             project.Developers.Add(dev);
             context.SaveChanges();
-            dev.Projects.ForEach(p => { p.Testers = null; p.Developers = null; });
             return dev;
 
         }

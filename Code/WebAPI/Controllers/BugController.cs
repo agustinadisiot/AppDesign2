@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using WebApi.Filters;
@@ -27,7 +28,7 @@ namespace WebApi.Controllers
 
         [AuthorizationFilter("Admin/Tester")]
         [HttpPost]
-        public object Post([FromBody] Bug bugExpected)
+        public object Post([FromBody] BugDTO bugExpected)
         {
             return Ok(businessLogic.Add(bugExpected));
         }
@@ -39,7 +40,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public object Update([FromRoute] int id, [FromBody] Bug bugModified)
+        public object Update([FromRoute] int id, [FromBody] BugDTO bugModified)
         {
             return Ok(businessLogic.Update(id, bugModified));
         }

@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using DTO;
 using RepositoryInterfaces;
 
 namespace BusinessLogic
@@ -14,10 +15,12 @@ namespace BusinessLogic
         }
 
 
-        public Developer Add(Developer newDev)
+        public DeveloperDTO Add(DeveloperDTO newDev)
         {
-            newDev.Validate();
-            return devDataAccess.Create(newDev);
+            Developer dev = newDev.ConvertToDomain();
+            dev.Validate();
+            devDataAccess.Create(dev);
+            return newDev;
         }
 
         public int GetQuantityBugsResolved(int idDev)

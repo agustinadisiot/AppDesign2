@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using DTO;
 using RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,11 @@ namespace BusinessLogic
             projectDataAccess = newProjectDataAccess;
         }
 
-        public Project Add(Project project)
+        public ProjectDTO Add(ProjectDTO projectDTO)
         {
+            Project project = projectDTO.ConvertToDomain();
             project.Validate();
-            return projectDataAccess.Create(project);
+            return new ProjectDTO(projectDataAccess.Create(project));
         }
 
         public ResponseMessage Delete(int Id)
@@ -27,20 +29,22 @@ namespace BusinessLogic
             return projectDataAccess.Delete(Id);
         }
 
-        public IEnumerable<Project> GetAll()
+        public IEnumerable<ProjectDTO> GetAll()
         {
-            return projectDataAccess.GetAll();
+            List<Project> projects = (List<Project>)projectDataAccess.GetAll();
+            return projects.ConvertAll(p => new ProjectDTO(p));
         }
 
-        public Project GetById(int Id)
+        public ProjectDTO GetById(int Id)
         {
-            return projectDataAccess.GetById(Id);
+            return new ProjectDTO(projectDataAccess.GetById(Id));
         }
 
-        public Project Update(int Id, Project projectModified)
+        public ProjectDTO Update(int Id, ProjectDTO projectModified)
         {
-            projectModified.Validate();
-            return projectDataAccess.Update(Id, projectModified);
+            Project project = projectModified.ConvertToDomain();
+            project.Validate();
+            return new ProjectDTO(projectDataAccess.Update(Id, project));
         }
 
         public ResponseMessage DeleteByName(string nameProject)
@@ -48,20 +52,21 @@ namespace BusinessLogic
             return projectDataAccess.DeleteByName(nameProject);
         }
 
-        public Project GetByName(string nameProject)
+        public ProjectDTO GetByName(string nameProject)
         {
-            return projectDataAccess.GetByName(nameProject);
+            return new ProjectDTO(projectDataAccess.GetByName(nameProject));
         }
 
-        public Project UpdateByName(string nameProjectToUpdate, Project projectModified)
+        public ProjectDTO UpdateByName(string nameProjectToUpdate, ProjectDTO projectModified)
         {
-            projectModified.Validate();
-            return projectDataAccess.UpdateByName(nameProjectToUpdate, projectModified);
+            Project project = projectModified.ConvertToDomain();
+            project.Validate();
+            return new ProjectDTO(projectDataAccess.UpdateByName(nameProjectToUpdate, project));
         }
 
-        public List<Bug> GetBugs(int id)
+        public List<BugDTO> GetBugs(int id)
         {
-            return projectDataAccess.GetBugs(id);
+            return projectDataAccess.GetBugs(id).ConvertAll(b=>new BugDTO(b));
         }
 
         public BugsQuantity GetBugsQuantity(int idProject)
@@ -69,14 +74,14 @@ namespace BusinessLogic
             return projectDataAccess.GetBugsQuantity(idProject);
         }
 
-        public List<Developer> GetDevelopers(int id)
+        public List<DeveloperDTO> GetDevelopers(int id)
         {
-            return projectDataAccess.GetDevelopers(id);
+            return projectDataAccess.GetDevelopers(id).ConvertAll(d=>new DeveloperDTO(d));
         }
 
-        public List<Tester> GetTesters(int id)
+        public List<TesterDTO> GetTesters(int id)
         {
-            return projectDataAccess.GetTesters(id);
+            return projectDataAccess.GetTesters(id).ConvertAll(t=>new TesterDTO(t));
         }
 
         public ResponseMessage RemoveDeveloperFromProject(int idproject, int idDev)
@@ -91,15 +96,15 @@ namespace BusinessLogic
 
         }
 
-        public Developer AddDeveloperToProject(int idproject, int idDev)
+        public DeveloperDTO AddDeveloperToProject(int idproject, int idDev)
         {
-            return projectDataAccess.AddDeveloperToProject(idproject, idDev);
+            return new DeveloperDTO(projectDataAccess.AddDeveloperToProject(idproject, idDev));
 
         }
 
-        public Tester AddTesterToProject(int idproject, int idTester)
+        public TesterDTO AddTesterToProject(int idproject, int idTester)
         {
-            return projectDataAccess.AddTesterToProject(idproject, idTester);
+            return new TesterDTO(projectDataAccess.AddTesterToProject(idproject, idTester));
 
         }
 

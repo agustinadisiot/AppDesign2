@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using WebApi.Filters;
@@ -24,7 +25,7 @@ namespace WebApi.Controllers
         }
         [AuthorizationFilter("Admin")]
         [HttpPost]
-        public object Post([FromBody] Project projectExpected)
+        public object Post([FromBody] ProjectDTO projectExpected)
         {
             return Ok(businessLogic.Add(projectExpected));
         }
@@ -42,7 +43,7 @@ namespace WebApi.Controllers
         }
         [AuthorizationFilter("Admin")]
         [HttpPut("{id}")]
-        public object Update([FromRoute] int id, [FromBody] Project projectModified)
+        public object Update([FromRoute] int id, [FromBody] ProjectDTO projectModified)
         {
             return Ok(businessLogic.Update(id, projectModified));
         }
