@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic;
 using BusinessLogicInterfaces;
-using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -18,23 +18,23 @@ namespace TestWebApi
         [TestMethod]
         public void GetAll()
         {
-            List<Bug> bugsExpected = new List<Bug>()
+            List<BugDTO> bugsExpected = new List<BugDTO>()
             {
-                new Bug(){
+                new BugDTO(){
                 Name = "Not working button",
                 Description = "Upload button not working",
                 Version = "1",
                 IsActive = true,
-                CompletedBy = null,
-                Id = 0
+                Id = 0,
+                CompletedById = 0
                 },
-                new Bug(){
+                new BugDTO(){
                 Name = "Not working button",
                 Description = "Upload button not working",
                 Version = "1",
                 IsActive = true,
-                CompletedBy = null,
-                Id = 1
+                Id = 1,
+                CompletedById = 0
                 }
             };
 
@@ -44,22 +44,22 @@ namespace TestWebApi
 
             var result = controller.Get();
             var okResult = result as OkObjectResult;
-            var bugsResult = okResult.Value as IEnumerable<Bug>;
+            var bugsResult = okResult.Value as IEnumerable<BugDTO>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
+            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer()); //bugdtocomparer
         }
 
         [TestMethod]
         public void Create()
         {
-            Bug bugExpected = new Bug()
+            BugDTO bugExpected = new BugDTO()
             {
                 Name = "Not working button",
                 Description = "Upload button not working",
                 Version = "1",
                 IsActive = true,
-                CompletedBy = null,
+                CompletedById = 0,
                 Id = 0
             };
 
@@ -69,7 +69,7 @@ namespace TestWebApi
 
             var result = controller.Post(bugExpected);
             var okResult = result as OkObjectResult;
-            var bugResult = okResult.Value as Bug;
+            var bugResult = okResult.Value as BugDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(bugExpected, bugResult);
@@ -78,13 +78,13 @@ namespace TestWebApi
         [TestMethod]
         public void GetBug()
         {
-            Bug bugExpected = new Bug()
+            BugDTO bugExpected = new BugDTO()
             {
                 Name = "Not working button",
                 Description = "Upload button not working",
                 Version = "1",
                 IsActive = true,
-                CompletedBy = null,
+                CompletedById = 0,
                 Id = 0
             };
 
@@ -94,7 +94,7 @@ namespace TestWebApi
 
             var result = controller.Get(bugExpected.Id);
             var okResult = result as OkObjectResult;
-            var bugResult = okResult.Value as Bug;
+            var bugResult = okResult.Value as BugDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(bugExpected, bugResult);
@@ -118,23 +118,23 @@ namespace TestWebApi
         [TestMethod]
         public void Update()
         {
-            Bug bugExpected = new Bug()
+            BugDTO bugExpected = new BugDTO()
             {
                 Name = "Not working button",
                 Description = "Upload button not working",
                 Version = "1",
                 IsActive = true,
-                CompletedBy = null,
+                CompletedById = 0,
                 Id = 0
             };
 
-            Bug bugModified = new Bug()
+            BugDTO bugModified = new BugDTO()
             {
                 Name = "Bug number 4",
                 Description = "Email verification not working",
                 Version = "1",
                 IsActive = true,
-                CompletedBy = null,
+                CompletedById = 0,
                 Id = 0
             };
 
@@ -144,7 +144,7 @@ namespace TestWebApi
 
             var result = controller.Update(bugExpected.Id, bugModified);
             var okResult = result as OkObjectResult;
-            var bugResult = okResult.Value as Bug;
+            var bugResult = okResult.Value as BugDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(bugExpected, bugResult);

@@ -19,11 +19,6 @@ namespace Repository
             context = (BugManagerContext)newContext;
         }
 
-        public LoginToken Login(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
         public void SaveLogin(LoginToken loginToken)
         {
             context.Add(loginToken);

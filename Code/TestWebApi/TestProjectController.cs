@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -16,13 +17,13 @@ namespace TestWebApi
         [TestMethod]
         public void GetAll()
         {
-            List<Project> projectsExpected = new List<Project>()
+            List<ProjectDTO> projectsExpected = new List<ProjectDTO>()
             {
-                new Project(){
+                new ProjectDTO(){
                     Name = "Project1",
                     Id = 0
                 },
-                new Project(){
+                new ProjectDTO(){
                 Name = "Project2",
                 Id = 1
                 }
@@ -34,16 +35,16 @@ namespace TestWebApi
 
             var result = controller.Get();
             var okResult = result as OkObjectResult;
-            var projectsResult = okResult.Value as IEnumerable<Project>;
+            var projectsResult = okResult.Value as IEnumerable<ProjectDTO>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer());
+            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer()); //projectdtoComparer
         }
 
         [TestMethod]
         public void Create()
         {
-            Project projectExpected = new Project()
+            ProjectDTO projectExpected = new ProjectDTO()
             {
                 Name = "Project",
                 Id = 0
@@ -55,7 +56,7 @@ namespace TestWebApi
 
             var result = controller.Post(projectExpected);
             var okResult = result as OkObjectResult;
-            var projectResult = okResult.Value as Project;
+            var projectResult = okResult.Value as ProjectDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(projectExpected, projectResult);
@@ -64,7 +65,7 @@ namespace TestWebApi
         [TestMethod]
         public void GetProject()
         {
-            Project projectExpected = new Project()
+            ProjectDTO projectExpected = new ProjectDTO()
             {
                 Name = "Project1",
                 Id = 0
@@ -76,7 +77,7 @@ namespace TestWebApi
 
             var result = controller.Get(projectExpected.Id);
             var okResult = result as OkObjectResult;
-            var projectResult = okResult.Value as Project;
+            var projectResult = okResult.Value as ProjectDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(projectExpected, projectResult);
@@ -85,7 +86,7 @@ namespace TestWebApi
         [TestMethod]
         public void GetProjectByName()
         {
-            Project projectExpected = new Project()
+            ProjectDTO projectExpected = new ProjectDTO()
             {
                 Name = "Project1",
                 Id = 0
@@ -97,7 +98,7 @@ namespace TestWebApi
 
             var result = controller.GetByName(projectExpected.Name);
             var okResult = result as OkObjectResult;
-            var projectResult = okResult.Value as Project;
+            var projectResult = okResult.Value as ProjectDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(projectExpected, projectResult);
@@ -106,21 +107,21 @@ namespace TestWebApi
         [TestMethod]
         public void Delete()
         {
-            Project projectExpected = new Project()
+            ProjectDTO projectExpected = new ProjectDTO()
             {
                 Name = "project3",
                 Id = 0
             };
 
-            List<Project> project = new List<Project>()
+            List<ProjectDTO> project = new List<ProjectDTO>()
             {
                 projectExpected,
-                new Project()
+                new ProjectDTO()
                 {
                     Name = "buttonProj",
                     Id = 1
                 },
-                 new Project()
+                 new ProjectDTO()
                 {
                     Name = "myProject",
                     Id = 2
@@ -140,13 +141,13 @@ namespace TestWebApi
         [TestMethod]
         public void Update()
         {
-            Project projectExpected = new Project()
+            ProjectDTO projectExpected = new ProjectDTO()
             {
                 Name = "proyectoEnEspaniol",
                 Id = 0
             };
 
-            Project projectModified = new Project()
+            ProjectDTO projectModified = new ProjectDTO()
             {
                 Name = "project number 4",
                 Id = 0
@@ -158,7 +159,7 @@ namespace TestWebApi
 
             var result = controller.Update(projectExpected.Id, projectModified);
             var okResult = result as OkObjectResult;
-            var projectResult = okResult.Value as Project;
+            var projectResult = okResult.Value as ProjectDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(projectExpected, projectResult);
@@ -168,42 +169,38 @@ namespace TestWebApi
         [TestMethod]
         public void GetAllBugs()
         {
-            Project project = new Project()
+            ProjectDTO project = new ProjectDTO()
             {
                 Name = "project3",
                 Id = 1
             };
 
 
-            List<Bug> bugsExpected = new List<Bug>()
+            List<BugDTO> bugsExpected = new List<BugDTO>()
             {
-                new Bug(){
+                new BugDTO(){
                 Name = "Not working button",
                 Description = "Upload button not working",
                 Version = "1",
                 IsActive = true,
-                CompletedBy = null,
                 Id = 0
                 },
-                new Bug(){
+                new BugDTO(){
                 Name = "Not working button",
                 Description = "Upload button not working",
                 Version = "1",
                 IsActive = true,
-                CompletedBy = null,
                 Id = 1
                 }
             };
 
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
             mock.Setup(b => b.GetBugs(1)).Returns(bugsExpected);
-            mock.Setup(b => b.Add(project)).Returns(project);
             var controller = new ProjectController(mock.Object);
 
-            controller.Post(project);
             var result = controller.GetBugs(1);
             var okResult = result as OkObjectResult;
-            var bugsResult = okResult.Value as IEnumerable<Bug>;
+            var bugsResult = okResult.Value as IEnumerable<BugDTO>;
 
             mock.VerifyAll();
             CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
@@ -244,9 +241,9 @@ namespace TestWebApi
         [TestMethod]
         public void GetAllDevelopers()
         {
-            List<Developer> devsExpected = new List<Developer>()
+            List<DeveloperDTO> devsExpected = new List<DeveloperDTO>()
             {
-                new Developer(){
+                new DeveloperDTO(){
                 Name = "Ivan",
                 Lastname = "monja",
                 Username = "Ivo",
@@ -254,7 +251,7 @@ namespace TestWebApi
                 Email = "ivi@gmail.com"
 
                 },
-                new Developer(){
+                new DeveloperDTO(){
                 Name = "Agustina",
                 Lastname = "didios",
                 Username = "Agus",
@@ -263,23 +260,20 @@ namespace TestWebApi
                 }
             };
 
-            Project project = new Project()
+            ProjectDTO project = new ProjectDTO()
             {
                 Name = "project3",
-                Id = 1,
-                Developers = devsExpected
+                Id = 1
             };
 
 
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
             mock.Setup(b => b.GetDevelopers(project.Id)).Returns(devsExpected);
-            mock.Setup(b => b.Add(project)).Returns(project);
             var controller = new ProjectController(mock.Object);
 
-            controller.Post(project);
             var result = controller.GetDevelopers(project.Id);
             var okResult = result as OkObjectResult;
-            var devsResult = okResult.Value as IEnumerable<Developer>;
+            var devsResult = okResult.Value as IEnumerable<DeveloperDTO>;
 
             mock.VerifyAll();
             CollectionAssert.AreEqual(devsExpected, (System.Collections.ICollection)devsResult, new UserComparer());
@@ -288,9 +282,9 @@ namespace TestWebApi
         [TestMethod]
         public void GetAllTesters()
         {
-            List<Tester> testersExpected = new List<Tester>()
+            List<TesterDTO> testersExpected = new List<TesterDTO>()
             {
-                new Tester(){
+                new TesterDTO(){
                  Name = "Ivan",
                 Lastname = "monja",
                 Username = "Ivo",
@@ -298,7 +292,7 @@ namespace TestWebApi
                 Email = "ivi@gmail.com"
 
                 },
-                new Tester(){
+                new TesterDTO(){
                   Name = "Agustina",
                 Lastname = "didios",
                 Username = "Agus",
@@ -307,23 +301,20 @@ namespace TestWebApi
                 }
             };
 
-            Project project = new Project()
+            ProjectDTO project = new ProjectDTO()
             {
                 Name = "project3",
                 Id = 1,
-                Testers = testersExpected
             };
 
 
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
             mock.Setup(b => b.GetTesters(project.Id)).Returns(testersExpected);
-            mock.Setup(b => b.Add(project)).Returns(project);
             var controller = new ProjectController(mock.Object);
 
-            controller.Post(project);
             var result = controller.GetTesters(project.Id);
             var okResult = result as OkObjectResult;
-            var testersResult = okResult.Value as IEnumerable<Tester>;
+            var testersResult = okResult.Value as IEnumerable<TesterDTO>;
 
             mock.VerifyAll();
             CollectionAssert.AreEqual(testersExpected, (System.Collections.ICollection)testersResult, new UserComparer());
@@ -332,13 +323,13 @@ namespace TestWebApi
         [TestMethod]
         public void AddDeveloperToProject()
         {
-            Project project = new Project()
+            ProjectDTO project = new ProjectDTO()
             {
                 Name = "project3",
                 Id = 1,
             };
 
-            Developer devExpected = new Developer()
+            DeveloperDTO devExpected = new DeveloperDTO()
             {
                 Id = 2,
                 Name = "Agustina",
@@ -355,7 +346,7 @@ namespace TestWebApi
 
             var result = controller.AddDeveloperToProject(project.Id, devExpected.Id);
             var okResult = result as OkObjectResult;
-            var devResult = okResult.Value as Developer;
+            var devResult = okResult.Value as DeveloperDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(devExpected, devResult);
@@ -364,13 +355,13 @@ namespace TestWebApi
         [TestMethod]
         public void AddTesterToProject()
         {
-            Project project = new Project()
+            ProjectDTO project = new ProjectDTO()
             {
                 Name = "project3",
                 Id = 1,
             };
 
-            Tester testerExpected = new Tester()
+            TesterDTO testerExpected = new TesterDTO()
             {
                 Id = 2,
                 Name = "Agustina",
@@ -387,7 +378,7 @@ namespace TestWebApi
 
             var result = controller.AddTesterToProject(project.Id, testerExpected.Id);
             var okResult = result as OkObjectResult;
-            var testerResult = okResult.Value as Tester;
+            var testerResult = okResult.Value as TesterDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(testerExpected, testerResult);
@@ -396,12 +387,12 @@ namespace TestWebApi
         [TestMethod]
         public void DeleteDeveloperFromProject()
         {
-            Project project = new Project()
+            ProjectDTO project = new ProjectDTO()
             {
                 Id = 1,
             };
 
-            Developer dev = new Developer()
+            DeveloperDTO dev = new DeveloperDTO()
             {
                 Id = 2,
                 Name = "Agustina",
@@ -425,12 +416,12 @@ namespace TestWebApi
         [TestMethod]
         public void DeleteTesterFromProject()
         {
-            Project project = new Project()
+            ProjectDTO project = new ProjectDTO()
             {
                 Id = 1,
             };
 
-            Tester tester = new Tester()
+            TesterDTO tester = new TesterDTO()
             {
                 Id = 2,
                 Name = "Agustina",
@@ -454,7 +445,7 @@ namespace TestWebApi
         [TestMethod]
         public void GetProjectCost()
         {
-            Project projectExpected = new Project()
+            ProjectDTO projectExpected = new ProjectDTO()
             {
                 Name = "Project1",
                 Id = 0
@@ -475,7 +466,7 @@ namespace TestWebApi
         [TestMethod]
         public void GetProjectDuration()
         {
-            Project projectExpected = new Project()
+            ProjectDTO projectExpected = new ProjectDTO()
             {
                 Name = "Project1",
                 Id = 0

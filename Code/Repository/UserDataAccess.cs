@@ -36,6 +36,7 @@ namespace Repository
 
         public bool VerifyRole(string token)
         {
+            if (context.Sessions.FirstOrDefault(s => s.Token == token) == null) return false;
             string username = context.Sessions.FirstOrDefault(s => s.Token == token).Username;
             bool isRole = users.Any(u => u.Username == username);
             return isRole;

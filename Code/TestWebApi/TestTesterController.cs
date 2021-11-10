@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic;
 using BusinessLogicInterfaces;
-using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -19,7 +19,7 @@ namespace TestWebApi
         [TestMethod]
         public void Create()
         {
-            Tester testerExpected = new Tester()
+            TesterDTO testerExpected = new TesterDTO()
             {
                 Username = "jose",
                 Name = "Joselito",
@@ -35,7 +35,7 @@ namespace TestWebApi
 
             var result = controller.Post(testerExpected);
             var okResult = result as OkObjectResult;
-            var devResult = okResult.Value as Tester;
+            var devResult = okResult.Value as TesterDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(testerExpected, devResult);
@@ -44,14 +44,14 @@ namespace TestWebApi
         [TestMethod]
         public void FilterBugsByStatus()
         {
-            List<Bug> bugsExpected = new List<Bug>()
+            List<BugDTO> bugsExpected = new List<BugDTO>()
             {
-                new Bug()
+                new BugDTO()
                 {
                     Name = "bug1",
                     IsActive = true
                 },
-                new Bug()
+                new BugDTO()
                 {
                     Name = "bug2",
                     IsActive = true
@@ -64,7 +64,7 @@ namespace TestWebApi
 
             var result = controller.GetBugsByStatus(idTester, true);
             var okResult = result as OkObjectResult;
-            var bugsResult = okResult.Value as List<Bug>;
+            var bugsResult = okResult.Value as List<BugDTO>;
 
             mock.VerifyAll();
             Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
@@ -73,13 +73,13 @@ namespace TestWebApi
         [TestMethod]
         public void FilterBugsByName()
         {
-            List<Bug> bugsExpected = new List<Bug>()
+            List<BugDTO> bugsExpected = new List<BugDTO>()
             {
-                new Bug()
+                new BugDTO()
                 {
                     Name = "bug1",
                 },
-                new Bug()
+                new BugDTO()
                 {
                     Name = "bug1",
                 },
@@ -91,7 +91,7 @@ namespace TestWebApi
 
             var result = controller.GetBugsByName(idTester, "bug1");
             var okResult = result as OkObjectResult;
-            var bugsResult = okResult.Value as List<Bug>;
+            var bugsResult = okResult.Value as List<BugDTO>;
 
             mock.VerifyAll();
             Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
@@ -100,13 +100,13 @@ namespace TestWebApi
         [TestMethod]
         public void FilterBugsByProject()
         {
-            List<Bug> bugsExpected = new List<Bug>()
+            List<BugDTO> bugsExpected = new List<BugDTO>()
             {
-                new Bug()
+                new BugDTO()
                 {
                     ProjectId = 3,
                 },
-                new Bug()
+                new BugDTO()
                 {
                     ProjectId = 3,
                 },
@@ -118,7 +118,7 @@ namespace TestWebApi
 
             var result = controller.GetBugsByProject(idTester, 3);
             var okResult = result as OkObjectResult;
-            var bugsResult = okResult.Value as List<Bug>;
+            var bugsResult = okResult.Value as List<BugDTO>;
 
             mock.VerifyAll();
             Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));

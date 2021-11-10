@@ -24,7 +24,8 @@ namespace TestDomain
             {
                 Name = "Work",
                 Time = 4,
-                Cost = 2
+                Cost = 2,
+                ProjectId = 1
             };
         }
 
@@ -58,6 +59,40 @@ namespace TestDomain
             work.Time = 3;
             int expected = 3;
             Assert.AreEqual(expected, work.Time);
+        }
+
+        [TestMethod]
+        public void ProjectGet()
+        {
+            Project expectedProject = new Project
+            {
+                Name = "New Project"
+            };
+            work.Project = expectedProject;
+            var actualProject = work.Project;
+            Assert.AreEqual(expectedProject, actualProject);
+        }
+
+        [DataTestMethod]
+        [DataRow("New project")]
+        [DataRow("Second project")]
+        [DataRow("The new new project")]
+        public void ProjectNameSet(string name)
+        {
+            work.ProjectName = name;
+            string expected = name;
+            Assert.AreEqual(expected, work.ProjectName);
+        }
+
+        [DataTestMethod]
+        [DataRow(0)]
+        [DataRow(1)]
+        [DataRow(2)]
+        public void ProjectIdGetSet(int id)
+        {
+            work.ProjectId = id;
+            int expected = id;
+            Assert.AreEqual(expected, work.ProjectId);
         }
 
         [TestMethod]

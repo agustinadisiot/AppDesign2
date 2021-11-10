@@ -27,7 +27,14 @@ namespace TestBugImportationBusinessLogic
                 ProjectId = 3,
                 IsActive = true,
                 CompletedBy = null,
-                Id = 0
+                Id = 0,
+                CompletedById = 0,
+                Time = 4,
+                Project = new Project()
+                {
+                    Id = 3,
+                    Name = "project"
+                }
             };
 
             Bug bug2 = new Bug()
@@ -38,7 +45,14 @@ namespace TestBugImportationBusinessLogic
                 ProjectId = 2,
                 IsActive = false,
                 CompletedBy = null,
-                Id = 1
+                Id = 1,
+                CompletedById = 0,
+                Time = 4,
+                Project = new Project()
+                {
+                    Id = 2,
+                    Name = "project2"
+                }
             };
 
             Bug bug3 = new Bug()
@@ -49,7 +63,14 @@ namespace TestBugImportationBusinessLogic
                 ProjectId = 5,
                 IsActive = true,
                 CompletedBy = null,
-                Id = 2
+                Id = 2,
+                CompletedById = 0,
+                Time = 4,
+                Project = new Project()
+                {
+                    Id = 5,
+                    Name = "project5"
+                }
             };
 
             string path = "file.xml";
@@ -81,9 +102,17 @@ namespace TestBugImportationBusinessLogic
         {
             Bug invalidBug = new Bug()
             {
-                Name = "invalid bug",
-                Description = "this is a bug",
-                Version = "24.2.4"
+                ProjectId = 5,
+                IsActive = true,
+                CompletedBy = null,
+                Id = 2,
+                CompletedById = 0,
+                Time = 4,
+                Project = new Project()
+                {
+                    Id = 5,
+                    Name = "project5"
+                }
             };
 
             string path = "file.xml";
