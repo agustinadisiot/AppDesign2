@@ -1,9 +1,11 @@
 ﻿using BusinessLogicInterfaces;
+using CustomBugImportation;
 using Domain;
 using Domain.Utils;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using WebApi.Filters;
 
 namespace WebApi.Controllers
@@ -60,6 +62,14 @@ namespace WebApi.Controllers
             ImportCompany parsedFormat = (ImportCompany)Enum.Parse(typeof(ImportCompany), format, true);
             businessLogic.ImportBugs(path, parsedFormat);
             return Ok();
+        }
+
+        [AuthorizationFilter("Admin")]
+        [HttpGet("cutom-importers")]
+        public object GetCustomImportersInfo()
+        {
+            List<ImporterInfo> info = businessLogic.GetCustomImportersInfo();
+            return Ok(info);
         }
     }
 }

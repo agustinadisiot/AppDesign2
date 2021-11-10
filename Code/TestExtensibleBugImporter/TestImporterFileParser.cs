@@ -1,7 +1,7 @@
+using CustomBugImportation;
 using ExtensibleBugImporter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using CustomBugImportation;
 using System.Linq;
 
 namespace TestExtensibleBugImporter

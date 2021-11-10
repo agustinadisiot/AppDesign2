@@ -10,4 +10,10 @@
     <ProjectReference Include="..\DTO\DTO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CustomBugImportation">
+      <HintPath>..\Reflection\CustomBugImportation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -21,7 +21,7 @@ namespace TestWebApi
     {
         // Hacer los tests requeria muchos mocks, incluyendo la extension de ServiceProvider que no se termino
         //https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.serviceproviderserviceextensions?view=dotnet-plat-ext-5.0
-        //[TestMethod]
+        //[TestMethod] TODO
         public void AdminAuthorization()
         {
             // SETUP
