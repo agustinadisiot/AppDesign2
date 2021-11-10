@@ -17,6 +17,7 @@ namespace TestDataAccess
         protected IUserDataAccess<T> userDataAccess { get; set; }
         protected DbSet<T> users;
         protected T user;
+        protected string role;
         protected User userDifferentRole;
         protected readonly DbConnection connection;
         protected readonly LoginDataAccess loginDataAccess;
@@ -56,9 +57,9 @@ namespace TestDataAccess
             bugManagerContext.Add(user);
             bugManagerContext.SaveChanges();
 
-            bool valid = loginDataAccess.VerifyUser("userPedro", "fransico234");
+            string expectedRole = loginDataAccess.VerifyUser("userPedro", "fransico234");
 
-            Assert.IsTrue(valid);
+            Assert.AreEqual(role, expectedRole);
         }
 
 
@@ -74,17 +75,17 @@ namespace TestDataAccess
             bugManagerContext.Add(user);
             bugManagerContext.SaveChanges();
 
-            bool valid = loginDataAccess.VerifyUser("userPedro", "jose454");
+            string expectedRole = loginDataAccess.VerifyUser("userPedro", "jose454");
 
-            Assert.IsFalse(valid);
+            Assert.AreNotEqual(role, expectedRole);
         }
 
         [TestMethod]
         public void VerifyNonExistingUser()
         {
-            bool valid = loginDataAccess.VerifyUser("administradorPedro", "contraseñaIncorrecta");
+            string expectedRole = loginDataAccess.VerifyUser("administradorPedro", "contraseñaIncorrecta");
 
-            Assert.IsFalse(valid);
+            Assert.AreNotEqual(expectedRole, role);
         }
 
 

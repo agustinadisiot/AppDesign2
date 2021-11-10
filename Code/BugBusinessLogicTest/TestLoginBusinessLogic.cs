@@ -17,10 +17,10 @@ namespace TestLoginBusinessLogic
         [DataRow("Pedro", "testqetrty")]
         public void LoginTokenNotEmpty(string username, string password)
         {
-
+            string role = "Admin";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 
-            mock.Setup(l => l.VerifyUser(username, password)).Returns(true);
+            mock.Setup(l => l.VerifyUser(username, password)).Returns(role);
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
@@ -35,10 +35,10 @@ namespace TestLoginBusinessLogic
         [DataRow("Pedro", "testqetrty")]
         public void LoginTokenDifferentEachLogin(string username, string password)
         {
-
+            string role = "Admin";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 
-            mock.Setup(l => l.VerifyUser(username, password)).Returns(true);
+            mock.Setup(l => l.VerifyUser(username, password)).Returns(role);
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
@@ -51,11 +51,12 @@ namespace TestLoginBusinessLogic
         [TestMethod]
         public void LoginTokenDifferentEachLoginDifferentAccounts()
         {
-
+            string role = "Admin"; 
+            string role2 = "Dev";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 
-            mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(true);
-            mock.Setup(l => l.VerifyUser("dev12", "devvvv")).Returns(true);
+            mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(role);
+            mock.Setup(l => l.VerifyUser("dev12", "devvvv")).Returns(role2);
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
@@ -68,9 +69,10 @@ namespace TestLoginBusinessLogic
         [TestMethod]
         public void LoginNotVerify()
         {
+            string roleNotFound = null;
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 
-            mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(false);
+            mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(roleNotFound);
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
             Assert.ThrowsException<AuthenticationException>(() => loginBusinessLogic.Login("admin", "Juana1223#@"));
@@ -80,8 +82,9 @@ namespace TestLoginBusinessLogic
         [TestMethod]
         public void ReturnedTokenSameAsSaved()
         {
+            string role = "Admin";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
-            mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(true);
+            mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(role);
             LoginToken saved = null;
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>())).Callback<LoginToken>((t) => { saved = t; });
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
@@ -98,10 +101,10 @@ namespace TestLoginBusinessLogic
         [DataRow("Pedro", "testqetrty")]
         public void LoginTokenHasUsername(string username, string password)
         {
-
+            string role = "Dev";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 
-            mock.Setup(l => l.VerifyUser(username, password)).Returns(true);
+            mock.Setup(l => l.VerifyUser(username, password)).Returns(role);
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
