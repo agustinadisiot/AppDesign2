@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using DTO;
 using RepositoryInterfaces;
 using System.Collections.Generic;
 
@@ -15,28 +16,30 @@ namespace BusinessLogic
         }
 
 
-        public Tester Add(Tester newTester)
+        public TesterDTO Add(TesterDTO newTester)
         {
-            newTester.Validate();
-            return testerDataAccess.Create(newTester);
+            Tester tester = newTester.ConvertToDomain();
+            tester.Validate();
+            testerDataAccess.Create(tester);
+            return newTester;
         }
 
-        public List<Bug> GetBugsByStatus(int idTester, bool filter)
+        public List<BugDTO> GetBugsByStatus(int idTester, bool filter)
         {
-            return testerDataAccess.GetBugsByStatus(idTester, filter);
-
+            List<Bug> bugs = testerDataAccess.GetBugsByStatus(idTester, filter);
+            return bugs.ConvertAll(b => new BugDTO(b));
         }
 
-        public List<Bug> GetBugsByName(int idTester, string filter)
+        public List<BugDTO> GetBugsByName(int idTester, string filter)
         {
-            return testerDataAccess.GetBugsByName(idTester, filter);
-
+            List<Bug> bugs = testerDataAccess.GetBugsByName(idTester, filter);
+            return bugs.ConvertAll(b => new BugDTO(b));
         }
 
-        public List<Bug> GetBugsByProject(int idTester, int filter)
+        public List<BugDTO> GetBugsByProject(int idTester, int filter)
         {
-            return testerDataAccess.GetBugsByProject(idTester, filter);
-
+            List<Bug> bugs = testerDataAccess.GetBugsByProject(idTester, filter);
+            return bugs.ConvertAll(b => new BugDTO(b));
         }
         public bool VerifyRole(string token)
         {

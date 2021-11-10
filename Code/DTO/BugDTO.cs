@@ -49,6 +49,12 @@ namespace DTO
             };
             return bug;
         }
+
+        public override bool Equals(object obj)
+        {
+            BugDTO bugDTO = (BugDTO)obj;
+            return bugDTO.Id == this.Id;
+        }
     }
 
    

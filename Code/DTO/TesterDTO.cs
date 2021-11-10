@@ -23,7 +23,7 @@ namespace DTO
             Password = tester.Password;
             Email = tester.Email;
             Cost = tester.Cost;
-            ProjectsDTO = ConvertProjects(tester.Projects);
+            ProjectsDTO = tester.Projects.ConvertAll(p=>new ProjectDTO(p));
         }
 
         public int Id { get; set; }
@@ -51,14 +51,10 @@ namespace DTO
             return tester;
         }
 
-        private List<ProjectDTO> ConvertProjects(List<Project> projects)
+        public override bool Equals(object obj)
         {
-            List<ProjectDTO> projectsDTO = new List<ProjectDTO>();
-            foreach (Project proj in projects)
-            {
-                projectsDTO.Add(new ProjectDTO(proj));
-            }
-            return projectsDTO;
+            TesterDTO testerDTO = (TesterDTO)obj;
+            return testerDTO.Id == this.Id;
         }
     }
 }

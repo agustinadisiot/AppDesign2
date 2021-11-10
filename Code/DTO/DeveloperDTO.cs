@@ -22,7 +22,7 @@ namespace DTO
             Password = dev.Password;
             Email = dev.Email;
             Cost = dev.Cost;
-            ProjectsDTO = ConvertProjects(dev.Projects);
+            ProjectsDTO = dev.Projects.ConvertAll(p=>new ProjectDTO(p));
         }
 
         public int Id { get; set; }
@@ -49,15 +49,10 @@ namespace DTO
             };
             return dev;
         }
-
-        private List<ProjectDTO> ConvertProjects(List<Project> projects)
+         public override bool Equals(object obj)
         {
-            List<ProjectDTO> projectsDTO = new List<ProjectDTO>();
-            foreach (Project proj in projects)
-            {
-                projectsDTO.Add(new ProjectDTO(proj));
-            }
-            return projectsDTO;
+            DeveloperDTO devDTO = (DeveloperDTO)obj;
+            return devDTO.Id == this.Id;
         }
     }
 }

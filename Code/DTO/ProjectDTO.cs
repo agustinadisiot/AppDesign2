@@ -27,5 +27,11 @@ namespace DTO
             };
             return project;
         }
+
+        public override bool Equals(object obj)
+        {
+            ProjectDTO projectDTO = (ProjectDTO)obj;
+            return projectDTO.Id == this.Id;
+        }
     }
 }
