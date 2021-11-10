@@ -32,7 +32,7 @@ namespace TestWebApi
             };
 
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetCustomImportersInfo());
+            mock.Setup(b => b.GetCustomImportersInfo()).Returns(expectedImportersInfo);
             var controller = new BugController(mock.Object);
 
             var result = controller.GetCustomImportersInfo(); ;
