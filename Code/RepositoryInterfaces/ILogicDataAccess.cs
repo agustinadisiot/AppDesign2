@@ -7,7 +7,7 @@ namespace RepositoryInterfaces
 {
     public interface ILoginDataAccess
     {
-        bool VerifyUser(string username, string password);
+        string VerifyUser(string username, string password);
         void SaveLogin(LoginToken loginToken);
     }
 }

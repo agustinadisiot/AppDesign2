@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using DTO;
 using RepositoryInterfaces;
 using System;
 using System.Security.Authentication;
@@ -15,18 +16,25 @@ namespace BusinessLogic
             loginDataAccess = newLoginDataAccess;
         }
 
-        public LoginToken Login(string username, string password)
+        public LoginResponseDTO Login(string username, string password)
         {
-            bool validCredentials = loginDataAccess.VerifyUser(username, password);
-            if (!validCredentials)
+            string validCredentials = loginDataAccess.VerifyUser(username, password);
+            if (validCredentials == null)
                 throw new AuthenticationException();
 
-            LoginToken token = new LoginToken { 
-                Token = Guid.NewGuid().ToString(),
+            string token = Guid.NewGuid().ToString();
+            LoginToken tokenSave = new LoginToken { 
+                Token = token,
                 Username = username 
             };
-            loginDataAccess.SaveLogin(token);
-            return token;
+            loginDataAccess.SaveLogin(tokenSave);
+
+            LoginResponseDTO response = new LoginResponseDTO
+            {
+                Token = token,
+                Role = validCredentials
+            };
+            return response;
         }
     }
 

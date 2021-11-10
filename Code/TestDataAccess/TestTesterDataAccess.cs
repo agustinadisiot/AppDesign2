@@ -23,6 +23,7 @@ namespace TestTesterDataAccess
             user = new Tester();
             users = bugManagerContext.Tester;
             userDifferentRole = new Developer();
+            role = Roles.Tester;
 
         }
 
