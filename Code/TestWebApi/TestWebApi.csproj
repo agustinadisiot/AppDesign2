@@ -24,4 +24,10 @@
     <ProjectReference Include="..\WebApi\WebApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CustomBugImportation">
+      <HintPath>..\Reflection\CustomBugImportation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

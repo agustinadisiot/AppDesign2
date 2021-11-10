@@ -7,6 +7,7 @@ using RepositoryInterfaces;
 using Domain.Utils;
 using BugParser;
 using DTO;
+using CustomBugImportation;
 
 namespace BusinessLogic
 {
@@ -66,6 +67,10 @@ namespace BusinessLogic
             }
         }
 
+        public List<ImporterInfo> GetCustomImportersInfo()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

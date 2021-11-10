@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using CustomBugImportation;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApi.Controllers;
 
 namespace TestWebApi
 {
@@ -33,10 +35,13 @@ namespace TestWebApi
             mock.Setup(b => b.GetCustomImportersInfo());
             var controller = new BugController(mock.Object);
 
-            List<ImporterInfo> actualImportersInfo = controller.GetCustomImportersInfo();
+            var result = controller.GetCustomImportersInfo(); ;
+            var okResult = result as OkObjectResult;
+            var actualImportersInfo = okResult.Value as IEnumerable<ImporterInfo>;
+
 
             mock.VerifyAll();
-            CollectionAssert.AreEquivalent(expectedImportersInfo, actualImportersInfo);
+            CollectionAssert.AreEquivalent(expectedImportersInfo, (System.Collections.ICollection)actualImportersInfo);
         }
     }
 }
