@@ -36,6 +36,11 @@ namespace BusinessLogic
             };
             return response;
         }
+
+        public TokenIdDTO GetIdRoleFromToken(string token)
+        {
+            loginDataAccess.
+        }
     }
 
 
