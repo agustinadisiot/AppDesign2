@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   LogIn() {
     // TODO validate credentials
-    this.router.navigateByUrl('/nav/admin');
+    this.router.navigateByUrl('/admin/bugs');
     //this.user = { username: '', password: '' }; TODO sacar
   }
 }

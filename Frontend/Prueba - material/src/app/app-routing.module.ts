@@ -19,10 +19,6 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./views/admin/admin.module').then(a => a.AdminModule)
   },
-  {
-    path: 'nav',
-    loadChildren: () => import('./components/navigation/navigation.module').then(m => m.NavigationModule)
-  },
   // {
   //   path:'dev',
   //   loadChildren: () => import('./views/dev/dev.module').then(m => m.DevModule)
