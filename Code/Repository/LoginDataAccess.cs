@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using BusinessLogicInterfaces;
 using Domain;
+using Domain.Utils;
 using Microsoft.EntityFrameworkCore;
 using Repository.Design;
 using RepositoryInterfaces;
@@ -25,12 +26,20 @@ namespace Repository
             context.SaveChanges();
         }
 
-        public bool VerifyUser(string username, string password)
+        public string VerifyUser(string username, string password)
         {
-            bool verified = context.Admins.Any(u => u.Username == username && u.Password == password) ||
-                            context.Developer.Any(u => u.Username == username && u.Password == password) ||
-                            context.Tester.Any(u => u.Username == username && u.Password == password);
-            return verified;
+            string role = null;
+            if(context.Admins.Any(u => u.Username == username && u.Password == password))
+            {
+                role = Roles.Admin;
+            }else if(context.Developer.Any(u => u.Username == username && u.Password == password))
+            {
+                role = Roles.Dev;
+            }else if(context.Tester.Any(u => u.Username == username && u.Password == password))
+            {
+                role = Roles.Tester;
+            }
+            return role;
         }
 
 

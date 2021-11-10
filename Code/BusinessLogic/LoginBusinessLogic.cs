@@ -17,8 +17,8 @@ namespace BusinessLogic
 
         public LoginToken Login(string username, string password)
         {
-            bool validCredentials = loginDataAccess.VerifyUser(username, password);
-            if (!validCredentials)
+            string validCredentials = loginDataAccess.VerifyUser(username, password);
+            if (validCredentials == null)
                 throw new AuthenticationException();
 
             LoginToken token = new LoginToken { 

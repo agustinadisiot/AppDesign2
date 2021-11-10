@@ -17,7 +17,7 @@ namespace TestLoginBusinessLogic
         [DataRow("Pedro", "testqetrty")]
         public void LoginTokenNotEmpty(string username, string password)
         {
-            string role = "Admin";
+            string role = "admin";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 
             mock.Setup(l => l.VerifyUser(username, password)).Returns(role);
@@ -35,7 +35,7 @@ namespace TestLoginBusinessLogic
         [DataRow("Pedro", "testqetrty")]
         public void LoginTokenDifferentEachLogin(string username, string password)
         {
-            string role = "Admin";
+            string role = "admin";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 
             mock.Setup(l => l.VerifyUser(username, password)).Returns(role);
@@ -51,8 +51,8 @@ namespace TestLoginBusinessLogic
         [TestMethod]
         public void LoginTokenDifferentEachLoginDifferentAccounts()
         {
-            string role = "Admin"; 
-            string role2 = "Dev";
+            string role = "admin"; 
+            string role2 = "dev";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 
             mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(role);
@@ -82,7 +82,7 @@ namespace TestLoginBusinessLogic
         [TestMethod]
         public void ReturnedTokenSameAsSaved()
         {
-            string role = "Admin";
+            string role = "admin";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
             mock.Setup(l => l.VerifyUser("admin", "Juana1223#@")).Returns(role);
             LoginToken saved = null;
@@ -101,7 +101,7 @@ namespace TestLoginBusinessLogic
         [DataRow("Pedro", "testqetrty")]
         public void LoginTokenHasUsername(string username, string password)
         {
-            string role = "Dev";
+            string role = "dev";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 
             mock.Setup(l => l.VerifyUser(username, password)).Returns(role);

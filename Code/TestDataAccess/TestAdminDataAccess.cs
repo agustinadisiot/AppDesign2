@@ -20,6 +20,7 @@ namespace TestDataAccess
             user = new Admin();
             users = bugManagerContext.Admins;
             userDifferentRole = new Tester();
+            role = Roles.Admin;
         }
 
     }
