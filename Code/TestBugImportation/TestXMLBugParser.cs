@@ -7,7 +7,6 @@ using System.Xml;
 
 namespace TestBugParser
 {
-    [DeploymentItem(@"TestFiles/XMLTestFiles/OneBug.xml", "TestFiles/XMLTestFiles")]
     [TestClass]
     public class TestXMLBugParser
     {
