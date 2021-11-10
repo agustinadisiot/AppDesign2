@@ -1,10 +1,10 @@
-﻿using Domain;
+﻿using DTO;
 
 namespace BusinessLogicInterfaces
 {
     public interface ILoginBusinessLogic
     {
-        public LoginToken Login(string username, string password);
+        public LoginResponseDTO Login(string username, string password);
 
     }
 }

@@ -4,6 +4,7 @@ using BusinessLogic;
 using RepositoryInterfaces;
 using Moq;
 using System.Security.Authentication;
+using DTO;
 
 namespace TestLoginBusinessLogic
 {
@@ -24,7 +25,7 @@ namespace TestLoginBusinessLogic
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
-            LoginToken token = loginBusinessLogic.Login(username, password);
+            LoginResponseDTO token = loginBusinessLogic.Login(username, password);
             mock.VerifyAll();
             Assert.IsTrue(token.Token.Length > 0);
         }
@@ -42,8 +43,8 @@ namespace TestLoginBusinessLogic
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
-            LoginToken first = loginBusinessLogic.Login(username, password);
-            LoginToken second = loginBusinessLogic.Login(username, password);
+            LoginResponseDTO first = loginBusinessLogic.Login(username, password);
+            LoginResponseDTO second = loginBusinessLogic.Login(username, password);
             mock.VerifyAll();
             Assert.IsTrue(first.Token != second.Token);
         }
@@ -60,8 +61,8 @@ namespace TestLoginBusinessLogic
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
-            LoginToken first = loginBusinessLogic.Login("admin", "Juana1223#@");
-            LoginToken second = loginBusinessLogic.Login("dev12", "devvvv");
+            LoginResponseDTO first = loginBusinessLogic.Login("admin", "Juana1223#@");
+            LoginResponseDTO second = loginBusinessLogic.Login("dev12", "devvvv");
             mock.VerifyAll();
             Assert.IsTrue(first.Token != second.Token);
         }
@@ -89,7 +90,7 @@ namespace TestLoginBusinessLogic
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>())).Callback<LoginToken>((t) => { saved = t; });
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
-            LoginToken returned = loginBusinessLogic.Login("admin", "Juana1223#@");
+            LoginResponseDTO returned = loginBusinessLogic.Login("admin", "Juana1223#@");
 
             Assert.AreEqual(saved.Token, returned.Token);
         }
@@ -99,7 +100,7 @@ namespace TestLoginBusinessLogic
         [DataRow("admin", "Juana1223#@")]
         [DataRow("dev12", "devvvv")]
         [DataRow("Pedro", "testqetrty")]
-        public void LoginTokenHasUsername(string username, string password)
+        public void LoginTokenHasRoleUsername(string username, string password)
         {
             string role = "dev";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
@@ -108,9 +109,9 @@ namespace TestLoginBusinessLogic
             mock.Setup(l => l.SaveLogin(It.IsAny<LoginToken>()));
             var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
 
-            LoginToken token = loginBusinessLogic.Login(username, password);
+            LoginResponseDTO token = loginBusinessLogic.Login(username, password);
             mock.VerifyAll();
-            Assert.IsTrue(token.Username == username);
+            Assert.IsTrue(token.Role == role);
         }
     }
 }
