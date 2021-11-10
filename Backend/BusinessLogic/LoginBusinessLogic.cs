@@ -39,7 +39,7 @@ namespace BusinessLogic
 
         public TokenIdDTO GetIdRoleFromToken(string token)
         {
-            loginDataAccess.
+            return loginDataAccess.GetIdRoleFromToken(token);
         }
     }
 

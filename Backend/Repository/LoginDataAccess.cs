@@ -2,6 +2,7 @@
 using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.EntityFrameworkCore;
 using Repository.Design;
 using RepositoryInterfaces;
@@ -18,6 +19,11 @@ namespace Repository
         public LoginDataAccess(DbContext newContext)
         {
             context = (BugManagerContext)newContext;
+        }
+
+        public TokenIdDTO GetIdRoleFromToken(string token)
+        {
+            throw new NotImplementedException();
         }
 
         public void SaveLogin(LoginToken loginToken)
