@@ -10,6 +10,7 @@ using System.Security.Authentication;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Domain;
+using DTO;
 
 namespace WebApi.Filters
 {
@@ -29,29 +30,27 @@ namespace WebApi.Filters
             string token = context.HttpContext.Request.Headers["token"];
             if (token == null)
             {
-                NotLoguedRespond(context);
+                NotLoggedRespond(context);
                 return;
             }
 
-            if (arg.Contains("Admin"))
-            {
-                var logic = context.HttpContext.RequestServices.GetService<IAdminBusinessLogic>();
-                isAuthorize = isAuthorize || logic.VerifyRole(token);
-            }
+            var loginLogic = context.HttpContext.RequestServices.GetService<ILoginBusinessLogic>();
+            TokenIdDTO tokenIdDTO = loginLogic.GetIdRoleFromToken(token);
+            context.HttpContext.Request.Headers.Add("role", tokenIdDTO.Role);
+            context.HttpContext.Request.Headers.Add("userId", tokenIdDTO.Id.ToString());
+
+            if (arg.Contains("Admin")) 
+                isAuthorize = isAuthorize || tokenIdDTO.Role == Roles.Admin;
+
             if (arg.Contains("Developer"))
-            {
-                var logic = context.HttpContext.RequestServices.GetService<IDeveloperBusinessLogic>();
-                isAuthorize = isAuthorize || logic.VerifyRole(token);
-            }
+                isAuthorize = isAuthorize || tokenIdDTO.Role == Roles.Dev;
+
             if (arg.Contains("Tester"))
-            {
-                var logic = context.HttpContext.RequestServices.GetService<ITesterBusinessLogic>();
-                isAuthorize = isAuthorize || logic.VerifyRole(token);
-            }
+                isAuthorize = isAuthorize || tokenIdDTO.Role == Roles.Tester;
 
             if (!isAuthorize)
             {
-                ResponseMessage message = new ResponseMessage("You aren't logued correctly.");
+                ResponseMessage message = new ResponseMessage("You aren't logged correctly.");
                 context.Result = new ObjectResult(message)
                 {
                     StatusCode = 403,
@@ -60,9 +59,9 @@ namespace WebApi.Filters
 
         }
 
-        private void NotLoguedRespond(AuthorizationFilterContext context)
+        private void NotLoggedRespond(AuthorizationFilterContext context)
         {
-            ResponseMessage message = new ResponseMessage("You aren't logued.");
+            ResponseMessage message = new ResponseMessage("You aren't logged.");
             context.Result = new ObjectResult(message)
             {
                 StatusCode = 401,
