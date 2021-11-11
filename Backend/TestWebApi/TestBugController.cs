@@ -48,7 +48,7 @@ namespace TestWebApi
             mock.Setup(b => b.GetAll(idRole)).Returns(bugsExpected);
             var controller = new BugController(mock.Object);
 
-            var result = controller.Get();
+            var result = controller.GetAll(idRole); //sholdnt recieve parameters
             var okResult = result as OkObjectResult;
             var bugsResult = okResult.Value as IEnumerable<BugDTO>;
 

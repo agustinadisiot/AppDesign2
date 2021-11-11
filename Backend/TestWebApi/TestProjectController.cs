@@ -39,12 +39,12 @@ namespace TestWebApi
             mock.Setup(b => b.GetAll(idRole)).Returns(projectsExpected);
             var controller = new ProjectController(mock.Object);
 
-            var result = controller.Get();
+            var result = controller.GetAll(idRole); //shouldnt recieve params
             var okResult = result as OkObjectResult;
             var projectsResult = okResult.Value as IEnumerable<ProjectDTO>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer()); //projectdtoComparer
+            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer()); 
         }
 
         [TestMethod]

@@ -33,11 +33,11 @@ namespace WebApi.Filters
                 NotLoggedRespond(context);
                 return;
             }
-
+            
             var loginLogic = context.HttpContext.RequestServices.GetService<ILoginBusinessLogic>();
             TokenIdDTO tokenIdDTO = loginLogic.GetIdRoleFromToken(token);
-            context.HttpContext.Request.Headers.Add("role", tokenIdDTO.Role);
-            context.HttpContext.Request.Headers.Add("userId", tokenIdDTO.Id.ToString());
+            context.HttpContext.Items.Add("role", tokenIdDTO.Role);
+            context.HttpContext.Items.Add("userId", tokenIdDTO.Id);
 
             if (arg.Contains("Admin")) 
                 isAuthorize = isAuthorize || tokenIdDTO.Role == Roles.Admin;
