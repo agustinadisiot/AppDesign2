@@ -22,7 +22,7 @@ namespace BusinessLogic
 
         public BugDTO GetById(int idBug)
         {
-            Bug bug = BugDataAccess.GetById(idBug);
+            Bug bug = BugDataAccess.GetById(idBug); 
             return new BugDTO(bug);
         }
 

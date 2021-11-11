@@ -205,7 +205,7 @@ namespace TestProjectBusinessLogic
             };
 
             TokenIdDTO idRole = new TokenIdDTO()
-            {
+            { 
                 Id = 2,
                 Role = "dev"
             };
