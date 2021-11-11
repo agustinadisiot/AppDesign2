@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from 'src/app/services/login/login.service';
 import { UserCredentials } from 'src/app/models/userCredentials';
+import { LoginResponse } from 'src/app/models/loginResponse';
 
 
 @Component({
@@ -29,10 +30,17 @@ export class LoginComponent implements OnInit {
 
 
   LogIn() {
-    this.loginService.login(this.credentials);
+    this.loginService.login(this.credentials).subscribe(
+      (loginResponse: LoginResponse) => {
+        //console.log(loginResponse)
+        localStorage.setItem("role", loginResponse.role);
+        this.router.navigateByUrl(`/${loginResponse.role}`);
+        this.credentials = { username: '', password: '' };
+      },
+      error => {
+        console.log(error) // TODO mostrar en pantalla
+      }
+    );
 
-    localStorage.setItem("role", "admin");
-    this.router.navigateByUrl('/admin/bugs');
-    this.credentials = { username: '', password: '' };
   }
 }

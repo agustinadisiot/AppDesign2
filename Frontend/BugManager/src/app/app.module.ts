@@ -11,7 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthorizationGuard } from './guards/authorization.guard';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import '@angular/compiler';
 
 @NgModule({
   declarations: [ // EXP: todo componente tiene que ser declarado por uno y uno solo modulo
@@ -28,6 +29,7 @@ import { AuthorizationGuard } from './guards/authorization.guard';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [AuthorizationGuard],
   exports: [],
