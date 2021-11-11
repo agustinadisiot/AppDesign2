@@ -29,8 +29,14 @@ namespace TestWebApi
                 }
             };
 
+            TokenIdDTO idRole = new TokenIdDTO()
+            {
+                Id = 2,
+                Role = "dev"
+            };
+
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(projectsExpected);
+            mock.Setup(b => b.GetAll(token)).Returns(projectsExpected);
             var controller = new ProjectController(mock.Object);
 
             var result = controller.Get();
