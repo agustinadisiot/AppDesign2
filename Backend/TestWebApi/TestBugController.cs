@@ -45,7 +45,7 @@ namespace TestWebApi
             };
 
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll(token)).Returns(bugsExpected);
+            mock.Setup(b => b.GetAll(idRole)).Returns(bugsExpected);
             var controller = new BugController(mock.Object);
 
             var result = controller.Get();

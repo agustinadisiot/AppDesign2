@@ -29,7 +29,7 @@ namespace BusinessLogic
             return projectDataAccess.Delete(Id);
         }
 
-        public IEnumerable<ProjectDTO> GetAll()
+        public IEnumerable<ProjectDTO> GetAll(TokenIdDTO idRole)
         {
             List<Project> projects = (List<Project>)projectDataAccess.GetAll();
             return projects.ConvertAll(p => new ProjectDTO(p));

@@ -36,7 +36,7 @@ namespace TestWebApi
             };
 
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll(token)).Returns(projectsExpected);
+            mock.Setup(b => b.GetAll(idRole)).Returns(projectsExpected);
             var controller = new ProjectController(mock.Object);
 
             var result = controller.Get();

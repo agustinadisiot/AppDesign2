@@ -26,7 +26,7 @@ namespace BusinessLogic
             return new BugDTO(bug);
         }
 
-        public IEnumerable<BugDTO> GetAll()
+        public IEnumerable<BugDTO> GetAll(TokenIdDTO idRole)
         {
             List<Bug> bugs = (List<Bug>)BugDataAccess.GetAll();
             return bugs.ConvertAll(b => new BugDTO(b));
