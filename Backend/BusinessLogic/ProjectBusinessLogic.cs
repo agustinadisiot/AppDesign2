@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using Domain.Utils;
 using DTO;
 using RepositoryInterfaces;
 using System;
@@ -32,6 +33,16 @@ namespace BusinessLogic
         public IEnumerable<ProjectDTO> GetAll(TokenIdDTO idRole)
         {
             List<Project> projects = (List<Project>)projectDataAccess.GetAll();
+            if (idRole.Role == Roles.Dev)
+            {
+                List<Project> myProjects = projects.FindAll(p => p.Developers.Exists(d => d.Id == idRole.Id));
+                return myProjects.ConvertAll(p => new ProjectDTO(p));
+            }
+            if (idRole.Role == Roles.Tester)
+            {
+                List<Project> myProjects = projects.FindAll(p => p.Testers.Exists(t => t.Id == idRole.Id));
+                return myProjects.ConvertAll(p => new ProjectDTO(p));
+            }
             return projects.ConvertAll(p => new ProjectDTO(p));
         }
 
