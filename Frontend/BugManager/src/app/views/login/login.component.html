@@ -24,8 +24,10 @@
       </button>
     </mat-form-field>
 
-    <button mat-flat-button color="primary" [disabled]="!form.valid" (click)="LogIn()">Log In</button>
-
+    <button mat-flat-button color="primary" disabled="{{!form.valid || loading}}" (click)="LogIn()">Log In
+    </button>
+    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+    <app-message [message]="errorMessage"></app-message>
   </form>
 
 </mat-card>

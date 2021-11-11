@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from 'src/app/services/login/login.service';
 import { UserCredentials } from 'src/app/models/userCredentials';
-import { LoginResponse } from 'src/app/models/loginResponse';
+import { LoginResponse } from 'src/app/views/login/models/loginResponse';
+import { InfoMessage } from 'src/app/components/message/model/message';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   credentials: UserCredentials = { username: '', password: '' } // TODO usar un modelo posta
   hide = true;
-
+  loading = false;
+  errorMessage: InfoMessage = { text: "", error: true };
 
   ngOnInit() {
     localStorage.removeItem("role");
@@ -30,15 +32,18 @@ export class LoginComponent implements OnInit {
 
 
   LogIn() {
+    this.loading = true;
     this.loginService.login(this.credentials).subscribe(
+
       (loginResponse: LoginResponse) => {
-        //console.log(loginResponse)
         localStorage.setItem("role", loginResponse.role);
         this.router.navigateByUrl(`/${loginResponse.role}`);
         this.credentials = { username: '', password: '' };
       },
+
       error => {
-        console.log(error) // TODO mostrar en pantalla
+        this.errorMessage.text = error
+        this.loading = false;
       }
     );
 

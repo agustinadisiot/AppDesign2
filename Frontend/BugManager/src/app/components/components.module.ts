@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NavComponent } from './nav/nav.component';
+import { GenericTableComponent } from './generic-table/generic-table.component';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   imports: [
@@ -12,9 +14,12 @@ import { NavComponent } from './nav/nav.component';
     NgbModule
   ],
   declarations: [
-    NotFoundComponent
+    NotFoundComponent,
+    GenericTableComponent,
+    MessageComponent,
   ],
   exports: [
+    MessageComponent,
   ]
 })
 export class ComponentsModule { }
