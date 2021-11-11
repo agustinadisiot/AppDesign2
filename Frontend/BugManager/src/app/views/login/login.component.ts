@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { LoginService } from 'src/app/services/login/login.service';
+import { UserCredentials } from 'src/app/models/userCredentials';
 
 
 @Component({
@@ -9,7 +11,7 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, fb: FormBuilder) { }
+  constructor(private router: Router, fb: FormBuilder, private loginService: LoginService) { }
 
 
   form = new FormGroup({
@@ -17,17 +19,20 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  user = { username: '', password: '' } // TODO usar un modelo posta
+  credentials: UserCredentials = { username: '', password: '' } // TODO usar un modelo posta
   hide = true;
 
 
   ngOnInit() {
+    localStorage.removeItem("role");
   }
 
 
   LogIn() {
-    // TODO validate credentials
+    this.loginService.login(this.credentials);
+
+    localStorage.setItem("role", "admin");
     this.router.navigateByUrl('/admin/bugs');
-    //this.user = { username: '', password: '' }; TODO sacar
+    this.credentials = { username: '', password: '' };
   }
 }
