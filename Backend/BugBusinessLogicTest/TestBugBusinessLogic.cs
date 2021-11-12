@@ -155,7 +155,7 @@ namespace TestBugBusinessLogic
             TokenIdDTO idRole = new TokenIdDTO()
             {
                 Id = 2,
-                Role = "dev"
+                Role = "admin"
             };
 
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);

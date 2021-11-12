@@ -274,5 +274,103 @@ namespace TestDataAccess
             CollectionAssert.DoesNotContain(bugsSaved, notExpectedBug);
 
         }
+
+        [TestMethod]
+        public void ResolveBug()
+        {
+            Developer dev = new Developer()
+            {
+                Id = 4,
+                Name = "Juan"
+            };
+            bugManagerContext.Add(dev);
+            bugManagerContext.SaveChanges();
+
+            Project project = new Project()
+            {
+                Name = "project",
+                Id = 4,
+            };
+            bugManagerContext.Add(project);
+            bugManagerContext.SaveChanges();
+
+            Bug bug = bugDataAccess.Create(new Bug
+            {
+                Id = 2,
+                Name = "b",
+                Description = "a",
+                Version = "1.0",
+                ProjectId = 4,
+                IsActive = true
+            });
+
+            var bugUpdated = new Bug
+            {
+                Id = 2,
+                Name = "b",
+                Description = "a",
+                ProjectId = 4,
+                Version = "1.0",
+                IsActive = false,
+                CompletedById = 4
+            };
+
+            Bug bugModified = bugDataAccess.ResolveBug(bug.Id);
+            bugManagerContext.SaveChanges();
+
+
+            Assert.AreEqual(0, new BugComparer().Compare(bugUpdated, bugModified));
+
+        }
+
+        [TestMethod]
+        public void UnresolveBug()
+        {
+            Developer dev = new Developer()
+            {
+                Id = 4,
+                Name = "Juan"
+            };
+            bugManagerContext.Add(dev);
+            bugManagerContext.SaveChanges();
+
+            Project project = new Project()
+            {
+                Name = "project",
+                Id = 4,
+            };
+            bugManagerContext.Add(project);
+            bugManagerContext.SaveChanges();
+
+            Bug bug = bugDataAccess.Create(new Bug
+            {
+                Id = 2,
+                Name = "b",
+                Description = "a",
+                ProjectId = 4,
+                Version = "1.0",
+                IsActive = false,
+                CompletedById = 4
+               
+            });
+
+            var bugUpdated = new Bug
+            {
+                Id = 2,
+                Name = "b",
+                Description = "a",
+                Version = "1.0",
+                ProjectId = 4,
+                IsActive = true,
+                CompletedById = 0
+            };
+
+            Bug bugModified = bugDataAccess.UnresolveBug(bug.Id);
+            bugManagerContext.SaveChanges();
+
+
+            Assert.AreEqual(0, new BugComparer().Compare(bugUpdated, bugModified));
+
+        }
     }
 }

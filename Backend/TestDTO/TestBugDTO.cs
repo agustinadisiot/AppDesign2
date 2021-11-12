@@ -104,6 +104,14 @@ namespace TestDTO
         }
 
         [TestMethod]
+        public void CompletedByNameGetSet()
+        {
+            bugDTO.CompletedByUsername = "Agus";
+            string expected = "Agus";
+            Assert.AreEqual(expected, bugDTO.CompletedByUsername);
+        }
+
+        [TestMethod]
         public void FromBugToDTO()
         {
             Bug bug = new Bug()
