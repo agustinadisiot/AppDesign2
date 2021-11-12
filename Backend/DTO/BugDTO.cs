@@ -14,6 +14,7 @@ namespace DTO
         public int Id { get; set; }
         public int CompletedById { get; set; }
         public bool IsActive { get; set; }
+        public string CompletedByUsername { get; set; }
 
         public BugDTO(Bug bug)
         {
