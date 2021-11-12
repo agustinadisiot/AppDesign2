@@ -71,5 +71,19 @@ namespace WebApi.Controllers
             List<ImporterInfo> info = businessLogic.GetCustomImportersInfo();
             return Ok(info);
         }
+
+        [AuthorizationFilter("Developer")]
+        [HttpPut("{id}/resolve")]
+        public object ResolveBug(int id)
+        {
+            return Ok(businessLogic.ResolveBug(id));
+        }
+
+        [AuthorizationFilter("Developer")]
+        [HttpPut("{id}/unresolve")]
+        public object UnresolveBug(int id)
+        {
+            return Ok(businessLogic.UnresolveBug(id));
+        }
     }
 }

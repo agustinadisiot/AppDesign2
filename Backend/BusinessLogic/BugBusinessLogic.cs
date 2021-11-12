@@ -71,6 +71,16 @@ namespace BusinessLogic
         {
             throw new NotImplementedException();
         }
+
+        public BugDTO ResolveBug(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BugDTO UnresolveBug(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
