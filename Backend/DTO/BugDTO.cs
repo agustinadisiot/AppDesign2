@@ -27,6 +27,7 @@ namespace DTO
             Id = bug.Id;
             IsActive = bug.IsActive;
             CompletedById = (int)bug.CompletedById;
+            if(bug.CompletedBy != null) { CompletedByUsername = bug.CompletedBy.Username; }
         }
 
         public BugDTO()

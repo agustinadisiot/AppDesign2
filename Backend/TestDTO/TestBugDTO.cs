@@ -122,6 +122,16 @@ namespace TestDTO
                 Time = 4,
                 ProjectId = 2,
                 CompletedById = 6,
+                CompletedBy = new Developer()
+                {
+                    Username = "ivan",
+                    Name="ivan",
+                    Cost = 5,
+                    Email = "fghj",
+                    Id = 6,
+                    Lastname = "perez",
+                    Password = "234567clave",
+                },
                 Id = 3,
                 Project = new Project()
                 {
