@@ -91,5 +91,15 @@ namespace Repository
             context.SaveChanges();
             return new ResponseMessage("Deleted successfully");
         }
+
+        public Bug ResolveBug(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Bug UnresolveBug(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

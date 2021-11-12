@@ -29,7 +29,7 @@ namespace WebApi.Filters
             string token = context.HttpContext.Request.Headers["token"];
             if (token == null)
             {
-                NotLoguedRespond(context);
+                NotLoggedRespond(context);
                 return;
             }
 
@@ -60,9 +60,9 @@ namespace WebApi.Filters
 
         }
 
-        private void NotLoguedRespond(AuthorizationFilterContext context)
+        private void NotLoggedRespond(AuthorizationFilterContext context)
         {
-            ResponseMessage message = new ResponseMessage("You aren't logued.");
+            ResponseMessage message = new ResponseMessage("You aren't logged.");
             context.Result = new ObjectResult(message)
             {
                 StatusCode = 401,

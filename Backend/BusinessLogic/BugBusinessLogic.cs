@@ -74,12 +74,12 @@ namespace BusinessLogic
 
         public BugDTO ResolveBug(int id)
         {
-            throw new NotImplementedException();
+            return new BugDTO(BugDataAccess.ResolveBug(id));
         }
 
         public BugDTO UnresolveBug(int id)
         {
-            throw new NotImplementedException();
+            return new BugDTO(BugDataAccess.UnresolveBug(id));
         }
     }
 
