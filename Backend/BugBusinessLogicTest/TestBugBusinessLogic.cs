@@ -203,5 +203,29 @@ namespace TestBugBusinessLogic
             mock.Verify(m => m.Create(invalidBug), Times.Never);
 
         }
+
+        [TestMethod]
+        public void ResolveBug()
+        {
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.ResolveBug(bug.Id)).Returns(bug);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            var result = bugBusinessLogic.ResolveBug(bug.Id);
+
+            Assert.AreEqual(new BugDTO(bug), result);
+        }
+
+        [TestMethod]
+        public void UnresolveBug()
+        {
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.UnresolveBug(bug.Id)).Returns(bug);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            var result = bugBusinessLogic.UnresolveBug(bug.Id);
+
+            Assert.AreEqual(new BugDTO(bug), result);
+        }
     }
 }
