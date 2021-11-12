@@ -3,6 +3,7 @@ using System.Data.Common;
 using System.Linq;
 using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -57,6 +58,68 @@ namespace TestDataAccess
             bool exists = bugManagerContext.Sessions.Any(s => s.Token == expectedToken
                                                         && s.Username == username);
             Assert.IsTrue(exists);
+        }
+
+        [TestMethod]
+        public void GetIdFromToken()
+        {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Admin admin = new Admin()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(admin);
+            loginDataAccess.SaveLogin(loginToken);
+
+            TokenIdDTO tokenExpected = loginDataAccess.GetIdRoleFromToken(token);
+
+            Assert.AreEqual(tokenExpected.Id, id);
+        }
+
+        [TestMethod]
+        public void GetRoleFromToken()
+        {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Admin admin = new Admin()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(admin);
+            loginDataAccess.SaveLogin(loginToken);
+
+            TokenIdDTO tokenExpected = loginDataAccess.GetIdRoleFromToken(token);
+
+            Assert.AreEqual(tokenExpected.Role, Roles.Admin);
         }
     }
 }

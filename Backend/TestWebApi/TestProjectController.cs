@@ -29,16 +29,22 @@ namespace TestWebApi
                 }
             };
 
+            TokenIdDTO idRole = new TokenIdDTO()
+            {
+                Id = 2,
+                Role = "dev"
+            };
+
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(projectsExpected);
+            mock.Setup(b => b.GetAll(idRole)).Returns(projectsExpected);
             var controller = new ProjectController(mock.Object);
 
-            var result = controller.Get();
+            var result = controller.GetAll(idRole); //shouldnt recieve params
             var okResult = result as OkObjectResult;
             var projectsResult = okResult.Value as IEnumerable<ProjectDTO>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer()); //projectdtoComparer
+            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer()); 
         }
 
         [TestMethod]

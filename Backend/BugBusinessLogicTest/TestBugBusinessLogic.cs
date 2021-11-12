@@ -152,11 +152,17 @@ namespace TestBugBusinessLogic
                 },
             };
 
+            TokenIdDTO idRole = new TokenIdDTO()
+            {
+                Id = 2,
+                Role = "dev"
+            };
+
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
             mock.Setup(b => b.GetAll()).Returns(bugsExpected);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.GetAll();
+            var result = bugBusinessLogic.GetAll(idRole);
 
             Assert.IsTrue(bugsExpected.ConvertAll(b=>new BugDTO(b)).SequenceEqual(result));
         }

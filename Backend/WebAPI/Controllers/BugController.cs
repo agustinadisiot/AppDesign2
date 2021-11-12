@@ -22,10 +22,14 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll([FromHeader] TokenIdDTO token) //shouldnt recieve parameters
         {
-
-            return Ok(businessLogic.GetAll());
+      /*      Object role;
+            HttpContext.Items.TryGetValue("role", out role);
+            Object Id;
+            HttpContext.Items.TryGetValue("id", out Id);
+            TokenIdDTO token = new TokenIdDTO() { Id = (int)Id, Role = (string)role };*/
+            return Ok(businessLogic.GetAll(token));
         }
 
         [AuthorizationFilter("Admin/Tester")]
@@ -65,7 +69,7 @@ namespace WebApi.Controllers
         }
 
         [AuthorizationFilter("Admin")]
-        [HttpGet("cutom-importers")]
+        [HttpGet("custom-importers")]
         public object GetCustomImportersInfo()
         {
             List<ImporterInfo> info = businessLogic.GetCustomImportersInfo();

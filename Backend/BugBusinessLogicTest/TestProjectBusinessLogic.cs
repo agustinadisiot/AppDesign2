@@ -204,11 +204,17 @@ namespace TestProjectBusinessLogic
                 },
             };
 
+            TokenIdDTO idRole = new TokenIdDTO()
+            { 
+                Id = 2,
+                Role = "dev"
+            };
+
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
             mock.Setup(b => b.GetAll()).Returns(projectsExpected.ConvertAll(p=>p.ConvertToDomain()));
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
-            var result = projectBusinessLogic.GetAll();
+            var result = projectBusinessLogic.GetAll(idRole);
 
             Assert.IsTrue(projectsExpected.SequenceEqual(result));
         }

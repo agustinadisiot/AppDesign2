@@ -10,6 +10,7 @@ using System.Security.Authentication;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Domain;
+using DTO;
 
 namespace WebApi.Filters
 {
@@ -32,26 +33,24 @@ namespace WebApi.Filters
                 NotLoggedRespond(context);
                 return;
             }
+            
+            var loginLogic = context.HttpContext.RequestServices.GetService<ILoginBusinessLogic>();
+            TokenIdDTO tokenIdDTO = loginLogic.GetIdRoleFromToken(token);
+            context.HttpContext.Items.Add("role", tokenIdDTO.Role);
+            context.HttpContext.Items.Add("userId", tokenIdDTO.Id);
 
-            if (arg.Contains("Admin"))
-            {
-                var logic = context.HttpContext.RequestServices.GetService<IAdminBusinessLogic>();
-                isAuthorize = isAuthorize || logic.VerifyRole(token);
-            }
+            if (arg.Contains("Admin")) 
+                isAuthorize = isAuthorize || tokenIdDTO.Role == Roles.Admin;
+
             if (arg.Contains("Developer"))
-            {
-                var logic = context.HttpContext.RequestServices.GetService<IDeveloperBusinessLogic>();
-                isAuthorize = isAuthorize || logic.VerifyRole(token);
-            }
+                isAuthorize = isAuthorize || tokenIdDTO.Role == Roles.Dev;
+
             if (arg.Contains("Tester"))
-            {
-                var logic = context.HttpContext.RequestServices.GetService<ITesterBusinessLogic>();
-                isAuthorize = isAuthorize || logic.VerifyRole(token);
-            }
+                isAuthorize = isAuthorize || tokenIdDTO.Role == Roles.Tester;
 
             if (!isAuthorize)
             {
-                ResponseMessage message = new ResponseMessage("You aren't logued correctly.");
+                ResponseMessage message = new ResponseMessage("You aren't logged correctly.");
                 context.Result = new ObjectResult(message)
                 {
                     StatusCode = 403,
