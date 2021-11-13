@@ -88,7 +88,12 @@ namespace TestWebApi
             mock.Setup(b => b.ImportBugsCustom("ImporterName", parameters, null));
             var controller = new BugController(mock.Object);
 
-            var result = controller.ImportBugsCustom("ImporterName", parameters); ;
+            ImporterInfo info = new ImporterInfo()
+            {
+                ImporterName = "ImporterName",
+                Params = parameters
+            };
+            var result = controller.ImportBugsCustom(info);
             var okResult = result as OkObjectResult;
 
 

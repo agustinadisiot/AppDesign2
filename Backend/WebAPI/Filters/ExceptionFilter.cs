@@ -1,6 +1,7 @@
 using BusinessLogic;
 using BusinessLogicInterfaces;
 using CustomBugImportation;
+using CustomBugImporter;
 using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -40,6 +41,10 @@ namespace WebApi.Filters
             {
                 statusCode = 401;
                 errorMesssage = "Incorrect password or username";
+            }
+            else if (context.Exception is ImporterManagerException)
+            {
+                statusCode = 500;
             }
             else
             {

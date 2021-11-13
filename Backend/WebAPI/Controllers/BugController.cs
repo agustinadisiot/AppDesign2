@@ -65,7 +65,7 @@ namespace WebApi.Controllers
         }
 
         [AuthorizationFilter("Admin")]
-        [HttpGet("cutom-importers")]
+        [HttpGet("custom-importers")]
         public object GetCustomImportersInfo()
         {
             List<ImporterInfo> info = businessLogic.GetCustomImportersInfo();
@@ -74,9 +74,9 @@ namespace WebApi.Controllers
 
         [AuthorizationFilter("Admin")]
         [HttpPost("custom-importers")]
-        public  object ImportBugsCustom(string importerName, List<Parameter> parameters)
+        public object ImportBugsCustom([FromBody] ImporterInfo importerInfo)
         {
-            businessLogic.ImportBugsCustom(importerName, parameters);
+            businessLogic.ImportBugsCustom(importerInfo.ImporterName, importerInfo.Params);
             return Ok();
         }
     }

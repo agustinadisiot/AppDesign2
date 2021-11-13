@@ -2,18 +2,33 @@
 using CustomBugImporter;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Reflection;
 namespace CustomBugImporter
 {
     public class CustomBugImporterManager : ICustomBugImporter
     {
-        const string defaultPath = ""; // TODO define folder for custom importers
-
-
-        // Path parameter is only for testing, defaultPath is use in production
-        public List<ImporterInfo> GetAvailableImportersInfo(string path = defaultPath)
+        private readonly string folderPathForImporters;
+        public const string customImporterFolderSettingsName = "CustomImporterFolder";
+        public CustomBugImporterManager()
         {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                folderPathForImporters = appSettings[customImporterFolderSettingsName] ?? string.Empty;
+            }
+            catch (ConfigurationErrorsException)
+            {
+                throw new ImporterManagerException("Cannot access importer folder");
+            }
+        }
+
+        // Path parameter is only for testing, folderPathForImporters is use in production
+        public List<ImporterInfo> GetAvailableImportersInfo(string path = null)
+        {
+            if (path == null)
+                path = folderPathForImporters;
             List<ImporterInfo> importerInfos = new List<ImporterInfo>();
 
             var importers = GetImporters(path);
@@ -32,8 +47,12 @@ namespace CustomBugImporter
             return importerInfos;
         }
 
-        public List<ImportedBug> ImportBugs(string importerName, List<Parameter> parameters, string path = defaultPath)
+        // Path parameter is only for testing, folderPathForImporters is use in production
+        public List<ImportedBug> ImportBugs(string importerName, List<Parameter> parameters, string path = null)
         {
+            if (path == null)
+                path = folderPathForImporters;
+
             List<ImportedBug> bugs = new List<ImportedBug>();
 
             var importers = GetImporters(path);
