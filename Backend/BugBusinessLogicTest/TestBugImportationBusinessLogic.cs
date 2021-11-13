@@ -16,7 +16,7 @@ namespace TestBugImportationBusinessLogic
     public class TestBugImportationBusinessLogic
     {
         [TestMethod]
-        public void ImportBugXMl()
+        public void ImportBugXML()
         {
 
             Bug bug1 = new Bug()

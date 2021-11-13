@@ -1,5 +1,5 @@
 using CustomBugImportation;
-using ExtensibleBugImporter;
+using CustomBugImporter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +10,11 @@ namespace TestCustomBugImporter
     public class TestImporterFileParser
     {
         const string baseDirectory = "../../../TestFiles/";
-        private ExtensibleBugImporterManager extensibleBugImporter;
+        private CustomBugImporterManager extensibleBugImporter;
         [TestInitialize]
         public void CreateBugParserInstance()
         {
-            extensibleBugImporter = new ExtensibleBugImporterManager();
+            extensibleBugImporter = new CustomBugImporterManager();
         }
 
         [TestMethod]
