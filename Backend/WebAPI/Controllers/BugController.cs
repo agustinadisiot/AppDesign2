@@ -76,7 +76,8 @@ namespace WebApi.Controllers
         [HttpPost("custom-importers")]
         public  object ImportBugsCustom(string importerName, List<Parameter> parameters)
         {
-            throw new NotImplementedException();
+            businessLogic.ImportBugsCustom(importerName, parameters);
+            return Ok();
         }
     }
 }
