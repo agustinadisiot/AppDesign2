@@ -1,5 +1,6 @@
 ﻿using BugParser;
 using CustomBugImportation;
+using CustomBugImporter;
 using Domain;
 using Domain.Utils;
 using DTO;
@@ -14,9 +15,9 @@ namespace BusinessLogicInterfaces
         BugDTO Update(int Id, BugDTO t);
         ResponseMessage Delete(int Id);
         BugDTO GetById(int Id);
-        List<ImporterInfo> GetCustomImportersInfo();
-
         void ImportBugs(string path, ImportCompany format, IParserFactory factory = null);
-        void ImportBugsCustom(string importerName, List<Parameter> parameters);
+
+        List<ImporterInfo> GetCustomImportersInfo(ICustomBugImporter importerManager = null);
+        void ImportBugsCustom(string importerName, List<Parameter> parameters, ICustomBugImporter importerManager = null);
     }
 }

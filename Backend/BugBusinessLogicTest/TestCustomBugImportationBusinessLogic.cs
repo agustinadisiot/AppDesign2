@@ -104,11 +104,11 @@ namespace TestBusinessLogic
 
 
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.Create(bug1)).Returns(bug1);
+            mock.Setup(b => b.Create(It.IsAny<Bug>)).Returns(bug1);
             mock.Setup(b => b.Create(bug2)).Returns(bug2);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            bugBusinessLogic.ImportBugsCustom(importerName, parameters);
+            bugBusinessLogic.ImportBugsCustom(importerName, parameters, importerMock.ob);
 
             mock.VerifyAll();
             importerMock.VerifyAll();
