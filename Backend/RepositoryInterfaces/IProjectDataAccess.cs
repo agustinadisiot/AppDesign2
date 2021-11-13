@@ -10,7 +10,7 @@ namespace RepositoryInterfaces
         public Project GetById(int id);
         public Project GetByName(string name);
 
-        public IEnumerable<Project> GetAll();
+        public IEnumerable<Project> GetAll(string token);
 
         public Project Update(int id, Project projectUpdated);
 

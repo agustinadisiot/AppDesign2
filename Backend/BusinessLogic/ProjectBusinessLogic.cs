@@ -30,19 +30,9 @@ namespace BusinessLogic
             return projectDataAccess.Delete(Id);
         }
 
-        public IEnumerable<ProjectDTO> GetAll(TokenIdDTO idRole)
+        public IEnumerable<ProjectDTO> GetAll(string token)
         {
-            List<Project> projects = (List<Project>)projectDataAccess.GetAll();
-            if (idRole.Role == Roles.Dev)
-            {
-                List<Project> myProjects = projects.FindAll(p => p.Developers.Exists(d => d.Id == idRole.Id));
-                return myProjects.ConvertAll(p => new ProjectDTO(p));
-            }
-            if (idRole.Role == Roles.Tester)
-            {
-                List<Project> myProjects = projects.FindAll(p => p.Testers.Exists(t => t.Id == idRole.Id));
-                return myProjects.ConvertAll(p => new ProjectDTO(p));
-            }
+            List<Project> projects = (List<Project>)projectDataAccess.GetAll(token);
             return projects.ConvertAll(p => new ProjectDTO(p));
         }
 

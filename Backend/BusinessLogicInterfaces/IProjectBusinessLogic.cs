@@ -6,7 +6,7 @@ namespace BusinessLogicInterfaces
 {
     public interface IProjectBusinessLogic
     {
-        IEnumerable<ProjectDTO> GetAll(TokenIdDTO idRole);
+        IEnumerable<ProjectDTO> GetAll(string token);
         ProjectDTO Add(ProjectDTO projectDTO);
         ProjectDTO GetById(int Id);
         ProjectDTO Update(int Id, ProjectDTO projectDTO);
