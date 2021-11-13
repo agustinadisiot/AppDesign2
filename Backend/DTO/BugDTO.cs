@@ -14,6 +14,7 @@ namespace DTO
         public int Id { get; set; }
         public int CompletedById { get; set; }
         public bool IsActive { get; set; }
+        public string CompletedByUsername { get; set; }
 
         public BugDTO(Bug bug)
         {
@@ -26,6 +27,7 @@ namespace DTO
             Id = bug.Id;
             IsActive = bug.IsActive;
             CompletedById = (int)bug.CompletedById;
+            if(bug.CompletedBy != null) { CompletedByUsername = bug.CompletedBy.Username; }
         }
 
         public BugDTO()

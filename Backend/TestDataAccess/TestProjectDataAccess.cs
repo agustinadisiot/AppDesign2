@@ -18,6 +18,7 @@ namespace TestDataAccess
 
         private readonly DbConnection connection;
         private readonly ProjectDataAccess projectDataAccess;
+        private readonly LoginDataAccess loginDataAccess;
         private readonly BugManagerContext bugManagerContext;
         private readonly DbContextOptions<BugManagerContext> contextOptions;
 
@@ -27,6 +28,7 @@ namespace TestDataAccess
             contextOptions = new DbContextOptionsBuilder<BugManagerContext>().UseSqlite(connection).Options;
             bugManagerContext = new BugManagerContext(contextOptions);
             projectDataAccess = new ProjectDataAccess(bugManagerContext);
+            loginDataAccess = new LoginDataAccess(bugManagerContext);
         }
 
         [TestInitialize]
@@ -45,6 +47,29 @@ namespace TestDataAccess
         [TestMethod]
         public void GetAll()
         {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Admin admin = new Admin()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(admin);
+            loginDataAccess.SaveLogin(loginToken);
+
             var projectsExpected = new List<Project>
             {
                 new Project
@@ -66,7 +91,7 @@ namespace TestDataAccess
                 Works = new List<Work>()
             }); 
             bugManagerContext.SaveChanges();
-            List<Project> projectDataBase = projectDataAccess.GetAll().ToList();
+            List<Project> projectDataBase = projectDataAccess.GetAll(token).ToList();
 
             Assert.AreEqual(1, projectDataBase.Count);
             CollectionAssert.AreEqual(projectsExpected, projectDataBase, new ProjectComparer());
@@ -121,6 +146,29 @@ namespace TestDataAccess
         [TestMethod]
         public void Delete()
         {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Admin admin = new Admin()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(admin);
+            loginDataAccess.SaveLogin(loginToken);
+
             Project notExpectedProject = new Project()
             {
                 Id = 1,
@@ -130,7 +178,7 @@ namespace TestDataAccess
             projectDataAccess.Delete(notExpectedProject.Id);
             bugManagerContext.SaveChanges();
 
-            var projectsSaved = projectDataAccess.GetAll().ToList();
+            var projectsSaved = projectDataAccess.GetAll(token).ToList();
 
             CollectionAssert.DoesNotContain(projectsSaved, notExpectedProject);
 
@@ -139,6 +187,29 @@ namespace TestDataAccess
         [TestMethod]
         public void DeleteByName()
         {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Admin admin = new Admin()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(admin);
+            loginDataAccess.SaveLogin(loginToken);
+
             Project notExpectedProject = new Project()
             {
                 Id = 1,
@@ -148,7 +219,7 @@ namespace TestDataAccess
             projectDataAccess.DeleteByName(notExpectedProject.Name);
             bugManagerContext.SaveChanges();
 
-            var projectsSaved = projectDataAccess.GetAll().ToList();
+            var projectsSaved = projectDataAccess.GetAll(token).ToList();
 
             CollectionAssert.DoesNotContain(projectsSaved, notExpectedProject);
 

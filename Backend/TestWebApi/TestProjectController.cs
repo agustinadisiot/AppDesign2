@@ -29,16 +29,19 @@ namespace TestWebApi
                 }
             };
 
+            string token = "sdfgh-fghjf";
+
+
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(projectsExpected);
+            mock.Setup(b => b.GetAll(token)).Returns(projectsExpected);
             var controller = new ProjectController(mock.Object);
 
-            var result = controller.Get();
+            var result = controller.GetAll(token); 
             var okResult = result as OkObjectResult;
             var projectsResult = okResult.Value as IEnumerable<ProjectDTO>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer()); //projectdtoComparer
+            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer()); 
         }
 
         [TestMethod]

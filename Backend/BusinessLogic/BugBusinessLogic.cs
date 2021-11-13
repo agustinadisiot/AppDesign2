@@ -23,13 +23,13 @@ namespace BusinessLogic
 
         public BugDTO GetById(int idBug)
         {
-            Bug bug = BugDataAccess.GetById(idBug);
+            Bug bug = BugDataAccess.GetById(idBug); 
             return new BugDTO(bug);
         }
 
-        public IEnumerable<BugDTO> GetAll()
+        public IEnumerable<BugDTO> GetAll(string token)
         {
-            List<Bug> bugs = (List<Bug>)BugDataAccess.GetAll();
+            List<Bug> bugs = (List<Bug>)BugDataAccess.GetAll(token);
             return bugs.ConvertAll(b => new BugDTO(b));
         }
 
@@ -108,6 +108,16 @@ namespace BusinessLogic
                 ProjectName = importedBug.ProjectName,
                 Time = importedBug.Time
             };
+        }
+
+        public BugDTO ResolveBug(int id, string token)
+        {
+            return new BugDTO(BugDataAccess.ResolveBug(id, token));
+        }
+
+        public BugDTO UnresolveBug(int id, string token)
+        {
+            return new BugDTO(BugDataAccess.UnresolveBug(id, token));
         }
     }
 

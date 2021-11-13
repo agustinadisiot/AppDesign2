@@ -38,16 +38,18 @@ namespace TestWebApi
                 }
             };
 
+            string token = "sdfgh-fghjf";
+
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(bugsExpected);
+            mock.Setup(b => b.GetAll(token)).Returns(bugsExpected);
             var controller = new BugController(mock.Object);
 
-            var result = controller.Get();
+            var result = controller.GetAll(token); 
             var okResult = result as OkObjectResult;
             var bugsResult = okResult.Value as IEnumerable<BugDTO>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer()); //bugdtocomparer
+            CollectionAssert.AreEqual(bugsExpected, (System.Collections.ICollection)bugsResult, new BugComparer());
         }
 
         [TestMethod]
@@ -143,6 +145,59 @@ namespace TestWebApi
             var controller = new BugController(mock.Object);
 
             var result = controller.Update(bugExpected.Id, bugModified);
+            var okResult = result as OkObjectResult;
+            var bugResult = okResult.Value as BugDTO;
+
+            mock.VerifyAll();
+            Assert.AreEqual(bugExpected, bugResult);
+        }
+
+        [TestMethod]
+        public void ResolveBug()
+        {
+            BugDTO bugExpected = new BugDTO()
+            {
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = true,
+                CompletedById = 0,
+                Id = 0
+            };
+
+            string token = "dfghj-fghj";
+            var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.ResolveBug(bugExpected.Id, token)).Returns(bugExpected);
+            var controller = new BugController(mock.Object);
+
+            var result = controller.ResolveBug(bugExpected.Id, token);
+            var okResult = result as OkObjectResult;
+            var bugResult = okResult.Value as BugDTO;
+
+            mock.VerifyAll();
+            Assert.AreEqual(bugExpected, bugResult);
+        }
+
+        [TestMethod]
+        public void UnresolveBug()
+        {
+            BugDTO bugExpected = new BugDTO()
+            {
+                Name = "Not working button",
+                Description = "Upload button not working",
+                Version = "1",
+                IsActive = false,
+                CompletedById = 4,
+                Id = 0
+            };
+
+            string token = "dfghj-fghj";
+
+            var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.UnresolveBug(bugExpected.Id, token)).Returns(bugExpected);
+            var controller = new BugController(mock.Object);
+
+            var result = controller.UnresolveBug(bugExpected.Id, token);
             var okResult = result as OkObjectResult;
             var bugResult = okResult.Value as BugDTO;
 

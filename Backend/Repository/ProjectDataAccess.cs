@@ -2,6 +2,7 @@
 using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.EntityFrameworkCore;
 using RepositoryInterfaces;
 using System.Collections.Generic;
@@ -49,9 +50,14 @@ namespace Repository
             return new ResponseMessage("Deleted successfully");
         }
 
-        public IEnumerable<Project> GetAll()
+        public IEnumerable<Project> GetAll(string token)
         {
-            return context.Projects;
+            LoginDataAccess loginDataAccess = new LoginDataAccess(context);
+            TokenIdDTO idRole = loginDataAccess.GetIdRoleFromToken(token);
+            List<Project> projects = context.Projects.ToList();
+            if (idRole.Role == Roles.Dev) return projects.FindAll(p => p.Developers.Exists(d => d.Id == idRole.Id));
+            if (idRole.Role == Roles.Tester) return projects.FindAll(p => p.Testers.Exists(t => t.Id == idRole.Id));
+            return projects;
         }
 
 

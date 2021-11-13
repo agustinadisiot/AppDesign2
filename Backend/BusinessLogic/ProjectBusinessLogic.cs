@@ -1,5 +1,6 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using Domain.Utils;
 using DTO;
 using RepositoryInterfaces;
 using System;
@@ -29,9 +30,9 @@ namespace BusinessLogic
             return projectDataAccess.Delete(Id);
         }
 
-        public IEnumerable<ProjectDTO> GetAll()
+        public IEnumerable<ProjectDTO> GetAll(string token)
         {
-            List<Project> projects = (List<Project>)projectDataAccess.GetAll();
+            List<Project> projects = (List<Project>)projectDataAccess.GetAll(token);
             return projects.ConvertAll(p => new ProjectDTO(p));
         }
 

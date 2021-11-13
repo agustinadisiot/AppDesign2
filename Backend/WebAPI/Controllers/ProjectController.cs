@@ -18,11 +18,13 @@ namespace WebApi.Controllers
             businessLogic = newProjectBusinessLogic;
         }
 
+        [AuthorizationFilter("Admin/Tester/Developer")]
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll([FromHeader] string token) //shouldnt recieve parameters
         {
-            return Ok(businessLogic.GetAll());
+            return Ok(businessLogic.GetAll(token));
         }
+
         [AuthorizationFilter("Admin")]
         [HttpPost]
         public object Post([FromBody] ProjectDTO projectExpected)

@@ -22,10 +22,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll([FromHeader] string token)
         {
-
-            return Ok(businessLogic.GetAll());
+            return Ok(businessLogic.GetAll(token));
         }
 
         [AuthorizationFilter("Admin/Tester")]
@@ -71,6 +70,19 @@ namespace WebApi.Controllers
             List<ImporterInfo> info = businessLogic.GetCustomImportersInfo();
             return Ok(info);
         }
+
+        [AuthorizationFilter("Developer")]
+        [HttpPut("{id}/resolve")]
+        public object ResolveBug([FromRoute] int id, [FromHeader] string token)
+        {
+            return Ok(businessLogic.ResolveBug(id, token));
+        }
+
+        [AuthorizationFilter("Developer")]
+        [HttpPut("{id}/unresolve")]
+        public object UnresolveBug([FromRoute] int id, [FromHeader] string token)
+        {
+            return Ok(businessLogic.UnresolveBug(id, token));
 
         [AuthorizationFilter("Admin")]
         [HttpPost("custom-importers")]

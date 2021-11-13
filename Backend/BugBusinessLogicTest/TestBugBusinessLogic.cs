@@ -152,11 +152,13 @@ namespace TestBugBusinessLogic
                 },
             };
 
+            string token = "dfgh-fgh-fds";
+
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(bugsExpected);
+            mock.Setup(b => b.GetAll(token)).Returns(bugsExpected);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.GetAll();
+            var result = bugBusinessLogic.GetAll(token);
 
             Assert.IsTrue(bugsExpected.ConvertAll(b=>new BugDTO(b)).SequenceEqual(result));
         }
@@ -202,6 +204,32 @@ namespace TestBugBusinessLogic
             Assert.ThrowsException<ValidationException>(()=> bugBusinessLogic.Add(new BugDTO(invalidBug)));
             mock.Verify(m => m.Create(invalidBug), Times.Never);
 
+        }
+
+        [TestMethod]
+        public void ResolveBug()
+        {
+            string token = "ghj-vbh";
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.ResolveBug(bug.Id, token)).Returns(bug);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            var result = bugBusinessLogic.ResolveBug(bug.Id, token );
+
+            Assert.AreEqual(new BugDTO(bug), result);
+        }
+
+        [TestMethod]
+        public void UnresolveBug()
+        {
+            string token = "fghj-fghj";
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.UnresolveBug(bug.Id, token)).Returns(bug);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            var result = bugBusinessLogic.UnresolveBug(bug.Id, token);
+
+            Assert.AreEqual(new BugDTO(bug), result);
         }
     }
 }

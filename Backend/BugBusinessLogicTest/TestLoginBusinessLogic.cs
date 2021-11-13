@@ -100,7 +100,7 @@ namespace TestLoginBusinessLogic
         [DataRow("admin", "Juana1223#@")]
         [DataRow("dev12", "devvvv")]
         [DataRow("Pedro", "testqetrty")]
-        public void LoginTokenHasRoleUsername(string username, string password)
+        public void LoginTokenHasRole(string username, string password)
         {
             string role = "dev";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
@@ -112,6 +112,37 @@ namespace TestLoginBusinessLogic
             LoginResponseDTO token = loginBusinessLogic.Login(username, password);
             mock.VerifyAll();
             Assert.IsTrue(token.Role == role);
+        }
+
+        [TestMethod]
+        public void GetIdFromToken()
+        {
+            string token = "sdfg-uytr-fds-dsdf";
+            string role = "dev";
+            int id = 4;
+            var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
+
+            mock.Setup(l => l.GetIdRoleFromToken(token)).Returns(new TokenIdDTO() { Id = id, Role = role });
+            var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
+
+            TokenIdDTO expected = loginBusinessLogic.GetIdRoleFromToken(token);
+            mock.VerifyAll();
+            Assert.AreEqual(expected.Id, id);
+        }
+
+        public void GetRoleFromToken()
+        {
+            string role = "dev";
+            string token = "asdfghj-dfgh-rwq-fds";
+            int id = 4;
+
+            var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
+            mock.Setup(l => l.GetIdRoleFromToken(token)).Returns(new TokenIdDTO() { Id = id, Role = role });
+            var loginBusinessLogic = new LoginBusinessLogic(mock.Object);
+
+            TokenIdDTO tokenExpected = loginBusinessLogic.GetIdRoleFromToken(token);
+            mock.VerifyAll();
+            Assert.AreEqual(tokenExpected.Role, role);
         }
     }
 }
