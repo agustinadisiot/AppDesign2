@@ -71,5 +71,12 @@ namespace WebApi.Controllers
             List<ImporterInfo> info = businessLogic.GetCustomImportersInfo();
             return Ok(info);
         }
+
+        [AuthorizationFilter("Admin")]
+        [HttpPost("custom-importers")]
+        public  object ImportBugsCustom(string importerName, List<Parameter> parameters)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

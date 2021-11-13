@@ -17,5 +17,6 @@ namespace BusinessLogicInterfaces
         List<ImporterInfo> GetCustomImportersInfo();
 
         void ImportBugs(string path, ImportCompany format, IParserFactory factory = null);
+        void ImportBugsCustom(string importerName, List<Parameter> parameters);
     }
 }

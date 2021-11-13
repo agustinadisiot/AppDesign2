@@ -71,6 +71,11 @@ namespace BusinessLogic
         {
             throw new NotImplementedException();
         }
+
+        public void ImportBugsCustom(string importerName, List<Parameter> parameters)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
