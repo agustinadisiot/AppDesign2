@@ -83,6 +83,13 @@ namespace WebApi.Controllers
         public object UnresolveBug([FromRoute] int id, [FromHeader] string token)
         {
             return Ok(businessLogic.UnresolveBug(id, token));
+
+        [AuthorizationFilter("Admin")]
+        [HttpPost("custom-importers")]
+        public object ImportBugsCustom([FromBody] ImporterInfo importerInfo)
+        {
+            businessLogic.ImportBugsCustom(importerInfo.ImporterName, importerInfo.Params);
+            return Ok();
         }
     }
 }

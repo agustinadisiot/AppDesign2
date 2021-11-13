@@ -1,6 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { LoginService } from 'src/app/services/login/login.service';
+import { UserCredentials } from 'src/app/models/userCredentials';
+import { LoginResponse } from 'src/app/views/login/models/loginResponse';
+import { InfoMessage } from 'src/app/components/message/model/message';
 
 
 @Component({
@@ -9,7 +13,7 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, fb: FormBuilder) { }
+  constructor(private router: Router, fb: FormBuilder, private loginService: LoginService) { }
 
 
   form = new FormGroup({
@@ -17,17 +21,31 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  user = { username: '', password: '' } // TODO usar un modelo posta
+  credentials: UserCredentials = { username: '', password: '' } // TODO usar un modelo posta
   hide = true;
-
+  loading = false;
+  errorMessage: InfoMessage = { text: "", error: true };
 
   ngOnInit() {
+    localStorage.removeItem("role");
   }
 
 
   LogIn() {
-    // TODO validate credentials
-    this.router.navigateByUrl('/admin/bugs');
-    //this.user = { username: '', password: '' }; TODO sacar
+    this.loading = true;
+    this.loginService.login(this.credentials).subscribe(
+
+      (loginResponse: LoginResponse) => {
+        localStorage.setItem("role", loginResponse.role);
+        this.router.navigateByUrl(`/${loginResponse.role}`);
+        this.credentials = { username: '', password: '' };
+      },
+
+      error => {
+        this.errorMessage.text = error
+        this.loading = false;
+      }
+    );
+
   }
 }

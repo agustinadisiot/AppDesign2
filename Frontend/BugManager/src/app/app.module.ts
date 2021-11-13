@@ -10,13 +10,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-
+import { AuthorizationGuard } from './guards/authorization.guard';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import '@angular/compiler';
+import { MessageComponent } from './components/message/message.component';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [ // EXP: todo componente tiene que ser declarado por uno y uno solo modulo
     AppComponent,
     LoginComponent,
-    NotFoundComponent,
   ],
   imports: [ // EXP: son como las dependencias
     AngularMaterialModule, // EXP: importo todos los modulos de angular material para que no tenga problemas que me falte alguno
@@ -27,8 +30,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    ComponentsModule,// TODO ver si esta bien ponerlo aca
   ],
-  providers: [],
+  providers: [AuthorizationGuard],
   exports: [],
   bootstrap: [AppComponent]
 })

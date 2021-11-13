@@ -8,6 +8,7 @@ using Domain.Utils;
 using BugParser;
 using DTO;
 using CustomBugImportation;
+using CustomBugImporter;
 
 namespace BusinessLogic
 {
@@ -63,13 +64,50 @@ namespace BusinessLogic
             List<Bug> bugsToImport = parser.GetBugs(path);
             foreach (var bug in bugsToImport)
             {
-                Add(new BugDTO(bug));
+                bug.Validate();
+                BugDataAccess.Create(bug);
             }
         }
 
-        public List<ImporterInfo> GetCustomImportersInfo()
+        public List<ImporterInfo> GetCustomImportersInfo(ICustomBugImporter importerManager = null)
         {
-            throw new NotImplementedException();
+            // This is to allow the tests to include their own mock custom importer
+            if (importerManager == null)
+                importerManager = new CustomBugImporterManager();
+            List<ImporterInfo> importersInfo = importerManager.GetAvailableImportersInfo();
+            return importersInfo;
+
+        }
+
+        public void ImportBugsCustom(string importerName, List<Parameter> parameters, ICustomBugImporter importerManager = null)
+        {
+            // This is to allow the tests to include their own mock custom importer
+            if (importerManager == null)
+                importerManager = new CustomBugImporterManager();
+
+            List<ImportedBug> bugsToImport = importerManager.ImportBugs(importerName, parameters);
+            foreach (var importedBug in bugsToImport)
+            {
+                Bug convertedBug = convertImportedBugToBug(importedBug);
+                convertedBug.Validate();
+                BugDataAccess.Create(convertedBug);
+            }
+
+        }
+
+        private Bug convertImportedBugToBug(ImportedBug importedBug)
+        {
+            return new Bug()
+            {
+                Name = importedBug.Name,
+                Description = importedBug.Description,
+                Version = importedBug.Version,
+                CompletedById = importedBug.CompletedById,
+                IsActive = importedBug.IsActive,
+                ProjectId = importedBug.ProjectId,
+                ProjectName = importedBug.ProjectName,
+                Time = importedBug.Time
+            };
         }
 
         public BugDTO ResolveBug(int id, string token)
