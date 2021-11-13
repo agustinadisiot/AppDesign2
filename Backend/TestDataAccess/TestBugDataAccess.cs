@@ -326,6 +326,7 @@ namespace TestDataAccess
         [TestMethod]
         public void ResolveBug()
         {
+
             string token = "sdfg-uytr-fds-dsdf";
             string username = "jose";
             int id = 3;
@@ -354,18 +355,22 @@ namespace TestDataAccess
             {
                 Name = "project",
                 Id = 4,
+                Developers = new List<Developer>() { dev }
             };
             bugManagerContext.Add(project);
             bugManagerContext.SaveChanges();
 
             Bug bug = bugDataAccess.Create(new Bug
             {
+                
                 Id = 2,
                 Name = "b",
                 Description = "a",
                 Version = "1.0",
                 ProjectId = 4,
-                IsActive = true
+                IsActive = true,
+                CompletedById = null,
+                CompletedBy = null,
             });
 
             var bugUpdated = new Bug
@@ -376,7 +381,8 @@ namespace TestDataAccess
                 ProjectId = 4,
                 Version = "1.0",
                 IsActive = false,
-                CompletedById = 4
+                CompletedById = id,
+                CompletedBy = dev
             };
 
             Bug bugModified = bugDataAccess.ResolveBug(bug.Id, token);
@@ -419,6 +425,7 @@ namespace TestDataAccess
             {
                 Name = "project",
                 Id = 4,
+                Developers = new List<Developer>() { dev }
             };
             bugManagerContext.Add(project);
             bugManagerContext.SaveChanges();
@@ -431,7 +438,7 @@ namespace TestDataAccess
                 ProjectId = 4,
                 Version = "1.0",
                 IsActive = false,
-                CompletedById = 4
+                CompletedById = id
                
             });
 
@@ -443,7 +450,7 @@ namespace TestDataAccess
                 Version = "1.0",
                 ProjectId = 4,
                 IsActive = true,
-                CompletedById = 0
+                CompletedById = null
             };
 
             Bug bugModified = bugDataAccess.UnresolveBug(bug.Id, token);

@@ -98,14 +98,26 @@ namespace Repository
             return new ResponseMessage("Deleted successfully");
         }
 
-        public Bug ResolveBug(int id)
+        public Bug ResolveBug(int id, string token)
         {
-            throw new NotImplementedException();
+            Bug bug = GetById(id);
+            LoginDataAccess login = new LoginDataAccess(context);
+            TokenIdDTO idRole = login.GetIdRoleFromToken(token);
+            bug.IsActive = false;
+            bug.CompletedById = idRole.Id;
+            context.SaveChanges();
+            return bug;
         }
 
-        public Bug UnresolveBug(int id)
+        public Bug UnresolveBug(int id, string token)
         {
-            throw new NotImplementedException();
+            Bug bug = GetById(id);
+            LoginDataAccess login = new LoginDataAccess(context);
+            TokenIdDTO idRole = login.GetIdRoleFromToken(token);
+            bug.IsActive = true;
+            bug.CompletedById = null;
+            context.SaveChanges();
+            return bug;
         }
     }
 }
