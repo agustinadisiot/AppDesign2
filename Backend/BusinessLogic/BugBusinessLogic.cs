@@ -74,7 +74,9 @@ namespace BusinessLogic
             // This is to allow the tests to include their own mock custom importer
             if (importerManager == null)
                 importerManager = new CustomBugImporterManager();
-            throw new NotImplementedException();
+            List<ImporterInfo> importersInfo = importerManager.GetAvailableImportersInfo();
+            return importersInfo;
+
         }
 
         public void ImportBugsCustom(string importerName, List<Parameter> parameters, ICustomBugImporter importerManager = null)
