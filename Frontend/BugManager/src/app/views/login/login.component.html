@@ -7,7 +7,7 @@
     <p>Username</p>
     <mat-form-field class=full-width appearance="fill">
       <mat-label>Enter your username</mat-label>
-      <input matInput [(ngModel)]="user.username" formControlName="username" required>
+      <input matInput [(ngModel)]="credentials.username" formControlName="username" required>
     </mat-form-field>
 
     <br>
@@ -16,7 +16,7 @@
     <!--Password-->
     <mat-form-field appearance="fill" class=full-width>
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" formControlName="password"
+      <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="credentials.password" formControlName="password"
         required>
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide">
@@ -24,8 +24,10 @@
       </button>
     </mat-form-field>
 
-    <button mat-flat-button color="primary" [disabled]="!form.valid" (click)="LogIn()">Log In</button>
-
+    <button mat-flat-button color="primary" disabled="{{!form.valid || loading}}" (click)="LogIn()">Log In
+    </button>
+    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+    <app-message [message]="errorMessage"></app-message>
   </form>
 
 </mat-card>

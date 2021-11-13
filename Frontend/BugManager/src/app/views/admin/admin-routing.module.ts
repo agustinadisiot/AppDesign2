@@ -9,6 +9,10 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'bugs'
+      },
+      {
         path: 'bugs',
         component: TableComponent
       }
