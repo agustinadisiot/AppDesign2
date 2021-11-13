@@ -115,7 +115,46 @@ namespace TestBusinessLogic
             CollectionAssert.AreEqual(expectedBugs, actualBugs, new BugComparer());
         }
 
+        [TestMethod]
+        public void GetInfoImporters()
+        {
+            List<ImporterInfo> expectedImportersInfo = new List<ImporterInfo>
+            {
+                new ImporterInfo {
+                                ImporterName = "Importer1",
+                                Params =  new List<Parameter>()
+                                        {
+                                            new Parameter(){
+                                                Name = "path",
+                                                Type = ParameterType.STRING,
+                                                Value = "example.com"
+                                            },
+                                            new Parameter(){
+                                                Name = "port",
+                                                Type = ParameterType.INTEGER,
+                                                Value = "80"
+                                            }
+                                        }
+                },
+                new ImporterInfo {
+                                ImporterName = "Importer2",
+                                Params = new List<Parameter>{}
+                }
+            };
 
+
+            var importerMock = new Mock<ICustomBugImporter>(MockBehavior.Strict);
+            importerMock.Setup(i => i.GetAvailableImportersInfo(null)).Returns(expectedImportersInfo);
+
+            var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
+            var bugBusinessLogic = new BugBusinessLogic(mock.Object);
+
+            List<ImporterInfo> actualImportersInfo = bugBusinessLogic.GetCustomImportersInfo(importerMock.Object);
+
+            mock.VerifyAll();
+            importerMock.VerifyAll();
+            CollectionAssert.AreEquivalent(expectedImportersInfo, actualImportersInfo);
+        }
 
 
     }
