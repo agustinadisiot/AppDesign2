@@ -2,6 +2,7 @@
 using CustomBugImportation;
 using CustomBugImporter;
 using Domain;
+using Domain.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RepositoryInterfaces;
@@ -30,7 +31,7 @@ namespace TestBusinessLogic
                 ProjectName = "project",
                 CompletedById = 0,
                 Time = 4,
-            }; 
+            };
 
             Bug bug1 = new Bug()
             {
@@ -43,6 +44,7 @@ namespace TestBusinessLogic
                 Id = 0,
                 CompletedById = 0,
                 Time = 4,
+                ProjectName = "project",
                 Project = new Project()
                 {
                     Id = 3,
@@ -69,9 +71,9 @@ namespace TestBusinessLogic
                 ProjectId = 2,
                 IsActive = false,
                 CompletedBy = null,
-                Id = 1,
                 CompletedById = 0,
                 Time = 4,
+                ProjectName = "project2",
                 Project = new Project()
                 {
                     Id = 2,
@@ -97,24 +99,23 @@ namespace TestBusinessLogic
 
             List<ImportedBug> importedBugs = new List<ImportedBug>() { importedBug1, importedBug2 };
             List<Bug> expectedBugs = new List<Bug>() { bug1, bug2 };
-            List<Bug> actualBugs = new List<Bug>() { };
+            List<Bug> actualBugs = new List<Bug>();
 
             var importerMock = new Mock<ICustomBugImporter>(MockBehavior.Strict);
             importerMock.Setup(i => i.ImportBugs(importerName, parameters, null)).Returns(importedBugs);
 
-
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.Create(It.IsAny<Bug>)).Returns(bug1);
-            mock.Setup(b => b.Create(bug2)).Returns(bug2);
+            mock.Setup(b => b.Create(It.IsAny<Bug>())).Returns<Bug>(b => b).Callback<Bug>(b => actualBugs.Add(b));
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            bugBusinessLogic.ImportBugsCustom(importerName, parameters, importerMock.ob);
+            bugBusinessLogic.ImportBugsCustom(importerName, parameters, importerMock.Object);
 
             mock.VerifyAll();
             importerMock.VerifyAll();
+            CollectionAssert.AreEqual(expectedBugs, actualBugs, new BugComparer());
         }
 
-       
+
 
 
     }
