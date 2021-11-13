@@ -326,13 +326,29 @@ namespace TestDataAccess
         [TestMethod]
         public void ResolveBug()
         {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
             Developer dev = new Developer()
             {
-                Id = 4,
-                Name = "Juan"
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
             };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
             bugManagerContext.Add(dev);
-            bugManagerContext.SaveChanges();
+            loginDataAccess.SaveLogin(loginToken);
+
 
             Project project = new Project()
             {
@@ -363,7 +379,7 @@ namespace TestDataAccess
                 CompletedById = 4
             };
 
-            Bug bugModified = bugDataAccess.ResolveBug(bug.Id);
+            Bug bugModified = bugDataAccess.ResolveBug(bug.Id, token);
             bugManagerContext.SaveChanges();
 
 
@@ -374,13 +390,30 @@ namespace TestDataAccess
         [TestMethod]
         public void UnresolveBug()
         {
+
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
             Developer dev = new Developer()
             {
-                Id = 4,
-                Name = "Juan"
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
             };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
             bugManagerContext.Add(dev);
-            bugManagerContext.SaveChanges();
+            loginDataAccess.SaveLogin(loginToken);
+
 
             Project project = new Project()
             {
@@ -413,7 +446,7 @@ namespace TestDataAccess
                 CompletedById = 0
             };
 
-            Bug bugModified = bugDataAccess.UnresolveBug(bug.Id);
+            Bug bugModified = bugDataAccess.UnresolveBug(bug.Id, token);
             bugManagerContext.SaveChanges();
 
 

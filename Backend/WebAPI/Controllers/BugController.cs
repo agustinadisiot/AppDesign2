@@ -73,16 +73,16 @@ namespace WebApi.Controllers
 
         [AuthorizationFilter("Developer")]
         [HttpPut("{id}/resolve")]
-        public object ResolveBug(int id)
+        public object ResolveBug([FromRoute] int id, [FromHeader] string token)
         {
-            return Ok(businessLogic.ResolveBug(id));
+            return Ok(businessLogic.ResolveBug(id, token));
         }
 
         [AuthorizationFilter("Developer")]
         [HttpPut("{id}/unresolve")]
-        public object UnresolveBug(int id)
+        public object UnresolveBug([FromRoute] int id, [FromHeader] string token)
         {
-            return Ok(businessLogic.UnresolveBug(id));
+            return Ok(businessLogic.UnresolveBug(id, token));
         }
     }
 }

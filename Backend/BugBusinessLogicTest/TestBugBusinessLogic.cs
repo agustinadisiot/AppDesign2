@@ -209,11 +209,12 @@ namespace TestBugBusinessLogic
         [TestMethod]
         public void ResolveBug()
         {
+            string token = "ghj-vbh";
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.ResolveBug(bug.Id)).Returns(bug);
+            mock.Setup(b => b.ResolveBug(bug.Id, token)).Returns(bug);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.ResolveBug(bug.Id);
+            var result = bugBusinessLogic.ResolveBug(bug.Id, token );
 
             Assert.AreEqual(new BugDTO(bug), result);
         }
@@ -221,11 +222,12 @@ namespace TestBugBusinessLogic
         [TestMethod]
         public void UnresolveBug()
         {
+            string token = "fghj-fghj";
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.UnresolveBug(bug.Id)).Returns(bug);
+            mock.Setup(b => b.UnresolveBug(bug.Id, token)).Returns(bug);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.UnresolveBug(bug.Id);
+            var result = bugBusinessLogic.UnresolveBug(bug.Id, token);
 
             Assert.AreEqual(new BugDTO(bug), result);
         }

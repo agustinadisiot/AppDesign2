@@ -165,11 +165,12 @@ namespace TestWebApi
                 Id = 0
             };
 
+            string token = "dfghj-fghj";
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.ResolveBug(bugExpected.Id)).Returns(bugExpected);
+            mock.Setup(b => b.ResolveBug(bugExpected.Id, token)).Returns(bugExpected);
             var controller = new BugController(mock.Object);
 
-            var result = controller.ResolveBug(bugExpected.Id);
+            var result = controller.ResolveBug(bugExpected.Id, token);
             var okResult = result as OkObjectResult;
             var bugResult = okResult.Value as BugDTO;
 
@@ -190,11 +191,13 @@ namespace TestWebApi
                 Id = 0
             };
 
+            string token = "dfghj-fghj";
+
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.UnresolveBug(bugExpected.Id)).Returns(bugExpected);
+            mock.Setup(b => b.UnresolveBug(bugExpected.Id, token)).Returns(bugExpected);
             var controller = new BugController(mock.Object);
 
-            var result = controller.UnresolveBug(bugExpected.Id);
+            var result = controller.UnresolveBug(bugExpected.Id, token);
             var okResult = result as OkObjectResult;
             var bugResult = okResult.Value as BugDTO;
 

@@ -15,7 +15,7 @@ namespace RepositoryInterfaces
         public Bug Update(int id, Bug bugUpdated);
 
         ResponseMessage Delete(int id);
-        Bug ResolveBug(int id);
-        Bug UnresolveBug(int id);
+        Bug ResolveBug(int id, string token);
+        Bug UnresolveBug(int id, string token);
     }
 }
