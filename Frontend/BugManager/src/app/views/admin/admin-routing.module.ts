@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BugsTableComponent } from 'src/app/components/bugs-table/bugs-table/bugs-table.component';
 import { TableComponent } from 'src/app/components/table/table.component';
 import { AdminComponent } from './admin.component';
 
@@ -14,6 +15,10 @@ const routes: Routes = [
       },
       {
         path: 'bugs',
+        component: BugsTableComponent
+      },
+      {
+        path: 'add-user',
         component: TableComponent
       }
     ]

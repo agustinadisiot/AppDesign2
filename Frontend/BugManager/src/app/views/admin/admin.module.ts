@@ -6,6 +6,7 @@ import { AdminComponent } from './admin.component';
 import { TableComponent } from 'src/app/components/table/table.component';
 import { AngularMaterialModule } from 'src/app/components/angular-material/angular-material.module';
 import { NavComponent } from 'src/app/components/nav/nav.component';
+import { GenericTableComponent } from 'src/app/components/generic-table/generic-table.component';
 
 
 @NgModule({

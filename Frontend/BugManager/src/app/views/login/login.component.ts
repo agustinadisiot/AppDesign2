@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from 'src/app/services/login/login.service';
-import { UserCredentials } from 'src/app/models/userCredentials';
 import { LoginResponse } from 'src/app/views/login/models/loginResponse';
 import { InfoMessage } from 'src/app/components/message/model/message';
+import { UserCredentials } from './models/userCredentials';
 
 
 @Component({

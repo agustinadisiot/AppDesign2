@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SideBarItem } from '../../models/sidebarItem';
+import { SideBarItem } from 'src/app/components/nav/model/sidebarItem';
 
 @Component({
   selector: 'app-admin',

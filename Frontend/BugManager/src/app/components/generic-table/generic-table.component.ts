@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
+import { Column } from './models/column';
 
 @Component({
   selector: 'app-generic-table',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GenericTableComponent implements OnInit {
 
-  constructor() { }
+  @Input() columns: Column[];
+  @Input() dataSource: any[];
+  @Input() displayedColumns: string[];
+
+  @Output() rowPressed = new EventEmitter();
+  constructor() {
+    // this.displayedColumns = this.columns.map(function (c) { return c.header }); TODO sacar
+  }
 
   ngOnInit(): void {
+  }
+
+  rowAction(row: any) {
+    this.rowPressed.emit(row);
   }
 
 }
