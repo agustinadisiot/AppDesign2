@@ -17,6 +17,7 @@ namespace TestDataAccess
 
         private readonly DbConnection connection;
         private readonly BugDataAccess bugDataAccess;
+        private readonly LoginDataAccess loginDataAccess;
         private readonly BugManagerContext bugManagerContext;
         private readonly DbContextOptions<BugManagerContext> contextOptions;
 
@@ -26,6 +27,7 @@ namespace TestDataAccess
             contextOptions = new DbContextOptionsBuilder<BugManagerContext>().UseSqlite(connection).Options;
             bugManagerContext = new BugManagerContext(contextOptions);
             bugDataAccess = new BugDataAccess(bugManagerContext);
+            loginDataAccess = new LoginDataAccess(bugManagerContext);
         }
 
         [TestInitialize]
@@ -53,6 +55,29 @@ namespace TestDataAccess
         [TestMethod]
         public void GetAll()
         {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Admin admin = new Admin()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(admin);
+            loginDataAccess.SaveLogin(loginToken);
+
             var bugsExpected = new List<Bug>
             {
                 new Bug
@@ -75,7 +100,7 @@ namespace TestDataAccess
                 IsActive = true
             });
             bugManagerContext.SaveChanges();
-            List<Bug> bugDataBase = bugDataAccess.GetAll().ToList();
+            List<Bug> bugDataBase = bugDataAccess.GetAll(token).ToList();
 
             Assert.AreEqual(1, bugDataBase.Count);
             CollectionAssert.AreEqual(bugsExpected, bugDataBase, new BugComparer());
@@ -258,6 +283,29 @@ namespace TestDataAccess
         [TestMethod]
         public void Delete()
         {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Admin admin = new Admin()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(admin);
+            loginDataAccess.SaveLogin(loginToken);
+
             Bug notExpectedBug = new Bug()
             {
                 Id = 1,
@@ -269,7 +317,7 @@ namespace TestDataAccess
             };
             bugDataAccess.Create(notExpectedBug);
             bugDataAccess.Delete(notExpectedBug.Id);
-            var bugsSaved = bugDataAccess.GetAll().ToList();
+            var bugsSaved = bugDataAccess.GetAll(token).ToList();
 
             CollectionAssert.DoesNotContain(bugsSaved, notExpectedBug);
 

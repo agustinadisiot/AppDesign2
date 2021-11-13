@@ -9,7 +9,7 @@ namespace BusinessLogicInterfaces
 {
     public interface IBugBusinessLogic
     {
-        IEnumerable<BugDTO> GetAll(TokenIdDTO idRole);
+        IEnumerable<BugDTO> GetAll(string token);
         BugDTO Add(BugDTO bugdto);
         BugDTO Update(int Id, BugDTO t);
         ResponseMessage Delete(int Id);

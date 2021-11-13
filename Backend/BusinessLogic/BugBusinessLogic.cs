@@ -26,18 +26,9 @@ namespace BusinessLogic
             return new BugDTO(bug);
         }
 
-        public IEnumerable<BugDTO> GetAll(TokenIdDTO idRole)
+        public IEnumerable<BugDTO> GetAll(string token)
         {
-            List<Bug> bugs = (List<Bug>)BugDataAccess.GetAll();
-            if (idRole.Role == Roles.Dev) {
-                List<Bug> myBugs = bugs.FindAll(b => b.Project.Developers.Exists(d => d.Id == idRole.Id));
-                return myBugs.ConvertAll(b => new BugDTO(b));
-            }
-            if (idRole.Role == Roles.Tester)
-            {
-                List<Bug> myBugs = bugs.FindAll(b => b.Project.Testers.Exists(t => t.Id == idRole.Id));
-                return myBugs.ConvertAll(b => new BugDTO(b));
-            }
+            List<Bug> bugs = (List<Bug>)BugDataAccess.GetAll(token);
             return bugs.ConvertAll(b => new BugDTO(b));
         }
 

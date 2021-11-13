@@ -2,6 +2,7 @@
 using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.EntityFrameworkCore;
 using Repository.Design;
 using RepositoryInterfaces;
@@ -61,9 +62,14 @@ namespace Repository
             return bug;
         }
 
-        public IEnumerable<Bug> GetAll()
+        public IEnumerable<Bug> GetAll(string token)
         {
-            return context.Bugs;
+            LoginDataAccess loginDataAccess = new LoginDataAccess(context);
+            TokenIdDTO idRole = loginDataAccess.GetIdRoleFromToken(token);
+            List<Bug> bugs = context.Bugs.ToList();
+            if (idRole.Role == Roles.Dev) return bugs.FindAll(b => b.Project.Developers.Exists(d => d.Id == idRole.Id));
+            if (idRole.Role == Roles.Tester) return bugs.FindAll(b => b.Project.Testers.Exists(t => t.Id == idRole.Id));
+            return bugs;
         }
 
         public Bug Update(int Id, Bug bugUpdated)

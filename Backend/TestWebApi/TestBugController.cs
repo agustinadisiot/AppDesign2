@@ -38,17 +38,13 @@ namespace TestWebApi
                 }
             };
 
-            TokenIdDTO idRole = new TokenIdDTO()
-            {
-                Id = 2,
-                Role = "dev"
-            };
+            string token = "sdfgh-fghjf";
 
             var mock = new Mock<IBugBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll(idRole)).Returns(bugsExpected);
+            mock.Setup(b => b.GetAll(token)).Returns(bugsExpected);
             var controller = new BugController(mock.Object);
 
-            var result = controller.GetAll(idRole); //sholdnt recieve parameters
+            var result = controller.GetAll(token); 
             var okResult = result as OkObjectResult;
             var bugsResult = okResult.Value as IEnumerable<BugDTO>;
 

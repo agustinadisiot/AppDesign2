@@ -22,13 +22,8 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll([FromHeader] TokenIdDTO token) //shouldnt recieve parameters
+        public IActionResult GetAll([FromHeader] string token)
         {
-      /*      Object role;
-            HttpContext.Items.TryGetValue("role", out role);
-            Object Id;
-            HttpContext.Items.TryGetValue("id", out Id);
-            TokenIdDTO token = new TokenIdDTO() { Id = (int)Id, Role = (string)role };*/
             return Ok(businessLogic.GetAll(token));
         }
 

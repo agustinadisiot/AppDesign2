@@ -152,17 +152,13 @@ namespace TestBugBusinessLogic
                 },
             };
 
-            TokenIdDTO idRole = new TokenIdDTO()
-            {
-                Id = 2,
-                Role = "admin"
-            };
+            string token = "dfgh-fgh-fds";
 
             var mock = new Mock<IBugDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(bugsExpected);
+            mock.Setup(b => b.GetAll(token)).Returns(bugsExpected);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.GetAll(idRole);
+            var result = bugBusinessLogic.GetAll(token);
 
             Assert.IsTrue(bugsExpected.ConvertAll(b=>new BugDTO(b)).SequenceEqual(result));
         }
