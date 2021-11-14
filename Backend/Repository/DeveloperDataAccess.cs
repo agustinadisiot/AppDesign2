@@ -12,14 +12,17 @@ namespace Repository
 {
     public class DeveloperDataAccess : UserDataAccess<Developer>, IDeveloperDataAccess
     {
+        private readonly DbSet<Developer> devs;
+
         public DeveloperDataAccess(DbContext newContext) : base(newContext)
         {
-            users = context.Set<Developer>();
+            devs = context.Set<Developer>();
+            users = devs;
         }
 
         public List<Developer> GetAllDevs()
         {
-            throw new NotImplementedException();
+            return devs.ToList();
         }
 
         public int GetQuantityBugsResolved(int idDev)

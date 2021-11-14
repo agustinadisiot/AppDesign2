@@ -23,7 +23,7 @@ namespace Repository
 
         public List<Tester> GetAllTesters()
         {
-            throw new NotImplementedException();
+            return testers.ToList();
         }
 
         public List<Bug> GetBugsByName(int idTester, string filter)
