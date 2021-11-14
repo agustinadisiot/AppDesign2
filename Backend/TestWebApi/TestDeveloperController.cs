@@ -70,6 +70,42 @@ namespace TestWebApi
 
             Assert.ThrowsException<NonexistentUserException>(() => controller.GetQuantityBugsResolved(idDev));
         }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            List<DeveloperDTO> developersExpected = new List<DeveloperDTO>()
+            {
+                new DeveloperDTO(){
+                    Username = "juana",
+                Name = "Juana",
+                Lastname = "López",
+                Password = "Juana1223#@",
+                Email = "juana.perez@gmail.com",
+                BugsResolved = 2
+                },
+                new DeveloperDTO(){
+                Username = "juana",
+                Name = "Juana",
+                Lastname = "López",
+                Password = "Juana1223#@",
+                Email = "juana.perez@gmail.com",
+                BugsResolved = 1
+                }
+            };
+
+
+            var mock = new Mock<IDeveloperBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetAll()).Returns(developersExpected);
+            var controller = new ProjectController(mock.Object);
+
+            var result = controller.GetAll();
+            var okResult = result as OkObjectResult;
+            var devsResult = okResult.Value as IEnumerable<DeveloperDTO>;
+
+            mock.VerifyAll();
+            CollectionAssert.AreEqual(developersExpected, (System.Collections.ICollection)devsResult, new UserComparer());
+        }
     }
 };
 
