@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Bug } from 'src/app/models/Bug';
-import { BugsService } from 'src/app/services/login/bug.service';
 import { Display } from 'src/app/utils/display';
-import { ButtonAction } from '../../generic-table/models/buttonAction';
-import { Column } from '../../generic-table/models/column';
-import { ColumnType } from '../../generic-table/models/columnTypes';
+import { ButtonAction } from '../generic-table/models/buttonAction';
+import { Column } from '../generic-table/models/column';
+import { ColumnType } from '../generic-table/models/columnTypes';
 
 @Component({
   selector: 'app-bugs-table',
@@ -34,12 +32,10 @@ export class BugsTableComponent implements OnInit {
   ]
   displayedColumns = ["name", "description", "projectName", "version", "time", "isActive", "completedByName"];
 
-  constructor(private router: Router, private bugsServices: BugsService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.buttonsActions.forEach((value: ButtonAction, key: string) => {
-      this.displayedColumns.push(key);
-    });
+    ;
 
   }
 

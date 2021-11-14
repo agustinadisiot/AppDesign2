@@ -18,7 +18,13 @@ export class GenericTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.declareButtonsIntTable();
   }
 
+  declareButtonsIntTable() {
+    this.buttonsActions.forEach((value: ButtonAction, key: string) => {
+      this.displayedColumns.push(key);
+    })
+  }
 
 }

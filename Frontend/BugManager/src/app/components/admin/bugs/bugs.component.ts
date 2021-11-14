@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Bug } from 'src/app/models/Bug';
+import { BugsService } from 'src/app/services/login/bug.service';
 import { Display } from 'src/app/utils/display';
 import { ButtonAction } from '../../generic-table/models/buttonAction';
 import { Column } from '../../generic-table/models/column';
@@ -17,7 +19,7 @@ export class BugsComponent implements OnInit {
     { header: "Edit", property: "edit", display: Display.id, type: ColumnType.Button },
     { header: "Delete", property: "delete", display: Display.id, type: ColumnType.Button },
   ]
-  constructor() { }
+  constructor(private router: Router, private bugsServices: BugsService) { }
 
   buttonsActions = new Map<string, ButtonAction>([
     ["edit", { text: "Edit", onClick: this.editBug, color: (b) => "primary" }],

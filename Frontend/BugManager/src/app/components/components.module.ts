@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavComponent } from './nav/nav.component';
 import { GenericTableComponent } from './generic-table/generic-table.component';
 import { MessageComponent } from './message/message.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
-import { BugsTableComponent } from './bugs-table/bugs-table/bugs-table.component';
+import { BugsTableComponent } from './bugs-table/bugs-table.component';
 import { BugsComponent } from './admin/bugs/bugs.component';
+import { ProjectsTableComponent } from './projects-table/projects-table.component';
 
 @NgModule({
   imports: [
@@ -21,6 +21,7 @@ import { BugsComponent } from './admin/bugs/bugs.component';
     MessageComponent,
     BugsTableComponent,
     BugsComponent,
+    ProjectsTableComponent,
   ],
   exports: [
     MessageComponent,
