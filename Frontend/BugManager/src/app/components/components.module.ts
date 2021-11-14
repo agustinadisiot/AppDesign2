@@ -7,6 +7,7 @@ import { GenericTableComponent } from './generic-table/generic-table.component';
 import { MessageComponent } from './message/message.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { BugsTableComponent } from './bugs-table/bugs-table/bugs-table.component';
+import { BugsComponent } from './admin/bugs/bugs.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { BugsTableComponent } from './bugs-table/bugs-table/bugs-table.component
     GenericTableComponent,
     MessageComponent,
     BugsTableComponent,
+    BugsComponent,
   ],
   exports: [
     MessageComponent,

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Bug } from 'src/app/models/Bug';
 import { BugsService } from 'src/app/services/login/bug.service';
 import { Display } from 'src/app/utils/display';
+import { ButtonAction } from '../../generic-table/models/buttonAction';
 import { Column } from '../../generic-table/models/column';
 import { ColumnType } from '../../generic-table/models/columnTypes';
 
@@ -14,12 +15,12 @@ import { ColumnType } from '../../generic-table/models/columnTypes';
 export class BugsTableComponent implements OnInit {
 
   @Input() dataSource: Bug[];
+  @Input() buttonsColumns: Column[];
+  @Input() buttonsActions: Map<string, ButtonAction>;
 
   bugsColumn: Column[] = [
     { header: "Name", property: "name", display: Display.id, type: ColumnType.Object },
     { header: "Description", property: "description", display: Display.id, type: ColumnType.Object },
-    { header: "Print", property: "print", display: Display.id, type: ColumnType.Button },
-    { header: "Alert", property: "alert", display: Display.id, type: ColumnType.Button },
     { header: "Project", property: "projectName", display: Display.id, type: ColumnType.Object },
     { header: "Version", property: "version", display: Display.id, type: ColumnType.Object },
     { header: "Time", property: "time", display: Display.id, type: ColumnType.Object },
@@ -28,43 +29,18 @@ export class BugsTableComponent implements OnInit {
     { header: "Project Id", property: "projectId", display: Display.id, type: ColumnType.Object },
     { header: "Id", property: "id", display: Display.id, type: ColumnType.Object },
     { header: "Completed By (Id)", property: "completedById", display: Display.id, type: ColumnType.Object },
+    { header: "Edit", property: "edit", display: Display.id, type: ColumnType.Button },
+    { header: "Delete", property: "delete", display: Display.id, type: ColumnType.Button },
   ]
+  displayedColumns = ["name", "description", "projectName", "version", "time", "isActive", "completedByName"];
 
-  displayedColumns = ["name", "description", "projectName", "version", "time", "isActive", "completedByName", "print", "alert"]
   constructor(private router: Router, private bugsServices: BugsService) { }
 
   ngOnInit(): void {
-    //this.dataSource = this.bugsServices.getBugs(); TODO
-    this.dataSource = [{
-      name: "Bug1",
-      description: "Descripcion bug1",
-      version: "1.0",
-      time: 12,
-      projectId: 3,
-      projectName: "nombre del proyecto",
-      id: 1,
-      isActive: true,
-    }, {
-      name: "Bug 2",
-      description: "Descripcion bug2",
-      version: "3.4",
-      time: 9999,
-      projectId: 2,
-      projectName: "Nombre del proyecto 2",
-      id: 2,
-      isActive: false,
-      completedById: 2,
-      completedByName: "Juancito"
-    },
-    ];
-    // (this.dataSource[0] as any).otherProperty = 'hello';
-    // console.log(this.dataSource[0]);
-    // console.log(typeof this.dataSource[0]);
-
+    this.buttonsActions.forEach((value: ButtonAction, key: string) => {
+      this.displayedColumns.push(key);
+    });
 
   }
 
-  rowPressed(row) {
-    // TODO ir a editar bug/eliminar
-  }
 }

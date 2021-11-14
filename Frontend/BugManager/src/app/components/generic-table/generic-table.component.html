@@ -3,19 +3,21 @@
     <ng-container matColumnDef="{{col.property}}">
       <th mat-header-cell *matHeaderCellDef> {{col.header}} </th>
       <td *matCellDef="let element">
+
         <ng-container *ngIf="col.type == columnsTypes.Object">
           {{col.display(element[col.property])}}
         </ng-container>
+
         <ng-container *ngIf="col.type == columnsTypes.Button">
-          <button (click)="actions.get(col.property).fun(element)" mat-flat-button
-            style="background-color:{{actions.get(col.property).color(element)}};">
-            {{actions.get(col.property).name}}</button>
+          <button (click)="buttonsActions.get(col.property)?.onClick(element)" mat-flat-button
+            color={{buttonsActions.get(col.property)?.color(element)}}>
+            {{buttonsActions.get(col.property)?.text}}</button>
         </ng-container>
       </td>
     </ng-container>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row (click)="rowAction(row)" *matRowDef="let row; columns: displayedColumns;">
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;">
   </tr>
 </table>
