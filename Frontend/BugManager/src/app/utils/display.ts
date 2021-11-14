@@ -1,13 +1,13 @@
-import { HttpErrorResponse } from "@angular/common/http";
-import { throwError } from "rxjs";
-
 export class Display {
 
-  public static displayIsActiveAsResolve(value: boolean) {
+  public static id(value: any) {
+    return value;
+  }
+  public static IsActiveAsResolve(value: boolean) {
     return value ? "Unresolved" : "Resolved"
   }
 
-  public static displayStringNull(value: string) {
+  public static NullableString(value: string) {
     return value == null ? "-" : value
   }
 }

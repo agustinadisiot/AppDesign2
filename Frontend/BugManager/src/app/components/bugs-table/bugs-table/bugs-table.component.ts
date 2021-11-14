@@ -4,6 +4,7 @@ import { Bug } from 'src/app/models/Bug';
 import { BugsService } from 'src/app/services/login/bug.service';
 import { Display } from 'src/app/utils/display';
 import { Column } from '../../generic-table/models/column';
+import { ColumnType } from '../../generic-table/models/columnTypes';
 
 @Component({
   selector: 'app-bugs-table',
@@ -15,19 +16,21 @@ export class BugsTableComponent implements OnInit {
   @Input() dataSource: Bug[];
 
   bugsColumn: Column[] = [
-    { header: "Name", property: "name", display: x => x },
-    { header: "Description", property: "description", display: x => x },
-    { header: "Project", property: "projectName", display: x => x },
-    { header: "Version", property: "version", display: x => x },
-    { header: "Time", property: "time", display: x => x },
-    { header: "State", property: "isActive", display: Display.displayIsActiveAsResolve },
-    { header: "Completed By", property: "completedByName", display: Display.displayStringNull },
-    { header: "Project Id", property: "projectId", display: x => x },
-    { header: "Id", property: "id", display: x => x },
-    { header: "Completed By (Id)", property: "completedById", display: x => x },
+    { header: "Name", property: "name", display: Display.id, type: ColumnType.Object },
+    { header: "Description", property: "description", display: Display.id, type: ColumnType.Object },
+    { header: "Print", property: "print", display: Display.id, type: ColumnType.Button },
+    { header: "Alert", property: "alert", display: Display.id, type: ColumnType.Button },
+    { header: "Project", property: "projectName", display: Display.id, type: ColumnType.Object },
+    { header: "Version", property: "version", display: Display.id, type: ColumnType.Object },
+    { header: "Time", property: "time", display: Display.id, type: ColumnType.Object },
+    { header: "State", property: "isActive", display: Display.IsActiveAsResolve, type: ColumnType.Object },
+    { header: "Completed By", property: "completedByName", display: Display.NullableString, type: ColumnType.Object },
+    { header: "Project Id", property: "projectId", display: Display.id, type: ColumnType.Object },
+    { header: "Id", property: "id", display: Display.id, type: ColumnType.Object },
+    { header: "Completed By (Id)", property: "completedById", display: Display.id, type: ColumnType.Object },
   ]
 
-  displayedColumns = ["name", "description", "projectName", "version", "time", "isActive", "completedByName"]
+  displayedColumns = ["name", "description", "projectName", "version", "time", "isActive", "completedByName", "print", "alert"]
   constructor(private router: Router, private bugsServices: BugsService) { }
 
   ngOnInit(): void {
@@ -53,7 +56,12 @@ export class BugsTableComponent implements OnInit {
       completedById: 2,
       completedByName: "Juancito"
     },
-    ]
+    ];
+    // (this.dataSource[0] as any).otherProperty = 'hello';
+    // console.log(this.dataSource[0]);
+    // console.log(typeof this.dataSource[0]);
+
+
   }
 
   rowPressed(row) {
