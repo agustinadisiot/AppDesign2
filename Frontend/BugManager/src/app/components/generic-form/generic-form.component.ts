@@ -10,19 +10,12 @@ import { InfoMessage } from '../message/model/message';
 export class GenericFormComponent implements OnInit {
   @Input() title: string = "Form";
   @Input() form: FormGroup = new FormGroup({});
-  @Input() errorMessage: InfoMessage = { error: false, text: "" }
+  @Input() infoMessage: InfoMessage = { error: false, text: "" }
   @Input() showCancelButton: boolean = true;
+  @Input() loading: boolean
 
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter();
-
-  loading = false;
-  clickOnSave() {
-    this.loading = true;
-    this.save.emit();
-    this.loading = false;
-  }
-
 
   constructor() { }
 

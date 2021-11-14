@@ -38,7 +38,8 @@ export class DevsScoreboardComponent implements OnInit {
         lastname: "González",
         email: "gonza@gmail.com",
         cost: 12,
-        bugsResolved: 9
+        bugsResolved: 9,
+        password: ""
       },
       {
         id: 2,
@@ -47,7 +48,8 @@ export class DevsScoreboardComponent implements OnInit {
         lastname: "asdf",
         email: "gonza@sdfail.com",
         cost: 111,
-        bugsResolved: 999
+        bugsResolved: 999,
+        password: ""
       },
     ];
   }

@@ -13,7 +13,7 @@ import { UserCredentials } from './models/userCredentials';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, fb: FormBuilder, private loginService: LoginService) { }
+  constructor(private router: Router, private loginService: LoginService) { }
 
 
   form = new FormGroup({
@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     localStorage.removeItem("role");
+    localStorage.removeItem("token");
   }
 
 
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
 
       (loginResponse: LoginResponse) => {
         localStorage.setItem("role", loginResponse.role);
+        localStorage.setItem("token", loginResponse.token);
         this.router.navigateByUrl(`/${loginResponse.role}`);
         this.credentials = { username: '', password: '' };
       },

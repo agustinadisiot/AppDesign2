@@ -1,3 +1,52 @@
-<app-generic-form title="Create User" [showCancelButton]="showCancelButton">
-  <p>create-user works!</p>
+<app-generic-form title="Create new user" [showCancelButton]="showCancelButton" [form]="form"
+  [infoMessage]="infoMessage" (save)="save()" [loading]="loading">
+
+  <form [formGroup]="form" (keydown.enter)="save()">
+    <div id="centerFormDiv">
+      <p>Username</p>
+      <mat-form-field class=full-width appearance="fill">
+        <mat-label>Enter username</mat-label>
+        <input matInput [(ngModel)]="user.username" formControlName="username" required placeholder="Ex. johnSmith">
+      </mat-form-field>
+
+      <p>Name</p>
+      <mat-form-field class=full-width appearance="fill">
+        <mat-label>Enter name</mat-label>
+        <input matInput [(ngModel)]="user.name" formControlName="name" required placeholder="Ex. John">
+      </mat-form-field>
+
+      <p>Lastname</p>
+      <mat-form-field class=full-width appearance="fill">
+        <mat-label>Enter lastame</mat-label>
+        <input matInput [(ngModel)]="user.lastname" formControlName="lastname" required placeholder="Ex. Smith">
+      </mat-form-field>
+
+      <p>Email</p>
+      <mat-form-field class=full-width appearance="fill">
+        <mat-label>Enter email</mat-label>
+        <input matInput [(ngModel)]="user.email" formControlName="email" required placeholder="Ex. john@example.com">
+      </mat-form-field>
+
+      <p>Password</p>
+      <mat-form-field appearance="fill" class=full-width>
+        <mat-label>Enter password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="user.password"
+          formControlName="password" required>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <p>Role</p>
+      <mat-form-field appearance="fill" class=full-width>
+        <mat-label>Choose role</mat-label>
+        <mat-select [(value)]="role">
+          <mat-option [value]="option.value" *ngFor="let option of roles">{{ option.viewValue }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </form>
+
 </app-generic-form>
