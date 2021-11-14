@@ -236,5 +236,36 @@ namespace TestTesterBusinessLogic
             Assert.ThrowsException<ValidationException>(() => testerBusinessLogic.Add(new TesterDTO(invalidTester)));
             mock.Verify(m => m.Create(invalidTester), Times.Never);
         }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            List<TesterDTO> testersExpected = new List<TesterDTO>()
+            {
+                new TesterDTO(){
+                    Username = "juana",
+                Name = "Juana",
+                Lastname = "López",
+                Password = "Juana1223#@",
+                Email = "juana.perez@gmail.com",
+                },
+                new TesterDTO(){
+                Username = "juana",
+                Name = "Juana",
+                Lastname = "López",
+                Password = "Juana1223#@",
+                Email = "juana.perez@gmail.com"
+                }
+            };
+
+
+            var mock = new Mock<ITesterDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetAllTesters()).Returns(testersExpected.ConvertAll(p => p.ConvertToDomain()));
+            var testerBusinessLogic = new TesterBusinessLogic(mock.Object);
+
+            var result = testerBusinessLogic.GetAllTesters();
+
+            Assert.IsTrue(testersExpected.SequenceEqual(result));
+        }
     }
 }

@@ -33,6 +33,8 @@ namespace WebApi.Controllers
             return Ok(new BugsQuantity(businessLogic.GetQuantityBugsResolved(idDev)));
         }
 
+        [AuthorizationFilter("Admin")]
+        [HttpGet]
         public object GetAllDevs()
         {
             return Ok(businessLogic.GetAllDevs());

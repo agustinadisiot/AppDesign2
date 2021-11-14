@@ -46,6 +46,8 @@ namespace WebApi.Controllers
 
         }
 
+        [AuthorizationFilter("Admin")]
+        [HttpGet]
         public object GetAllTesters()
         {
             return Ok(businessLogic.GetAllTesters());
