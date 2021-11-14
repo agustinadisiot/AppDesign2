@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Bug } from 'src/app/models/Bug';
-import { BugsService } from 'src/app/services/login/bug.service';
+import { BugsService } from 'src/app/services/bug.service';
 import { Display } from 'src/app/utils/display';
 import { ButtonAction } from '../../generic-table/models/buttonAction';
 import { Column } from '../../generic-table/models/column';

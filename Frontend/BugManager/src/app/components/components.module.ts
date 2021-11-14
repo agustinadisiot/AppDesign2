@@ -9,6 +9,7 @@ import { BugsTableComponent } from './bugs-table/bugs-table.component';
 import { BugsComponent } from './admin/bugs/bugs.component';
 import { ProjectsTableComponent } from './projects-table/projects-table.component';
 import { ProjectsComponent } from './admin/projects/projects.component';
+import { DevsScoreboardComponent } from './admin/devs-scoreboard/devs-scoreboard.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ProjectsComponent } from './admin/projects/projects.component';
     BugsComponent,
     ProjectsTableComponent,
     ProjectsComponent,
+    DevsScoreboardComponent,
   ],
   exports: [
     MessageComponent,

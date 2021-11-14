@@ -10,4 +10,8 @@ export class Display {
   public static NullableString(value: string) {
     return value == null ? "-" : value
   }
+
+  public static CostPerHour(value: number) {
+    return `$${value}/hr`
+  }
 }

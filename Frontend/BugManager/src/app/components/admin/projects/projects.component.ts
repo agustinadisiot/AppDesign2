@@ -4,7 +4,7 @@ import { ColumnType } from '../../generic-table/models/columnTypes';
 import { ButtonAction } from '../../generic-table/models/buttonAction';
 import { Project } from 'src/app/models/Project';
 import { Router } from '@angular/router';
-import { ProjectsService } from 'src/app/services/login/project.service';
+import { ProjectsService } from 'src/app/services/project.service';
 import { Display } from 'src/app/utils/display';
 
 @Component({

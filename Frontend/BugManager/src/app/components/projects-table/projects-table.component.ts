@@ -18,10 +18,9 @@ export class ProjectsTableComponent implements OnInit {
 
 
   columns: Column[] = [
+    { header: "Nº", property: "id", display: Display.id, type: ColumnType.Object },
     { header: "Name", property: "name", display: Display.id, type: ColumnType.Object },
-    { header: "No.", property: "id", display: Display.id, type: ColumnType.Object },
   ]
-  displayedColumns = ["id", "name"];
 
   constructor() { }
 

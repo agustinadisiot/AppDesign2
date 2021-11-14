@@ -13,17 +13,18 @@ export class GenericTableComponent implements OnInit {
   @Input() columns: Column[];
   @Input() buttonsActions: Map<string, ButtonAction>;
   @Input() dataSource: any[];
-  @Input() displayedColumns: string[];
+  displayedColumns: string[] = [];
   columnsTypes = ColumnType;
   constructor() { }
 
   ngOnInit(): void {
-    this.declareButtonsInTable();
+    this.displayAllColumns();
+
   }
 
-  declareButtonsInTable() {
-    this.buttonsActions.forEach((value: ButtonAction, key: string) => {
-      this.displayedColumns.push(key);
+  displayAllColumns() {
+    this.columns.forEach((value: Column) => {
+      this.displayedColumns.push(value.property);
     })
   }
 
