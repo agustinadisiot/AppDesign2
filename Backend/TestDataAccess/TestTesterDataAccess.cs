@@ -222,5 +222,37 @@ namespace TestTesterDataAccess
             CollectionAssert.AreEqual(bugsExpected, bugsResult, new BugComparer());
         }
 
+        [TestMethod]
+        public void GetAll()
+        {
+            var testersExpected = new List<Tester>
+            {
+                new Tester()
+                {
+                    Id = 1,
+                    Name = "a",
+                    Cost =5,
+                    Email = "fghjk@ghj",
+                    Lastname = "gimenez",
+                    Password = "352683clave",
+                    Username = "ertyu",
+                }
+             };
+            bugManagerContext.Add(new Tester()
+            {
+                Id = 1,
+                Name = "a",
+                Cost = 5,
+                Email = "fghjk@ghj",
+                Lastname = "gimenez",
+                Password = "352683clave",
+                Username = "ertyu",
+            });
+            bugManagerContext.SaveChanges();
+            List<Tester> testerDataBase = testerDataAccess.GetAllTesters().ToList();
+
+            Assert.AreEqual(1, testerDataBase.Count);
+            CollectionAssert.AreEqual(testersExpected, testerDataBase, new UserComparer());
+        }
     }
 }
