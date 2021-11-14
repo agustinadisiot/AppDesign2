@@ -21,6 +21,11 @@ namespace Repository
             users = testers;
         }
 
+        public List<Tester> GetAllTesters()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Bug> GetBugsByName(int idTester, string filter)
         {
             Tester tester = testers.FirstOrDefault(t => t.Id == idTester);

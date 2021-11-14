@@ -36,7 +36,9 @@ namespace BusinessLogic
 
         public List<DeveloperDTO> GetAllDevs()
         {
-            throw new System.NotImplementedException();
+            List<DeveloperDTO> devs = devDataAccess.GetAllDevs().ConvertAll(d => new DeveloperDTO(d));
+            devs.ForEach(d => d.BugsResolved = GetQuantityBugsResolved(d.Id));
+            return devs;
         }
     }
 

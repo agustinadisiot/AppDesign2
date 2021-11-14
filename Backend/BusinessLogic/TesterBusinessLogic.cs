@@ -48,7 +48,7 @@ namespace BusinessLogic
 
         public List<TesterDTO> GetAllTesters()
         {
-            throw new System.NotImplementedException();
+            return testerDataAccess.GetAllTesters().ConvertAll(t=>new TesterDTO(t));
         }
     }
 

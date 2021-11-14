@@ -17,6 +17,11 @@ namespace Repository
             users = context.Set<Developer>();
         }
 
+        public List<Developer> GetAllDevs()
+        {
+            throw new NotImplementedException();
+        }
+
         public int GetQuantityBugsResolved(int idDev)
         {
             return context.Bugs.Count(b => b.CompletedById == idDev);
