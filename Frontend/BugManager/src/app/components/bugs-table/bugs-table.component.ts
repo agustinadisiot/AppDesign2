@@ -27,16 +27,19 @@ export class BugsTableComponent implements OnInit {
     { header: "Project Id", property: "projectId", display: Display.id, type: ColumnType.Object },
     { header: "Id", property: "id", display: Display.id, type: ColumnType.Object },
     { header: "Completed By (Id)", property: "completedById", display: Display.id, type: ColumnType.Object },
-    { header: "Edit", property: "edit", display: Display.id, type: ColumnType.Button },
-    { header: "Delete", property: "delete", display: Display.id, type: ColumnType.Button },
   ]
   displayedColumns = ["name", "description", "projectName", "version", "time", "isActive", "completedByName"];
 
   constructor() { }
 
   ngOnInit(): void {
-    ;
+    this.declareButtonsInHeader();
+  }
 
+  declareButtonsInHeader() {
+    this.buttonsColumns.forEach((column: Column) => {
+      this.bugsColumn.push(column);
+    })
   }
 
 }

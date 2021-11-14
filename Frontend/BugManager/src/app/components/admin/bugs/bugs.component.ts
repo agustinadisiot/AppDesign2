@@ -22,8 +22,8 @@ export class BugsComponent implements OnInit {
   constructor(private router: Router, private bugsServices: BugsService) { }
 
   buttonsActions = new Map<string, ButtonAction>([
-    ["edit", { text: "Edit", onClick: this.editBug, color: (b) => "primary" }],
-    ["delete", { text: "Delete", onClick: this.deleteBug, color: (b) => "warn" }],
+    ["edit", { text: "Edit", onClick: this.editBug, color: () => "primary" }],
+    ["delete", { text: "Delete", onClick: this.deleteBug, color: () => "warn" }],
   ]);
 
 
@@ -36,8 +36,6 @@ export class BugsComponent implements OnInit {
     alert(JSON.stringify(bug));
     // TODO
   }
-
-
 
   ngOnInit(): void {
     //this.dataSource = this.bugsServices.getBugs(); TODO

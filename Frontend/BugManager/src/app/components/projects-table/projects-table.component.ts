@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Project } from 'src/app/models/Project';
 import { Display } from 'src/app/utils/display';
 import { ButtonAction } from '../generic-table/models/buttonAction';
@@ -18,7 +17,7 @@ export class ProjectsTableComponent implements OnInit {
   @Input() buttonsActions: Map<string, ButtonAction>;
 
 
-  bugsColumn: Column[] = [
+  columns: Column[] = [
     { header: "Name", property: "name", display: Display.id, type: ColumnType.Object },
     { header: "No.", property: "id", display: Display.id, type: ColumnType.Object },
   ]
@@ -27,6 +26,13 @@ export class ProjectsTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.declareButtonsInHeader();
+  }
+
+  declareButtonsInHeader() {
+    this.buttonsColumns.forEach((column: Column) => {
+      this.columns.push(column);
+    })
   }
 
 }

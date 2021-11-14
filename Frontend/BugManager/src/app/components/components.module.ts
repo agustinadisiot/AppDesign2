@@ -8,6 +8,7 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 import { BugsTableComponent } from './bugs-table/bugs-table.component';
 import { BugsComponent } from './admin/bugs/bugs.component';
 import { ProjectsTableComponent } from './projects-table/projects-table.component';
+import { ProjectsComponent } from './admin/projects/projects.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { ProjectsTableComponent } from './projects-table/projects-table.componen
     BugsTableComponent,
     BugsComponent,
     ProjectsTableComponent,
+    ProjectsComponent,
   ],
   exports: [
     MessageComponent,

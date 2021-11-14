@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BugsComponent } from 'src/app/components/admin/bugs/bugs.component';
+import { ProjectsComponent } from 'src/app/components/admin/projects/projects.component';
 import { TableComponent } from 'src/app/components/table/table.component';
 import { AdminComponent } from './admin.component';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'add-user',
         component: TableComponent
+      },
+      {
+        path: 'projects',
+        component: ProjectsComponent
       }
     ]
   }
