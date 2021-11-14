@@ -1,5 +1,6 @@
 ﻿using Domain;
 using DTO;
+using System.Collections.Generic;
 
 namespace BusinessLogicInterfaces
 {
@@ -8,6 +9,7 @@ namespace BusinessLogicInterfaces
         DeveloperDTO Add(DeveloperDTO newTester);
 
         int GetQuantityBugsResolved(int idDev);
+        List<DeveloperDTO> GetAllDevs();
     }
 }
 

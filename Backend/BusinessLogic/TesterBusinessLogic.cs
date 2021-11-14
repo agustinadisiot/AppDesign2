@@ -45,6 +45,11 @@ namespace BusinessLogic
         {
             return testerDataAccess.VerifyRole(token);
         }
+
+        public List<TesterDTO> GetAllTesters()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
 

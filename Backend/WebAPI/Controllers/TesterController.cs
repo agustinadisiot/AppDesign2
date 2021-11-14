@@ -45,5 +45,10 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetBugsByProject(idTester, filter));
 
         }
+
+        public object GetAllTesters()
+        {
+            return Ok(businessLogic.GetAllTesters());
+        }
     }
 }

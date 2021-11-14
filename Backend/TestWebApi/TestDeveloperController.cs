@@ -96,10 +96,10 @@ namespace TestWebApi
 
 
             var mock = new Mock<IDeveloperBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll()).Returns(developersExpected);
-            var controller = new ProjectController(mock.Object);
+            mock.Setup(b => b.GetAllDevs()).Returns(developersExpected);
+            var controller = new DeveloperController(mock.Object);
 
-            var result = controller.GetAll();
+            var result = controller.GetAllDevs();
             var okResult = result as OkObjectResult;
             var devsResult = okResult.Value as IEnumerable<DeveloperDTO>;
 

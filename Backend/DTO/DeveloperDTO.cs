@@ -33,6 +33,7 @@ namespace DTO
         public string Email { get; set; }
         public List<ProjectDTO> ProjectsDTO { get; set; }
         public int Cost { get; set; }
+        public int BugsResolved { get; set; }
 
         public Developer ConvertToDomain()
         {

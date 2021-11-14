@@ -32,5 +32,11 @@ namespace WebApi.Controllers
 
             return Ok(new BugsQuantity(businessLogic.GetQuantityBugsResolved(idDev)));
         }
+
+        public object GetAllDevs()
+        {
+            return Ok(businessLogic.GetAllDevs());
+
+        }
     }
 }
