@@ -24,9 +24,7 @@ export class BugsTableComponent implements OnInit {
     { header: "Time", property: "time", display: Display.id, type: ColumnType.Object },
     { header: "State", property: "isActive", display: Display.IsActiveAsResolve, type: ColumnType.Object },
     { header: "Completed By", property: "completedByName", display: Display.NullableString, type: ColumnType.Object },
-    //{ header: "Project Id", property: "projectId", display: Display.id, type: ColumnType.Object }, TODO delete if they are not going to be show
     { header: "Id", property: "id", display: Display.id, type: ColumnType.Object },
-    //{ header: "Completed By (Id)", property: "completedById", display: Display.id, type: ColumnType.Object },
   ]
 
   constructor() { }

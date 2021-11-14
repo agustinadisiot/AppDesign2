@@ -1,9 +1,7 @@
-p {
-  text-align: center;
-}
+
 .success{
-  color:rgb(63, 161, 63);
+  color:#4CAF50;
 }
 .error{
-  color: red !important;
+  color: #F44336;
 }

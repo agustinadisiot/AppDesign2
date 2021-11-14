@@ -10,6 +10,8 @@ import { BugsComponent } from './admin/bugs/bugs.component';
 import { ProjectsTableComponent } from './projects-table/projects-table.component';
 import { ProjectsComponent } from './admin/projects/projects.component';
 import { DevsScoreboardComponent } from './admin/devs-scoreboard/devs-scoreboard.component';
+import { GenericFormComponent } from './generic-form/generic-form.component';
+import { CreateUserComponent } from './admin/create-user/create-user.component';
 
 @NgModule({
   imports: [
@@ -26,6 +28,8 @@ import { DevsScoreboardComponent } from './admin/devs-scoreboard/devs-scoreboard
     ProjectsTableComponent,
     ProjectsComponent,
     DevsScoreboardComponent,
+    GenericFormComponent,
+    CreateUserComponent,
   ],
   exports: [
     MessageComponent,

@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <mat-card class=center-screen>
+    <h2>{{title}}</h2>
+    <mat-divider></mat-divider>
+    <br>
+    <ng-content></ng-content>
+    <mat-divider></mat-divider>
+    <br>
+
+    <button *ngIf="showCancelButton" id="cancel" mat-flat-button color="warn" disabled="{{loading}}"
+      (click)="cancel.emit()">Cancel
+    </button>
+    <button id="save" mat-flat-button color="primary" disabled="{{ !form.valid || loading}}"
+      (click)="clickOnSave()">Save
+    </button>
+
+
+    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+    <br>
+    <app-message [message]="errorMessage"></app-message>
+
+  </mat-card>
+</div>

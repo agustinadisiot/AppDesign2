@@ -23,12 +23,11 @@
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-
-    <button type="submit" tabindex="3" mat-flat-button color="primary" disabled="{{!form.valid || loading}}"
-      (click)="LogIn()">Log In
-    </button>
-    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
-    <app-message [message]="errorMessage"></app-message>
   </form>
+
+  <button type="submit" mat-flat-button color="primary" disabled="{{!form.valid || loading}}" (click)="LogIn()">Log In
+  </button>
+  <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+  <app-message [message]="errorMessage"></app-message>
 
 </mat-card>

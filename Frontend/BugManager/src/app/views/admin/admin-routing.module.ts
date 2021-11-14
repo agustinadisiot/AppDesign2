@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BugsComponent } from 'src/app/components/admin/bugs/bugs.component';
+import { CreateUserComponent } from 'src/app/components/admin/create-user/create-user.component';
 import { DevsScoreboardComponent } from 'src/app/components/admin/devs-scoreboard/devs-scoreboard.component';
 import { ProjectsComponent } from 'src/app/components/admin/projects/projects.component';
-import { TableComponent } from 'src/app/components/table/table.component';
+import { GenericFormComponent } from 'src/app/components/generic-form/generic-form.component'; // TODO sacar
 import { AdminComponent } from './admin.component';
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'add-user',
-        component: TableComponent
+        component: CreateUserComponent
       },
       {
         path: 'projects',
