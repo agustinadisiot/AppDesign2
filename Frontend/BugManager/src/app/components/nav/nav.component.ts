@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
-import { SideBarItem } from '../../models/sidebarItem';
+import { SideBarItem } from './model/sidebarItem';
 
 @Component({
   selector: 'app-nav',

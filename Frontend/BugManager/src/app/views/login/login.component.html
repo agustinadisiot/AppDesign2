@@ -1,7 +1,7 @@
 <h2 class=mat-headline>Welcome to BugManager, please sign in or ask the Admin to create an account for you.</h2>
 <mat-card class=center-screen>
 
-  <form [formGroup]="form">
+  <form [formGroup]="form" (keydown.enter)="LogIn()">
 
     <!--Username-->
     <p>Username</p>
@@ -23,11 +23,11 @@
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-
-    <button mat-flat-button color="primary" disabled="{{!form.valid || loading}}" (click)="LogIn()">Log In
-    </button>
-    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
-    <app-message [message]="errorMessage"></app-message>
   </form>
+
+  <button type="submit" mat-flat-button color="primary" disabled="{{!form.valid || loading}}" (click)="LogIn()">Log In
+  </button>
+  <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+  <app-message [message]="errorMessage"></app-message>
 
 </mat-card>

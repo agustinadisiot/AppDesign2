@@ -2,21 +2,38 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { NavComponent } from './nav/nav.component';
 import { GenericTableComponent } from './generic-table/generic-table.component';
 import { MessageComponent } from './message/message.component';
+import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { BugsTableComponent } from './bugs-table/bugs-table.component';
+import { BugsComponent } from './admin/bugs/bugs.component';
+import { ProjectsTableComponent } from './projects-table/projects-table.component';
+import { ProjectsComponent } from './admin/projects/projects.component';
+import { DevsScoreboardComponent } from './admin/devs-scoreboard/devs-scoreboard.component';
+import { GenericFormComponent } from './generic-form/generic-form.component';
+import { CreateUserComponent } from './admin/create-user/create-user.component';
+import { ClassicImportComponent } from './admin/classic-import/classic-import.component';
+import { CustomImportComponent } from './admin/custom-import/custom-import.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    AngularMaterialModule,
   ],
   declarations: [
-    NotFoundComponent,
     GenericTableComponent,
     MessageComponent,
+    BugsTableComponent,
+    BugsComponent,
+    ProjectsTableComponent,
+    ProjectsComponent,
+    DevsScoreboardComponent,
+    GenericFormComponent,
+    CreateUserComponent,
+    ClassicImportComponent,
+    CustomImportComponent,
   ],
   exports: [
     MessageComponent,
