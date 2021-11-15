@@ -56,7 +56,7 @@ namespace TestWebApi
             var cantResult = okResult.Value as BugsQuantity;
 
             mock.VerifyAll();
-            Assert.AreEqual(cantBugsResolved, cantResult.quantity);
+            Assert.AreEqual(cantBugsResolved, cantResult.Quantity);
         }
 
         [TestMethod]

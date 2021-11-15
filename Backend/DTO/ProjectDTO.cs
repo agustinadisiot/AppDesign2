@@ -17,6 +17,9 @@ namespace DTO
 
         public string Name { get; set; }
         public int Id { get; set; }
+        public int TotalCost { get; set; }
+        public int TotalDuration { get; set; }
+        public int BugsQuantity { get; set; }
 
         public Project ConvertToDomain()
         {
