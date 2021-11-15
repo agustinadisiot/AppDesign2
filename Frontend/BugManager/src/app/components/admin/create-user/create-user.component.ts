@@ -15,7 +15,7 @@ export class CreateUserComponent implements OnInit {
   showCancelButton = false;
   loading = false;
   infoMessage: InfoMessage = { error: true, text: '' };
-  user: User = { username: '', name: '', lastname: '', email: '', password: '', id: 0 }
+  user: User = { username: '', name: '', lastname: '', email: '', password: '', cost: 0 }
   hidePassword = true;
   roles: Role[] = [
     { value: "admin", viewValue: "Admin" },
@@ -31,6 +31,7 @@ export class CreateUserComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     lastname: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.email]),
+    cost: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]), // TODO add length
   });
 

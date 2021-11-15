@@ -10,8 +10,7 @@ export class HttpErrorHandler {
 
     const possibleErrorCodes = [404, 400, 401, 500]
     if (possibleErrorCodes.includes(error.status))
-      console.log(error) // TODO delete
-    return throwError(error.error.responseMessage)
+      return throwError(error.error.responseMessage)
 
     return throwError("Server with problems");
   }

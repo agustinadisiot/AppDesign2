@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ClassicImportService } from 'src/app/services/classic-import';
+import { ClassicImportService } from 'src/app/services/classic-import.service';
 import { InfoMessage } from '../../message/model/message';
 
 @Component({

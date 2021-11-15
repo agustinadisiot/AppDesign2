@@ -13,6 +13,7 @@ import { DevsScoreboardComponent } from './admin/devs-scoreboard/devs-scoreboard
 import { GenericFormComponent } from './generic-form/generic-form.component';
 import { CreateUserComponent } from './admin/create-user/create-user.component';
 import { ClassicImportComponent } from './admin/classic-import/classic-import.component';
+import { CustomImportComponent } from './admin/custom-import/custom-import.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { ClassicImportComponent } from './admin/classic-import/classic-import.co
     GenericFormComponent,
     CreateUserComponent,
     ClassicImportComponent,
+    CustomImportComponent,
   ],
   exports: [
     MessageComponent,
