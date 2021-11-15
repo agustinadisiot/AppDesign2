@@ -18,6 +18,7 @@ namespace TestDataAccess
     {
         private readonly DbConnection connection;
         private readonly WorkDataAccess workDataAccess;
+        private readonly LoginDataAccess loginDataAccess;
         private readonly BugManagerContext bugManagerContext;
         private readonly DbContextOptions<BugManagerContext> contextOptions;
 
@@ -27,6 +28,7 @@ namespace TestDataAccess
             contextOptions = new DbContextOptionsBuilder<BugManagerContext>().UseSqlite(connection).Options;
             bugManagerContext = new BugManagerContext(contextOptions);
             workDataAccess = new WorkDataAccess(bugManagerContext);
+            loginDataAccess = new LoginDataAccess(bugManagerContext);
         }
 
         [TestInitialize]
@@ -88,6 +90,58 @@ namespace TestDataAccess
         public void GetNonExistant()
         {
             Assert.ThrowsException<NonexistentWorkException>(() => workDataAccess.GetById(90));
+        }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Admin admin = new Admin()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(admin);
+            loginDataAccess.SaveLogin(loginToken);
+
+            var worksExpected = new List<Work>
+            {
+                new Work
+                {
+                    Id = 1,
+                    Name = "a",
+                    ProjectId = 1,
+                    Cost = 3,
+                    Time = 3
+        }
+    };
+            bugManagerContext.Add(new Work
+            {
+                Id = 1,
+                Name = "a",
+                ProjectId = 1,
+                Cost = 3,
+                Time = 3,
+            });
+            bugManagerContext.SaveChanges();
+            List<Work> workDataBase = workDataAccess.GetAll(token).ToList();
+
+            Assert.AreEqual(1, workDataBase.Count);
+            CollectionAssert.AreEqual(worksExpected, workDataBase, new WorkComparer());
         }
     }
 }
