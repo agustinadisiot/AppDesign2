@@ -20,6 +20,7 @@ namespace BugParser
             }
             catch (InvalidOperationException e)
             {
+                fs.Close();
                 throw new XmlException(e.Message);
             }
             List<Bug> importedBugs;
@@ -29,8 +30,10 @@ namespace BugParser
             }
             catch (NullReferenceException e)
             {
+                fs.Close();
                 throw new XmlException(e.Message);
             }
+            fs.Close();
             return importedBugs;
 
         }
