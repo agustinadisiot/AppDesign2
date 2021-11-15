@@ -21,11 +21,17 @@ namespace TestWebApi
             {
                 new ProjectDTO(){
                     Name = "Project1",
-                    Id = 0
+                    Id = 0,
+                    TotalCost = 43,
+                    TotalDuration = 78,
+                    BugsQuantity = 6
                 },
                 new ProjectDTO(){
                 Name = "Project2",
-                Id = 1
+                Id = 1,
+                TotalCost = 43,
+                    TotalDuration = 78,
+                    BugsQuantity = 6
                 }
             };
 
@@ -71,7 +77,10 @@ namespace TestWebApi
             ProjectDTO projectExpected = new ProjectDTO()
             {
                 Name = "Project1",
-                Id = 0
+                Id = 0,
+                TotalCost = 43,
+                TotalDuration = 78,
+                BugsQuantity = 6
             };
 
             var mock = new Mock<IProjectBusinessLogic>(MockBehavior.Strict);
