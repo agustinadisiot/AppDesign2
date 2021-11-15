@@ -290,7 +290,7 @@ namespace TestDataAccess
             bugManagerContext.SaveChanges();
 
             int cantExpected = project.Bugs.Count();
-            Assert.AreEqual(cantExpected, projectDataAccess.GetBugsQuantity(project.Id).quantity);
+            Assert.AreEqual(cantExpected, projectDataAccess.GetBugsQuantity(project.Id).Quantity);
 
         }
 

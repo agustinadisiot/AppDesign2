@@ -175,6 +175,9 @@ namespace TestProjectBusinessLogic
 
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
             mock.Setup(b => b.GetById(projectExpected.Id)).Returns(projectExpected);
+            mock.Setup(b => b.GetProjectCost(It.IsAny<int>())).Returns(new ProjectCost(0));
+            mock.Setup(b => b.GetProjectDuration(It.IsAny<int>())).Returns(new ProjectDuration(0));
+            mock.Setup(b => b.GetBugsQuantity(It.IsAny<int>())).Returns(new BugsQuantity(0));
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
             var result = projectBusinessLogic.GetById(projectExpected.Id);
@@ -208,6 +211,9 @@ namespace TestProjectBusinessLogic
 
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
             mock.Setup(b => b.GetAll(token)).Returns(projectsExpected.ConvertAll(p=>p.ConvertToDomain()));
+            mock.Setup(b => b.GetProjectCost(It.IsAny<int>())).Returns(new ProjectCost(0));
+            mock.Setup(b => b.GetProjectDuration(It.IsAny<int>())).Returns(new ProjectDuration(0));
+            mock.Setup(b => b.GetBugsQuantity(It.IsAny<int>())).Returns(new BugsQuantity(0));
             var projectBusinessLogic = new ProjectBusinessLogic(mock.Object);
 
             var result = projectBusinessLogic.GetAll(token);
@@ -392,7 +398,7 @@ namespace TestProjectBusinessLogic
             var result = projectBusinessLogic.GetBugsQuantity(project.Id);
 
             mock.VerifyAll();
-            Assert.AreEqual(cant, result.quantity);
+            Assert.AreEqual(cant, result.Quantity);
         }
 
         [TestMethod]

@@ -20,7 +20,7 @@ namespace WebApi.Controllers
 
         [AuthorizationFilter("Admin/Tester/Developer")]
         [HttpGet]
-        public IActionResult GetAll([FromHeader] string token) //shouldnt recieve parameters
+        public IActionResult GetAll([FromHeader] string token) 
         {
             return Ok(businessLogic.GetAll(token));
         }
