@@ -33,12 +33,20 @@ namespace BusinessLogic
         public IEnumerable<ProjectDTO> GetAll(string token)
         {
             List<Project> projects = (List<Project>)projectDataAccess.GetAll(token);
-            return projects.ConvertAll(p => new ProjectDTO(p));
+            List<ProjectDTO> projectsDTO = projects.ConvertAll(p => new ProjectDTO(p));
+            projectsDTO.ForEach(p => p.TotalCost = GetProjectCost(p.Id).Cost);
+            projectsDTO.ForEach(p => p.TotalDuration = GetProjectDuration(p.Id).Duration);
+            projectsDTO.ForEach(p => p.BugsQuantity = GetBugsQuantity(p.Id).Quantity);
+            return projectsDTO;
         }
 
         public ProjectDTO GetById(int Id)
         {
-            return new ProjectDTO(projectDataAccess.GetById(Id));
+            ProjectDTO project =  new ProjectDTO(projectDataAccess.GetById(Id));
+            project.BugsQuantity = GetBugsQuantity(Id).Quantity;
+            project.TotalCost = GetProjectCost(Id).Cost;
+            project.TotalDuration = GetProjectDuration(Id).Duration;
+            return project;
         }
 
         public ProjectDTO Update(int Id, ProjectDTO projectModified)
