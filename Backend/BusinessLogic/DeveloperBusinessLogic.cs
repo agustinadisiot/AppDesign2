@@ -2,6 +2,7 @@
 using Domain;
 using DTO;
 using RepositoryInterfaces;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -31,6 +32,13 @@ namespace BusinessLogic
         public bool VerifyRole(string token)
         {
             return devDataAccess.VerifyRole(token);
+        }
+
+        public List<DeveloperDTO> GetAllDevs()
+        {
+            List<DeveloperDTO> devs = devDataAccess.GetAllDevs().ConvertAll(d => new DeveloperDTO(d));
+            devs.ForEach(d => d.BugsResolved = GetQuantityBugsResolved(d.Id));
+            return devs;
         }
     }
 

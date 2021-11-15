@@ -74,5 +74,38 @@ namespace TestDataAccess
             Assert.AreEqual(expectedQuantity, result);
         }
 
+        [TestMethod]
+        public void GetAll()
+        {
+            var devsExpected = new List<Developer>
+            {
+                new Developer()
+                {
+                    Id = 1,
+                    Name = "a",
+                    Cost =5,
+                    Email = "fghjk@ghj",
+                    Lastname = "gimenez",
+                    Password = "352683clave",
+                    Username = "ertyu",
+                }
+             };
+            bugManagerContext.Add(new Developer()
+            {
+                Id = 1,
+                Name = "a",
+                Cost = 5,
+                Email = "fghjk@ghj",
+                Lastname = "gimenez",
+                Password = "352683clave",
+                Username = "ertyu",
+            });
+            bugManagerContext.SaveChanges();
+            List<Developer> devsDataBase = devDataAccess.GetAllDevs().ToList();
+
+            Assert.AreEqual(1, devsDataBase.Count);
+            CollectionAssert.AreEqual(devsExpected, devsDataBase, new UserComparer());
+        }
+
     }
 }

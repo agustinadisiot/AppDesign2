@@ -10,5 +10,6 @@ namespace RepositoryInterfaces
         List<Bug> GetBugsByStatus(int idTester, bool filter);
         List<Bug> GetBugsByName(int idTester, string filter);
         List<Bug> GetBugsByProject(int idTester, int filter);
+        List<Tester> GetAllTesters();
     }
 }

@@ -105,5 +105,43 @@ namespace TestDeveloperBusinessLogic
 
             Assert.IsFalse(isRole);
         }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            List<DeveloperDTO> devsExpected = new List<DeveloperDTO>()
+            {
+                new DeveloperDTO(){
+                    Id = 3,
+                    Username = "juana",
+                Name = "Juana",
+                Lastname = "López",
+                Password = "Juana1223#@",
+                Email = "juana.perez@gmail.com",
+                BugsResolved = 0,
+                Cost = 3
+                },
+                new DeveloperDTO(){
+                    Id = 4,
+                Username = "juana",
+                Name = "Juana",
+                Lastname = "López",
+                Password = "Juana1223#@",
+                Email = "juana.perez@gmail.com",
+                BugsResolved = 0,
+                Cost = 6
+                }
+            };
+
+
+            var mock = new Mock<IDeveloperDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetAllDevs()).Returns(devsExpected.ConvertAll(p => p.ConvertToDomain()));
+            mock.Setup(b => b.GetQuantityBugsResolved(It.IsAny<int>())).Returns(0);
+            var devBusinessLogic = new DeveloperBusinessLogic(mock.Object);
+
+            var result = devBusinessLogic.GetAllDevs();
+
+            Assert.IsTrue(devsExpected.SequenceEqual(result));
+        }
     }
 }

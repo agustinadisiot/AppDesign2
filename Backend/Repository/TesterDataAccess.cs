@@ -21,6 +21,11 @@ namespace Repository
             users = testers;
         }
 
+        public List<Tester> GetAllTesters()
+        {
+            return testers.ToList();
+        }
+
         public List<Bug> GetBugsByName(int idTester, string filter)
         {
             Tester tester = testers.FirstOrDefault(t => t.Id == idTester);
@@ -41,7 +46,7 @@ namespace Repository
 
         public List<Bug> GetBugsByProject(int idTester, int filter)
         {
-            Tester tester = testers.FirstOrDefault(t => t.Id == idTester);
+            Tester tester = testers.Include("Projects").FirstOrDefault(t => t.Id == idTester);
             List<Bug> filteredBugs = new List<Bug>();
             foreach (Project project in tester.Projects)
             {

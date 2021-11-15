@@ -10,6 +10,7 @@ namespace BusinessLogicInterfaces
         List<BugDTO> GetBugsByName(int idTester, string filter);
         List<BugDTO> GetBugsByProject(int idTester, int filter);
         TesterDTO Add(TesterDTO newTester);
+        List<TesterDTO> GetAllTesters();
     }
 }
 

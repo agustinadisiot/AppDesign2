@@ -123,6 +123,40 @@ namespace TestWebApi
             mock.VerifyAll();
             Assert.IsTrue(bugsExpected.SequenceEqual(bugsResult));
         }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            List<TesterDTO> testersExpected = new List<TesterDTO>()
+            {
+                new TesterDTO(){
+                    Username = "juana",
+                Name = "Juana",
+                Lastname = "López",
+                Password = "Juana1223#@",
+                Email = "juana.perez@gmail.com",
+                },
+                new TesterDTO(){
+                Username = "juana",
+                Name = "Juana",
+                Lastname = "López",
+                Password = "Juana1223#@",
+                Email = "juana.perez@gmail.com"
+                }
+            };
+
+
+            var mock = new Mock<ITesterBusinessLogic>(MockBehavior.Strict);
+            mock.Setup(b => b.GetAllTesters()).Returns(testersExpected);
+            var controller = new TesterController(mock.Object);
+
+            var result = controller.GetAllTesters();
+            var okResult = result as OkObjectResult;
+            var testersResult = okResult.Value as IEnumerable<TesterDTO>;
+
+            mock.VerifyAll();
+            CollectionAssert.AreEqual(testersExpected, (System.Collections.ICollection)testersResult, new UserComparer());
+        }
     }
 };
 

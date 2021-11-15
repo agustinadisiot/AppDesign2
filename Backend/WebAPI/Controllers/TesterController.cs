@@ -45,5 +45,12 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetBugsByProject(idTester, filter));
 
         }
+
+        [AuthorizationFilter("Admin")]
+        [HttpGet]
+        public object GetAllTesters()
+        {
+            return Ok(businessLogic.GetAllTesters());
+        }
     }
 }
