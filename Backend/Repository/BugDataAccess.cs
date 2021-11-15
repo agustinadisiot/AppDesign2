@@ -53,7 +53,7 @@ namespace Repository
             Bug bug;
             try
             {
-                bug = bugs.First(bug => bug.Id == id);
+                bug = bugs.Include("Project").First(bug => bug.Id == id);
             }
             catch (InvalidOperationException e)
             {

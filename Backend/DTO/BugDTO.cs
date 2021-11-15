@@ -12,7 +12,7 @@ namespace DTO
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
         public int Id { get; set; }
-        public int CompletedById { get; set; }
+        public int? CompletedById { get; set; }
         public bool IsActive { get; set; }
         public string CompletedByUsername { get; set; }
 
@@ -22,11 +22,11 @@ namespace DTO
             Description = bug.Description;
             Version = bug.Version;
             Time = bug.Time;
-            ProjectId = bug.Project.Id;
+            ProjectId = bug.ProjectId;
             ProjectName = bug.Project.Name;
             Id = bug.Id;
             IsActive = bug.IsActive;
-            CompletedById = (int)bug.CompletedById;
+            CompletedById = bug.CompletedById;
             if(bug.CompletedBy != null) { CompletedByUsername = bug.CompletedBy.Username; }
         }
 

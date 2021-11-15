@@ -46,7 +46,7 @@ namespace Repository
 
         public List<Bug> GetBugsByProject(int idTester, int filter)
         {
-            Tester tester = testers.FirstOrDefault(t => t.Id == idTester);
+            Tester tester = testers.Include("Projects").FirstOrDefault(t => t.Id == idTester);
             List<Bug> filteredBugs = new List<Bug>();
             foreach (Project project in tester.Projects)
             {
