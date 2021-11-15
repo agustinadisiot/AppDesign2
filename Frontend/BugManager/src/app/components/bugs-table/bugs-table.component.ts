@@ -17,6 +17,7 @@ export class BugsTableComponent implements OnInit {
   @Input() buttonsActions: Map<string, ButtonAction>;
 
   bugsColumn: Column[] = [
+    { header: "No.", property: "id", display: Display.id, type: ColumnType.Object },
     { header: "Name", property: "name", display: Display.id, type: ColumnType.Object },
     { header: "Description", property: "description", display: Display.id, type: ColumnType.Object },
     { header: "Project", property: "projectName", display: Display.id, type: ColumnType.Object },
