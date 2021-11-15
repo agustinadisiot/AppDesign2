@@ -1,7 +1,6 @@
 ﻿using BugParser;
 using CustomBugImportation;
 using CustomBugImporter;
-using Domain;
 using Domain.Utils;
 using DTO;
 using System.Collections.Generic;

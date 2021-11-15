@@ -1,18 +1,13 @@
-﻿using BusinessLogic;
-using BusinessLogicInterfaces;
+﻿using BusinessLogicInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebApi.Controllers;
 using WebApi.Filters;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace TestWebApi
 {

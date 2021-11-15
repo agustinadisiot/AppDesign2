@@ -1,16 +1,10 @@
-using BusinessLogic;
 using BusinessLogicInterfaces;
 using Domain.Utils;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Authentication;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Domain;
-using DTO;
+using System;
 
 namespace WebApi.Filters
 {
@@ -33,13 +27,13 @@ namespace WebApi.Filters
                 NotLoggedRespond(context);
                 return;
             }
-            
+
             var loginLogic = context.HttpContext.RequestServices.GetService<ILoginBusinessLogic>();
             TokenIdDTO tokenIdDTO = loginLogic.GetIdRoleFromToken(token);
             context.HttpContext.Items.Add("role", tokenIdDTO.Role);
             context.HttpContext.Items.Add("userId", tokenIdDTO.Id);
 
-            if (arg.Contains("Admin")) 
+            if (arg.Contains("Admin"))
                 isAuthorize = isAuthorize || tokenIdDTO.Role == Roles.Admin;
 
             if (arg.Contains("Developer"))

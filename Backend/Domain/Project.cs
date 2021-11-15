@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Domain
 {
@@ -28,10 +27,10 @@ namespace Domain
 
         public void Validate()
         {
-            if(this.Name == null ||
+            if (this.Name == null ||
                 this.Testers == null ||
                 this.Developers == null ||
-                this.Bugs == null||
+                this.Bugs == null ||
                 this.Works == null)
             {
                 throw new ValidationException();

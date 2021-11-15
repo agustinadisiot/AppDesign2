@@ -1,13 +1,8 @@
-﻿using BusinessLogic;
-using BusinessLogicInterfaces;
-using Domain;
+﻿using Domain;
 using Domain.Utils;
 using DTO;
 using Microsoft.EntityFrameworkCore;
-using Repository.Design;
 using RepositoryInterfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Repository
@@ -55,13 +50,15 @@ namespace Repository
         public string VerifyUser(string username, string password)
         {
             string role = null;
-            if(context.Admins.Any(u => u.Username == username && u.Password == password))
+            if (context.Admins.Any(u => u.Username == username && u.Password == password))
             {
                 role = Roles.Admin;
-            }else if(context.Developer.Any(u => u.Username == username && u.Password == password))
+            }
+            else if (context.Developer.Any(u => u.Username == username && u.Password == password))
             {
                 role = Roles.Dev;
-            }else if(context.Tester.Any(u => u.Username == username && u.Password == password))
+            }
+            else if (context.Tester.Any(u => u.Username == username && u.Password == password))
             {
                 role = Roles.Tester;
             }

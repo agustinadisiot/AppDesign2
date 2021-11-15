@@ -1,10 +1,10 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Domain;
 using BusinessLogic;
-using RepositoryInterfaces;
-using Moq;
-using System.Security.Authentication;
+using Domain;
 using DTO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using RepositoryInterfaces;
+using System.Security.Authentication;
 
 namespace TestLoginBusinessLogic
 {
@@ -52,7 +52,7 @@ namespace TestLoginBusinessLogic
         [TestMethod]
         public void LoginTokenDifferentEachLoginDifferentAccounts()
         {
-            string role = "admin"; 
+            string role = "admin";
             string role2 = "dev";
             var mock = new Mock<ILoginDataAccess>(MockBehavior.Strict);
 

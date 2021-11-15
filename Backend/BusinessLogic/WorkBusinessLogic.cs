@@ -1,7 +1,6 @@
 ﻿using Domain;
 using DTO;
 using RepositoryInterfaces;
-using System;
 using System.Collections.Generic;
 
 namespace BusinessLogic
@@ -30,7 +29,7 @@ namespace BusinessLogic
 
         public List<WorkDTO> GetAll(string token)
         {
-            return WorkDataAccess.GetAll(token).ConvertAll(w=> new WorkDTO(w));
+            return WorkDataAccess.GetAll(token).ConvertAll(w => new WorkDTO(w));
         }
     }
 }

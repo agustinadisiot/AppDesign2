@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Domain
+﻿namespace Domain
 {
     public class Work
     {
@@ -19,7 +17,7 @@ namespace Domain
                                 this.ProjectName == null;
             if (this.Name == null ||
                 this.Time == 0 ||
-                this.Cost == 0 || 
+                this.Cost == 0 ||
                 hasNoProject)
             {
                 throw new ValidationException();

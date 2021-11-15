@@ -99,6 +99,15 @@ namespace TestDTO
         }
 
         [TestMethod]
+        public void BugsResolvedGetSet()
+        {
+            developerDTO.BugsResolved = 4;
+            int expected = 4;
+            Assert.AreEqual(expected, developerDTO.BugsResolved);
+        }
+
+
+        [TestMethod]
         public void FromDevToDTO()
         {
             Developer dev = new Developer()

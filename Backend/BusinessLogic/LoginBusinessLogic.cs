@@ -23,9 +23,10 @@ namespace BusinessLogic
                 throw new AuthenticationException();
 
             string token = Guid.NewGuid().ToString();
-            LoginToken tokenSave = new LoginToken { 
+            LoginToken tokenSave = new LoginToken
+            {
                 Token = token,
-                Username = username 
+                Username = username
             };
             loginDataAccess.SaveLogin(tokenSave);
 

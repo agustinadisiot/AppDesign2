@@ -1,4 +1,3 @@
-using BusinessLogic;
 using BusinessLogicInterfaces;
 using CustomBugImportation;
 using CustomBugImporter;
@@ -6,10 +5,7 @@ using Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Authentication;
-using System.Threading.Tasks;
 
 namespace WebApi.Filters
 {

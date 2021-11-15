@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using BusinessLogic;
-using Domain;
+﻿using Domain;
 using Domain.Utils;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repository;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
 
 namespace TestDataAccess
 {
@@ -53,7 +52,7 @@ namespace TestDataAccess
         }
 
         [TestMethod]
-        public void GetAll()
+        public void AdminGetAll()
         {
             string token = "sdfg-uytr-fds-dsdf";
             string username = "jose";
@@ -96,6 +95,130 @@ namespace TestDataAccess
                 Name = "a",
                 Description = "a",
                 ProjectId = 1,
+                Version = "1.0",
+                IsActive = true
+            });
+            bugManagerContext.SaveChanges();
+            List<Bug> bugDataBase = bugDataAccess.GetAll(token).ToList();
+
+            Assert.AreEqual(1, bugDataBase.Count);
+            CollectionAssert.AreEqual(bugsExpected, bugDataBase, new BugComparer());
+        }
+
+        [TestMethod]
+        public void DevGetAll()
+        {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Developer dev = new Developer()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            Project proj = new Project()
+            {
+                Id = 24,
+                Name = "Project",
+                Developers = { dev },
+            };
+
+            bugManagerContext.Add(proj);
+            bugManagerContext.Add(dev);
+            loginDataAccess.SaveLogin(loginToken);
+
+            var bugsExpected = new List<Bug>
+            {
+                new Bug
+                {
+                    Id = 1,
+                    Name = "a",
+                    Description = "a",
+                    ProjectId = 24,
+                    Version = "1.0",
+                    IsActive = true
+        }
+    };
+            bugManagerContext.Add(new Bug
+            {
+                Id = 1,
+                Name = "a",
+                Description = "a",
+                ProjectId = 24,
+                Version = "1.0",
+                IsActive = true
+            });
+            bugManagerContext.SaveChanges();
+            List<Bug> bugDataBase = bugDataAccess.GetAll(token).ToList();
+
+            Assert.AreEqual(1, bugDataBase.Count);
+            CollectionAssert.AreEqual(bugsExpected, bugDataBase, new BugComparer());
+        }
+
+        [TestMethod]
+        public void TesterGetAll()
+        {
+            string token = "sdfg-uytr-fds-dsdf";
+            string username = "jose";
+            int id = 3;
+
+            Tester tester = new Tester()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            Project proj = new Project()
+            {
+                Id = 26,
+                Name = "Project",
+                Testers = { tester },
+            };
+
+            bugManagerContext.Add(proj);
+            bugManagerContext.Add(tester);
+            loginDataAccess.SaveLogin(loginToken);
+
+            var bugsExpected = new List<Bug>
+            {
+                new Bug
+                {
+                    Id = 1,
+                    Name = "a",
+                    Description = "a",
+                    ProjectId = 26,
+                    Version = "1.0",
+                    IsActive = true
+        }
+    };
+            bugManagerContext.Add(new Bug
+            {
+                Id = 1,
+                Name = "a",
+                Description = "a",
+                ProjectId = 26,
                 Version = "1.0",
                 IsActive = true
             });
@@ -362,7 +485,7 @@ namespace TestDataAccess
 
             Bug bug = bugDataAccess.Create(new Bug
             {
-                
+
                 Id = 2,
                 Name = "b",
                 Description = "a",
@@ -439,7 +562,7 @@ namespace TestDataAccess
                 Version = "1.0",
                 IsActive = false,
                 CompletedById = id
-               
+
             });
 
             var bugUpdated = new Bug

@@ -17,7 +17,7 @@ namespace Domain.Utils
                         workExpected.Cost == workReturned.Cost &&
                         workExpected.Time == workReturned.Time;
 
-                return equals ? 0 : -1;
+            return equals ? 0 : -1;
         }
     }
 }

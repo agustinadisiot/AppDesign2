@@ -1,6 +1,5 @@
 ﻿using BusinessLogicInterfaces;
 using CustomBugImportation;
-using Domain;
 using Domain.Utils;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -89,9 +88,9 @@ namespace WebApi.Controllers
         [HttpPost("custom-importers")]
         public object ImportBugsCustom([FromBody] ImporterInfo importerInfo)
         {
-           businessLogic.ImportBugsCustom(importerInfo.ImporterName, importerInfo.Params);
-           return Ok();
+            businessLogic.ImportBugsCustom(importerInfo.ImporterName, importerInfo.Params);
+            return Ok();
         }
-        
+
     }
 }

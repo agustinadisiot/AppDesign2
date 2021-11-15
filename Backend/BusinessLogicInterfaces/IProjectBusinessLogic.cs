@@ -1,5 +1,4 @@
-﻿using Domain;
-using DTO;
+﻿using DTO;
 using System.Collections.Generic;
 
 namespace BusinessLogicInterfaces

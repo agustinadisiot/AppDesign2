@@ -1,5 +1,4 @@
 ﻿using CustomBugImportation;
-using CustomBugImporter;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

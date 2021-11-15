@@ -2,7 +2,6 @@
 using Domain.Utils;
 using DTO;
 using Microsoft.EntityFrameworkCore;
-using Repository;
 using RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
@@ -27,21 +26,11 @@ namespace Repository
             {
                 throw new NonexistentWorkException();
             }
-            AddProjectIdToWork(work);
 
             context.Add(work);
             context.SaveChanges();
 
             return work;
-        }
-
-        private void AddProjectIdToWork(Work work)
-        {
-            if ((work.ProjectId == 0) && (work.ProjectName != null))
-            {
-                Project worksProject = context.Projects.First(p => p.Name == work.ProjectName);
-                work.ProjectId = worksProject.Id;
-            }
         }
 
         public Work GetById(int id)

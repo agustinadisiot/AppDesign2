@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
-using BusinessLogic;
 using BusinessLogicInterfaces;
 using Domain.Utils;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 using WebApi.Controllers;
 
 
@@ -44,7 +42,7 @@ namespace TestWebApi
             mock.Setup(b => b.GetAll(token)).Returns(bugsExpected);
             var controller = new BugController(mock.Object);
 
-            var result = controller.GetAll(token); 
+            var result = controller.GetAll(token);
             var okResult = result as OkObjectResult;
             var bugsResult = okResult.Value as IEnumerable<BugDTO>;
 

@@ -1,7 +1,6 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain;
-using System.Collections.Generic;
 using Domain.Utils;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDomain
 {
@@ -213,10 +212,11 @@ namespace TestDomain
         [TestMethod]
         public void IsValidBug()
         {
-            try {
+            try
+            {
                 bug.Validate();
             }
-            catch(ValidationException e)
+            catch (ValidationException e)
             {
                 Assert.Fail("Expected ValidationException but instead threw" + e.Message);
             }

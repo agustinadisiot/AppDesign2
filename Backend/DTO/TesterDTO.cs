@@ -1,6 +1,4 @@
 ﻿using Domain;
-using DTO;
-using System;
 using System.Collections.Generic;
 
 namespace DTO
@@ -23,7 +21,7 @@ namespace DTO
             Password = tester.Password;
             Email = tester.Email;
             Cost = tester.Cost;
-            ProjectsDTO = tester.Projects.ConvertAll(p=>new ProjectDTO(p));
+            ProjectsDTO = tester.Projects.ConvertAll(p => new ProjectDTO(p));
         }
 
         public int Id { get; set; }

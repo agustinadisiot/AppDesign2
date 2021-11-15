@@ -1,5 +1,4 @@
-﻿using BusinessLogic;
-using BusinessLogicInterfaces;
+﻿using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
 using Microsoft.Data.Sqlite;
@@ -45,7 +44,7 @@ namespace TestDataAccess
         }
 
         [TestMethod]
-        public void GetAll()
+        public void AdminGetAll()
         {
             string token = "sdfg-uytr-fds-dsdf";
             string username = "jose";
@@ -89,13 +88,121 @@ namespace TestDataAccess
                 Developers = new List<Developer>(),
                 Bugs = new List<Bug>(),
                 Works = new List<Work>()
-            }); 
+            });
             bugManagerContext.SaveChanges();
             List<Project> projectDataBase = projectDataAccess.GetAll(token).ToList();
 
             Assert.AreEqual(1, projectDataBase.Count);
             CollectionAssert.AreEqual(projectsExpected, projectDataBase, new ProjectComparer());
         }
+
+
+        [TestMethod]
+        public void DevGetAll()
+        {
+            string token = "sdfg-uytr-fds-ds";
+            string username = "jose";
+            int id = 3;
+
+            Developer dev = new Developer()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(dev);
+            loginDataAccess.SaveLogin(loginToken);
+
+            var projectsExpected = new List<Project>
+            {
+                new Project
+                {
+                    Id = 1,
+                    Name = "a",
+                    Testers = new List<Tester>(),
+                    Developers = {dev },
+                    Bugs = new List<Bug>(),
+                }
+             };
+            bugManagerContext.Add(new Project
+            {
+                Id = 1,
+                Name = "a",
+                Testers = new List<Tester>(),
+                Developers = { dev },
+                Bugs = new List<Bug>(),
+                Works = new List<Work>()
+            });
+            bugManagerContext.SaveChanges();
+            List<Project> projectDataBase = projectDataAccess.GetAll(token).ToList();
+
+            Assert.AreEqual(1, projectDataBase.Count);
+            CollectionAssert.AreEqual(projectsExpected, projectDataBase, new ProjectComparer());
+        }
+
+        [TestMethod]
+        public void TesterGetAll()
+        {
+            string token = "sdfg-uytr-fds-ds";
+            string username = "jose";
+            int id = 3;
+
+            Tester tester = new Tester()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            bugManagerContext.Add(tester);
+            loginDataAccess.SaveLogin(loginToken);
+
+            var projectsExpected = new List<Project>
+            {
+                new Project
+                {
+                    Id = 1,
+                    Name = "a",
+                    Testers = {tester },
+                    Developers = new List<Developer>(),
+                    Bugs = new List<Bug>(),
+                }
+             };
+            bugManagerContext.Add(new Project
+            {
+                Id = 1,
+                Name = "a",
+                Testers = { tester },
+                Developers = new List<Developer>(),
+                Bugs = new List<Bug>(),
+                Works = new List<Work>()
+            });
+            bugManagerContext.SaveChanges();
+            List<Project> projectDataBase = projectDataAccess.GetAll(token).ToList();
+
+            Assert.AreEqual(1, projectDataBase.Count);
+            CollectionAssert.AreEqual(projectsExpected, projectDataBase, new ProjectComparer());
+        }
+
 
         [TestMethod]
         public void Update()
@@ -657,9 +764,9 @@ namespace TestDataAccess
                         Cost = 3
                     }
                 },
-                Developers = new List<Developer>() { 
+                Developers = new List<Developer>() {
                     new Developer()
-                    { 
+                    {
                         Id = 5,
                             Name = "Agustina",
                             Lastname = "didios",
