@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDomain", "TestDomain\Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{5FD942F9-89C3-415A-8B8F-D71A35B37AE7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBusinessLogic", "TestBusinessLogic\TestBusinessLogic.csproj", "{546707BE-842F-41EB-BE91-A790AA8C7B1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBusinessLogic", "BugBusinessLogicTest\TestBusinessLogic.csproj", "{546707BE-842F-41EB-BE91-A790AA8C7B1C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApi", "TestWebApi\TestWebApi.csproj", "{63A26FCA-0FFC-4CD8-B724-E0FAF36156C8}"
 EndProject
