@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Repository;
 using RepositoryInterfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Repository
@@ -54,6 +55,11 @@ namespace Repository
                 throw new NonexistentWorkException();
             }
             return work;
+        }
+
+        public List<Work> GetAll(string token)
+        {
+            throw new NotImplementedException();
         }
     }
 }
