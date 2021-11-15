@@ -13,14 +13,14 @@ import { Role } from './model/Role';
 })
 export class CreateUserComponent implements OnInit {
   showCancelButton = false;
-  hidePassword = true;
   loading = false;
-  user: User = { username: '', name: '', lastname: '', email: '', password: '', id: 0 }
   infoMessage: InfoMessage = { error: true, text: '' };
+  user: User = { username: '', name: '', lastname: '', email: '', password: '', id: 0 }
+  hidePassword = true;
   roles: Role[] = [
     { value: "admin", viewValue: "Admin" },
     { value: "tester", viewValue: "Tester" },
-    { value: "dev", viewValue: "Developer" }, // TODO chequear si es dev o develoepr
+    { value: "dev", viewValue: "Developer" },
   ]
   role: string = this.roles[0].value;
 

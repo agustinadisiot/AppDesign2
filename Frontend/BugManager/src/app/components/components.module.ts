@@ -12,6 +12,7 @@ import { ProjectsComponent } from './admin/projects/projects.component';
 import { DevsScoreboardComponent } from './admin/devs-scoreboard/devs-scoreboard.component';
 import { GenericFormComponent } from './generic-form/generic-form.component';
 import { CreateUserComponent } from './admin/create-user/create-user.component';
+import { ClassicImportComponent } from './admin/classic-import/classic-import.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { CreateUserComponent } from './admin/create-user/create-user.component';
     DevsScoreboardComponent,
     GenericFormComponent,
     CreateUserComponent,
+    ClassicImportComponent,
   ],
   exports: [
     MessageComponent,

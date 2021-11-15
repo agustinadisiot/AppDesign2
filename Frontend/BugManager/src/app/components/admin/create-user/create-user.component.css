@@ -1,20 +1,14 @@
-#centerFormDiv{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 50%;
-}
-
-form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .full-width {
-  width: 100%;
+  display: block;
+  width: 95%;
+  margin: 0 auto;
 }
 
+/* TODO eliminar 
 p{
-  font-size: 0; /* TODO eliminar del html si no las dejamos */
-}
+  margin: 0 auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  width: 95%;
+  font-size: 0; 
+} */
