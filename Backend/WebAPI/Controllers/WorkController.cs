@@ -1,7 +1,9 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
@@ -16,8 +18,9 @@ namespace WebApi.Controllers
             businessLogic = newbusinessLogic;
         }
 
+        [AuthorizationFilter("Admin/Tester")]
         [HttpPost]
-        public object Post(Work workExpected)
+        public object Post(WorkDTO workExpected)
         {
             return Ok(businessLogic.Add(workExpected));
 
@@ -27,6 +30,13 @@ namespace WebApi.Controllers
         public object Get([FromRoute] int id)
         {
             return Ok(businessLogic.GetById(id));
+        }
+
+
+        [HttpGet]
+        public object GetAll(string token)
+        {
+            return Ok(businessLogic.GetAll(token));
         }
     }
 }

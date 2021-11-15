@@ -1,5 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
+using Domain.Utils;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -20,8 +22,7 @@ namespace TestWebApi
                 Cost = 2,
                 Time = 4,
                 Id = 3,
-                ProjectId = 2,
-                Id = 3
+                ProjectId = 2
             };
 
             var mock = new Mock<IWorkBusinessLogic>(MockBehavior.Strict);
