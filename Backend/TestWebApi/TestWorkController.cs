@@ -14,11 +14,13 @@ namespace TestWebApi
         [TestMethod]
         public void Create()
         {
-            Work workExpected = new Work()
+            WorkDTO workExpected = new WorkDTO()
             {
                 Name = "implement menu",
                 Cost = 2,
                 Time = 4,
+                Id = 3,
+                ProjectId = 2,
                 Id = 3
             };
 
@@ -28,7 +30,7 @@ namespace TestWebApi
 
             var result = controller.Post(workExpected);
             var okResult = result as OkObjectResult;
-            var workResult = okResult.Value as Work;
+            var workResult = okResult.Value as WorkDTO;
 
             mock.VerifyAll();
             Assert.AreEqual(workExpected, workResult);
