@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using Domain;
+using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RepositoryInterfaces;
@@ -84,6 +85,66 @@ namespace TestBusinessLogic
             Assert.ThrowsException<ValidationException>(() => workBusinessLogic.Add(invalidWork));
             mock.Verify(m => m.Create(invalidWork), Times.Never);
 
+        }
+
+        [TestMethod]
+        public void GetAll()
+        {
+            List<Work> worksExpected = new List<Work>()
+            {
+                new Work()
+                {
+                     Id = 0,
+                Name = "work1",
+                Cost = 3,
+                ProjectId = 3,
+                ProjectName = "project",
+                Time = 3,
+                Project = new Project()
+                {
+                    Id = 3,
+                    Name = "project"
+                }
+                },
+                new Work()
+                {
+                    Id = 1,
+                Name = "work",
+                Cost = 4,
+                ProjectId = 3,
+                ProjectName = "project",
+                Time = 3,
+                Project = new Project()
+                {
+                    Id = 3,
+                    Name = "project"
+                }
+                },
+                 new Work()
+                {
+                    Id = 2,
+                Name = "Bug1",
+                Cost = 7,
+                ProjectId = 4,
+                 ProjectName = "project",
+                Time = 3,
+                Project = new Project()
+                {
+                    Id = 4,
+                    Name = "project"
+                }
+                },
+            };
+
+            string token = "dfgh-fgh-fds";
+
+            var mock = new Mock<IWorkDataAccess>(MockBehavior.Strict);
+            mock.Setup(b => b.GetAll(token)).Returns(worksExpected);
+            var workBusinessLogic = new WorkBusinessLogic(mock.Object);
+
+            var result = workBusinessLogic.GetAll(token);
+
+            Assert.IsTrue(worksExpected.ConvertAll(b => new WorkDTO(b)).SequenceEqual(result));
         }
     }
 }
