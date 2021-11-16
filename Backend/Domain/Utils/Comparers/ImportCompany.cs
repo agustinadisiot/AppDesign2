@@ -2,6 +2,7 @@
 {
     public enum ImportCompany
     {
-        XML = 0
+        XML = 0,
+        WrongFormat = -1
     }
 }
