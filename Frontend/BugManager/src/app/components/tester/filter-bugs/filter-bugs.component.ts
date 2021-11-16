@@ -17,6 +17,7 @@ interface Filters {
 export class FilterBugsComponent implements OnInit {
 
   dataSource: Bug[];
+  allBugs: Bug[];
   filteredBugs: Bug[];
 
   filters: Filters = {};
@@ -39,48 +40,20 @@ export class FilterBugsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.dataSource = this.bugsServices.getBugs(); TODO
-    this.dataSource = [{
-      name: "Bug1 Tester",
-      description: "Descripcion bug1",
-      version: "1.0",
-      time: 12,
-      projectId: 3,
-      projectName: "nombre del proyecto",
-      id: 1,
-      isActive: true,
-    }, {
-      name: "Bug 2",
-      description: "Descripcion bug2",
-      version: "3.4",
-      time: 9999,
-      projectId: 2,
-      projectName: "Nombre del proyecto 2",
-      id: 2,
-      isActive: false,
-      completedById: 2,
-      completedByName: "Juancito"
-    }, {
-      name: "nombre",
-      description: "Descripcion bug2",
-      version: "3.4",
-      time: 9999,
-      projectId: 2,
-      projectName: "Nombre del proyecto 2",
-      id: 2,
-      isActive: false,
-      completedById: 2,
-      completedByName: "Juancito"
-    },
-    ];
-    this.filteredBugs = this.dataSource;
+  }
+
+  sendBugs(dataSource) {
+    console.log(dataSource)
+    console.log("sdf")
+    this.allBugs = dataSource;
+    this.filteredBugs = this.allBugs;
   }
 
   applyFilter() {
     let tempFilteredBug: Bug[] = [];
-    tempFilteredBug = this.dataSource;
+    tempFilteredBug = this.allBugs;
     if (this.filters.id != undefined)
-      tempFilteredBug = this.dataSource.filter(b => b.id == this.filters.id);
+      tempFilteredBug = this.filteredBugs.filter(b => b.id == this.filters.id);
 
     tempFilteredBug = tempFilteredBug.filter(b => b.projectName.toLowerCase().includes(this.filters.projectName?.toLowerCase() || ""));
     tempFilteredBug = tempFilteredBug.filter(b => b.name.toLowerCase().includes(this.filters.bugName?.toLowerCase() || ""));
@@ -88,7 +61,7 @@ export class FilterBugsComponent implements OnInit {
     if (this.filters.status != undefined)
       tempFilteredBug = tempFilteredBug.filter(b => b.isActive == this.filters.status);
 
-    this.filteredBugs = tempFilteredBug;
+    this.dataSource = tempFilteredBug;
   }
 
   clearFilter() {

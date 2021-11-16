@@ -10,11 +10,19 @@ import { HttpErrorHandler } from './error-handler';
 })
 export class BugsService {
   endpoint = `${environment.webApi_origin}/bugs`;
+  options = { headers: { 'token': '', 'path': '' } };
 
   constructor(private http: HttpClient) { }
 
   getBugs(): any {
-    return this.http.get<Bug[]>(this.endpoint).pipe(catchError(HttpErrorHandler.handleError));
+    this.options.headers.token = localStorage.getItem('token') || '';
+    console.log(this.options.headers)
+    return this.http.get<Bug[]>(this.endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  getBug(id: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.get<Bug>(`${this.endpoint}/${id}`, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
 }

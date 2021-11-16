@@ -29,29 +29,7 @@ export class DevsScoreboardComponent implements OnInit {
   constructor(private devService: DeveloperService) { }
 
   ngOnInit(): void {
-    //this.dataSource = this.devService.getDevelopers(); TODO
-    this.dataSource = [
-      {
-        id: 1,
-        username: "pepe123",
-        name: "Juan",
-        lastname: "González",
-        email: "gonza@gmail.com",
-        cost: 12,
-        bugsResolved: 9,
-        password: ""
-      },
-      {
-        id: 2,
-        username: "asdf",
-        name: "asdf",
-        lastname: "asdf",
-        email: "gonza@sdfail.com",
-        cost: 111,
-        bugsResolved: 999,
-        password: ""
-      },
-    ];
+    this.dataSource = this.devService.getDevelopers(); // TODO subscribe
   }
 
 }

@@ -10,11 +10,13 @@ import { HttpErrorHandler } from './error-handler';
 })
 export class DeveloperService {
   endpoint = `${environment.webApi_origin}/devs`;
+  options = { headers: { 'token': '', 'path': '' } };
 
   constructor(private http: HttpClient) { }
 
   getDevelopers(): any {
-    return this.http.get<Developer[]>(this.endpoint).pipe(catchError(HttpErrorHandler.handleError));
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.get<Developer[]>(this.endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
 }

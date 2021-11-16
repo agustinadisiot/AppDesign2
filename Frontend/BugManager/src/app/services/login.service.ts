@@ -14,7 +14,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(credentials: UserCredentials): any { // 
+  login(credentials: UserCredentials): any {
     return this.http.post<LoginResponse>(this.endpoint, credentials).pipe(catchError(HttpErrorHandler.handleError));
   }
 }

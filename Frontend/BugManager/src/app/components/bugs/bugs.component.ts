@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bug } from 'src/app/models/Bug';
 import { BugsService } from 'src/app/services/bug.service';
@@ -15,11 +15,13 @@ import { ColumnType } from '../generic-table/models/columnTypes';
 export class BugsComponent implements OnInit {
 
   @Input() dataSource: Bug[];
+  @Output() sendBugs = new EventEmitter<any>();
+
   buttonsColumns: Column[] = [
     { header: "Edit", property: "edit", display: Display.id, type: ColumnType.Button },
     { header: "Delete", property: "delete", display: Display.id, type: ColumnType.Button },
   ]
-  constructor(private router: Router, private r: ActivatedRoute, private bugsServices: BugsService) { }
+  constructor(private router: Router, private r: ActivatedRoute) { }
 
   buttonsActions = new Map<string, ButtonAction>([
     ["edit", { text: "Edit", onClick: (b) => { this.editBug(b) }, color: () => "primary" }],
@@ -36,6 +38,9 @@ export class BugsComponent implements OnInit {
     // TODO
   }
 
+  sendBugToNextTable(bugs) {
+    this.sendBugs.emit(bugs)
+  }
   ngOnInit(): void {
   }
 

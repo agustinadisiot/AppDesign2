@@ -29,4 +29,5 @@
   </button>
 </form>
 
-<app-bugs [dataSource]="filteredBugs"></app-bugs>
+<app-bugs [dataSource]="dataSource" (sendBugs)="sendBugs($event)">
+</app-bugs>

@@ -8,5 +8,5 @@ export interface Bug {
   id?: number;
   completedById?: number;
   isActive: boolean;
-  completedByName?: string;
+  completedByUsername?: string;
 }
