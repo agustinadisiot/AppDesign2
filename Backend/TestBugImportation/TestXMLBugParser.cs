@@ -2,6 +2,7 @@ using BugParser;
 using Domain;
 using Domain.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -134,6 +135,31 @@ namespace TestBugParser
 
         }
 
+        [TestMethod]
+        public void BugParser()
+        {
+            ImportCompany xml = ImportCompany.XML;
+            ParserFactory parser = new ParserFactory();
+            IBugParser actual = parser.GetBugParser(xml);
+            Assert.IsTrue(actual is BugParserXML);
+
+        }
+
+        [TestMethod]
+        public void BugParserException()
+        {
+            try
+            {
+                ImportCompany wrongFormat = ImportCompany.WrongFormat;
+                ParserFactory parser = new ParserFactory();
+                IBugParser actual = parser.GetBugParser(wrongFormat);
+            }
+            catch (NotImplementedException e)
+            {
+                string messageExpected = "Bug parsers for this company not available";
+                Assert.AreEqual(e.Message, messageExpected);
+            }
+        }
 
     }
 
