@@ -2,6 +2,7 @@ using BusinessLogicInterfaces;
 using CustomBugImportation;
 using CustomBugImporter;
 using Domain.Utils;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;

@@ -1,6 +1,6 @@
 ﻿
-namespace BusinessLogicInterfaces
-{
+namespace DTO
+{ 
     public class ResponseMessage
     {
         public string responseMessage { get; set; }

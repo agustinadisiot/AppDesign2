@@ -1,6 +1,7 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
+using DTO;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
