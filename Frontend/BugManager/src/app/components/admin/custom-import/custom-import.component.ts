@@ -21,10 +21,7 @@ export class CustomImportComponent implements OnInit {
   form = new FormGroup({});
 
   selectedImporterControl = new FormControl('', Validators.required);
-  importers: ImporterInfo[] = [
-    { importerName: "importer 1", params: [{ name: "path", type: 0 }, { name: "port", type: 1 }] },
-    { importerName: "importer 2", params: [{ name: "File name", type: 0 }] }
-  ];
+  importers: ImporterInfo[] = [];
   importer: ImporterInfo;
   paramTypes = ParamType;
   constructor(private service: CustomImportService) {
@@ -70,8 +67,6 @@ export class CustomImportComponent implements OnInit {
 
   save(): void {
     this.loading = true;
-    console.log(this.importer)
-    console.log(this.importers[1]);
     this.convertValuesToString();
     this.service.importBugs(this.importer).subscribe(
 

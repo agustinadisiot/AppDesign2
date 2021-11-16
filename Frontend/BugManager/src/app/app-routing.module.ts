@@ -25,10 +25,12 @@ const routes: Routes = [
   //   path:'dev',
   //   loadChildren: () => import('./views/dev/dev.module').then(m => m.DevModule)
   // },
-  // {
-  //   path:'tester',
-  //   loadChildren: () => import('./views/tester/tester.module').then(m => m.TesterModule)
-  // },
+  {
+    path: 'tester',
+    canActivate: [AuthorizationGuard],
+    data: { role: 'tester' },
+    loadChildren: () => import('./views/tester/tester.module').then(m => m.TesterModule)
+  },
   {
     path: '404-not-found',
     component: NotFoundComponent
