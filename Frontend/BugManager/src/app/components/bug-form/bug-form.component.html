@@ -5,7 +5,7 @@
     <mat-form-field appearance="fill" class=full-width>
       <mat-label>Choose project</mat-label>
       <mat-select formControlName="project" required [(ngModel)]="selectedProjectId">
-        <mat-option [value]="option.value" *ngFor="let option of projects">{{ option.viewValue }}
+        <mat-option [value]="option.id" *ngFor="let option of projects">{{ option.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -40,12 +40,10 @@
 
     <mat-form-field appearance="fill" class=full-width>
       <mat-label>Resolved by</mat-label>
-      <mat-select [(value)]="dev" [disabled]="bug.isActive">
-        <mat-option [value]="option.value" *ngFor="let option of devs">{{ option.viewValue }}</mat-option>
+      <mat-select [(value)]="selectedDevId" [disabled]="bug.isActive">
+        <mat-option [value]="option.id" *ngFor="let option of devs">{{ option.username }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-
-    <!-- time, project, completedby -->
   </form>
 </app-generic-form>

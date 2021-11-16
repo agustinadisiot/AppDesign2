@@ -13,6 +13,7 @@ import { ColumnType } from '../generic-table/models/columnTypes';
 export class ProjectsTableComponent implements OnInit {
 
   @Input() dataSource: Project[];
+  @Input() loading: boolean;
   @Input() buttonsColumns: Column[];
   @Input() buttonsActions: Map<string, ButtonAction>;
 

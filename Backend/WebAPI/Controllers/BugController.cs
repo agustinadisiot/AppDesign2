@@ -40,6 +40,7 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetById(id));
         }
 
+        [AuthorizationFilter("Admin/Tester")]
         [HttpPut("{id}")]
         public object Update([FromRoute] int id, [FromBody] BugDTO bugModified)
         {

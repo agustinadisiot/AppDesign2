@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  credentials: UserCredentials = { username: '', password: '' } // TODO usar un modelo posta
+  credentials: UserCredentials = { username: '', password: '' }
   hide = true;
   loading = false;
   errorMessage: InfoMessage = { text: "", error: true };

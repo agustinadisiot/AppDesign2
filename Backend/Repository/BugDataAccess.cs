@@ -87,8 +87,7 @@ namespace Repository
             bugToUpdate.CompletedById = bugUpdated.CompletedById;
             bugToUpdate.Description = bugUpdated.Description;
             context.SaveChanges();
-            bugToUpdate.Project = null;
-            return bugToUpdate;
+            return GetById(Id);
         }
 
         public ResponseMessage Delete(int id)

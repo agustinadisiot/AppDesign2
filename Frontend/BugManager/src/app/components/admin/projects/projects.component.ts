@@ -15,7 +15,7 @@ import { Display } from 'src/app/utils/display';
 export class ProjectsComponent implements OnInit {
 
   dataSource: Project[];
-
+  loading = true;
 
   buttonsColumns: Column[] = [
     { header: "Testers", property: "testers", display: Display.id, type: ColumnType.Button },
@@ -53,20 +53,18 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.dataSource = this.projectService.getProjects(); TODO
-    this.dataSource = [
-      {
-        name: "Project1",
-        id: 1,
+    this.loading = true;
+    this.projectService.getProjects().subscribe(
+
+      (response: Project[]) => {
+        this.loading = false;
+        this.dataSource = response;
       },
-      {
-        name: "The Project",
-        id: 2,
-      },
-      {
-        name: "Project X",
-        id: 3,
-      },
-    ];
+
+      error => {
+        this.loading = false;
+        // TODO mostrar error
+      }
+    );
   }
 }

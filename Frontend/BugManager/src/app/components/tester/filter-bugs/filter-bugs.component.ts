@@ -43,8 +43,6 @@ export class FilterBugsComponent implements OnInit {
   }
 
   sendBugs(dataSource) {
-    console.log(dataSource)
-    console.log("sdf")
     this.allBugs = dataSource;
     this.filteredBugs = this.allBugs;
   }
@@ -66,7 +64,7 @@ export class FilterBugsComponent implements OnInit {
 
   clearFilter() {
     this.filters = {};
-    this.filteredBugs = this.dataSource;
+    this.dataSource = this.allBugs;
   }
 
 }

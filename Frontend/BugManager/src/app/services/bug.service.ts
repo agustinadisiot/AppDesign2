@@ -16,13 +16,22 @@ export class BugsService {
 
   getBugs(): any {
     this.options.headers.token = localStorage.getItem('token') || '';
-    console.log(this.options.headers)
     return this.http.get<Bug[]>(this.endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
   getBug(id: number): any {
     this.options.headers.token = localStorage.getItem('token') || '';
     return this.http.get<Bug>(`${this.endpoint}/${id}`, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  createBug(bug: Bug): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.post(this.endpoint, bug, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  editBug(id: number, bug: Bug): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.put(`${this.endpoint}/${id}`, bug, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
 }

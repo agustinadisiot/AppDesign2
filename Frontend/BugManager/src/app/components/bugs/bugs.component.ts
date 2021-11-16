@@ -44,4 +44,7 @@ export class BugsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  createBug() {
+    this.router.navigate(["../bug"], { relativeTo: this.r });
+  }
 }

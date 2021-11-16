@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Bug } from 'src/app/models/Bug';
+import { Developer } from 'src/app/models/Developer';
+import { Project } from 'src/app/models/Project';
+import { BugsService } from 'src/app/services/bug.service';
+import { DeveloperService } from 'src/app/services/developer.service';
+import { ProjectsService } from 'src/app/services/project.service';
 import { Display } from 'src/app/utils/display';
 import { InfoMessage } from '../message/model/message';
 
@@ -11,8 +16,10 @@ import { InfoMessage } from '../message/model/message';
   styleUrls: ['./bug-form.component.css']
 })
 export class BugFormComponent implements OnInit {
-  loading = false;
+  constructor(private route: ActivatedRoute, private projectService: ProjectsService,
+    private devService: DeveloperService, private bugService: BugsService) { }
 
+  loading = false;
   infoMessage: InfoMessage = { error: true, text: '' };
 
   form = new FormGroup({
@@ -24,36 +31,125 @@ export class BugFormComponent implements OnInit {
     isActive: new FormControl('', [Validators.required])
   });
 
-  projects: any[] = [
-    { value: 1, viewValue: "Admin" },
-    { value: 2, viewValue: "Tester" },
-    { value: 3, viewValue: "Developer" }
-  ];
+  projects: Project[] = [];
   selectedProjectId: number;
 
-  devs: any[] = [
-    { value: 1, viewValue: "Admin" },
-    { value: 2, viewValue: "Tester" },
-    { value: 3, viewValue: "Developer" },
-  ]
-  dev: number;
+  devs: Developer[] = []
+  selectedDevId: number;
 
   display = Display.IsActiveAsResolve;
   bug: Bug = { name: '', description: '', version: '', time: 0, projectId: 0, projectName: '', isActive: true }
-  constructor(private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
-    let param1 = this.route.snapshot.queryParams["id"];
-    console.log(param1)
+    this.loadProjects();
+    this.loadDevs();
+    this.loadBug();
+  }
 
-    if (this.projects.length > 0)
-      this.selectedProjectId = this.projects[0].value;
+  loadProjects() {
+    this.projectService.getProjects().subscribe(
 
+      (response: Project[]) => {
+        this.loading = false;
+        this.projects = response;
+        if (this.projects.length == 0)
+          this.infoMessage = { error: true, text: "You don't have any assigned projects yet" };
+        else
+          this.selectedProjectId = this.projects[0].id;
+      },
 
+      error => {
+        this.loading = false;
+        this.infoMessage.error = true;
+        this.infoMessage.text = `Problem loading projects: ${error}`
+      });
+  }
+
+  loadDevs() {
+    this.devService.getDevelopers().subscribe(
+
+      (response: Developer[]) => {
+        this.loading = false;
+        this.devs = response;
+      },
+
+      error => {
+        this.loading = false;
+        this.infoMessage.error = true;
+        this.infoMessage.text = `Problem loading developers: ${error}`
+      });
+  }
+
+  loadBug() {
+    let id = this.route.snapshot.queryParams["id"];
+    if (id == null)
+      return;
+
+    this.bugService.getBug(id).subscribe(
+
+      (response: Bug) => {
+        this.loading = false;
+        this.bug = response;
+        this.selectedDevId = this.bug.completedById || 0;
+      },
+
+      error => {
+        this.loading = false;
+        this.infoMessage.error = true;
+        this.infoMessage.text = `Problem loading bug: ${error}`
+      });
   }
 
   save() {
+    this.loading = true;
+    this.bug.projectId = this.selectedProjectId;
+    this.bug.projectName = this.projects.find(p => p.id == this.selectedProjectId)?.name || "";
+    if (!this.bug.isActive)
+      this.bug.completedById = this.selectedDevId
+    else
+      this.bug.completedById = 0;
+
+    let id = this.route.snapshot.queryParams["id"];
+    if (id == null)
+      this.createBug()
+    else
+      this.editBug(id)
+  }
+
+  createBug() {
+    this.bugService.createBug(this.bug).subscribe(
+
+      (response) => {
+        this.loading = false;
+        this.infoMessage.error = false;
+        this.infoMessage.text = `Bug "${this.bug.name}" added successfully`
+        this.form.reset();
+        this.form.markAsUntouched();
+      },
+
+      error => {
+        this.loading = false;
+        this.infoMessage.error = true;
+        this.infoMessage.text = error
+      });
+
+  }
+
+  editBug(id: number) {
+    this.bugService.editBug(id, this.bug).subscribe(
+
+      (response) => {
+        this.loading = false;
+        this.infoMessage.error = false;
+        this.infoMessage.text = `Bug "${this.bug.name}" edited successfully`
+      },
+
+      error => {
+        this.loading = false;
+        this.infoMessage.error = true;
+        this.infoMessage.text = error
+      });
 
   }
 }

@@ -54,7 +54,7 @@ namespace Repository
         {
             LoginDataAccess loginDataAccess = new LoginDataAccess(context);
             TokenIdDTO idRole = loginDataAccess.GetIdRoleFromToken(token);
-            List<Project> projects = context.Projects.ToList();
+            List<Project> projects = context.Projects.Include(p => p.Testers).Include(p => p.Developers).ToList();
             if (idRole.Role == Roles.Dev) return projects.FindAll(p => p.Developers.Exists(d => d.Id == idRole.Id));
             if (idRole.Role == Roles.Tester) return projects.FindAll(p => p.Testers.Exists(t => t.Id == idRole.Id));
             return projects;
