@@ -1,10 +1,8 @@
-﻿using BusinessLogic;
-using BusinessLogicInterfaces;
+﻿using BusinessLogicInterfaces;
 using Domain;
 using Domain.Utils;
 using DTO;
 using Microsoft.EntityFrameworkCore;
-using Repository.Design;
 using RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
@@ -45,6 +43,7 @@ namespace Repository
             if ((bug.ProjectId == 0) && (bug.ProjectName != null))
             {
                 Project bugsProject = context.Projects.First(p => p.Name == bug.ProjectName);
+                if (bugsProject == null) throw new NonexistentProjectException();
                 bug.ProjectId = bugsProject.Id;
             }
         }

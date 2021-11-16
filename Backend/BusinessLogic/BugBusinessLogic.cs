@@ -1,14 +1,12 @@
-﻿using Domain;
-using System;
+﻿using BugParser;
 using BusinessLogicInterfaces;
-using System.Collections.Generic;
-using System.Linq;
-using RepositoryInterfaces;
-using Domain.Utils;
-using BugParser;
-using DTO;
 using CustomBugImportation;
 using CustomBugImporter;
+using Domain;
+using Domain.Utils;
+using DTO;
+using RepositoryInterfaces;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -23,7 +21,7 @@ namespace BusinessLogic
 
         public BugDTO GetById(int idBug)
         {
-            Bug bug = BugDataAccess.GetById(idBug); 
+            Bug bug = BugDataAccess.GetById(idBug);
             return new BugDTO(bug);
         }
 

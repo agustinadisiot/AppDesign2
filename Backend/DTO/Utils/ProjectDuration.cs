@@ -1,5 +1,5 @@
-﻿namespace BusinessLogicInterfaces
-{
+﻿namespace DTO
+{ 
     public class ProjectDuration
     {
 
@@ -8,6 +8,6 @@
             Duration = expectedDuration;
         }
 
-        public int Duration { get;  set; }
+        public int Duration { get; set; }
     }
 }

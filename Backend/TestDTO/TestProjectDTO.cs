@@ -1,8 +1,6 @@
 using Domain;
 using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace TestDTO
 {
@@ -19,7 +17,7 @@ namespace TestDTO
 
         [TestInitialize]
         public void Setup()
-        { 
+        {
             projectDTO = new ProjectDTO()
             {
                 Name = "Project",
@@ -35,12 +33,37 @@ namespace TestDTO
         }
 
         [TestMethod]
+        public void CostGetSet()
+        {
+            projectDTO.TotalCost = 4;
+            int expected = 4;
+            Assert.AreEqual(expected, projectDTO.TotalCost);
+        }
+
+        [TestMethod]
+        public void DurationGetSet()
+        {
+            projectDTO.TotalDuration = 4;
+            int expected = 4;
+            Assert.AreEqual(expected, projectDTO.TotalDuration);
+        }
+
+        [TestMethod]
+        public void BugsGetSet()
+        {
+            projectDTO.BugsQuantity = 4;
+            int expected = 4;
+            Assert.AreEqual(expected, projectDTO.BugsQuantity);
+        }
+
+
+        [TestMethod]
         public void FromProjectToDTO()
         {
             Project project = new Project()
             {
-               Id= 3,
-               Name = "project"
+                Id = 3,
+                Name = "project"
             };
 
             ProjectDTO projectDTO = new ProjectDTO(project);

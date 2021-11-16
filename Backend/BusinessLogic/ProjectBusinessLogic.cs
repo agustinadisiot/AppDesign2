@@ -1,11 +1,8 @@
 ﻿using BusinessLogicInterfaces;
 using Domain;
-using Domain.Utils;
 using DTO;
 using RepositoryInterfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BusinessLogic
 {
@@ -42,7 +39,7 @@ namespace BusinessLogic
 
         public ProjectDTO GetById(int Id)
         {
-            ProjectDTO project =  new ProjectDTO(projectDataAccess.GetById(Id));
+            ProjectDTO project = new ProjectDTO(projectDataAccess.GetById(Id));
             project.BugsQuantity = GetBugsQuantity(Id).Quantity;
             project.TotalCost = GetProjectCost(Id).Cost;
             project.TotalDuration = GetProjectDuration(Id).Duration;
@@ -75,7 +72,7 @@ namespace BusinessLogic
 
         public List<BugDTO> GetBugs(int id)
         {
-            return projectDataAccess.GetBugs(id).ConvertAll(b=>new BugDTO(b));
+            return projectDataAccess.GetBugs(id).ConvertAll(b => new BugDTO(b));
         }
 
         public BugsQuantity GetBugsQuantity(int idProject)
@@ -85,12 +82,12 @@ namespace BusinessLogic
 
         public List<DeveloperDTO> GetDevelopers(int id)
         {
-            return projectDataAccess.GetDevelopers(id).ConvertAll(d=>new DeveloperDTO(d));
+            return projectDataAccess.GetDevelopers(id).ConvertAll(d => new DeveloperDTO(d));
         }
 
         public List<TesterDTO> GetTesters(int id)
         {
-            return projectDataAccess.GetTesters(id).ConvertAll(t=>new TesterDTO(t));
+            return projectDataAccess.GetTesters(id).ConvertAll(t => new TesterDTO(t));
         }
 
         public ResponseMessage RemoveDeveloperFromProject(int idproject, int idDev)

@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 namespace BusinessLogicInterfaces
 {
-    public interface IWorkBusinessLogic : IBusinessLogic<Work>
+    public interface IWorkBusinessLogic
     {
         IEnumerable<WorkDTO> GetAll(string token);
         WorkDTO Add(WorkDTO t);
+        Work GetById(int Id);
     }
 }

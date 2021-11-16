@@ -1,6 +1,5 @@
-﻿using BusinessLogicInterfaces;
-using Domain;
-using System;
+﻿using Domain;
+using DTO;
 using System.Collections.Generic;
 
 namespace RepositoryInterfaces

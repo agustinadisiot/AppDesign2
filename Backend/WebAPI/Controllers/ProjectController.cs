@@ -1,8 +1,6 @@
 ﻿using BusinessLogicInterfaces;
-using Domain;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using WebApi.Filters;
 
 namespace WebApi.Controllers
@@ -20,7 +18,7 @@ namespace WebApi.Controllers
 
         [AuthorizationFilter("Admin/Tester/Developer")]
         [HttpGet]
-        public IActionResult GetAll([FromHeader] string token) 
+        public IActionResult GetAll([FromHeader] string token)
         {
             return Ok(businessLogic.GetAll(token));
         }
@@ -71,7 +69,7 @@ namespace WebApi.Controllers
             return Ok(businessLogic.GetBugsQuantity(id));
         }
 
-        [AuthorizationFilter("Admin")]
+        [AuthorizationFilter("Admin/Tester")]
         [HttpGet("{id}/devs")]
         public object GetDevelopers([FromRoute] int id)
         {

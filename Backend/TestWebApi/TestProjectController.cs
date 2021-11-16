@@ -42,12 +42,12 @@ namespace TestWebApi
             mock.Setup(b => b.GetAll(token)).Returns(projectsExpected);
             var controller = new ProjectController(mock.Object);
 
-            var result = controller.GetAll(token); 
+            var result = controller.GetAll(token);
             var okResult = result as OkObjectResult;
             var projectsResult = okResult.Value as IEnumerable<ProjectDTO>;
 
             mock.VerifyAll();
-            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer()); 
+            CollectionAssert.AreEqual(projectsExpected, (System.Collections.ICollection)projectsResult, new ProjectComparer());
         }
 
         [TestMethod]

@@ -210,7 +210,7 @@ namespace TestProjectBusinessLogic
             string token = "dfgh-fgh-fds";
 
             var mock = new Mock<IProjectDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.GetAll(token)).Returns(projectsExpected.ConvertAll(p=>p.ConvertToDomain()));
+            mock.Setup(b => b.GetAll(token)).Returns(projectsExpected.ConvertAll(p => p.ConvertToDomain()));
             mock.Setup(b => b.GetProjectCost(It.IsAny<int>())).Returns(new ProjectCost(0));
             mock.Setup(b => b.GetProjectDuration(It.IsAny<int>())).Returns(new ProjectDuration(0));
             mock.Setup(b => b.GetBugsQuantity(It.IsAny<int>())).Returns(new BugsQuantity(0));
@@ -350,7 +350,7 @@ namespace TestProjectBusinessLogic
 
             var result = projectBusinessLogic.GetBugs(1);
             mock.VerifyAll();
-            Assert.IsTrue(bugsExpected.ConvertAll(b=>new BugDTO(b)).SequenceEqual(result));
+            Assert.IsTrue(bugsExpected.ConvertAll(b => new BugDTO(b)).SequenceEqual(result));
         }
 
         [TestMethod]

@@ -1,7 +1,6 @@
 using Domain;
 using DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 
 namespace TestDTO
 {
@@ -125,7 +124,7 @@ namespace TestDTO
                 CompletedBy = new Developer()
                 {
                     Username = "ivan",
-                    Name="ivan",
+                    Name = "ivan",
                     Cost = 5,
                     Email = "fghj",
                     Id = 6,

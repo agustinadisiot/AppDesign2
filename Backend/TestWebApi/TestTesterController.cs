@@ -1,12 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
-using BusinessLogic;
 using BusinessLogicInterfaces;
 using Domain.Utils;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
+using System.Linq;
 using WebApi.Controllers;
 
 
@@ -59,7 +58,7 @@ namespace TestWebApi
             };
             int idTester = 1;
             var mock = new Mock<ITesterBusinessLogic>(MockBehavior.Strict);
-            mock.Setup(t => t.GetBugsByStatus(idTester,true)).Returns(bugsExpected);
+            mock.Setup(t => t.GetBugsByStatus(idTester, true)).Returns(bugsExpected);
             var controller = new TesterController(mock.Object);
 
             var result = controller.GetBugsByStatus(idTester, true);

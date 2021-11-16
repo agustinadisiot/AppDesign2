@@ -1,14 +1,13 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BusinessLogic;
+using BusinessLogicInterfaces;
 using Domain;
+using Domain.Utils;
+using DTO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using RepositoryInterfaces;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLogic;
-using RepositoryInterfaces;
-using Domain.Utils;
-using Moq;
-using Microsoft.AspNetCore.Mvc;
-using BusinessLogicInterfaces;
-using DTO;
 
 namespace TestBugBusinessLogic
 {
@@ -117,7 +116,7 @@ namespace TestBugBusinessLogic
                     Id = 3,
                     Name = "project"
                 }
-                }, 
+                },
                 new Bug()
                 {
                     Id = 1,
@@ -160,7 +159,7 @@ namespace TestBugBusinessLogic
 
             var result = bugBusinessLogic.GetAll(token);
 
-            Assert.IsTrue(bugsExpected.ConvertAll(b=>new BugDTO(b)).SequenceEqual(result));
+            Assert.IsTrue(bugsExpected.ConvertAll(b => new BugDTO(b)).SequenceEqual(result));
         }
 
         [TestMethod]
@@ -201,7 +200,7 @@ namespace TestBugBusinessLogic
             mock.Setup(b => b.Create(invalidBug)).Returns(invalidBug);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            Assert.ThrowsException<ValidationException>(()=> bugBusinessLogic.Add(new BugDTO(invalidBug)));
+            Assert.ThrowsException<ValidationException>(() => bugBusinessLogic.Add(new BugDTO(invalidBug)));
             mock.Verify(m => m.Create(invalidBug), Times.Never);
 
         }
@@ -214,7 +213,7 @@ namespace TestBugBusinessLogic
             mock.Setup(b => b.ResolveBug(bug.Id, token)).Returns(bug);
             var bugBusinessLogic = new BugBusinessLogic(mock.Object);
 
-            var result = bugBusinessLogic.ResolveBug(bug.Id, token );
+            var result = bugBusinessLogic.ResolveBug(bug.Id, token);
 
             Assert.AreEqual(new BugDTO(bug), result);
         }

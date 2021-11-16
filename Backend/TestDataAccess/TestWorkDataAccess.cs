@@ -4,12 +4,9 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repository;
-using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestDataAccess
 {
@@ -93,7 +90,7 @@ namespace TestDataAccess
         }
 
         [TestMethod]
-        public void GetAll()
+        public void AdminGetAll()
         {
             string token = "sdfg-uytr-fds-dsdf";
             string username = "jose";
@@ -134,6 +131,126 @@ namespace TestDataAccess
                 Id = 1,
                 Name = "a",
                 ProjectId = 1,
+                Cost = 3,
+                Time = 3,
+            });
+            bugManagerContext.SaveChanges();
+            List<Work> workDataBase = workDataAccess.GetAll(token).ToList();
+
+            Assert.AreEqual(1, workDataBase.Count);
+            CollectionAssert.AreEqual(worksExpected, workDataBase, new WorkComparer());
+        }
+
+        [TestMethod]
+        public void DevGetAll()
+        {
+            string token = "sdfg-uytr-fds";
+            string username = "jose";
+            int id = 3;
+
+            Developer dev = new Developer()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            Project proj = new Project()
+            {
+                Id = 9,
+                Name = "Project",
+                Developers = { dev },
+            };
+
+            bugManagerContext.Add(proj);
+            bugManagerContext.Add(dev);
+            loginDataAccess.SaveLogin(loginToken);
+
+            var worksExpected = new List<Work>
+            {
+                new Work
+                {
+                    Id = 1,
+                    Name = "a",
+                    ProjectId = 9,
+                    Cost = 3,
+                    Time = 3
+        }
+    };
+            bugManagerContext.Add(new Work
+            {
+                Id = 1,
+                Name = "a",
+                ProjectId = 9,
+                Cost = 3,
+                Time = 3,
+            });
+            bugManagerContext.SaveChanges();
+            List<Work> workDataBase = workDataAccess.GetAll(token).ToList();
+
+            Assert.AreEqual(1, workDataBase.Count);
+            CollectionAssert.AreEqual(worksExpected, workDataBase, new WorkComparer());
+        }
+
+        [TestMethod]
+        public void TesterGetAll()
+        {
+            string token = "sdfg-uytr-fds";
+            string username = "jose";
+            int id = 3;
+
+            Tester tester = new Tester()
+            {
+                Username = username,
+                Name = "ivan",
+                Email = "dfgh@fghj.com",
+                Id = id,
+                Lastname = "dfgh",
+                Password = "122334"
+            };
+
+            LoginToken loginToken = new LoginToken
+            {
+                Token = token,
+                Username = username
+            };
+
+            Project proj = new Project()
+            {
+                Id = 23,
+                Name = "Project",
+                Testers = { tester },
+            };
+
+            bugManagerContext.Add(proj);
+            bugManagerContext.Add(tester);
+            loginDataAccess.SaveLogin(loginToken);
+
+            var worksExpected = new List<Work>
+            {
+                new Work
+                {
+                    Id = 1,
+                    Name = "a",
+                    ProjectId = 23,
+                    Cost = 3,
+                    Time = 3
+        }
+    };
+            bugManagerContext.Add(new Work
+            {
+                Id = 1,
+                Name = "a",
+                ProjectId = 23,
                 Cost = 3,
                 Time = 3,
             });

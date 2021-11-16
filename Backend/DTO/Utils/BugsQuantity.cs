@@ -1,5 +1,5 @@
 ﻿
-namespace BusinessLogicInterfaces
+namespace DTO
 {
     public class BugsQuantity
     {

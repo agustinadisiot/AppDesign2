@@ -1,5 +1,4 @@
 ﻿using Domain;
-using System;
 using System.Collections.Generic;
 
 namespace DTO
@@ -22,7 +21,7 @@ namespace DTO
             Password = dev.Password;
             Email = dev.Email;
             Cost = dev.Cost;
-            ProjectsDTO = dev.Projects.ConvertAll(p=>new ProjectDTO(p));
+            ProjectsDTO = dev.Projects.ConvertAll(p => new ProjectDTO(p));
         }
 
         public int Id { get; set; }
@@ -50,7 +49,7 @@ namespace DTO
             };
             return dev;
         }
-         public override bool Equals(object obj)
+        public override bool Equals(object obj)
         {
             DeveloperDTO devDTO = (DeveloperDTO)obj;
             return devDTO.Id == this.Id;

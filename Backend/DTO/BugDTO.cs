@@ -1,5 +1,4 @@
 ﻿using Domain;
-using System;
 
 namespace DTO
 {
@@ -27,7 +26,7 @@ namespace DTO
             Id = bug.Id;
             IsActive = bug.IsActive;
             CompletedById = bug.CompletedById;
-            if(bug.CompletedBy != null) { CompletedByUsername = bug.CompletedBy.Username; }
+            if (bug.CompletedBy != null) { CompletedByUsername = bug.CompletedBy.Username; }
         }
 
         public BugDTO()
@@ -59,5 +58,5 @@ namespace DTO
         }
     }
 
-   
+
 }

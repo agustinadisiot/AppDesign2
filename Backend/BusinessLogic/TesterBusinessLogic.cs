@@ -48,7 +48,7 @@ namespace BusinessLogic
 
         public List<TesterDTO> GetAllTesters()
         {
-            return testerDataAccess.GetAllTesters().ConvertAll(t=>new TesterDTO(t));
+            return testerDataAccess.GetAllTesters().ConvertAll(t => new TesterDTO(t));
         }
     }
 

@@ -30,12 +30,12 @@ namespace DTO
             Work work = new Work()
             {
                 Name = this.Name,
-            Cost = this.Cost,
-            Time = this.Time,
-            Id = this.Id,
-            ProjectId = this.ProjectId,
-            ProjectName = this.ProjectName
-        };
+                Cost = this.Cost,
+                Time = this.Time,
+                Id = this.Id,
+                ProjectId = this.ProjectId,
+                ProjectName = this.ProjectName
+            };
             return work;
         }
 

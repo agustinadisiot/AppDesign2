@@ -1,14 +1,11 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BusinessLogic;
 using Domain;
+using DTO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using RepositoryInterfaces;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLogic;
-using RepositoryInterfaces;
-using Domain.Utils;
-using Moq;
-using Microsoft.AspNetCore.Mvc;
-using BusinessLogicInterfaces;
-using DTO;
 
 namespace TestTesterBusinessLogic
 {
@@ -92,7 +89,7 @@ namespace TestTesterBusinessLogic
             var bugsResult = testerBusinessLogic.GetBugsByStatus(idTester, true);
 
             mock.VerifyAll();
-            Assert.IsTrue(bugsExpected.ConvertAll(b=>new BugDTO(b)).SequenceEqual(bugsResult));
+            Assert.IsTrue(bugsExpected.ConvertAll(b => new BugDTO(b)).SequenceEqual(bugsResult));
         }
 
         [TestMethod]
