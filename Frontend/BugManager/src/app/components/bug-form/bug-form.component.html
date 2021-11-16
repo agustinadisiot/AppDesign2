@@ -3,9 +3,10 @@
   <form [formGroup]="form" (keydown.enter)="save()">
 
     <mat-form-field appearance="fill" class=full-width>
-      <mat-label>Project</mat-label>
-      <mat-select [(value)]="projectId" require formControlName="project">
-        <mat-option [value]="option.value" *ngFor="let option of projects">{{ option.viewValue }}</mat-option>
+      <mat-label>Choose project</mat-label>
+      <mat-select formControlName="project" required [(ngModel)]="selectedProjectId">
+        <mat-option [value]="option.value" *ngFor="let option of projects">{{ option.viewValue }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 

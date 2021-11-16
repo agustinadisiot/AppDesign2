@@ -14,11 +14,12 @@ export class BugFormComponent implements OnInit {
   loading = false;
 
   infoMessage: InfoMessage = { error: true, text: '' };
+
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    version: new FormControl('', [Validators.required]),
     project: new FormControl('', [Validators.required]),
+    version: new FormControl('', [Validators.required]),
     time: new FormControl('', [Validators.required]),
     isActive: new FormControl('', [Validators.required])
   });
@@ -28,7 +29,7 @@ export class BugFormComponent implements OnInit {
     { value: 2, viewValue: "Tester" },
     { value: 3, viewValue: "Developer" }
   ];
-  projectId: number = this.projects[0].value;
+  selectedProjectId: number;
 
   devs: any[] = [
     { value: 1, viewValue: "Admin" },
@@ -45,6 +46,10 @@ export class BugFormComponent implements OnInit {
   ngOnInit(): void {
     let param1 = this.route.snapshot.queryParams["id"];
     console.log(param1)
+
+    if (this.projects.length > 0)
+      this.selectedProjectId = this.projects[0].value;
+
 
   }
 
