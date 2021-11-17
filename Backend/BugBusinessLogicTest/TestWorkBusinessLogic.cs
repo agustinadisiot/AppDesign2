@@ -45,13 +45,13 @@ namespace TestBusinessLogic
         public void CreateWork()
         {
             var mock = new Mock<IWorkDataAccess>(MockBehavior.Strict);
-            mock.Setup(d => d.Create(work)).Returns(work);
+            var expectedWork = new WorkDTO(work);
+            mock.Setup(d => d.Create(It.IsAny<Work>())).Returns(work);
             var workBusinessLogic = new WorkBusinessLogic(mock.Object);
-
-            var workResult = workBusinessLogic.Add(new WorkDTO(work));
+            var workResult = workBusinessLogic.Add(expectedWork);
             mock.VerifyAll();
 
-            Assert.AreEqual(workResult, new WorkDTO(work));
+            Assert.AreEqual(workResult, expectedWork);
         }
 
         [TestMethod]
