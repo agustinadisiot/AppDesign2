@@ -38,7 +38,7 @@ export class BugsComponent implements OnInit {
   deleteBug(bug) {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(bug.id)
+
       if (!result)
         return
       this.serviceBugs.deleteBug(bug.id).subscribe(
@@ -46,9 +46,8 @@ export class BugsComponent implements OnInit {
           (response: Bug[]) => {
             this.dataSource = response;
             this.sendBugToNextTable(response);
-            console.log(response)
           },
-          (error) => { console.log(error) }
+          (error) => { }
         ));
     });
   }

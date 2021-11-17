@@ -108,7 +108,7 @@ export class BugFormComponent implements OnInit {
     if (!this.bug.isActive)
       this.bug.completedById = this.selectedDevId
     else
-      this.bug.completedById = 0;
+      this.bug.completedById = undefined;
 
     let id = this.route.snapshot.queryParams["id"];
     if (id == null)
