@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Bug } from 'src/app/models/Bug';
+import { BugsService } from 'src/app/services/bug.service';
 import { Display } from 'src/app/utils/display';
 import { ButtonAction } from '../../generic-table/models/buttonAction';
 import { Column } from '../../generic-table/models/column';
@@ -12,7 +13,7 @@ import { ColumnType } from '../../generic-table/models/columnTypes';
 })
 export class ResolveBugsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: BugsService) { }
   dataSource: Bug[];
 
   buttonsColumns: Column[] = [
@@ -46,12 +47,30 @@ export class ResolveBugsComponent implements OnInit {
   }
 
   resolveBug(bug: Bug) {
-
+    this.service.resolveBug(bug.id || 0).subscribe(
+      (response) => {
+        this.reloadBugs();
+      }
+    );
   }
 
   unresolveBug(bug: Bug) {
-
+    this.service.unresolveBug(bug.id || 0).subscribe(
+      (response) => {
+        this.reloadBugs();
+      }
+    );
   }
+
+  reloadBugs() {
+    this.service.getBugs().subscribe(
+
+      (response: Bug[]) => {
+        this.dataSource = response;
+      });
+  }
+
+
 
   ngOnInit(): void {
   }

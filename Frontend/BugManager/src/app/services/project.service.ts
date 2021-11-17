@@ -14,7 +14,10 @@ export class ProjectsService {
   endpoint = `${environment.webApi_origin}/projects`;
   options = { headers: { 'token': '', 'path': '' } };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // this.option.header.token =....  cannot go here because 
+    // the same instance of the class may be reuse across diferente users (and the token wouldn't be refresh)
+  }
 
   getProjects(): any {
     this.options.headers.token = localStorage.getItem('token') || '';
