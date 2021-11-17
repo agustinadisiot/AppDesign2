@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Bug } from 'src/app/models/Bug';
 import { BugsService } from 'src/app/services/bug.service';
 import { Display } from 'src/app/utils/display';
@@ -39,14 +38,12 @@ export class BugsTableComponent implements OnInit {
     this.bugsServices.getBugs().subscribe(
 
       (response: Bug[]) => {
-        console.log
         this.dataSource = response;
         this.sendBugs.emit(response);
         this.loading = false;
       },
 
       error => {
-        // TODO mostrar error
         this.loading = false;
       }
     );;
@@ -57,7 +54,6 @@ export class BugsTableComponent implements OnInit {
       this.bugsColumn.push(column);
     })
   }
-
 
 
 }

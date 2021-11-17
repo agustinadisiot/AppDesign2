@@ -34,4 +34,9 @@ export class BugsService {
     return this.http.put(`${this.endpoint}/${id}`, bug, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
+  deleteBug(id: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.delete(`${this.endpoint}/${id}`, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
 }

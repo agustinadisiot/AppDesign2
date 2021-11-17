@@ -23,11 +23,11 @@ export class BugsComponent implements OnInit {
     { header: "Edit", property: "edit", display: Display.id, type: ColumnType.Button },
     { header: "Delete", property: "delete", display: Display.id, type: ColumnType.Button },
   ]
-  constructor(private router: Router, private r: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private router: Router, private r: ActivatedRoute, public dialog: MatDialog, private serviceBugs: BugsService) { }
 
   buttonsActions = new Map<string, ButtonAction>([
     ["edit", { text: "Edit", onClick: (b) => { this.editBug(b) }, color: () => "primary" }],
-    ["delete", { text: "Delete", onClick: (b) => { this.deleteBug() }, color: () => "warn" }],
+    ["delete", { text: "Delete", onClick: (b) => { this.deleteBug(b) }, color: () => "warn" }],
   ]);
 
 
@@ -35,10 +35,21 @@ export class BugsComponent implements OnInit {
     this.router.navigate(["../bug"], { relativeTo: this.r, queryParams: { id: String(bug.id) } });
   }
 
-  deleteBug() {
+  deleteBug(bug) {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
+      console.log(bug.id)
+      if (!result)
+        return
+      this.serviceBugs.deleteBug(bug.id).subscribe(
+        (response) => this.serviceBugs.getBugs().subscribe(
+          (response: Bug[]) => {
+            this.dataSource = response;
+            this.sendBugToNextTable(response);
+            console.log(response)
+          },
+          (error) => { console.log(error) }
+        ));
     });
   }
 
