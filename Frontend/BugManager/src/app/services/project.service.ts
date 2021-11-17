@@ -4,6 +4,7 @@ import { catchError } from 'rxjs';
 import { Project } from 'src/app/models/Project';
 import { environment } from 'src/environments/environment';
 import { Developer } from '../models/Developer';
+import { Tester } from '../models/Tester';
 import { HttpErrorHandler } from './error-handler';
 
 @Injectable({
@@ -40,6 +41,11 @@ export class ProjectsService {
     return this.http.get<Developer[]>(`${this.endpoint}/${id}/devs`, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
+  getTesters(id: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.get<Tester[]>(`${this.endpoint}/${id}/testers`, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
   deleteProject(id: number): any {
     this.options.headers.token = localStorage.getItem('token') || '';
     return this.http.delete(`${this.endpoint}/${id}`, this.options).pipe(catchError(HttpErrorHandler.handleError));
@@ -48,13 +54,25 @@ export class ProjectsService {
   addDevToProject(projectId: number, devId: number): any {
     this.options.headers.token = localStorage.getItem('token') || '';
     let endpoint = `${this.endpoint}/${projectId}/devs/${devId}`;
-    return this.http.post<Developer[]>(endpoint, null, this.options).pipe(catchError(HttpErrorHandler.handleError));
+    return this.http.post<Developer>(endpoint, null, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
-  removeDevToProject(projectId: number, devId: number): any {
+  removeDevFromProject(projectId: number, devId: number): any {
     this.options.headers.token = localStorage.getItem('token') || '';
     let endpoint = `${this.endpoint}/${projectId}/devs/${devId}`;
-    return this.http.delete<Developer[]>(endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
+    return this.http.delete<Developer>(endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  addTesterToProject(projectId: number, testerId: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    let endpoint = `${this.endpoint}/${projectId}/testers/${testerId}`;
+    return this.http.post<Tester>(endpoint, null, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  removeTesterFromProject(projectId: number, testerId: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    let endpoint = `${this.endpoint}/${projectId}/testers/${testerId}`;
+    return this.http.delete<Tester>(endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
 }

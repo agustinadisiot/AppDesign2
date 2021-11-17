@@ -21,6 +21,7 @@ import { BugFormComponent } from './bug-form/bug-form.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { DevsProjectComponent } from './admin/devs-project/devs-project.component';
 import { CreateProjectComponent } from './admin/create-project/create-project.component';
+import { TestersProjectComponent } from './admin/tester-project/tester-project.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { CreateProjectComponent } from './admin/create-project/create-project.co
     BugFormComponent,
     DeleteDialogComponent,
     DevsProjectComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    TestersProjectComponent
   ],
   exports: [
     MessageComponent,

@@ -25,7 +25,7 @@ export class DevsProjectComponent implements OnInit {
     ["change", { text: (u) => { return this.getButtonText(u) }, onClick: (u) => { this.changeProjectParticipance(u) }, color: (u) => this.getButtonColor(u) }],
   ]);
 
-  userOnProject: Developer[];
+  userOnProject: Developer[] = [];
 
   changeProjectParticipance(u) {
     if (this.userInProject(u))
@@ -66,7 +66,7 @@ export class DevsProjectComponent implements OnInit {
 
   removeDevToProject(user: Developer) {
     let devId = user.id || 0;
-    this.service.removeDevToProject(this.projectId, devId).subscribe(
+    this.service.removeDevFromProject(this.projectId, devId).subscribe(
       (response) => {
         this.updateDevelopers();
       },

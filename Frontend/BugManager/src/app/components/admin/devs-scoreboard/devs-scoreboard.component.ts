@@ -14,8 +14,8 @@ import { ColumnType } from '../../generic-table/models/columnTypes';
 export class DevsScoreboardComponent implements OnInit {
 
   @Input() dataSource: Developer[] = [];
-  @Input() buttonsColumns: Column[];
-  @Input() buttonsActions: Map<string, ButtonAction>;
+  @Input() buttonsColumns: Column[] = [];
+  @Input() buttonsActions: Map<string, ButtonAction> = new Map<string, ButtonAction>([]);
   loading = true;
 
   columns: Column[] = [

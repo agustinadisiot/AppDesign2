@@ -9,6 +9,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { GenericFormComponent } from 'src/app/components/generic-form/generic-form.component';
 import { GenericTableComponent } from 'src/app/components/generic-table/generic-table.component';
 import { MessageComponent } from 'src/app/components/message/message.component';
+import { TestersProjectComponent } from 'src/app/components/admin/tester-project/tester-project.component';
 
 
 @NgModule({
