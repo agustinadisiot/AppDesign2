@@ -1,24 +1,26 @@
-﻿using Domain;
+﻿using BusinessLogicInterfaces;
+using Domain;
 using DTO;
 using RepositoryInterfaces;
 using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public class WorkBusinessLogic
+    public class WorkBusinessLogic : IWorkBusinessLogic
     {
-        private IWorkDataAccess WorkDataAccess;
+        public IWorkDataAccess WorkDataAccess { get; set; }
 
         public WorkBusinessLogic(IWorkDataAccess newWorkDataAccess)
         {
             WorkDataAccess = newWorkDataAccess;
         }
 
-        public object Add(Work work)
+        public WorkDTO Add(WorkDTO workDTO)
         {
+            Work work = workDTO.ConvertToDomain();
             work.Validate();
             WorkDataAccess.Create(work);
-            return work;
+            return workDTO;
         }
 
         public Work GetById(int id)
@@ -27,7 +29,7 @@ namespace BusinessLogic
             return work;
         }
 
-        public List<WorkDTO> GetAll(string token)
+        public IEnumerable<WorkDTO> GetAll(string token)
         {
             return WorkDataAccess.GetAll(token).ConvertAll(w => new WorkDTO(w));
         }
