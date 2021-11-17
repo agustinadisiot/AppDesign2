@@ -47,6 +47,9 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
   ],
   exports: [
     MessageComponent,
+    GenericFormComponent,
+    GenericTableComponent,
+    DeleteDialogComponent,
     NavComponent
   ]
 })

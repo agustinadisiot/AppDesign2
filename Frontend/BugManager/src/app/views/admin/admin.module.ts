@@ -6,6 +6,9 @@ import { AdminComponent } from './admin.component';
 import { AngularMaterialModule } from 'src/app/components/angular-material/angular-material.module';
 import { NavComponent } from 'src/app/components/nav/nav.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { GenericFormComponent } from 'src/app/components/generic-form/generic-form.component';
+import { GenericTableComponent } from 'src/app/components/generic-table/generic-table.component';
+import { MessageComponent } from 'src/app/components/message/message.component';
 
 
 @NgModule({

@@ -15,13 +15,14 @@ import '@angular/compiler';
 import { MessageComponent } from './components/message/message.component';
 import { ComponentsModule } from './components/components.module';
 import { NotFoundComponent } from './views/not-found/not-found.component';
-import { NavComponent } from './components/nav/nav.component';
+import { GenericFormComponent } from './components/generic-form/generic-form.component';
+import { GenericTableComponent } from './components/generic-table/generic-table.component';
 
 @NgModule({
   declarations: [ // EXP: todo componente tiene que ser declarado por uno y uno solo modulo
     AppComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [ // EXP: son como las dependencias
     AngularMaterialModule, // EXP: importo todos los modulos de angular material para que no tenga problemas que me falte alguno
