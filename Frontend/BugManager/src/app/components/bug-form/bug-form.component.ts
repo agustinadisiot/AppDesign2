@@ -43,7 +43,6 @@ export class BugFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
-    this.loadDevs();
     this.loadBug();
   }
 
@@ -55,8 +54,10 @@ export class BugFormComponent implements OnInit {
         this.projects = response;
         if (this.projects.length == 0)
           this.infoMessage = { error: true, text: "You don't have any assigned projects yet" };
-        else
+        else {
           this.selectedProjectId = this.projects[0].id;
+          this.loadDevs();
+        }
       },
 
       error => {
@@ -67,7 +68,7 @@ export class BugFormComponent implements OnInit {
   }
 
   loadDevs() {
-    this.devService.getDevelopers().subscribe(
+    this.projectService.getDevelopers(this.selectedProjectId).subscribe(
 
       (response: Developer[]) => {
         this.loading = false;
