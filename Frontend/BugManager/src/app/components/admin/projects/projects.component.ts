@@ -3,7 +3,7 @@ import { Column } from '../../generic-table/models/column';
 import { ColumnType } from '../../generic-table/models/columnTypes';
 import { ButtonAction } from '../../generic-table/models/buttonAction';
 import { Project } from 'src/app/models/Project';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectsService } from 'src/app/services/project.service';
 import { Display } from 'src/app/utils/display';
 
@@ -25,27 +25,25 @@ export class ProjectsComponent implements OnInit {
   ]
 
   buttonsActions = new Map<string, ButtonAction>([
-    ["testers", { text: "Testers", onClick: this.tester, color: () => "accent" }],
-    ["devs", { text: "Developers", onClick: this.developers, color: () => "accent" }],
-    ["edit", { text: "Edit", onClick: this.edit, color: () => "primary" }],
-    ["delete", { text: "Delete", onClick: this.delete, color: () => "warn" }],
+    ["testers", { text: () => "Testers", onClick: (p) => { this.tester(p) }, color: () => "accent" }],
+    ["devs", { text: () => "Developers", onClick: (p) => { this.developers(p) }, color: () => "accent" }],
+    ["edit", { text: () => "Edit", onClick: (p) => { this.edit(p) }, color: () => "primary" }],
+    ["delete", { text: () => "Delete", onClick: (p) => { this.delete(p) }, color: () => "warn" }],
   ]);
 
-  constructor(private router: Router, private projectService: ProjectsService) { }
+  constructor(private router: Router, private projectService: ProjectsService, private r: ActivatedRoute) { }
 
   edit(project) {
-    alert(JSON.stringify(project));
-    // TODO
+    this.router.navigate(["../project"], { relativeTo: this.r, queryParams: { id: String(project.id) } });
   }
 
   tester(project) {
-    alert(JSON.stringify(project));
-    // TODO
+    this.router.navigate(["../project/testers"], { relativeTo: this.r, queryParams: { id: String(project.id) } });
   }
 
   developers(project) {
-    alert(JSON.stringify(project));
-    // TODO
+    console.log()
+    this.router.navigate(["../project/devs"], { relativeTo: this.r, queryParams: { id: String(project.id) } });
   }
   delete(project) {
     alert(JSON.stringify(project));

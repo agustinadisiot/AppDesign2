@@ -8,6 +8,7 @@ import { DevsScoreboardComponent } from 'src/app/components/admin/devs-scoreboar
 import { ProjectsComponent } from 'src/app/components/admin/projects/projects.component';
 import { AdminComponent } from './admin.component';
 import { BugFormComponent } from 'src/app/components/bug-form/bug-form.component';
+import { DevsProjectComponent } from 'src/app/components/admin/devs-project/devs-project.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
       {
         path: 'bug',
         component: BugFormComponent
+      },
+      {
+        path: 'project/devs',
+        component: DevsProjectComponent
       }
     ]
   }

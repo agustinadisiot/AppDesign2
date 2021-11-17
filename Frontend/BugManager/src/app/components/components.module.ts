@@ -19,6 +19,7 @@ import { NavComponent } from './nav/nav.component';
 import { EditBugsComponent } from './edit-bugs/edit-bugs.component';
 import { BugFormComponent } from './bug-form/bug-form.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { DevsProjectComponent } from './admin/devs-project/devs-project.component';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
     EditBugsComponent,
     BugFormComponent,
     DeleteDialogComponent,
+    DevsProjectComponent
   ],
   exports: [
     MessageComponent,

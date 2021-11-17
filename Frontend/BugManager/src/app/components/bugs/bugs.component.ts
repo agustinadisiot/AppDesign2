@@ -26,8 +26,8 @@ export class BugsComponent implements OnInit {
   constructor(private router: Router, private r: ActivatedRoute, public dialog: MatDialog, private serviceBugs: BugsService) { }
 
   buttonsActions = new Map<string, ButtonAction>([
-    ["edit", { text: "Edit", onClick: (b) => { this.editBug(b) }, color: () => "primary" }],
-    ["delete", { text: "Delete", onClick: (b) => { this.deleteBug(b) }, color: () => "warn" }],
+    ["edit", { text: () => "Edit", onClick: (b) => { this.editBug(b) }, color: () => "primary" }],
+    ["delete", { text: () => "Delete", onClick: (b) => { this.deleteBug(b) }, color: () => "warn" }],
   ]);
 
 

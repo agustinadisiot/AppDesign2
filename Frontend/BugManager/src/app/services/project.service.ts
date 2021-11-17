@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 import { Project } from 'src/app/models/Project';
 import { environment } from 'src/environments/environment';
+import { Developer } from '../models/Developer';
 import { HttpErrorHandler } from './error-handler';
 
 @Injectable({
@@ -17,6 +18,23 @@ export class ProjectsService {
   getProjects(): any {
     this.options.headers.token = localStorage.getItem('token') || '';
     return this.http.get<Project[]>(this.endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  getDevelopers(id: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.get<Developer[]>(`${this.endpoint}/${id}/devs`, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  addDevToProject(projectId: number, devId: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    let endpoint = `${this.endpoint}/${projectId}/devs/${devId}`;
+    return this.http.post<Developer[]>(endpoint, null, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  removeDevToProject(projectId: number, devId: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    let endpoint = `${this.endpoint}/${projectId}/devs/${devId}`;
+    return this.http.delete<Developer[]>(endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
 }

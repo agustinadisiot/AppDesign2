@@ -14,4 +14,8 @@ export class Display {
   public static CostPerHour(value: number) {
     return `$${value}/hr`
   }
+
+  public static TotalCost(value: number) {
+    return `$${value}`
+  }
 }
