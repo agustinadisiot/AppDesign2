@@ -54,6 +54,7 @@ export class TestersProjectComponent implements OnInit {
     else
       return "Add"
   }
+
   userInProject(u: User) {
     return this.userOnProject.find(user => user.id == u.id) != null
   }

@@ -21,10 +21,10 @@ const routes: Routes = [
     data: { role: 'admin' },
     loadChildren: () => import('./views/admin/admin.module').then(a => a.AdminModule)
   },
-  // {
-  //   path:'dev',
-  //   loadChildren: () => import('./views/dev/dev.module').then(m => m.DevModule)
-  // },
+  {
+    path: 'dev',
+    loadChildren: () => import('./views/dev/dev.module').then(m => m.DevModule)
+  },
   {
     path: 'tester',
     canActivate: [AuthorizationGuard],
