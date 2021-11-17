@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Project } from 'src/app/models/Project';
 import { ProjectsService } from 'src/app/services/project.service';
 import { InfoMessage } from '../../message/model/message';
 
@@ -28,6 +27,7 @@ export class CreateProjectComponent implements OnInit {
     this.id = this.route.snapshot.queryParams["id"];
     if (this.id != null)
       this.getProject(this.id);
+    this.project.name = '';
     this.loading = false;
   }
 

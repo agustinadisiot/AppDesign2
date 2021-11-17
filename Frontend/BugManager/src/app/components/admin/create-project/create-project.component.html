@@ -1,8 +1,9 @@
-<app-generic-form title="Project" [formGroup]="form" [showCancelButton]="showCancelButton" [infoMessage]="infoMessage"
+<app-generic-form title="Project" [form]="form" [showCancelButton]="showCancelButton" [infoMessage]="infoMessage"
   (save)="save()" [loading]="loading">
-
-  <mat-form-field class=full-width appearance="fill">
-    <mat-label>Enter project name</mat-label>
-    <input matInput [(ngModel)]="project.name" formControlName="name" required placeholder="Ex. Project X">
-  </mat-form-field>
+  <form [formGroup]="form" (keydown.enter)="save()">
+    <mat-form-field class=full-width appearance="fill">
+      <mat-label>Enter project name</mat-label>
+      <input matInput [(ngModel)]="project.name" formControlName="name" required placeholder="Ex. Project X">
+    </mat-form-field>
+  </form>
 </app-generic-form>
