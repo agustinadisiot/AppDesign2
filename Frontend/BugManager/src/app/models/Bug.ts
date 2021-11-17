@@ -5,8 +5,8 @@ export interface Bug {
   time: number;
   projectId: number;
   projectName: string;
-  id: number;
+  id?: number;
   completedById?: number;
   isActive: boolean;
-  completedByName?: string;
+  completedByUsername?: string;
 }

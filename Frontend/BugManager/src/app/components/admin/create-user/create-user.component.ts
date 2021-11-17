@@ -32,7 +32,7 @@ export class CreateUserComponent implements OnInit {
     lastname: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.email]),
     cost: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]), // TODO add length
+    password: new FormControl('', [Validators.required]),
   });
 
 

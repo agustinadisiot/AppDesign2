@@ -18,7 +18,7 @@ namespace Repository
 
         public List<Developer> GetAllDevs()
         {
-            return devs.ToList();
+            return devs.Include(d => d.Projects).ThenInclude(p => p.Testers).ToList();
         }
 
         public int GetQuantityBugsResolved(int idDev)

@@ -13,6 +13,7 @@ export class GenericTableComponent implements OnInit {
   @Input() columns: Column[];
   @Input() buttonsActions: Map<string, ButtonAction>;
   @Input() dataSource: any[];
+  @Input() loading: boolean = true;
   displayedColumns: string[] = [];
   columnsTypes = ColumnType;
   constructor() { }

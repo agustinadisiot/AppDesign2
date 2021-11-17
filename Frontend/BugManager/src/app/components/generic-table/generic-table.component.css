@@ -16,3 +16,7 @@ table {
 td, th {
   padding-left : 1em;
 }
+
+mat-spinner{
+  margin: 0 auto;
+}

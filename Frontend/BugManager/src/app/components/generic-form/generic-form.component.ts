@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { InfoMessage } from '../message/model/message';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-generic-form',
@@ -15,9 +16,11 @@ export class GenericFormComponent implements OnInit {
   @Input() loading: boolean
 
   @Output() save = new EventEmitter();
-  @Output() cancel = new EventEmitter();
 
-  constructor() { }
+  cancel() {
+    this.location.back();
+  }
+  constructor(private location: Location) { }
 
   ngOnInit(): void {
   }

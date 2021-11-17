@@ -12,7 +12,7 @@
     <br>
 
     <button *ngIf="showCancelButton" id="cancel" mat-flat-button color="warn" disabled="{{loading}}"
-      (click)="cancel.emit()">Cancel
+      (click)="cancel()">Cancel
     </button>
     <button id="save" mat-flat-button color="primary" disabled="{{ !form.valid || loading}}" (click)="save.emit()">Save
     </button>
