@@ -20,9 +20,29 @@ export class ProjectsService {
     return this.http.get<Project[]>(this.endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
+  getProject(id: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.get<Project>(`${this.endpoint}/${id}`, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  createProject(project): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.post<Project[]>(this.endpoint, project, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  editProject(project, id: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.put<Project[]>(`${this.endpoint}/${id}`, project, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
   getDevelopers(id: number): any {
     this.options.headers.token = localStorage.getItem('token') || '';
     return this.http.get<Developer[]>(`${this.endpoint}/${id}/devs`, this.options).pipe(catchError(HttpErrorHandler.handleError));
+  }
+
+  deleteProject(id: number): any {
+    this.options.headers.token = localStorage.getItem('token') || '';
+    return this.http.delete(`${this.endpoint}/${id}`, this.options).pipe(catchError(HttpErrorHandler.handleError));
   }
 
   addDevToProject(projectId: number, devId: number): any {

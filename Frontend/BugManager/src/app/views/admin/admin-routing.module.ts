@@ -9,6 +9,7 @@ import { ProjectsComponent } from 'src/app/components/admin/projects/projects.co
 import { AdminComponent } from './admin.component';
 import { BugFormComponent } from 'src/app/components/bug-form/bug-form.component';
 import { DevsProjectComponent } from 'src/app/components/admin/devs-project/devs-project.component';
+import { CreateProjectComponent } from 'src/app/components/admin/create-project/create-project.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
       {
         path: 'project/devs',
         component: DevsProjectComponent
+      },
+      {
+        path: 'project',
+        component: CreateProjectComponent
       }
     ]
   }

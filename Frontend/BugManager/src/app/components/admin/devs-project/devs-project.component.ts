@@ -18,7 +18,7 @@ export class DevsProjectComponent implements OnInit {
   projectId: number;
 
   buttonsColumns: Column[] = [
-    { header: "Change", property: "change", display: Display.id, type: ColumnType.Button },
+    { header: "Project", property: "change", display: Display.id, type: ColumnType.Button },
   ]
 
   buttonsActions = new Map<string, ButtonAction>([

@@ -6,6 +6,8 @@ import { Project } from 'src/app/models/Project';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectsService } from 'src/app/services/project.service';
 import { Display } from 'src/app/utils/display';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-projects',
@@ -31,7 +33,7 @@ export class ProjectsComponent implements OnInit {
     ["delete", { text: () => "Delete", onClick: (p) => { this.delete(p) }, color: () => "warn" }],
   ]);
 
-  constructor(private router: Router, private projectService: ProjectsService, private r: ActivatedRoute) { }
+  constructor(private router: Router, private projectService: ProjectsService, private r: ActivatedRoute, public dialog: MatDialog) { }
 
   edit(project) {
     this.router.navigate(["../project"], { relativeTo: this.r, queryParams: { id: String(project.id) } });
@@ -42,15 +44,33 @@ export class ProjectsComponent implements OnInit {
   }
 
   developers(project) {
-    console.log()
     this.router.navigate(["../project/devs"], { relativeTo: this.r, queryParams: { id: String(project.id) } });
   }
+
+
   delete(project) {
-    alert(JSON.stringify(project));
-    // TODO
+    let dialogRef = this.dialog.open(DeleteDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (!result)
+        return
+
+      this.projectService.deleteProject(project.id).subscribe(
+        (response) => { this.loadProjects() },
+        (error) => { }
+      );
+    });
+  }
+
+  createProject() {
+    this.router.navigate(["../project"], { relativeTo: this.r });
   }
 
   ngOnInit(): void {
+    this.loadProjects();
+  }
+
+  loadProjects() {
     this.loading = true;
     this.projectService.getProjects().subscribe(
 
