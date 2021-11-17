@@ -13,7 +13,7 @@ import { ColumnType } from '../../generic-table/models/columnTypes';
 })
 export class DevsScoreboardComponent implements OnInit {
 
-  @Input() dataSource: Developer[];
+  @Input() dataSource: Developer[] = [];
   @Input() buttonsColumns: Column[];
   @Input() buttonsActions: Map<string, ButtonAction>;
   loading = true;
@@ -31,7 +31,7 @@ export class DevsScoreboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.declareButtonsInHeader();
-    this.dataSource = this.devService.getDevelopers().subscribe(
+    this.devService.getDevelopers().subscribe(
 
       (response: Developer[]) => {
         this.loading = false;
