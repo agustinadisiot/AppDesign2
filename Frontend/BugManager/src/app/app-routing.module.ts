@@ -23,6 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'dev',
+    canActivate: [AuthorizationGuard],
+    data: { role: 'dev' },
     loadChildren: () => import('./views/dev/dev.module').then(m => m.DevModule)
   },
   {
