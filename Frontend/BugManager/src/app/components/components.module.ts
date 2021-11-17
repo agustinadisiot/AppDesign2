@@ -18,6 +18,7 @@ import { FilterBugsComponent } from './tester/filter-bugs/filter-bugs.component'
 import { NavComponent } from './nav/nav.component';
 import { EditBugsComponent } from './edit-bugs/edit-bugs.component';
 import { BugFormComponent } from './bug-form/bug-form.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { BugFormComponent } from './bug-form/bug-form.component';
     NavComponent,
     EditBugsComponent,
     BugFormComponent,
+    DeleteDialogComponent,
   ],
   exports: [
     MessageComponent,

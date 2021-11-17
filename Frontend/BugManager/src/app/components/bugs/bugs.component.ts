@@ -1,8 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bug } from 'src/app/models/Bug';
 import { BugsService } from 'src/app/services/bug.service';
 import { Display } from 'src/app/utils/display';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ButtonAction } from '../generic-table/models/buttonAction';
 import { Column } from '../generic-table/models/column';
 import { ColumnType } from '../generic-table/models/columnTypes';
@@ -21,11 +23,11 @@ export class BugsComponent implements OnInit {
     { header: "Edit", property: "edit", display: Display.id, type: ColumnType.Button },
     { header: "Delete", property: "delete", display: Display.id, type: ColumnType.Button },
   ]
-  constructor(private router: Router, private r: ActivatedRoute) { }
+  constructor(private router: Router, private r: ActivatedRoute, public dialog: MatDialog) { }
 
   buttonsActions = new Map<string, ButtonAction>([
     ["edit", { text: "Edit", onClick: (b) => { this.editBug(b) }, color: () => "primary" }],
-    ["delete", { text: "Delete", onClick: this.deleteBug, color: () => "warn" }],
+    ["delete", { text: "Delete", onClick: (b) => { this.deleteBug() }, color: () => "warn" }],
   ]);
 
 
@@ -33,9 +35,11 @@ export class BugsComponent implements OnInit {
     this.router.navigate(["../bug"], { relativeTo: this.r, queryParams: { id: String(bug.id) } });
   }
 
-  deleteBug(bug) {
-    alert(JSON.stringify(bug));
-    // TODO
+  deleteBug() {
+    let dialogRef = this.dialog.open(DeleteDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+    });
   }
 
   sendBugToNextTable(bugs) {
