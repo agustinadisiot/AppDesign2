@@ -53,19 +53,16 @@ export class DevsProjectComponent implements OnInit {
 
 
   addDevToProject(user: Developer) {
-    let devId = user.id || 0;
+    let devId = user.id || 1;
     this.service.addDevToProject(this.projectId, devId).subscribe(
       (response) => {
         this.updateDevelopers();
-      },
-      error => {
-        // TODO 
       }
     );
   }
 
   removeDevToProject(user: Developer) {
-    let devId = user.id || 0;
+    let devId = user.id || 1;
     this.service.removeDevFromProject(this.projectId, devId).subscribe(
       (response) => {
         this.updateDevelopers();
