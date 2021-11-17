@@ -10,22 +10,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthorizationGuard } from './guards/authorization.guard';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import '@angular/compiler';
-import { MessageComponent } from './components/message/message.component';
 import { ComponentsModule } from './components/components.module';
 import { NotFoundComponent } from './views/not-found/not-found.component';
-import { GenericFormComponent } from './components/generic-form/generic-form.component';
-import { GenericTableComponent } from './components/generic-table/generic-table.component';
 
 @NgModule({
-  declarations: [ // EXP: todo componente tiene que ser declarado por uno y uno solo modulo
+  declarations: [
     AppComponent,
     LoginComponent,
     NotFoundComponent,
   ],
-  imports: [ // EXP: son como las dependencias
-    AngularMaterialModule, // EXP: importo todos los modulos de angular material para que no tenga problemas que me falte alguno
+  imports: [
+    AngularMaterialModule, // All Angular Material modules are importers to prevent missing dependancies 
     AppRoutingModule,
     CommonModule,
     RouterModule,
@@ -34,7 +31,7 @@ import { GenericTableComponent } from './components/generic-table/generic-table.
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ComponentsModule,// TODO ver si esta bien ponerlo aca
+    ComponentsModule,
   ],
   providers: [AuthorizationGuard],
   exports: [],

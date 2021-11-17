@@ -65,9 +65,6 @@ export class TestersProjectComponent implements OnInit {
     this.service.addTesterToProject(this.projectId, testerId).subscribe(
       (response) => {
         this.updateTesters();
-      },
-      error => {
-        // TODO 
       }
     );
   }
@@ -77,9 +74,6 @@ export class TestersProjectComponent implements OnInit {
     this.service.removeTesterFromProject(this.projectId, testerId).subscribe(
       (response) => {
         this.updateTesters();
-      },
-      error => {
-        // TODO 
       }
     );
   }
@@ -96,7 +90,6 @@ export class TestersProjectComponent implements OnInit {
 
       error => {
         this.loading = false;
-        // TODO mostrar error
       }
     );
     this.updateTesters();
@@ -107,10 +100,6 @@ export class TestersProjectComponent implements OnInit {
 
       (response: Tester[]) => {
         this.userOnProject = response;
-      },
-
-      error => {
-        // TODO 
       }
     );
   }

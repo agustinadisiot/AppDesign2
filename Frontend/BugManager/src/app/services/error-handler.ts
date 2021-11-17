@@ -4,7 +4,6 @@ import { throwError } from "rxjs";
 export class HttpErrorHandler {
 
   public static handleError(error: HttpErrorResponse) {
-    console.log(error) // TODO delete
     if (error.status === 0)
       return throwError("Server is shut down")
 
