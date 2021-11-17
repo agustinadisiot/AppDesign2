@@ -66,9 +66,6 @@ export class DevsProjectComponent implements OnInit {
     this.service.removeDevFromProject(this.projectId, devId).subscribe(
       (response) => {
         this.updateDevelopers();
-      },
-      error => {
-        // TODO 
       }
     );
   }
@@ -84,10 +81,6 @@ export class DevsProjectComponent implements OnInit {
 
       (response: Developer[]) => {
         this.userOnProject = response;
-      },
-
-      error => {
-        // TODO 
       }
     );
   }

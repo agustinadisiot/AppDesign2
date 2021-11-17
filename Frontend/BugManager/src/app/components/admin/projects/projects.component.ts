@@ -81,7 +81,6 @@ export class ProjectsComponent implements OnInit {
 
       error => {
         this.loading = false;
-        // TODO mostrar error
       }
     );
   }

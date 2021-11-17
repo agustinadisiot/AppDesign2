@@ -18,7 +18,7 @@ export class NavComponent implements OnInit, OnDestroy {
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener); // TODO ver si sacar el mobileQuery depreceated
+    this.mobileQuery.addListener(this._mobileQueryListener); // source: 'Responsive sidenav' from https://material.angular.io/components/sidenav/examples
 
 
   }
