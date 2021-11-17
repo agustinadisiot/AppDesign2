@@ -12,7 +12,7 @@
         <ng-container *ngIf="col.type == columnsTypes.Button">
           <button (click)="buttonsActions.get(col.property)?.onClick(element)" mat-flat-button
             color={{buttonsActions.get(col.property)?.color(element)}}>
-            {{buttonsActions.get(col.property)?.text}}</button>
+            {{buttonsActions.get(col.property)?.text(element)}}</button>
         </ng-container>
       </td>
     </ng-container>

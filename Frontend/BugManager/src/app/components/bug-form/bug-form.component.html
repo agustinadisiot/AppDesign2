@@ -4,7 +4,7 @@
 
     <mat-form-field appearance="fill" class=full-width>
       <mat-label>Choose project</mat-label>
-      <mat-select formControlName="project" required [(ngModel)]="selectedProjectId">
+      <mat-select formControlName="project" required [(ngModel)]="selectedProjectId" (selectionChange)="loadDevs()">
         <mat-option [value]="option.id" *ngFor="let option of projects">{{ option.name }}
         </mat-option>
       </mat-select>

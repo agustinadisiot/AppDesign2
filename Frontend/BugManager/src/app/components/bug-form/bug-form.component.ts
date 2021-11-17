@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -28,14 +29,14 @@ export class BugFormComponent implements OnInit {
     project: new FormControl('', [Validators.required]),
     version: new FormControl('', [Validators.required]),
     time: new FormControl('', [Validators.required]),
-    isActive: new FormControl('', [Validators.required])
+    isActive: new FormControl('', [])
   });
 
   projects: Project[] = [];
   selectedProjectId: number;
 
   devs: Developer[] = []
-  selectedDevId: number;
+  selectedDevId?: number;
 
   display = Display.IsActiveAsResolve;
   bug: Bug = { name: '', description: '', version: '', time: 0, projectId: 0, projectName: '', isActive: true }
@@ -43,7 +44,6 @@ export class BugFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
-    this.loadDevs();
     this.loadBug();
   }
 
@@ -55,8 +55,6 @@ export class BugFormComponent implements OnInit {
         this.projects = response;
         if (this.projects.length == 0)
           this.infoMessage = { error: true, text: "You don't have any assigned projects yet" };
-        else
-          this.selectedProjectId = this.projects[0].id;
       },
 
       error => {
@@ -67,7 +65,7 @@ export class BugFormComponent implements OnInit {
   }
 
   loadDevs() {
-    this.devService.getDevelopers().subscribe(
+    this.projectService.getDevelopers(this.selectedProjectId).subscribe(
 
       (response: Developer[]) => {
         this.loading = false;
@@ -79,6 +77,7 @@ export class BugFormComponent implements OnInit {
         this.infoMessage.error = true;
         this.infoMessage.text = `Problem loading developers: ${error}`
       });
+    this.devs = [];
   }
 
   loadBug() {
@@ -91,7 +90,9 @@ export class BugFormComponent implements OnInit {
       (response: Bug) => {
         this.loading = false;
         this.bug = response;
-        this.selectedDevId = this.bug.completedById || 0;
+        this.selectedProjectId = this.bug.projectId;
+        this.loadDevs();
+        this.selectedDevId = this.bug.completedById || undefined;
       },
 
       error => {

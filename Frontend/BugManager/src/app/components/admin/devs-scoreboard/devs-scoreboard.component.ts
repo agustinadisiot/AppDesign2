@@ -13,9 +13,10 @@ import { ColumnType } from '../../generic-table/models/columnTypes';
 })
 export class DevsScoreboardComponent implements OnInit {
 
-  @Input() dataSource: Developer[];
-  @Input() buttonsColumns: Column[];
-  @Input() buttonsActions: Map<string, ButtonAction>;
+  @Input() dataSource: Developer[] = [];
+  @Input() buttonsColumns: Column[] = [];
+  @Input() buttonsActions: Map<string, ButtonAction> = new Map<string, ButtonAction>([]);
+  loading = true;
 
   columns: Column[] = [
     { header: "Username", property: "username", display: Display.id, type: ColumnType.Object },
@@ -29,7 +30,25 @@ export class DevsScoreboardComponent implements OnInit {
   constructor(private devService: DeveloperService) { }
 
   ngOnInit(): void {
-    this.dataSource = this.devService.getDevelopers(); // TODO subscribe
+    this.declareButtonsInHeader();
+    this.devService.getDevelopers().subscribe(
+
+      (response: Developer[]) => {
+        this.loading = false;
+        this.dataSource = response;
+      },
+
+      error => {
+        this.loading = false;
+        // TODO mostrar error
+      }
+    );
+  }
+
+  declareButtonsInHeader() {
+    this.buttonsColumns.forEach((column: Column) => {
+      this.columns.push(column);
+    })
   }
 
 }
