@@ -28,7 +28,7 @@ namespace TestBugBusinessLogic
         {
             bug = new Bug()
             {
-                Id = 0,
+                Id = 1,
                 Name = "Bug1",
                 Description = "Cuando el servidor se cierra y estoy en login se rompe",
                 Version = "12.4.5",

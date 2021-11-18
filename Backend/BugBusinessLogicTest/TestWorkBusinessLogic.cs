@@ -30,21 +30,28 @@ namespace TestBusinessLogic
                 Name = "work1",
                 Cost = 3,
                 Time = 2,
-                ProjectId = 1
+                ProjectId = 1,
+                Project = new Project()
+                {
+                    Id = 1,
+                    Name = "project"
+                },
+                ProjectName = "project"
             };
 
         }
+
         [TestMethod]
         public void CreateWork()
         {
             var mock = new Mock<IWorkDataAccess>(MockBehavior.Strict);
-            mock.Setup(b => b.Create(work)).Returns(work);
+            var expectedWork = new WorkDTO(work);
+            mock.Setup(d => d.Create(It.IsAny<Work>())).Returns(work);
             var workBusinessLogic = new WorkBusinessLogic(mock.Object);
-
-            var workResult = workBusinessLogic.Add(work);
+            var workResult = workBusinessLogic.Add(expectedWork);
             mock.VerifyAll();
 
-            Assert.AreEqual(workResult, work);
+            Assert.AreEqual(workResult, expectedWork);
         }
 
         [TestMethod]
@@ -80,7 +87,7 @@ namespace TestBusinessLogic
             mock.Setup(b => b.Create(invalidWork)).Returns(invalidWork);
             var workBusinessLogic = new WorkBusinessLogic(mock.Object);
 
-            Assert.ThrowsException<ValidationException>(() => workBusinessLogic.Add(invalidWork));
+            Assert.ThrowsException<ValidationException>(() => workBusinessLogic.Add(new WorkDTO(invalidWork)));
             mock.Verify(m => m.Create(invalidWork), Times.Never);
 
         }
