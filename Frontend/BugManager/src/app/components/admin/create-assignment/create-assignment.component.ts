@@ -29,7 +29,7 @@ export class CreateAssignmentComponent implements OnInit {
   projects: Project[] = [];
   selectedProjectId: number;
 
-  assignment: Assignment = { name: '', time: 0, cost : 0, projectId: 0, projectName: ''}
+  assignment: Assignment = { name: '', time: 0, cost: 0, projectId: 0, projectName: '' }
 
   ngOnInit(): void {
     this.loadProjects();
@@ -87,7 +87,10 @@ export class CreateAssignmentComponent implements OnInit {
         this.loading = false;
         this.infoMessage.error = false;
         this.infoMessage.text = `Assignment "${this.assignment.name}" added successfully`
-        this.form.reset();
+        //this.form.reset();
+        this.assignment.name = '';
+        this.assignment.cost = 0;
+        this.assignment.time = 0;
         this.form.markAsUntouched();
       },
 
