@@ -61,7 +61,6 @@ export class CreateProjectComponent implements OnInit {
         this.infoMessage.error = false;
         this.infoMessage.text = `Project "${this.project.name}" added successfully`
         this.project.name = '';
-        this.form.reset();
         this.form.markAsUntouched();
       },
 
