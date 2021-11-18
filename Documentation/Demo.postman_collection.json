@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Agregar un Dev",
+			"name": "Login admin",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -34,10 +34,106 @@
 			"response": []
 		},
 		{
-			"name": "Agregar Admin",
+			"name": "Login dev",
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"dev1\",\r\n    \"password\": \"10987dev\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login tester",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"username\": \"FranTester\",\r\n    \"password\": \"tester123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar un Dev",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"ivan\",\r\n  \"name\": \"ivan\",\r\n  \"lastname\": \"Perez\",\r\n  \"password\": \"123dr568\",\r\n  \"email\": \"juanperez@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/devs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"devs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"username\": \"Administrator1\",\r\n  \"name\": \"Lucía\",\r\n  \"lastname\": \"López\",\r\n  \"password\": \"admin123\",\r\n  \"email\": \"lucia123@gmail.com\"\r\n}",
@@ -65,10 +161,16 @@
 			"name": "Agregar Tester",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"tester1\",\r\n  \"name\": \"Juan\",\r\n  \"lastname\": \"María\",\r\n  \"password\": \"dfgh865\",\r\n  \"email\": \"juanmaria@hotmail.com\"\r\n}",
+					"raw": "{\r\n  \"username\": \"prueba\",\r\n  \"name\": \"Jose\",\r\n  \"lastname\": \"María\",\r\n  \"password\": \"12345\",\r\n  \"email\": \"juholaa@hotmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -90,10 +192,90 @@
 			"response": []
 		},
 		{
+			"name": "Conseguir testers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/testers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"testers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Conseguir devs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/devs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"devs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Agregar Proyecto 1",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"name\": \"Proyecto X\"\r\n}",
@@ -121,7 +303,13 @@
 			"name": "Agregar Proyecto 2",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"name\": \"Proyecto Y\"\r\n}",
@@ -149,7 +337,13 @@
 			"name": "Agregar Proyecto 3",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"name\": \"Proyecto B\"\r\n}",
@@ -177,10 +371,16 @@
 			"name": "Agregar Proyecto \"Nombre del proyecto\"",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Proyecto B\"\r\n}",
+					"raw": "{\r\n  \"name\": \"Nombre del Proyecto\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -205,7 +405,13 @@
 			"name": "Eliminar Proyecto 1",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -237,7 +443,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -248,7 +460,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/projects/2",
+					"raw": "http://localhost:5000/projects/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -256,7 +468,7 @@
 					"port": "5000",
 					"path": [
 						"projects",
-						"2"
+						"1"
 					]
 				}
 			},
@@ -269,7 +481,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -280,7 +498,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/projects/2",
+					"raw": "http://localhost:5000/projects/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -288,7 +506,7 @@
 					"port": "5000",
 					"path": [
 						"projects",
-						"2"
+						"3"
 					]
 				}
 			},
@@ -298,7 +516,13 @@
 			"name": "Modificar Proyecto",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"name\" : \"Projecto M\"\r\n}",
@@ -330,7 +554,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -358,7 +588,13 @@
 			"name": "Agregar dev a proyecto",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -369,7 +605,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/projects/2/devs/1",
+					"raw": "http://localhost:5000/projects/3/devs/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -377,7 +613,7 @@
 					"port": "5000",
 					"path": [
 						"projects",
-						"2",
+						"3",
 						"devs",
 						"1"
 					]
@@ -389,7 +625,13 @@
 			"name": "Agregar tester a proyecto",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -400,7 +642,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/projects/3/testers/1",
+					"raw": "http://localhost:5000/projects/4/testers/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -408,73 +650,9 @@
 					"port": "5000",
 					"path": [
 						"projects",
-						"3",
+						"4",
 						"testers",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Conseguir Proyecto 2",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/projects/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"projects",
 						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Conseguir Proyecto 3",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/projects/3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"projects",
-						"3"
 					]
 				}
 			},
@@ -484,7 +662,13 @@
 			"name": "Eliminar tester de proyecto",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -512,45 +696,19 @@
 			"response": []
 		},
 		{
-			"name": "Conseguir Proyecto 3 (ahora sin testers)",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/projects/3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"projects",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Agregar un bug a un proyecto",
+			"name": "Agregar un bug a un proyecto por nombre de proyecto",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Error en el envío de correo\",\r\n  \"description\": \"El error se produce cuando el usuario no tiene un correo asignado\",\r\n  \"version\": \"1.0\",\r\n  \"ProjectId\": 2\r\n}",
+					"raw": "{\r\n  \"name\": \"Error en el envío de correo\",\r\n  \"description\": \"El error se produce cuando el usuario no tiene un correo asignado\",\r\n  \"version\": \"1.0\",\r\n  \"time\" : 3,\r\n  \"ProjectName\": \"3D Game\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -572,10 +730,84 @@
 			"response": []
 		},
 		{
-			"name": "Modificar/ Resolver Bug",
+			"name": "Agregar un bug a un proyecto por id de proyecto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Error en el envío de correo\",\r\n  \"description\": \"El error se produce cuando el usuario no tiene un correo asignado\",\r\n  \"version\": \"1.0\",\r\n  \"time\" : 3,\r\n  \"ProjectId\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/bugs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bugs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar un assignment a un proyecto por id de proyecto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"tarea 6\",\r\n  \"time\" : 5,\r\n  \"cost\": 3,\r\n  \"ProjectId\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/works",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"works"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Bug",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"name\": \"Botón no funciona\",\r\n  \"description\": \"Botón no funciona en la interfaz de compras\",\r\n  \"version\": \"1.0\",\r\n  \"ProjectId\": 2,\r\n  \"isActive\" : false,\r\n  \"CompletedById\" : 1\r\n}",
@@ -595,35 +827,6 @@
 					"path": [
 						"bugs",
 						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Modificar/ Resolver Bug",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Botón no funciona\",\r\n  \"description\": \"Botón no funciona en la interfaz de compras\",\r\n  \"version\": \"1.0\",\r\n  \"ProjectId\": 2,\r\n  \"isActive\" : false,\r\n  \"CompletedById\" : 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/bugs/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"bugs",
-						"2"
 					]
 				}
 			},
@@ -633,39 +836,13 @@
 			"name": "Eliminar Bug",
 			"request": {
 				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
 					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/bugs/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"bugs",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Conseguir Bug (eliminado)",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -702,6 +879,11 @@
 						"key": "path",
 						"value": "C:\\Users\\Agustina\\Desktop\\ort\\Semestre6\\desenio2\\obl\\Disiot-221025-Monjardin-239850\\Code\\TestBugImportation\\TestFiles\\XMLTestFiles\\TwoBugs.xml",
 						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -736,7 +918,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -764,13 +952,19 @@
 			"response": []
 		},
 		{
-			"name": "Conseguir Bug",
+			"name": "Conseguir Bugs",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -781,28 +975,33 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/bugs/2",
+					"raw": "http://localhost:5000/bugs",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"bugs",
-						"2"
+						"bugs"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Conseguir Bug Copy",
+			"name": "Conseguir Tareas",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -813,7 +1012,158 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/bugs/2",
+					"raw": "http://localhost:5000/works",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"works"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Conseguir costo de proyecto",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/projects/5/cost",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"projects",
+						"5",
+						"cost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Conseguir duracion de proyecto Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/projects/5/duration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"projects",
+						"5",
+						"duration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Conseguir Proyecto por nombre",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "7b05db6e-ddff-4710-ba5b-cffc8e368d62",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/projects/name/Bug Manager",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"projects",
+						"name",
+						"Bug Manager"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar/ Resolver Bug Dev",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "8a2c82f9-7786-4d8a-b2bd-686487422df3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/bugs/3/resolve",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -821,7 +1171,44 @@
 					"port": "5000",
 					"path": [
 						"bugs",
-						"2"
+						"3",
+						"resolve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar/ Unresolver Bug Dev",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "8a2c82f9-7786-4d8a-b2bd-686487422df3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/bugs/3/unresolve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bugs",
+						"3",
+						"unresolve"
 					]
 				}
 			},
