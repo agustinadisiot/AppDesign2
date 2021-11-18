@@ -1,3 +1,4 @@
+using CustomBugImporter;
 using Factory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,8 @@ namespace WebApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            string path = configuration.GetSection("MySettings").GetSection("CustomImporterFolder").Value;
+            ReflectionPath.Path = path;
         }
 
         public IConfiguration Configuration { get; }
