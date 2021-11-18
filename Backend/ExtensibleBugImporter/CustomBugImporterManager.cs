@@ -1,26 +1,18 @@
 ﻿using CustomBugImportation;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Reflection;
 namespace CustomBugImporter
 {
     public class CustomBugImporterManager : ICustomBugImporter
     {
-        private readonly string folderPathForImporters;
+        private string folderPathForImporters;
         public const string customImporterFolderSettingsName = "CustomImporterFolder";
         public CustomBugImporterManager()
         {
-            try
-            {
-                var appSettings = ConfigurationManager.AppSettings;
-                folderPathForImporters = appSettings[customImporterFolderSettingsName] ?? string.Empty;
-            }
-            catch (ConfigurationErrorsException)
-            {
-                throw new ImporterManagerException("Cannot access importer folder");
-            }
+            folderPathForImporters = ReflectionPath.Path;
         }
 
         // Path parameter is only for testing, folderPathForImporters is use in production
@@ -102,6 +94,11 @@ namespace CustomBugImporter
                 }
             }
             return importerInfos;
+        }
+
+        public void setPath(string path)
+        {
+            this.folderPathForImporters = path;
         }
     }
 }
