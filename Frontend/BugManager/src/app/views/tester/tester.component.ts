@@ -10,7 +10,7 @@ export class TesterComponent implements OnInit {
 
   testerMenuItems: SideBarItem[] = [
     { path: '/tester/bugs', title: 'Bugs', icon: 'bug_report' },
-    { path: '/tester/assigments', title: 'Assignments', icon: 'assignment' },
+    { path: '/tester/assignments', title: 'Assignments', icon: 'assignment' },
   ]
 
 
