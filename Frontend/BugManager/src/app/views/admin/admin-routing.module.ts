@@ -11,6 +11,9 @@ import { BugFormComponent } from 'src/app/components/bug-form/bug-form.component
 import { DevsProjectComponent } from 'src/app/components/admin/devs-project/devs-project.component';
 import { CreateProjectComponent } from 'src/app/components/admin/create-project/create-project.component';
 import { TestersProjectComponent } from 'src/app/components/admin/tester-project/tester-project.component';
+import { AssignmentsTableComponent } from 'src/app/components/assignments-table/assignments-table.component';
+import { AssignmentsWithCreateComponent } from 'src/app/components/admin/assignments-with-create/assignments-with-create.component';
+import { CreateAssignmentComponent } from 'src/app/components/admin/create-assignment/create-assignment.component';
 
 const routes: Routes = [
   {
@@ -61,6 +64,14 @@ const routes: Routes = [
       {
         path: 'project',
         component: CreateProjectComponent
+      },
+      {
+        path: 'assignments',
+        component: AssignmentsWithCreateComponent
+      },
+      {
+        path: 'assignment',
+        component: CreateAssignmentComponent
       }
     ]
   }

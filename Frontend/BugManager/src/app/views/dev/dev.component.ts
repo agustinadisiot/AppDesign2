@@ -10,7 +10,7 @@ export class DevComponent implements OnInit {
 
   devMenuItems: SideBarItem[] = [
     { path: '/dev/bugs', title: 'Bugs', icon: 'bug_report' },
-    { path: '/dev/assigments', title: 'Assignments', icon: 'assignment' },
+    { path: '/dev/assignments', title: 'Assignments', icon: 'assignment' },
   ]
 
   constructor() { }
