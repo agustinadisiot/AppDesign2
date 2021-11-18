@@ -12,23 +12,26 @@
 
     <mat-form-field class=full-width appearance="fill">
       <mat-label>Enter name</mat-label>
-      <input matInput [(ngModel)]="bug.name" formControlName="name" required placeholder="Ex. WebApi not working">
+      <input maxlength="60" matInput [(ngModel)]="bug.name" formControlName="name" required placeholder="Ex. WebApi not working">
+      <mat-hint align="end">{{bug.name.length}} / 60</mat-hint>
     </mat-form-field>
 
     <mat-form-field class=full-width appearance="fill">
       <mat-label>Enter description</mat-label>
-      <input matInput [(ngModel)]="bug.description" formControlName="description" required
+      <input maxlength="150" matInput [(ngModel)]="bug.description" formControlName="description" required
         placeholder="Ex. WebApi cors version is not 4.0">
+        <mat-hint align="end">{{bug.description.length}} / 150</mat-hint>
     </mat-form-field>
 
     <mat-form-field class=full-width appearance="fill">
       <mat-label>Enter version</mat-label>
-      <input matInput [(ngModel)]="bug.version" formControlName="version" required placeholder="Ex. 1.0">
+      <input maxlength="10" matInput [(ngModel)]="bug.version" formControlName="version" required placeholder="Ex. 1.0">
+      <mat-hint align="end">{{bug.version.length}} / 10</mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class=full-width>
       <mat-label>Enter time</mat-label>
-      <input matInput [(ngModel)]="bug.time" formControlName="time" type="number" min="0" required placeholder="0"
+      <input matInput [(ngModel)]="bug.time" formControlName="time" type="number" min="1" max="999" required placeholder="1"
         formControlName="time">
       <span matSuffix>hr.</span>
     </mat-form-field>

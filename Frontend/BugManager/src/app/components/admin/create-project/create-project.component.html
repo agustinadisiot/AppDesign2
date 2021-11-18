@@ -3,7 +3,8 @@
   <form [formGroup]="form" (keydown.enter)="save()">
     <mat-form-field class=full-width appearance="fill">
       <mat-label>Enter project name</mat-label>
-      <input matInput [(ngModel)]="project.name" formControlName="name" required placeholder="Ex. Project X">
+      <input maxlength="30" matInput [(ngModel)]="project.name" formControlName="name" required placeholder="Ex. Project X">
+      <mat-hint align="end">{{project.name.length}} / 30</mat-hint>
     </mat-form-field>
   </form>
 </app-generic-form>
