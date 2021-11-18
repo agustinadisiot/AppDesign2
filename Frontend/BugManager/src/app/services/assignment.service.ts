@@ -18,4 +18,14 @@ import { HttpErrorHandler } from './error-handler';
       this.options.headers.token = localStorage.getItem('token') || '';
       return this.http.get<Assignment[]>(this.endpoint, this.options).pipe(catchError(HttpErrorHandler.handleError));
     }
+
+    getAssignment(id: number): any {
+        this.options.headers.token = localStorage.getItem('token') || '';
+        return this.http.get<Assignment>(`${this.endpoint}/${id}`, this.options).pipe(catchError(HttpErrorHandler.handleError));
+    }
+    
+    createAssignment(assignment: Assignment): any {
+        this.options.headers.token = localStorage.getItem('token') || '';
+        return this.http.post(this.endpoint, assignment, this.options).pipe(catchError(HttpErrorHandler.handleError));
+    }
 }

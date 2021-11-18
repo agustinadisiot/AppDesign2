@@ -202,8 +202,11 @@ namespace Repository.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjectId")
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Time")
                         .HasColumnType("int");
@@ -264,9 +267,13 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.Work", b =>
                 {
-                    b.HasOne("Domain.Project", null)
+                    b.HasOne("Domain.Project", "Project")
                         .WithMany("Works")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("ProjectTester", b =>

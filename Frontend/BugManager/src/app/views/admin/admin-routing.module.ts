@@ -12,6 +12,8 @@ import { DevsProjectComponent } from 'src/app/components/admin/devs-project/devs
 import { CreateProjectComponent } from 'src/app/components/admin/create-project/create-project.component';
 import { TestersProjectComponent } from 'src/app/components/admin/tester-project/tester-project.component';
 import { AssignmentsTableComponent } from 'src/app/components/assignments-table/assignments-table.component';
+import { AssignmentsWithCreateComponent } from 'src/app/components/admin/assignments-with-create/assignments-with-create.component';
+import { CreateAssignmentComponent } from 'src/app/components/admin/create-assignment/create-assignment.component';
 
 const routes: Routes = [
   {
@@ -65,7 +67,11 @@ const routes: Routes = [
       },
       {
         path: 'assignments',
-        component: AssignmentsTableComponent
+        component: AssignmentsWithCreateComponent
+      },
+      {
+        path: 'assignment',
+        component: CreateAssignmentComponent
       }
     ]
   }

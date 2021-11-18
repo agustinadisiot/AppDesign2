@@ -21,6 +21,7 @@ export class AssignmentsTableComponent implements OnInit {
     { header: "Name", property: "name", display: Display.id, type: ColumnType.Object },
     { header: "Cost", property: "cost", display: Display.id, type: ColumnType.Object },
     { header: "Time", property: "time", display: Display.id, type: ColumnType.Object },
+    { header: "Project name", property: "projectName", display: Display.id, type: ColumnType.Object },
   ]
   constructor(private assignmentServices: AssignmentService) { }
 

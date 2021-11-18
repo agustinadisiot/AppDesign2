@@ -18,7 +18,7 @@ namespace WebApi.Controllers
 
         [AuthorizationFilter("Admin/Tester")]
         [HttpPost]
-        public object Post(WorkDTO workExpected)
+        public object Post([FromBody]WorkDTO workExpected)
         {
             return Ok(businessLogic.Add(workExpected));
 
@@ -32,7 +32,7 @@ namespace WebApi.Controllers
 
 
         [HttpGet]
-        public object GetAll(string token)
+        public object GetAll([FromHeader]string token)
         {
             return Ok(businessLogic.GetAll(token));
         }

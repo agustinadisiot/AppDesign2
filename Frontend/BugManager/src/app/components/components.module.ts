@@ -24,6 +24,8 @@ import { CreateProjectComponent } from './admin/create-project/create-project.co
 import { ResolveBugsComponent } from './dev/resolve-bugs/resolve-bugs.component';
 import { TestersProjectComponent } from './admin/tester-project/tester-project.component';
 import { AssignmentsTableComponent } from './assignments-table/assignments-table.component';
+import { AssignmentsWithCreateComponent } from './admin/assignments-with-create/assignments-with-create.component';
+import { CreateAssignmentComponent } from './admin/create-assignment/create-assignment.component';
 
 @NgModule({
   imports: [
@@ -54,6 +56,8 @@ import { AssignmentsTableComponent } from './assignments-table/assignments-table
     CreateProjectComponent,
     ResolveBugsComponent,
     AssignmentsTableComponent,
+    AssignmentsWithCreateComponent,
+    CreateAssignmentComponent,
   ],
   exports: [
     MessageComponent,
