@@ -125,7 +125,8 @@ export class BugFormComponent implements OnInit {
         this.loading = false;
         this.infoMessage.error = false;
         this.infoMessage.text = `Bug "${this.bug.name}" added successfully`
-        this.form.reset();
+        //this.form.reset();
+        this.bug  = { name: '', description: '', version: '', time: 0, projectId: 0, projectName: '', isActive: true }
         this.form.markAsUntouched();
       },
 

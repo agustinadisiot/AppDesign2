@@ -64,7 +64,7 @@ namespace Repository
         {
             Project project = projects.FirstOrDefault(proj => proj.Id == id);
             if (project == null) throw new NonexistentProjectException();
-            project = projects.Include("Developers").Include("Bugs").Include("Testers").First(proj => proj.Id == id);
+            project = projects.Include("Developers").Include("Bugs").Include("Testers").Include("Works").First(proj => proj.Id == id);
             return project;
         }
 
