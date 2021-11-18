@@ -2,4 +2,9 @@
   display: block;
   width: 95%;
   margin: 0 auto;
+  margin-top: 3%;
+}
+
+mat-hint{
+  margin-bottom: 24%;
 }

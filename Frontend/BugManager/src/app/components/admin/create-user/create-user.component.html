@@ -42,7 +42,7 @@
 
     <mat-form-field appearance="fill" class=full-width *ngIf="role == 'dev' || role == 'tester'">
       <mat-label>Cost</mat-label>
-      <input matInput [(ngModel)]="user.cost" formControlName="cost" type="number" min="0" required placeholder="0">
+      <input matInput [(ngModel)]="user.cost" formControlName="cost" type="number" min="1" max="999" required placeholder="1">
       <span matPrefix>$&nbsp;</span>
       <span matSuffix>/hr</span>
     </mat-form-field>

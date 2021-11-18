@@ -2,6 +2,7 @@
   display: block;
   width: 95%;
   margin: 0 auto;
+  margin-top: 3%;
 }
 mat-slide-toggle{
   margin-top: 3%;
