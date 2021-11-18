@@ -6,6 +6,7 @@ using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
+using System.IO;
 using System.Security.Authentication;
 
 namespace WebApi.Filters
@@ -38,6 +39,10 @@ namespace WebApi.Filters
             {
                 statusCode = 401;
                 errorMesssage = "Incorrect password or username";
+            }
+            else if (context.Exception is DirectoryNotFoundException)
+            {
+                statusCode = 500;
             }
             else if (context.Exception is ImporterManagerException)
             {
